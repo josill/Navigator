@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <color name="black">#FF000000</color>-->
+<!--    <color name="white">#FFFFFFFF</color>-->
+    <color name="mainTileBGColor">#5EBDCA</color>
+    <color name="secondaryTileBGColor">#E3F1F3</color>
+    <color name="tertiaryTileBGColor">#72CA5E</color>
+    <color name="textColorMain">#E7E6E2</color>
+    <color name="textColorSecondary">#FF000000</color>
+</resources>

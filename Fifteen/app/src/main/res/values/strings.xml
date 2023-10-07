@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Fifteen</string>
+    <string name="zero_seconds">0 sec</string>
+</resources>
