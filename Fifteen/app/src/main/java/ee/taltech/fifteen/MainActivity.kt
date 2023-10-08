@@ -78,6 +78,20 @@
             }
         }
 
+        private fun resetGame() {
+            handler.removeCallbacks(runnable);
+            seconds = 0 ;
+            secondsElapsedView.text = "0 s";
+
+            moveCount = 0;
+            movesMadeView.text = "0";
+
+            gameStarted = false;
+            drawBoard();
+            checkPosition();
+            startGame();
+        }
+
         private fun drawBoard() {
             val puzzle = board.createPuzzle();
 
@@ -97,19 +111,6 @@
             }
         }
 
-        private fun resetGame() {
-            handler.removeCallbacks(runnable);
-            seconds = 0 ;
-            secondsElapsedView.text = "0 s";
-
-            moveCount = 0;
-            movesMadeView.text = "0";
-
-            gameStarted = false;
-            drawBoard();
-            startGame();
-        }
-
         fun undo() {
 
         }
@@ -117,37 +118,9 @@
         private fun handleTileClick(tileId: String) {
             increaseMoveCount();
 
-            println("Button ID clicked: $tileId");
-
             val clickedTile = findButtonById(tileId);
-            lateinit var emptyTile: Button;
             val clickedTileNumber = tileId.split("tile")[1].toInt();
-            val directions = listOf("Up", "Down", "Left", "Right")
-//            val centerTileNumbers =  listOf(6, 7, 10, 11);
-//            val cornerTileNumber = listOf(1, 4, 13, 16);
-//            var otherTileNumbers = listOf(2, 3, 5, 8, 9, 12, 14, 15);
-//
-//            lateinit var tileUp: Button;
-//            lateinit var tileDown: Button;
-//            lateinit var tileLeft: Button;
-//            lateinit var tileRight: Button;
-
-//            if (tileNumber in centerTileNumbers) {
-//                tileUp = findButtonById("tile${tileNumber-4}")
-//                tileDown = findButtonById("tile${tileNumber+4}")
-//                tileLeft = findButtonById("tile${tileNumber-1}")
-//                tileRight = findButtonById("tile${tileNumber+1}")
-//            } else if (tileNumber in cornerTileNumber) {
-//                tileUp = findButtonById("tile${tileNumber-4}")
-//                tileDown = findButtonById("tile${tileNumber+4}")
-//                tileLeft = findButtonById("tile${tileNumber-1}")
-//                tileRight = findButtonById("tile${tileNumber+1}")
-//            } else {
-//                tileUp = findButtonById("tile${tileNumber-4}")
-//                tileDown = findButtonById("tile${tileNumber+4}")
-//                tileLeft = findButtonById("tile${tileNumber-1}")
-//                tileRight = findButtonById("tile${tileNumber+1}")
-//            }
+            val clickedTileValue = clickedTile.text;
 
             for (i in 1..4) {
                 val neighbourTileNumber = when (i) {
@@ -161,12 +134,20 @@
 
                 try {
                     val neighbourTile = findButtonById(neighbourTileId)
-                    val direction = directions[i - 1]
-                    println("Clicked Tile: $tileId, Direction: $direction, Neighbor Tile: $neighbourTileId, Neighbor Tile Text: ${neighbourTile.text}")
+
+                    if (neighbourTile.text == "") {
+                        neighbourTile.text = clickedTileValue;
+                        neighbourTile.setBackgroundColor(mainTileBGColor);
+
+                        clickedTile.text = "";
+                        clickedTile.setBackgroundColor(secondaryTileBGColor);
+                    }
                 } catch (e: Exception) {
                     println(e)
                 }
             }
+
+            checkPosition();
         }
 
         private fun startTimer() {
@@ -183,6 +164,17 @@
         private fun increaseMoveCount() {
             moveCount++;
             movesMadeView.text = moveCount.toString();
+        }
+
+        private fun checkPosition() {
+            for (i in 1..16) {
+                val buttonId = "tile$i";
+                val button = findButtonById(buttonId);
+
+                if (button.text.toString().toIntOrNull() == i) button.setBackgroundColor(tertiaryTileBGColor);
+                else if (button.text == "") button.setBackgroundColor(secondaryTileBGColor);
+                else button.setBackgroundColor(mainTileBGColor);
+            }
         }
 
         private fun findButtonById(tileName: String): Button {
