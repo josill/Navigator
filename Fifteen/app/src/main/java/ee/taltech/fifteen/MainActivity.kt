@@ -2,6 +2,7 @@
 
     import android.os.Bundle
     import android.os.Handler
+    import android.view.View
     import android.widget.Button
     import android.widget.TextView
     import androidx.appcompat.app.AppCompatActivity
@@ -64,8 +65,14 @@
 
                 startTimer();
 
-                boardLayout.setOnClickListener {
-                    increaseMoveCount();
+                val tileOnClickListener = View.OnClickListener { view ->
+                    val idString = resources.getResourceEntryName(view.id);
+                    increaseMoveCount(idString);
+                }
+
+                for (i in 0 until boardLayout.childCount) {
+                    val button = boardLayout.getChildAt(i);
+                    button.setOnClickListener(tileOnClickListener);
                 }
             }
         }
@@ -117,8 +124,9 @@
             handler.post(runnable);
         }
 
-        private fun increaseMoveCount() {
-            println("----------------------------here------------------------------")
+        private fun increaseMoveCount(tileId: String) {
+            println("Button ID clicked: $tileId")
+
             moveCount++;
             movesMadeView.text = moveCount.toString();
         }
