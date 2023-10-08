@@ -8,6 +8,7 @@
     import androidx.appcompat.app.AppCompatActivity
     import androidx.constraintlayout.widget.ConstraintLayout
     import androidx.core.content.ContextCompat
+    import java.lang.Exception
     import java.util.Stack
     import kotlin.properties.Delegates
 
@@ -67,7 +68,7 @@
 
                 val tileOnClickListener = View.OnClickListener { view ->
                     val idString = resources.getResourceEntryName(view.id);
-                    increaseMoveCount(idString);
+                    handleTileClick(idString);
                 }
 
                 for (i in 0 until boardLayout.childCount) {
@@ -113,6 +114,61 @@
 
         }
 
+        private fun handleTileClick(tileId: String) {
+            increaseMoveCount();
+
+            println("Button ID clicked: $tileId");
+
+            val clickedTile = findButtonById(tileId);
+            lateinit var emptyTile: Button;
+            val clickedTileNumber = tileId.split("tile")[1].toInt();
+            val directions = listOf("Up", "Down", "Left", "Right")
+//            val centerTileNumbers =  listOf(6, 7, 10, 11);
+//            val cornerTileNumber = listOf(1, 4, 13, 16);
+//            var otherTileNumbers = listOf(2, 3, 5, 8, 9, 12, 14, 15);
+//
+//            lateinit var tileUp: Button;
+//            lateinit var tileDown: Button;
+//            lateinit var tileLeft: Button;
+//            lateinit var tileRight: Button;
+
+//            if (tileNumber in centerTileNumbers) {
+//                tileUp = findButtonById("tile${tileNumber-4}")
+//                tileDown = findButtonById("tile${tileNumber+4}")
+//                tileLeft = findButtonById("tile${tileNumber-1}")
+//                tileRight = findButtonById("tile${tileNumber+1}")
+//            } else if (tileNumber in cornerTileNumber) {
+//                tileUp = findButtonById("tile${tileNumber-4}")
+//                tileDown = findButtonById("tile${tileNumber+4}")
+//                tileLeft = findButtonById("tile${tileNumber-1}")
+//                tileRight = findButtonById("tile${tileNumber+1}")
+//            } else {
+//                tileUp = findButtonById("tile${tileNumber-4}")
+//                tileDown = findButtonById("tile${tileNumber+4}")
+//                tileLeft = findButtonById("tile${tileNumber-1}")
+//                tileRight = findButtonById("tile${tileNumber+1}")
+//            }
+
+            for (i in 1..4) {
+                val neighbourTileNumber = when (i) {
+                    1 -> clickedTileNumber - 4 // upper neighbour tile
+                    2 -> clickedTileNumber + 4 // lower neighbour tile
+                    3 -> clickedTileNumber - 1 // left neighbour tile
+                    else -> clickedTileNumber + 1 // right neighbour tile
+                }
+
+                val neighbourTileId = "tile$neighbourTileNumber"
+
+                try {
+                    val neighbourTile = findButtonById(neighbourTileId)
+                    val direction = directions[i - 1]
+                    println("Clicked Tile: $tileId, Direction: $direction, Neighbor Tile: $neighbourTileId, Neighbor Tile Text: ${neighbourTile.text}")
+                } catch (e: Exception) {
+                    println(e)
+                }
+            }
+        }
+
         private fun startTimer() {
             handler = Handler()
             runnable = Runnable {
@@ -124,9 +180,7 @@
             handler.post(runnable);
         }
 
-        private fun increaseMoveCount(tileId: String) {
-            println("Button ID clicked: $tileId")
-
+        private fun increaseMoveCount() {
             moveCount++;
             movesMadeView.text = moveCount.toString();
         }
