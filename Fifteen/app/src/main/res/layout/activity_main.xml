@@ -105,6 +105,7 @@
 
         <Button
             android:id="@+id/newGameButton"
+            android:drawableStart="@drawable/baseline_play_arrow_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="60dp"
@@ -115,6 +116,7 @@
 
         <Button
             android:id="@+id/undoButton"
+            android:drawableStart="@drawable/baseline_replay_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/secondaryTileBGColor"

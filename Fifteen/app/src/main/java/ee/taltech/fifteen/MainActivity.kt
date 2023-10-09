@@ -1,5 +1,9 @@
     package ee.taltech.fifteen
 
+    import android.content.BroadcastReceiver
+    import android.content.Context
+    import android.content.Intent
+    import android.content.IntentFilter
     import android.os.Bundle
     import android.os.Handler
     import android.view.View
@@ -8,8 +12,10 @@
     import androidx.appcompat.app.AppCompatActivity
     import androidx.constraintlayout.widget.ConstraintLayout
     import androidx.core.content.ContextCompat
+    import ee.taltech.fifteen.databinding.ActivityMainBinding
     import java.lang.Exception
     import java.util.Stack
+    import kotlin.math.roundToInt
     import kotlin.properties.Delegates
 
     class MainActivity : AppCompatActivity() {
@@ -29,6 +35,10 @@
         private var stack = Stack<String>()
         private var moveCount = 0
         private var seconds = 0
+        private var time = 0.0
+        private lateinit var binding: ActivityMainBinding
+        private var timerStarted = false
+        private lateinit var serviceIntent: Intent
         private lateinit var handler: Handler
         private lateinit var runnable: Runnable
 
@@ -46,6 +56,9 @@
             boardLayout = findViewById(R.id.boardLayout)
             newGameButton = findViewById(R.id.newGameButton)
             undoButton = findViewById(R.id.undoButton)
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            serviceIntent = Intent(applicationContext, TimerService::class.java)
+            registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
 
             movesMadeView.text = "0"
             secondsElapsedView.text = getString(R.string.zero_seconds)
@@ -61,7 +74,7 @@
 
         private fun buildGame() {
             activateBoard(true)
-            startTimer()
+            startTimer1()
             firstStart = false;
         }
 
@@ -130,17 +143,6 @@
             checkPosition()
         }
 
-        private fun startTimer() {
-            handler = Handler()
-            runnable = Runnable {
-                seconds++
-                secondsElapsedView.text = getString(R.string.seconds_elapsed, seconds)
-                handler.postDelayed(runnable, 1000)
-            }
-
-            handler.post(runnable)
-        }
-
         private fun activateBoard(activate: Boolean) {
             lateinit var tileOnClickListener: View.OnClickListener
 
@@ -161,15 +163,6 @@
         private fun increaseMoveCount() {
             moveCount++
             movesMadeView.text = moveCount.toString()
-        }
-
-        private fun clearCounters() {
-            handler.removeCallbacks(runnable)
-            seconds = 0
-            secondsElapsedView.text = "0 s"
-
-            moveCount = 0
-            movesMadeView.text = "0"
         }
 
         private fun checkPosition() {
@@ -198,6 +191,63 @@
             clearCounters()
             val winDialog = WinDialog(moveCountString, timeElapsedString)
             winDialog.show(supportFragmentManager, "win_dialog")
+        }
+
+        private val updateTime: BroadcastReceiver = object: BroadcastReceiver() {
+            override fun onReceive(p0: Context?, p1: Intent?) {
+                time = intent.getDoubleExtra(TimerService.TIME_EXTRA, 0.0)
+                binding.secondsElapsedView.text = getTimerStringFromDouble(time)
+                return
+            }
+        }
+
+        private fun getTimerStringFromDouble(time: Double): String {
+            val resultInt = time.roundToInt()
+            val seconds = resultInt % 86400 % 3600 % 60
+
+            return seconds.toString()
+        }
+
+        private fun startStopTimer() {
+            if (timerStarted) stopTimer()
+            else startTimer1()
+        }
+
+        private fun resetTimer() {
+            stopTimer()
+            time = 0.0
+            binding.secondsElapsedView.text = getTimerStringFromDouble(time)
+        }
+
+        private fun startTimer1() {
+            serviceIntent.putExtra(TimerService.TIME_EXTRA, time)
+            startService(serviceIntent)
+            timerStarted = true
+        }
+
+        private fun stopTimer() {
+            stopService(serviceIntent)
+            timerStarted = false
+        }
+
+        private fun startTimer() {
+            handler = Handler()
+            runnable = Runnable {
+                seconds++
+                secondsElapsedView.text = getString(R.string.seconds_elapsed, seconds)
+                handler.postDelayed(runnable, 1000)
+            }
+
+            handler.post(runnable)
+        }
+
+        private fun clearCounters() {
+            stopTimer()
+            time = 0.0
+            binding.secondsElapsedView.text = getTimerStringFromDouble(time)
+
+            moveCount = 0
+            movesMadeView.text = "0"
         }
 
         private fun findButtonById(tileName: String): Button {
