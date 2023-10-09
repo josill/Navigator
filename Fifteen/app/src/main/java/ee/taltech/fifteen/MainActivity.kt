@@ -4,7 +4,6 @@
     import android.os.Handler
     import android.view.View
     import android.widget.Button
-    import android.widget.FrameLayout
     import android.widget.TextView
     import androidx.appcompat.app.AppCompatActivity
     import androidx.constraintlayout.widget.ConstraintLayout
@@ -189,7 +188,7 @@
                 else button.setBackgroundColor(mainTileBGColor)
             }
 
-            if (correctCount == 15) handleWin()
+            if (correctCount >= 4) handleWin()
         }
 
         private fun handleWin() {
