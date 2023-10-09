@@ -4,6 +4,7 @@
     import android.os.Handler
     import android.view.View
     import android.widget.Button
+    import android.widget.FrameLayout
     import android.widget.TextView
     import androidx.appcompat.app.AppCompatActivity
     import androidx.constraintlayout.widget.ConstraintLayout
@@ -13,100 +14,80 @@
     import kotlin.properties.Delegates
 
     class MainActivity : AppCompatActivity() {
-        private lateinit var secondsElapsedView: TextView;
-        private lateinit var movesMadeView: TextView;
-        private lateinit var boardLayout: ConstraintLayout;
-        private lateinit var newGameButton: Button;
-        private lateinit var undoButton: Button;
+        private lateinit var secondsElapsedView: TextView
+        private lateinit var movesMadeView: TextView
+        private lateinit var boardLayout: ConstraintLayout
+        private lateinit var newGameButton: Button
+        private lateinit var undoButton: Button
 
-        private var textColor by Delegates.notNull<Int>();
-        private var mainTileBGColor by Delegates.notNull<Int>();
-        private var secondaryTileBGColor by Delegates.notNull<Int>();
-        private var tertiaryTileBGColor by Delegates.notNull<Int>();
+        private var textColor by Delegates.notNull<Int>()
+        private var mainTileBGColor by Delegates.notNull<Int>()
+        private var secondaryTileBGColor by Delegates.notNull<Int>()
+        private var tertiaryTileBGColor by Delegates.notNull<Int>()
 
-        private lateinit var board: Board;
-        private var gameStarted = false;
-        private var stack = Stack<String>();
-        private var moveCount = 0;
-        private var seconds = 0;
-        private lateinit var handler: Handler;
-        private lateinit var runnable: Runnable;
+        private lateinit var board: Board
+        private var firstStart = true
+        private var stack = Stack<String>()
+        private var moveCount = 0
+        private var seconds = 0
+        private lateinit var handler: Handler
+        private lateinit var runnable: Runnable
 
         override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-//
-            textColor = ContextCompat.getColor(this, R.color.textColorMain);
-            mainTileBGColor = ContextCompat.getColor(this, R.color.mainTileBGColor);
-            secondaryTileBGColor = ContextCompat.getColor(this, R.color.secondaryTileBGColor);
-            tertiaryTileBGColor = ContextCompat.getColor(this, R.color.tertiaryTileBGColor);
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main)
 
-            secondsElapsedView = findViewById(R.id.secondsElapsedView);
-            movesMadeView = findViewById(R.id.movesMadeView);
-            boardLayout = findViewById(R.id.boardLayout);
-            newGameButton = findViewById(R.id.newGameButton);
-            undoButton = findViewById(R.id.undoButton);
+            textColor = ContextCompat.getColor(this, R.color.textColorMain)
+            mainTileBGColor = ContextCompat.getColor(this, R.color.mainTileBGColor)
+            secondaryTileBGColor = ContextCompat.getColor(this, R.color.secondaryTileBGColor)
+            tertiaryTileBGColor = ContextCompat.getColor(this, R.color.tertiaryTileBGColor)
 
-            movesMadeView.text = "0";
-            secondsElapsedView.text = getString(R.string.zero_seconds);
-            board = Board();
-            drawBoard();
+            secondsElapsedView = findViewById(R.id.secondsElapsedView)
+            movesMadeView = findViewById(R.id.movesMadeView)
+            boardLayout = findViewById(R.id.boardLayout)
+            newGameButton = findViewById(R.id.newGameButton)
+            undoButton = findViewById(R.id.undoButton)
+
+            movesMadeView.text = "0"
+            secondsElapsedView.text = getString(R.string.zero_seconds)
+            board = Board()
+            drawBoard()
+            checkPosition()
 
             newGameButton.setOnClickListener {
-                if (gameStarted) {
-                    resetGame();
-                }
-                startGame();
+                if (firstStart) buildGame()
+                else resetGame()
             }
         }
 
-        private fun startGame() {
-            if (!gameStarted) {
-                gameStarted = true;
-
-                startTimer();
-
-                val tileOnClickListener = View.OnClickListener { view ->
-                    val idString = resources.getResourceEntryName(view.id);
-                    handleTileClick(idString);
-                }
-
-                for (i in 0 until boardLayout.childCount) {
-                    val button = boardLayout.getChildAt(i);
-                    button.setOnClickListener(tileOnClickListener);
-                }
-            }
+        private fun buildGame() {
+            activateBoard(true)
+            startTimer()
+            firstStart = false;
         }
 
         private fun resetGame() {
-            handler.removeCallbacks(runnable);
-            seconds = 0 ;
-            secondsElapsedView.text = "0 s";
-
-            moveCount = 0;
-            movesMadeView.text = "0";
-
-            gameStarted = false;
-            drawBoard();
-            checkPosition();
-            startGame();
+            clearCounters()
+            drawBoard()
+            checkPosition()
+            buildGame()
         }
 
         private fun drawBoard() {
-            val puzzle = board.createPuzzle();
+            val puzzle = board.createPuzzle()
 
             for (i in 0 until 16) {
-                val buttonNumber = puzzle[i];
+                val buttonNumber = puzzle[i]
 
-                val button = findButtonById("tile${i+1}");
-                button.setTextColor(textColor);
+                val button = findButtonById("tile${i+1}")
+                button.setTextColor(textColor)
 
                 if (buttonNumber == 16) {
-                    button.setBackgroundColor(secondaryTileBGColor);
-                    button.text = "";
+                    button.setBackgroundColor(secondaryTileBGColor)
+                    button.text = ""
                 } else {
-                    button.setBackgroundColor(mainTileBGColor);
-                    button.text = buttonNumber.toString();
+                    button.setBackgroundColor(mainTileBGColor)
+                    button.text = buttonNumber.toString()
                 }
             }
         }
@@ -116,11 +97,11 @@
         }
 
         private fun handleTileClick(tileId: String) {
-            increaseMoveCount();
+            increaseMoveCount()
 
-            val clickedTile = findButtonById(tileId);
-            val clickedTileNumber = tileId.split("tile")[1].toInt();
-            val clickedTileValue = clickedTile.text;
+            val clickedTile = findButtonById(tileId)
+            val clickedTileNumber = tileId.split("tile")[1].toInt()
+            val clickedTileValue = clickedTile.text
 
             for (i in 1..4) {
                 val neighbourTileNumber = when (i) {
@@ -136,49 +117,92 @@
                     val neighbourTile = findButtonById(neighbourTileId)
 
                     if (neighbourTile.text == "") {
-                        neighbourTile.text = clickedTileValue;
-                        neighbourTile.setBackgroundColor(mainTileBGColor);
+                        neighbourTile.text = clickedTileValue
+                        neighbourTile.setBackgroundColor(mainTileBGColor)
 
-                        clickedTile.text = "";
-                        clickedTile.setBackgroundColor(secondaryTileBGColor);
+                        clickedTile.text = ""
+                        clickedTile.setBackgroundColor(secondaryTileBGColor)
                     }
                 } catch (e: Exception) {
                     println(e)
                 }
             }
 
-            checkPosition();
+            checkPosition()
         }
 
         private fun startTimer() {
             handler = Handler()
             runnable = Runnable {
                 seconds++
-                secondsElapsedView.text = "$seconds s"
+                secondsElapsedView.text = getString(R.string.seconds_elapsed, seconds)
                 handler.postDelayed(runnable, 1000)
             }
 
-            handler.post(runnable);
+            handler.post(runnable)
         }
 
-        private fun increaseMoveCount() {
-            moveCount++;
-            movesMadeView.text = moveCount.toString();
-        }
+        private fun activateBoard(activate: Boolean) {
+            lateinit var tileOnClickListener: View.OnClickListener
 
-        private fun checkPosition() {
-            for (i in 1..16) {
-                val buttonId = "tile$i";
-                val button = findButtonById(buttonId);
+            if (activate) {
+                tileOnClickListener = View.OnClickListener { view ->
+                    val idString = resources.getResourceEntryName(view.id)
+                    handleTileClick(idString)
+                }
+            }
 
-                if (button.text.toString().toIntOrNull() == i) button.setBackgroundColor(tertiaryTileBGColor);
-                else if (button.text == "") button.setBackgroundColor(secondaryTileBGColor);
-                else button.setBackgroundColor(mainTileBGColor);
+            for (i in 0 until boardLayout.childCount) {
+                val button = boardLayout.getChildAt(i)
+                if (activate) button.setOnClickListener(tileOnClickListener)
+                else button.setOnClickListener(null)
             }
         }
 
+        private fun increaseMoveCount() {
+            moveCount++
+            movesMadeView.text = moveCount.toString()
+        }
+
+        private fun clearCounters() {
+            handler.removeCallbacks(runnable)
+            seconds = 0
+            secondsElapsedView.text = "0 s"
+
+            moveCount = 0
+            movesMadeView.text = "0"
+        }
+
+        private fun checkPosition() {
+            // find if the tiles are in the correct place
+            var correctCount = 0
+
+            for (i in 1..16) {
+                val buttonId = "tile$i"
+                val button = findButtonById(buttonId)
+
+                if (button.text.toString().toIntOrNull() == i) {
+                    button.setBackgroundColor(tertiaryTileBGColor)
+                    correctCount++
+                }
+                else if (button.text == "") button.setBackgroundColor(secondaryTileBGColor)
+                else button.setBackgroundColor(mainTileBGColor)
+            }
+
+            if (correctCount == 15) handleWin()
+        }
+
+        private fun handleWin() {
+            val moveCountString = getString(R.string.game_complete_moves, moveCount)
+            val timeElapsedString = getString(R.string.game_complete_time_elapsed, seconds)
+            activateBoard(false)
+            clearCounters()
+            val winDialog = WinDialog(moveCountString, timeElapsedString)
+            winDialog.show(supportFragmentManager, "win_dialog")
+        }
+
         private fun findButtonById(tileName: String): Button {
-            val resourceId = resources.getIdentifier(tileName, "id", packageName);
-            return findViewById(resourceId);
+            val resourceId = resources.getIdentifier(tileName, "id", packageName)
+            return findViewById(resourceId)
         }
     }

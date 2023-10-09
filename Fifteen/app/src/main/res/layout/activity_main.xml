@@ -30,7 +30,7 @@
         android:layout_marginBottom="32dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintBottom_toTopOf="@+id/boardLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -44,11 +44,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:width="100dp"
                 android:background="@color/secondaryTileBGColor"
                 android:padding="5dp"
-                android:text="Time: "
+                android:text="@string/time"
                 android:textColor="@color/textColorSecondary" />
 
             <TextView
@@ -59,7 +59,7 @@
                 android:width="100dp"
                 android:background="@color/secondaryTileBGColor"
                 android:padding="5dp"
-                android:text="Moves:"
+                android:text="@string/moves"
                 android:textColor="@color/textColorSecondary" />
         </LinearLayout>
 
@@ -102,7 +102,7 @@
         android:orientation="horizontal"        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include">
+        app:layout_constraintTop_toBottomOf="@+id/boardLayout">
 
         <Button
             android:id="@+id/newGameButton"
@@ -110,16 +110,19 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="60dp"
             android:background="@color/secondaryTileBGColor"
-            android:text="new game"
-            android:textColor="@color/textColorSecondary" />
+            android:text="@string/new_game"
+            android:textColor="@color/textColorSecondary"
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/undoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/secondaryTileBGColor"
-            android:text="undo"
-            android:textColor="@color/textColorSecondary" />
+            android:text="@string/undo"
+            android:textColor="@color/textColorSecondary"
+            style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
