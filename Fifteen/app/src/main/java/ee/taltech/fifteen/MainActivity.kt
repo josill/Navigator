@@ -9,26 +9,38 @@
     import android.view.View
     import android.widget.Button
     import android.widget.TextView
+    import androidx.annotation.ColorInt
     import androidx.appcompat.app.AppCompatActivity
     import androidx.constraintlayout.widget.ConstraintLayout
     import androidx.core.content.ContextCompat
+    import com.google.android.material.switchmaterial.SwitchMaterial
     import ee.taltech.fifteen.databinding.ActivityMainBinding
+    import org.w3c.dom.Text
     import java.lang.Exception
     import java.util.Stack
     import kotlin.math.roundToInt
     import kotlin.properties.Delegates
 
     class MainActivity : AppCompatActivity() {
+        private lateinit var appLayout: ConstraintLayout
+        private lateinit var secondsElapsedHeading: TextView
         private lateinit var secondsElapsedView: TextView
+        private lateinit var movesMadeHeading: TextView
         private lateinit var movesMadeView: TextView
         private lateinit var boardLayout: ConstraintLayout
         private lateinit var newGameButton: Button
         private lateinit var undoButton: Button
+        private lateinit var modeToggle: SwitchMaterial
 
         private var textColor by Delegates.notNull<Int>()
-        private var mainTileBGColor by Delegates.notNull<Int>()
-        private var secondaryTileBGColor by Delegates.notNull<Int>()
-        private var tertiaryTileBGColor by Delegates.notNull<Int>()
+        private var lightMainTileBGColor by Delegates.notNull<Int>()
+        private var lightSecondaryTileBGColor by Delegates.notNull<Int>()
+        private var lightTertiaryTileBGColor by Delegates.notNull<Int>()
+        private var darkMainTileBGColor by Delegates.notNull<Int>()
+        private var darkSecondaryTileBGColor by Delegates.notNull<Int>()
+        private var darkTertiaryTileBGColor by Delegates.notNull<Int>()
+        private var lightBGColor by Delegates.notNull<Int>()
+        private var darkBGColor by Delegates.notNull<Int>()
 
         private lateinit var board: Board
         private var firstStart = true
@@ -36,6 +48,9 @@
         private var moveCount = 0
         private var seconds = 0
         private var time = 0.0
+        val buttonIds = intArrayOf(R.id.tile1, R.id.tile2, R.id.tile3, R.id.tile4, R.id.tile5, R.id.tile6, R.id.tile7, R.id.tile8,
+            R.id.tile9, R.id.tile10, R.id.tile11, R.id.tile12, R.id.tile13, R.id.tile14, R.id.tile15, R.id.tile16)
+
         private lateinit var binding: ActivityMainBinding
         private var timerStarted = false
         private lateinit var serviceIntent: Intent
@@ -47,15 +62,25 @@
             setContentView(R.layout.activity_main)
 
             textColor = ContextCompat.getColor(this, R.color.textColorMain)
-            mainTileBGColor = ContextCompat.getColor(this, R.color.mainTileBGColor)
-            secondaryTileBGColor = ContextCompat.getColor(this, R.color.secondaryTileBGColor)
-            tertiaryTileBGColor = ContextCompat.getColor(this, R.color.tertiaryTileBGColor)
+            lightMainTileBGColor = ContextCompat.getColor(this, R.color.lightMainTileBGColor)
+            lightSecondaryTileBGColor = ContextCompat.getColor(this, R.color.lightSecondaryTileBGColor)
+            lightTertiaryTileBGColor = ContextCompat.getColor(this, R.color.lightTertiaryTileBGColor)
+            darkMainTileBGColor = ContextCompat.getColor(this, R.color.darkMainTileBGColor)
+            darkSecondaryTileBGColor = ContextCompat.getColor(this, R.color.darkSecondaryTileBGColor)
+            darkTertiaryTileBGColor = ContextCompat.getColor(this, R.color.darkTertiaryTileBGColor)
+            lightBGColor = ContextCompat.getColor(this, R.color.lightBackgroundColor)
+            darkBGColor = ContextCompat.getColor(this, R.color.darkBackgroundColor)
 
+            appLayout = findViewById(R.id.appLayout)
+            secondsElapsedHeading = findViewById(R.id.secondsElapsedHeading)
             secondsElapsedView = findViewById(R.id.secondsElapsedView)
+            movesMadeHeading = findViewById(R.id.movesMadeHeading)
             movesMadeView = findViewById(R.id.movesMadeView)
             boardLayout = findViewById(R.id.boardLayout)
             newGameButton = findViewById(R.id.newGameButton)
             undoButton = findViewById(R.id.undoButton)
+            modeToggle = findViewById(R.id.modeToggle)
+
             binding = ActivityMainBinding.inflate(layoutInflater)
             serviceIntent = Intent(applicationContext, TimerService::class.java)
             registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
@@ -69,6 +94,30 @@
             newGameButton.setOnClickListener {
                 if (firstStart) buildGame()
                 else resetGame()
+            }
+
+            modeToggle.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    appLayout.setBackgroundColor(darkBGColor)
+                    window.navigationBarColor = darkBGColor
+
+                    movesMadeHeading.setBackgroundColor(darkSecondaryTileBGColor)
+                    movesMadeView.setBackgroundColor(darkSecondaryTileBGColor)
+                    secondsElapsedHeading.setBackgroundColor(darkSecondaryTileBGColor)
+                    secondsElapsedView.setBackgroundColor(darkSecondaryTileBGColor)
+                    newGameButton.setBackgroundColor(darkSecondaryTileBGColor)
+                    undoButton.setBackgroundColor(darkSecondaryTileBGColor)
+                } else {
+                    appLayout.setBackgroundColor(lightBGColor)
+                    window.navigationBarColor = darkSecondaryTileBGColor
+
+                    movesMadeHeading.setBackgroundColor(lightSecondaryTileBGColor)
+                    movesMadeView.setBackgroundColor(lightSecondaryTileBGColor)
+                    secondsElapsedHeading.setBackgroundColor(lightSecondaryTileBGColor)
+                    secondsElapsedView.setBackgroundColor(lightSecondaryTileBGColor)
+                    newGameButton.setBackgroundColor(lightSecondaryTileBGColor)
+                    undoButton.setBackgroundColor(lightSecondaryTileBGColor)
+                }
             }
         }
 
@@ -95,10 +144,18 @@
                 button.setTextColor(textColor)
 
                 if (buttonNumber == 16) {
-                    button.setBackgroundColor(secondaryTileBGColor)
+                    if (modeToggle.isActivated) {
+                        button.setBackgroundColor(darkSecondaryTileBGColor)
+                    } else {
+                        button.setBackgroundColor(lightSecondaryTileBGColor)
+                    }
                     button.text = ""
                 } else {
-                    button.setBackgroundColor(mainTileBGColor)
+                    if (modeToggle.isActivated) {
+                        button.setBackgroundColor(darkMainTileBGColor)
+                    } else {
+                        button.setBackgroundColor(lightMainTileBGColor)
+                    }
                     button.text = buttonNumber.toString()
                 }
             }
@@ -130,10 +187,18 @@
 
                     if (neighbourTile.text == "") {
                         neighbourTile.text = clickedTileValue
-                        neighbourTile.setBackgroundColor(mainTileBGColor)
+                        if (modeToggle.isActivated) {
+                            neighbourTile.setBackgroundColor(darkMainTileBGColor)
+                        } else {
+                            neighbourTile.setBackgroundColor(lightMainTileBGColor)
+                        }
 
                         clickedTile.text = ""
-                        clickedTile.setBackgroundColor(secondaryTileBGColor)
+                        if (modeToggle.isActivated) {
+                            clickedTile.setBackgroundColor(darkSecondaryTileBGColor)
+                        } else {
+                            clickedTile.setBackgroundColor(lightSecondaryTileBGColor)
+                        }
                     }
                 } catch (e: Exception) {
                     println(e)
@@ -166,7 +231,6 @@
         }
 
         private fun checkPosition() {
-            // find if the tiles are in the correct place
             var correctCount = 0
 
             for (i in 1..16) {
@@ -174,11 +238,27 @@
                 val button = findButtonById(buttonId)
 
                 if (button.text.toString().toIntOrNull() == i) {
-                    button.setBackgroundColor(tertiaryTileBGColor)
+                    if (modeToggle.isActivated) {
+                        button.setBackgroundColor(darkTertiaryTileBGColor)
+                    } else {
+                        button.setBackgroundColor(lightTertiaryTileBGColor)
+                    }
                     correctCount++
                 }
-                else if (button.text == "") button.setBackgroundColor(secondaryTileBGColor)
-                else button.setBackgroundColor(mainTileBGColor)
+                else if (button.text == "") {
+                    if (modeToggle.isActivated) {
+                        button.setBackgroundColor(darkSecondaryTileBGColor)
+                    } else {
+                        button.setBackgroundColor(lightSecondaryTileBGColor)
+                    }
+                }
+                else {
+                    if (modeToggle.isActivated) {
+                        button.setBackgroundColor(darkMainTileBGColor)
+                    } else {
+                        button.setBackgroundColor(lightMainTileBGColor)
+                    }
+                }
             }
 
             if (correctCount >= 4) handleWin()
@@ -208,17 +288,6 @@
             return seconds.toString()
         }
 
-        private fun startStopTimer() {
-            if (timerStarted) stopTimer()
-            else startTimer1()
-        }
-
-        private fun resetTimer() {
-            stopTimer()
-            time = 0.0
-            binding.secondsElapsedView.text = getTimerStringFromDouble(time)
-        }
-
         private fun startTimer1() {
             serviceIntent.putExtra(TimerService.TIME_EXTRA, time)
             startService(serviceIntent)
@@ -228,17 +297,6 @@
         private fun stopTimer() {
             stopService(serviceIntent)
             timerStarted = false
-        }
-
-        private fun startTimer() {
-            handler = Handler()
-            runnable = Runnable {
-                seconds++
-                secondsElapsedView.text = getString(R.string.seconds_elapsed, seconds)
-                handler.postDelayed(runnable, 1000)
-            }
-
-            handler.post(runnable)
         }
 
         private fun clearCounters() {
