@@ -1,23 +1,21 @@
     package ee.taltech.fifteen
 
-    import android.content.BroadcastReceiver
-    import android.content.Context
     import android.content.Intent
     import android.content.IntentFilter
     import android.os.Bundle
-    import android.os.Handler
+    import android.util.Log
     import android.view.View
     import android.widget.Button
     import android.widget.TextView
-    import androidx.annotation.ColorInt
     import androidx.appcompat.app.AppCompatActivity
     import androidx.constraintlayout.widget.ConstraintLayout
     import androidx.core.content.ContextCompat
+    import androidx.localbroadcastmanager.content.LocalBroadcastManager
     import com.google.android.material.switchmaterial.SwitchMaterial
     import ee.taltech.fifteen.databinding.ActivityMainBinding
-    import org.w3c.dom.Text
     import java.lang.Exception
     import java.util.Stack
+    import java.util.Timer
     import kotlin.math.roundToInt
     import kotlin.properties.Delegates
 
@@ -48,14 +46,14 @@
         private var moveCount = 0
         private var seconds = 0
         private var time = 0.0
-        val buttonIds = intArrayOf(R.id.tile1, R.id.tile2, R.id.tile3, R.id.tile4, R.id.tile5, R.id.tile6, R.id.tile7, R.id.tile8,
+        private val tileIds = intArrayOf(R.id.tile1, R.id.tile2, R.id.tile3, R.id.tile4, R.id.tile5, R.id.tile6, R.id.tile7, R.id.tile8,
             R.id.tile9, R.id.tile10, R.id.tile11, R.id.tile12, R.id.tile13, R.id.tile14, R.id.tile15, R.id.tile16)
 
         private lateinit var binding: ActivityMainBinding
         private var timerStarted = false
-        private lateinit var serviceIntent: Intent
-        private lateinit var handler: Handler
-        private lateinit var runnable: Runnable
+//        private lateinit var serviceIntent: Intent
+//        private var timerReceiver = TimerReceiver()
+//        private val timerIntentFilter = IntentFilter(TimerReceiver.TIMER_UPDATED)
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -81,9 +79,9 @@
             undoButton = findViewById(R.id.undoButton)
             modeToggle = findViewById(R.id.modeToggle)
 
-            binding = ActivityMainBinding.inflate(layoutInflater)
-            serviceIntent = Intent(applicationContext, TimerService::class.java)
-            registerReceiver(updateTime, IntentFilter(TimerService.TIMER_UPDATED))
+//            timerIntentFilter.addAction(TimerReceiver.TIMER_UPDATED)
+//            LocalBroadcastManager.getInstance(this)
+//                .registerReceiver(timerReceiver, timerIntentFilter)
 
             movesMadeView.text = "0"
             secondsElapsedView.text = getString(R.string.zero_seconds)
@@ -121,26 +119,37 @@
             }
         }
 
+        override fun onDestroy() {
+            super.onDestroy()
+//            LocalBroadcastManager.getInstance(this)
+//                .unregisterReceiver(timerReceiver)
+        }
+
         private fun buildGame() {
             activateBoard(true)
-            startTimer1()
-            firstStart = false;
+            startTimer()
+            firstStart = false
         }
 
         private fun resetGame() {
+            Log.d("ABCDEFG", "0")
             clearCounters()
+            Log.d("ABCDEFG", "1")
             drawBoard()
+            Log.d("ABCDEFG", "2")
             checkPosition()
+            Log.d("ABCDEFG", "3")
             buildGame()
+            Log.d("ABCDEFG", "4")
         }
 
         private fun drawBoard() {
             val puzzle = board.createPuzzle()
 
-            for (i in 0 until 16) {
+            for ((i, tileId) in tileIds.withIndex()) {
                 val buttonNumber = puzzle[i]
 
-                val button = findButtonById("tile${i+1}")
+                val button = findViewById<Button>(tileId)
                 button.setTextColor(textColor)
 
                 if (buttonNumber == 16) {
@@ -168,8 +177,9 @@
         private fun handleTileClick(tileId: String) {
             increaseMoveCount()
 
-            val clickedTile = findButtonById(tileId)
             val clickedTileNumber = tileId.split("tile")[1].toInt()
+            val clickedTileR = tileIds[clickedTileNumber - 1]
+            val clickedTile = findViewById<Button>(clickedTileR)
             val clickedTileValue = clickedTile.text
 
             for (i in 1..4) {
@@ -179,11 +189,10 @@
                     3 -> clickedTileNumber - 1 // left neighbour tile
                     else -> clickedTileNumber + 1 // right neighbour tile
                 }
-
-                val neighbourTileId = "tile$neighbourTileNumber"
-
+                
                 try {
-                    val neighbourTile = findButtonById(neighbourTileId)
+                    val neighbourTileR = tileIds[neighbourTileNumber - 1]
+                    val neighbourTile = findViewById<Button>(neighbourTileR)
 
                     if (neighbourTile.text == "") {
                         neighbourTile.text = clickedTileValue
@@ -233,11 +242,10 @@
         private fun checkPosition() {
             var correctCount = 0
 
-            for (i in 1..16) {
-                val buttonId = "tile$i"
-                val button = findButtonById(buttonId)
+            for ((i, tileId) in tileIds.withIndex()) {
+                val button = findViewById<Button>(tileId)
 
-                if (button.text.toString().toIntOrNull() == i) {
+                if (button.text.toString().toIntOrNull() == i + 1) {
                     if (modeToggle.isActivated) {
                         button.setBackgroundColor(darkTertiaryTileBGColor)
                     } else {
@@ -273,14 +281,6 @@
             winDialog.show(supportFragmentManager, "win_dialog")
         }
 
-        private val updateTime: BroadcastReceiver = object: BroadcastReceiver() {
-            override fun onReceive(p0: Context?, p1: Intent?) {
-                time = intent.getDoubleExtra(TimerService.TIME_EXTRA, 0.0)
-                binding.secondsElapsedView.text = getTimerStringFromDouble(time)
-                return
-            }
-        }
-
         private fun getTimerStringFromDouble(time: Double): String {
             val resultInt = time.roundToInt()
             val seconds = resultInt % 86400 % 3600 % 60
@@ -288,22 +288,24 @@
             return seconds.toString()
         }
 
-        private fun startTimer1() {
-            serviceIntent.putExtra(TimerService.TIME_EXTRA, time)
-            startService(serviceIntent)
+        private fun startTimer() {
+//            LocalBroadcastManager.getInstance(this)
+//                .sendBroadcast(Intent(TimerReceiver.TIMER_STARTED))
             timerStarted = true
         }
 
         private fun stopTimer() {
-            stopService(serviceIntent)
+//            LocalBroadcastManager.getInstance(this)
+//                .sendBroadcast(Intent(TimerReceiver.TIMER_STOPPED))
             timerStarted = false
         }
 
         private fun clearCounters() {
             stopTimer()
             time = 0.0
-            binding.secondsElapsedView.text = getTimerStringFromDouble(time)
-
+            Log.d("ABCDEFG", "00")
+//            binding.secondsElapsedView.text = getTimerStringFromDouble(time)
+            Log.d("ABCDEFG", "000")
             moveCount = 0
             movesMadeView.text = "0"
         }
