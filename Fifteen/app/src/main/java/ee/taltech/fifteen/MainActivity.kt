@@ -98,6 +98,7 @@
                 if (isChecked) {
                     appLayout.setBackgroundColor(darkBGColor)
                     window.navigationBarColor = darkBGColor
+                    window.statusBarColor = darkBGColor
 
                     movesMadeHeading.setBackgroundColor(darkSecondaryTileBGColor)
                     movesMadeView.setBackgroundColor(darkSecondaryTileBGColor)
@@ -105,9 +106,12 @@
                     secondsElapsedView.setBackgroundColor(darkSecondaryTileBGColor)
                     newGameButton.setBackgroundColor(darkSecondaryTileBGColor)
                     undoButton.setBackgroundColor(darkSecondaryTileBGColor)
+
+                    checkPosition()
                 } else {
                     appLayout.setBackgroundColor(lightBGColor)
                     window.navigationBarColor = darkSecondaryTileBGColor
+                    window.statusBarColor = darkSecondaryTileBGColor
 
                     movesMadeHeading.setBackgroundColor(lightSecondaryTileBGColor)
                     movesMadeView.setBackgroundColor(lightSecondaryTileBGColor)
@@ -115,6 +119,8 @@
                     secondsElapsedView.setBackgroundColor(lightSecondaryTileBGColor)
                     newGameButton.setBackgroundColor(lightSecondaryTileBGColor)
                     undoButton.setBackgroundColor(lightSecondaryTileBGColor)
+
+                    checkPosition()
                 }
             }
         }
@@ -153,14 +159,14 @@
                 button.setTextColor(textColor)
 
                 if (buttonNumber == 16) {
-                    if (modeToggle.isActivated) {
+                    if (modeToggle.isChecked) {
                         button.setBackgroundColor(darkSecondaryTileBGColor)
                     } else {
                         button.setBackgroundColor(lightSecondaryTileBGColor)
                     }
                     button.text = ""
                 } else {
-                    if (modeToggle.isActivated) {
+                    if (modeToggle.isChecked) {
                         button.setBackgroundColor(darkMainTileBGColor)
                     } else {
                         button.setBackgroundColor(lightMainTileBGColor)
@@ -189,21 +195,21 @@
                     3 -> clickedTileNumber - 1 // left neighbour tile
                     else -> clickedTileNumber + 1 // right neighbour tile
                 }
-                
+
                 try {
                     val neighbourTileR = tileIds[neighbourTileNumber - 1]
                     val neighbourTile = findViewById<Button>(neighbourTileR)
 
                     if (neighbourTile.text == "") {
                         neighbourTile.text = clickedTileValue
-                        if (modeToggle.isActivated) {
+                        if (modeToggle.isChecked) {
                             neighbourTile.setBackgroundColor(darkMainTileBGColor)
                         } else {
                             neighbourTile.setBackgroundColor(lightMainTileBGColor)
                         }
 
                         clickedTile.text = ""
-                        if (modeToggle.isActivated) {
+                        if (modeToggle.isChecked) {
                             clickedTile.setBackgroundColor(darkSecondaryTileBGColor)
                         } else {
                             clickedTile.setBackgroundColor(lightSecondaryTileBGColor)
@@ -246,7 +252,7 @@
                 val button = findViewById<Button>(tileId)
 
                 if (button.text.toString().toIntOrNull() == i + 1) {
-                    if (modeToggle.isActivated) {
+                    if (modeToggle.isChecked) {
                         button.setBackgroundColor(darkTertiaryTileBGColor)
                     } else {
                         button.setBackgroundColor(lightTertiaryTileBGColor)
@@ -254,14 +260,14 @@
                     correctCount++
                 }
                 else if (button.text == "") {
-                    if (modeToggle.isActivated) {
+                    if (modeToggle.isChecked) {
                         button.setBackgroundColor(darkSecondaryTileBGColor)
                     } else {
                         button.setBackgroundColor(lightSecondaryTileBGColor)
                     }
                 }
                 else {
-                    if (modeToggle.isActivated) {
+                    if (modeToggle.isChecked) {
                         button.setBackgroundColor(darkMainTileBGColor)
                     } else {
                         button.setBackgroundColor(lightMainTileBGColor)
