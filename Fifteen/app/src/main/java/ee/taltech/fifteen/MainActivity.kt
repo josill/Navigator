@@ -7,15 +7,16 @@
     import android.view.View
     import android.widget.Button
     import android.widget.TextView
+    import androidx.annotation.IdRes
     import androidx.appcompat.app.AppCompatActivity
     import androidx.constraintlayout.widget.ConstraintLayout
     import androidx.core.content.ContextCompat
     import androidx.localbroadcastmanager.content.LocalBroadcastManager
     import com.google.android.material.switchmaterial.SwitchMaterial
     import ee.taltech.fifteen.databinding.ActivityMainBinding
-    import java.lang.Exception
     import java.util.Stack
     import java.util.Timer
+    import kotlin.Exception
     import kotlin.math.roundToInt
     import kotlin.properties.Delegates
 
@@ -42,7 +43,7 @@
 
         private lateinit var board: Board
         private var firstStart = true
-        private var stack = Stack<String>()
+        private var movesMade = Stack<Int>()
         private var moveCount = 0
         private var seconds = 0
         private var time = 0.0
@@ -93,6 +94,10 @@
                 if (firstStart) buildGame()
                 else resetGame()
             }
+
+//            undoButton.setOnClickListener {
+//                undo()
+//            }
 
             modeToggle.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
@@ -176,12 +181,24 @@
             }
         }
 
-        fun undo() {
+        fun undo(view: View) {
+            if (movesMade.isNotEmpty()) {
+                var lastMoveValue = movesMade.pop()
 
+                var emptyTileR = tileIds[lastMoveValue]
+                Log.d("emptytiler", emptyTileR.toString())
+                var emptyTile = findViewById<Button>(emptyTileR)
+                Log.d("emptytile", emptyTile.toString())
+
+
+                val emptyTileId = resources.getResourceEntryName(emptyTile.id)
+//                Log.d("emptytiler", emptyTileR.toString())
+                handleTileClick(emptyTileId, undoMove = true)
+            }
         }
 
-        private fun handleTileClick(tileId: String) {
-            increaseMoveCount()
+        private fun handleTileClick(tileId: String, undoMove: Boolean = false) {
+            if (!undoMove) increaseMoveCount()
 
             val clickedTileNumber = tileId.split("tile")[1].toInt()
             val clickedTileR = tileIds[clickedTileNumber - 1]
@@ -201,6 +218,8 @@
                     val neighbourTile = findViewById<Button>(neighbourTileR)
 
                     if (neighbourTile.text == "") {
+                        if (!undoMove) movesMade.push(neighbourTileNumber - 1)
+
                         neighbourTile.text = clickedTileValue
                         if (modeToggle.isChecked) {
                             neighbourTile.setBackgroundColor(darkMainTileBGColor)
@@ -215,6 +234,7 @@
                             clickedTile.setBackgroundColor(lightSecondaryTileBGColor)
                         }
                     }
+
                 } catch (e: Exception) {
                     println(e)
                 }
@@ -314,10 +334,7 @@
             Log.d("ABCDEFG", "000")
             moveCount = 0
             movesMadeView.text = "0"
-        }
 
-        private fun findButtonById(tileName: String): Button {
-            val resourceId = resources.getIdentifier(tileName, "id", packageName)
-            return findViewById(resourceId)
+            movesMade = Stack<Int>()
         }
     }

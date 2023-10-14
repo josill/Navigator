@@ -119,6 +119,7 @@
 
         <Button
             android:id="@+id/undoButton"
+            android:onClick="undo"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
