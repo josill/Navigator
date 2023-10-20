@@ -1,21 +1,17 @@
     package ee.taltech.fifteen
 
-    import android.content.Intent
-    import android.content.IntentFilter
+    import android.content.res.TypedArray
     import android.os.Bundle
     import android.util.Log
     import android.view.View
     import android.widget.Button
     import android.widget.TextView
-    import androidx.annotation.IdRes
     import androidx.appcompat.app.AppCompatActivity
     import androidx.constraintlayout.widget.ConstraintLayout
     import androidx.core.content.ContextCompat
-    import androidx.localbroadcastmanager.content.LocalBroadcastManager
     import com.google.android.material.switchmaterial.SwitchMaterial
     import ee.taltech.fifteen.databinding.ActivityMainBinding
     import java.util.Stack
-    import java.util.Timer
     import kotlin.Exception
     import kotlin.math.roundToInt
     import kotlin.properties.Delegates
@@ -31,7 +27,10 @@
         private lateinit var undoButton: Button
         private lateinit var modeToggle: SwitchMaterial
 
-        private var textColor by Delegates.notNull<Int>()
+        private var lightTextColorMain by Delegates.notNull<Int>()
+        private var lightTextColorSecondary by Delegates.notNull<Int>()
+        private var darkTextColorMain by Delegates.notNull<Int>()
+        private var darkTextColorSecondary by Delegates.notNull<Int>()
         private var lightMainTileBGColor by Delegates.notNull<Int>()
         private var lightSecondaryTileBGColor by Delegates.notNull<Int>()
         private var lightTertiaryTileBGColor by Delegates.notNull<Int>()
@@ -49,6 +48,7 @@
         private var time = 0.0
         private val tileIds = intArrayOf(R.id.tile1, R.id.tile2, R.id.tile3, R.id.tile4, R.id.tile5, R.id.tile6, R.id.tile7, R.id.tile8,
             R.id.tile9, R.id.tile10, R.id.tile11, R.id.tile12, R.id.tile13, R.id.tile14, R.id.tile15, R.id.tile16)
+        private lateinit var tileMap: MutableMap<Int, String>;
 
         private lateinit var binding: ActivityMainBinding
         private var timerStarted = false
@@ -60,7 +60,10 @@
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
 
-            textColor = ContextCompat.getColor(this, R.color.textColorMain)
+            lightTextColorMain = ContextCompat.getColor(this, R.color.lightTextColorMain)
+            lightTextColorSecondary = ContextCompat.getColor(this, R.color.lightTextColorSecondary)
+            darkTextColorMain = ContextCompat.getColor(this, R.color.darkTextColorMain)
+            darkTextColorSecondary = ContextCompat.getColor(this, R.color.darkTextColorSecondary)
             lightMainTileBGColor = ContextCompat.getColor(this, R.color.lightMainTileBGColor)
             lightSecondaryTileBGColor = ContextCompat.getColor(this, R.color.lightSecondaryTileBGColor)
             lightTertiaryTileBGColor = ContextCompat.getColor(this, R.color.lightTertiaryTileBGColor)
@@ -83,21 +86,37 @@
 //            timerIntentFilter.addAction(TimerReceiver.TIMER_UPDATED)
 //            LocalBroadcastManager.getInstance(this)
 //                .registerReceiver(timerReceiver, timerIntentFilter)
-
             movesMadeView.text = "0"
             secondsElapsedView.text = getString(R.string.zero_seconds)
             board = Board()
-            drawBoard()
+
+            val tileIdsArray = savedInstanceState?.getIntArray("tileIds")
+            val tileValuesArray = savedInstanceState?.getStringArray("tileValues")
+
+            if (tileIdsArray != null && tileValuesArray != null) {
+                tileMap = mutableMapOf<Int, String>().apply {
+                    for (i in tileIdsArray.indices) this [tileIdsArray[i]] = tileValuesArray[i]
+                }
+
+                Log.d("onCreate", "onCreate1")
+
+                drawBoard(false)
+            } else {
+                Log.d("onCreate", "onCreate2")
+                tileMap = mutableMapOf()
+                drawBoard()
+            }
+
+            tileMap.forEach { (key, value) ->
+                Log.d("onCreate", "Key: $key, Value: $value")
+            }
+
             checkPosition()
 
             newGameButton.setOnClickListener {
                 if (firstStart) buildGame()
                 else resetGame()
             }
-
-//            undoButton.setOnClickListener {
-//                undo()
-//            }
 
             modeToggle.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
@@ -106,11 +125,21 @@
                     window.statusBarColor = darkBGColor
 
                     movesMadeHeading.setBackgroundColor(darkSecondaryTileBGColor)
+                    movesMadeHeading.setTextColor(darkTextColorMain)
                     movesMadeView.setBackgroundColor(darkSecondaryTileBGColor)
+                    secondsElapsedHeading.setTextColor(darkTextColorMain)
                     secondsElapsedHeading.setBackgroundColor(darkSecondaryTileBGColor)
                     secondsElapsedView.setBackgroundColor(darkSecondaryTileBGColor)
+                    secondsElapsedView.setTextColor(darkTextColorMain)
                     newGameButton.setBackgroundColor(darkSecondaryTileBGColor)
+                    newGameButton.setTextColor(darkTextColorMain)
                     undoButton.setBackgroundColor(darkSecondaryTileBGColor)
+                    undoButton.setTextColor(darkTextColorMain)
+
+                    for (tileId in tileIds) {
+                        val button = findViewById<Button>(tileId)
+                        button.setTextColor(darkTextColorMain)
+                    }
 
                     checkPosition()
                 } else {
@@ -119,16 +148,54 @@
                     window.statusBarColor = darkSecondaryTileBGColor
 
                     movesMadeHeading.setBackgroundColor(lightSecondaryTileBGColor)
+                    movesMadeHeading.setTextColor(lightTextColorSecondary)
                     movesMadeView.setBackgroundColor(lightSecondaryTileBGColor)
+                    secondsElapsedHeading.setTextColor(lightTextColorSecondary)
                     secondsElapsedHeading.setBackgroundColor(lightSecondaryTileBGColor)
                     secondsElapsedView.setBackgroundColor(lightSecondaryTileBGColor)
+                    secondsElapsedView.setTextColor(lightTextColorSecondary)
                     newGameButton.setBackgroundColor(lightSecondaryTileBGColor)
+                    newGameButton.setTextColor(lightTextColorSecondary)
                     undoButton.setBackgroundColor(lightSecondaryTileBGColor)
+                    undoButton.setTextColor(lightTextColorSecondary)
+
+                    for (tileId in tileIds) {
+                        val button = findViewById<Button>(tileId)
+                        button.setTextColor(lightTextColorMain)
+                    }
 
                     checkPosition()
                 }
             }
         }
+
+        override fun onSaveInstanceState(outState: Bundle) {
+            super.onSaveInstanceState(outState)
+
+            Log.d("onSaveInstanceState", "onSaveInstanceState")
+
+            tileMap.forEach { (key, value) ->
+                Log.d("onSaveInstanceState", "Key: $key, Value: $value")
+            }
+
+            if (::tileMap.isInitialized) {
+                val keys = (tileMap.keys).toIntArray()
+                val values = tileMap.values.toTypedArray()
+
+                outState.putIntArray("tileIds", keys)
+                outState.putStringArray("tileValues", values)
+            }
+        }
+
+//        override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+//            super.onRestoreInstanceState(savedInstanceState)
+//
+//            Log.d("onRestoreInstanceState", "onRestoreInstanceState")
+//
+//            tileMap.forEach { (key, value) ->
+//                Log.d("onRestoreInstanceState", "Key: $key, Value: $value")
+//            }
+//        }
 
         override fun onDestroy() {
             super.onDestroy()
@@ -143,51 +210,59 @@
         }
 
         private fun resetGame() {
-            Log.d("ABCDEFG", "0")
             clearCounters()
-            Log.d("ABCDEFG", "1")
             drawBoard()
-            Log.d("ABCDEFG", "2")
             checkPosition()
-            Log.d("ABCDEFG", "3")
             buildGame()
-            Log.d("ABCDEFG", "4")
         }
 
-        private fun drawBoard() {
+        private fun drawBoard(newGame: Boolean = true) {
             val puzzle = board.createPuzzle()
 
             for ((i, tileId) in tileIds.withIndex()) {
                 val buttonNumber = puzzle[i]
 
                 val button = findViewById<Button>(tileId)
-                button.setTextColor(textColor)
+                if (modeToggle.isChecked) button.setTextColor(darkTextColorMain)
+                else button.setTextColor(lightTextColorMain)
 
                 if (buttonNumber == 16) {
-                    if (modeToggle.isChecked) {
-                        button.setBackgroundColor(darkSecondaryTileBGColor)
+                    if (modeToggle.isChecked) button.setBackgroundColor(darkSecondaryTileBGColor)
+                    else button.setBackgroundColor(lightSecondaryTileBGColor)
+
+                    if (tileMap.size == 16 && !newGame) {
+                        Log.d("onCreate", "isNotEmpty16")
+                        button.text = tileMap[tileId]
                     } else {
-                        button.setBackgroundColor(lightSecondaryTileBGColor)
+                        Log.d("onCreate", "isEmpty16")
+                        button.text = ""
+                        tileMap[tileId] = button.text as String
                     }
-                    button.text = ""
+
+                    tileMap[tileId] = button.text as String
                 } else {
-                    if (modeToggle.isChecked) {
-                        button.setBackgroundColor(darkMainTileBGColor)
+                    if (modeToggle.isChecked) button.setBackgroundColor(darkMainTileBGColor)
+                    else button.setBackgroundColor(lightMainTileBGColor)
+
+                    if (tileMap.size == 16 && !newGame) {
+                        Log.d("onCreate", "isNotEmpty")
+                        button.text = tileMap[tileId]
                     } else {
-                        button.setBackgroundColor(lightMainTileBGColor)
+                        Log.d("onCreate", "isEmpty")
+                        button.text = buttonNumber.toString()
+                        tileMap[tileId] = button.text as String
                     }
-                    button.text = buttonNumber.toString()
                 }
             }
         }
 
         fun undo(view: View) {
             if (movesMade.isNotEmpty()) {
-                var lastMoveValue = movesMade.pop()
+                val lastMoveValue = movesMade.pop()
 
-                var emptyTileR = tileIds[lastMoveValue]
+                val emptyTileR = tileIds[lastMoveValue]
                 Log.d("emptytiler", emptyTileR.toString())
-                var emptyTile = findViewById<Button>(emptyTileR)
+                val emptyTile = findViewById<Button>(emptyTileR)
                 Log.d("emptytile", emptyTile.toString())
 
 
@@ -221,18 +296,16 @@
                         if (!undoMove) movesMade.push(neighbourTileNumber - 1)
 
                         neighbourTile.text = clickedTileValue
-                        if (modeToggle.isChecked) {
-                            neighbourTile.setBackgroundColor(darkMainTileBGColor)
-                        } else {
-                            neighbourTile.setBackgroundColor(lightMainTileBGColor)
-                        }
+                        tileMap[neighbourTileR] = neighbourTile.text as String
+
+                        if (modeToggle.isChecked) neighbourTile.setBackgroundColor(darkMainTileBGColor)
+                        else neighbourTile.setBackgroundColor(lightMainTileBGColor)
 
                         clickedTile.text = ""
-                        if (modeToggle.isChecked) {
-                            clickedTile.setBackgroundColor(darkSecondaryTileBGColor)
-                        } else {
-                            clickedTile.setBackgroundColor(lightSecondaryTileBGColor)
-                        }
+                        tileMap[clickedTileR] = clickedTile.text as String
+
+                        if (modeToggle.isChecked) clickedTile.setBackgroundColor(darkSecondaryTileBGColor)
+                        else clickedTile.setBackgroundColor(lightSecondaryTileBGColor)
                     }
 
                 } catch (e: Exception) {
@@ -272,30 +345,21 @@
                 val button = findViewById<Button>(tileId)
 
                 if (button.text.toString().toIntOrNull() == i + 1) {
-                    if (modeToggle.isChecked) {
-                        button.setBackgroundColor(darkTertiaryTileBGColor)
-                    } else {
-                        button.setBackgroundColor(lightTertiaryTileBGColor)
-                    }
+                    if (modeToggle.isChecked) button.setBackgroundColor(darkTertiaryTileBGColor)
+                    else button.setBackgroundColor(lightTertiaryTileBGColor)
                     correctCount++
                 }
                 else if (button.text == "") {
-                    if (modeToggle.isChecked) {
-                        button.setBackgroundColor(darkSecondaryTileBGColor)
-                    } else {
-                        button.setBackgroundColor(lightSecondaryTileBGColor)
-                    }
+                    if (modeToggle.isChecked) button.setBackgroundColor(darkSecondaryTileBGColor)
+                    else button.setBackgroundColor(lightSecondaryTileBGColor)
                 }
                 else {
-                    if (modeToggle.isChecked) {
-                        button.setBackgroundColor(darkMainTileBGColor)
-                    } else {
-                        button.setBackgroundColor(lightMainTileBGColor)
-                    }
+                    if (modeToggle.isChecked) button.setBackgroundColor(darkMainTileBGColor)
+                    else button.setBackgroundColor(lightMainTileBGColor)
                 }
             }
 
-            if (correctCount >= 4) handleWin()
+            if (correctCount == 15) handleWin()
         }
 
         private fun handleWin() {
