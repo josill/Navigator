@@ -62,7 +62,7 @@
             android:textColor="@color/lightTextColorSecondary" />
 
         <TextView
-            android:id="@+id/movesMadeView"
+            android:id="@+id/secondsElapsedView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -85,7 +85,7 @@
             android:textColor="@color/lightTextColorSecondary" />
 
         <TextView
-            android:id="@+id/secondsElapsedView"
+            android:id="@+id/movesMadeView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

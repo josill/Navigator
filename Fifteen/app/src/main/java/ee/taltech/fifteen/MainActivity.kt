@@ -86,8 +86,6 @@
 //            timerIntentFilter.addAction(TimerReceiver.TIMER_UPDATED)
 //            LocalBroadcastManager.getInstance(this)
 //                .registerReceiver(timerReceiver, timerIntentFilter)
-            movesMadeView.text = "0"
-            secondsElapsedView.text = getString(R.string.zero_seconds)
             board = Board()
 
             val tileIdsArray = savedInstanceState?.getIntArray("tileIds")
@@ -98,19 +96,15 @@
                     for (i in tileIdsArray.indices) this [tileIdsArray[i]] = tileValuesArray[i]
                 }
 
-                Log.d("onCreate", "onCreate1")
-
                 drawBoard(false)
             } else {
-                Log.d("onCreate", "onCreate2")
                 tileMap = mutableMapOf()
+
                 drawBoard()
             }
 
-            tileMap.forEach { (key, value) ->
-                Log.d("onCreate", "Key: $key, Value: $value")
-            }
-
+            movesMadeView.text = savedInstanceState?.getString("movesMade") ?: "0"
+            secondsElapsedView.text = getString(R.string.seconds_elapsed, savedInstanceState?.getDouble("secondsElapsed") ?: 0.0)
             checkPosition()
 
             newGameButton.setOnClickListener {
@@ -172,12 +166,6 @@
         override fun onSaveInstanceState(outState: Bundle) {
             super.onSaveInstanceState(outState)
 
-            Log.d("onSaveInstanceState", "onSaveInstanceState")
-
-            tileMap.forEach { (key, value) ->
-                Log.d("onSaveInstanceState", "Key: $key, Value: $value")
-            }
-
             if (::tileMap.isInitialized) {
                 val keys = (tileMap.keys).toIntArray()
                 val values = tileMap.values.toTypedArray()
@@ -185,17 +173,10 @@
                 outState.putIntArray("tileIds", keys)
                 outState.putStringArray("tileValues", values)
             }
-        }
 
-//        override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-//            super.onRestoreInstanceState(savedInstanceState)
-//
-//            Log.d("onRestoreInstanceState", "onRestoreInstanceState")
-//
-//            tileMap.forEach { (key, value) ->
-//                Log.d("onRestoreInstanceState", "Key: $key, Value: $value")
-//            }
-//        }
+            outState.putString("movesMade", moveCount.toString())
+            outState.putDouble("timeElapsed", time)
+        }
 
         override fun onDestroy() {
             super.onDestroy()
@@ -273,8 +254,6 @@
         }
 
         private fun handleTileClick(tileId: String, undoMove: Boolean = false) {
-            if (!undoMove) increaseMoveCount()
-
             val clickedTileNumber = tileId.split("tile")[1].toInt()
             val clickedTileR = tileIds[clickedTileNumber - 1]
             val clickedTile = findViewById<Button>(clickedTileR)
@@ -293,7 +272,10 @@
                     val neighbourTile = findViewById<Button>(neighbourTileR)
 
                     if (neighbourTile.text == "") {
-                        if (!undoMove) movesMade.push(neighbourTileNumber - 1)
+                        if (!undoMove) {
+                            increaseMoveCount()
+                            movesMade.push(neighbourTileNumber - 1)
+                        }
 
                         neighbourTile.text = clickedTileValue
                         tileMap[neighbourTileR] = neighbourTile.text as String
