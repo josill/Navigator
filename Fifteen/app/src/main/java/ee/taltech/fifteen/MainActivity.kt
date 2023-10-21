@@ -121,6 +121,7 @@
                     movesMadeHeading.setBackgroundColor(darkSecondaryTileBGColor)
                     movesMadeHeading.setTextColor(darkTextColorMain)
                     movesMadeView.setBackgroundColor(darkSecondaryTileBGColor)
+                    movesMadeView.setTextColor(darkTextColorMain)
                     secondsElapsedHeading.setTextColor(darkTextColorMain)
                     secondsElapsedHeading.setBackgroundColor(darkSecondaryTileBGColor)
                     secondsElapsedView.setBackgroundColor(darkSecondaryTileBGColor)
@@ -138,12 +139,13 @@
                     checkPosition()
                 } else {
                     appLayout.setBackgroundColor(lightBGColor)
-                    window.navigationBarColor = darkSecondaryTileBGColor
-                    window.statusBarColor = darkSecondaryTileBGColor
+                    window.navigationBarColor = lightMainTileBGColor
+                    window.statusBarColor = lightMainTileBGColor
 
                     movesMadeHeading.setBackgroundColor(lightSecondaryTileBGColor)
                     movesMadeHeading.setTextColor(lightTextColorSecondary)
                     movesMadeView.setBackgroundColor(lightSecondaryTileBGColor)
+                    movesMadeView.setTextColor(lightTextColorSecondary)
                     secondsElapsedHeading.setTextColor(lightTextColorSecondary)
                     secondsElapsedHeading.setBackgroundColor(lightSecondaryTileBGColor)
                     secondsElapsedView.setBackgroundColor(lightSecondaryTileBGColor)

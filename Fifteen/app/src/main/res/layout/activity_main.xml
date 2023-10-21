@@ -112,7 +112,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="60dp"
             android:background="@color/lightSecondaryTileBGColor"
-            android:drawableStart="@drawable/baseline_play_arrow_24"
             android:text="@string/new_game"
             android:textAlignment="center"
             android:textColor="@color/lightTextColorSecondary" />
@@ -124,7 +123,6 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:background="@color/lightSecondaryTileBGColor"
-            android:drawableStart="@drawable/baseline_replay_24"
             android:text="@string/undo"
             android:textColor="@color/lightTextColorSecondary" />
     </LinearLayout>
