@@ -363,8 +363,8 @@
         }
 
         private fun startTimer() {
-            Log.d("MainActivityBroadcast", "started timer")
             startService(serviceIntent)
+            Log.d("MainActivityBroadcast", "started timer")
             timerStarted = true
         }
 
@@ -375,8 +375,8 @@
         }
 
         private fun stopTimer() {
-            Log.d("MainActivityBroadcast", "stopped timer")
             stopService(serviceIntent)
+            Log.d("MainActivityBroadcast", "stopped timer")
             timerStarted = false
         }
 
