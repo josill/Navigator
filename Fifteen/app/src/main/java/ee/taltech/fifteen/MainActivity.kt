@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.res.TypedArray
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,10 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.google.android.material.switchmaterial.SwitchMaterial
+import ee.taltech.fifteen.R.string.seconds_elapsed
 import java.util.Stack
-import java.util.Timer
 import kotlin.Exception
-import kotlin.math.roundToInt
 import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
@@ -68,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         R.id.tile15,
         R.id.tile16
     )
-    private lateinit var tileMap: MutableMap<Int, String>;
+    private lateinit var tileMap: MutableMap<Int, String>
 
     private var timerStarted = false
     private lateinit var serviceIntent: Intent
@@ -78,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             if (intent?.action == TimerService.timerUpdated) {
                 val currentTime = intent.getIntExtra(TimerService.timerUpdated, 0)
                 Log.d("MainActivityBroadcast", "Received update in mainActivity at $currentTime")
-                updateTimer(currentTime.toInt())
+                updateTimer(currentTime)
             }
         }
     }
@@ -134,10 +132,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         movesMadeView.text = savedInstanceState?.getString("movesMade") ?: "0"
-        secondsElapsedView.text = getString(
-            R.string.seconds_elapsed,
-            savedInstanceState?.getDouble("secondsElapsed") ?: 0.0
-        )
+        secondsElapsedView.text = resources.getString(seconds_elapsed, seconds)
         checkPosition()
 
         newGameButton.setOnClickListener {
@@ -267,7 +262,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun undo(view: View) {
+    fun undo() {
         if (movesMade.isNotEmpty()) {
             val lastMoveValue = movesMade.pop()
 
@@ -391,7 +386,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateTimer(seconds: Int) {
         runOnUiThread {
-            secondsElapsedView.text = seconds.toString() + " " + getString(R.string.seconds_elapsed)
+            secondsElapsedView.text = resources.getString(seconds_elapsed, seconds)
         }
     }
 
