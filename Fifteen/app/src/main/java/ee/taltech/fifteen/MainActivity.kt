@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == TimerService.timerUpdated) {
                 val currentTime = intent.getIntExtra(TimerService.timerUpdated, 0)
-                Log.d("MainActivityBroadcast", "Received update in mainActivity at $currentTime")
                 updateTimer(currentTime)
             }
         }
@@ -267,9 +266,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun undo() {
-        Log.d("MainActivityUndo", "undo function")
         if (movesMade.isNotEmpty()) {
-            Log.d("MainActivityUndo", "undoing has moves")
             val lastMoveValue = movesMade.pop()
             val emptyTileR = tileIds[lastMoveValue]
             val emptyTile = findViewById<Button>(emptyTileR)
@@ -280,7 +277,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleTileClick(tileId: String, undoMove: Boolean = false) {
-        Log.d("MainActivityUndo", "handleTileClick function")
         val clickedTileNumber = tileId.split("tile")[1].toInt()
         val clickedTileR = tileIds[clickedTileNumber - 1]
         val clickedTile = findViewById<Button>(clickedTileR)
@@ -402,7 +398,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun stopTimer() {
-        Log.d("MainActivityBroadcast", "stopped timer")
         stopService(serviceIntent)
         timerStarted = false
     }
