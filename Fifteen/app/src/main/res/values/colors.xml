@@ -3,14 +3,14 @@
     <color name="lightMainTileBGColor">#5EBDCA</color>
     <color name="lightSecondaryTileBGColor">#E3F1F3</color>
     <color name="lightTertiaryTileBGColor">#72CA5E</color>
-    <color name="lightTextColorMain">#E7E6E2</color>
-    <color name="lightTextColorSecondary">#FF000000</color>
+    <color name="lightMainTextColor">#FF000000</color>
+    <color name="lightSecondaryTextColor">#E7E6E2</color>
     <color name="lightBackgroundColor">#F5F5F5</color>
 
     <color name="darkMainTileBGColor">#7F2C4E</color>
     <color name="darkSecondaryTileBGColor">#A14261</color>
     <color name="darkTertiaryTileBGColor">#C69749</color>
-    <color name="darkTextColorMain">#E7E6E2</color>
-    <color name="darkTextColorSecondary">#C69749</color>
+    <color name="darkMainTextColor">#E7E6E2</color>
+    <color name="darkSecondaryTextColor">#C69749</color>
     <color name="darkBackgroundColor">#0F0F0F</color>
 </resources>
