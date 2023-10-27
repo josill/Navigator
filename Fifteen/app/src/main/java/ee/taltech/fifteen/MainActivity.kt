@@ -146,9 +146,9 @@ class MainActivity : AppCompatActivity() {
 
         modeToggle.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                appLayout.setBackgroundColor(darkBGColor)
-                window.navigationBarColor = darkBGColor
-                window.statusBarColor = darkBGColor
+                // appLayout.setBackgroundColor(darkBGColor)
+                // window.navigationBarColor = darkBGColor
+                // window.statusBarColor = darkBGColor
 
                 movesMadeHeading.setBackgroundColor(darkSecondaryTileBGColor)
                 movesMadeHeading.setTextColor(darkTextColorMain)
@@ -170,9 +170,9 @@ class MainActivity : AppCompatActivity() {
 
                 checkPosition()
             } else {
-                appLayout.setBackgroundColor(lightBGColor)
-                window.navigationBarColor = lightMainTileBGColor
-                window.statusBarColor = lightMainTileBGColor
+                // appLayout.setBackgroundColor(lightBGColor)
+                // window.navigationBarColor = lightMainTileBGColor
+                // window.statusBarColor = lightMainTileBGColor
 
                 movesMadeHeading.setBackgroundColor(lightSecondaryTileBGColor)
                 movesMadeHeading.setTextColor(lightTextColorSecondary)
