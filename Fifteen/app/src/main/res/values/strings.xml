@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Fifteen</string>
-<!--        <string name="seconds_elapsed">0 sec</string>-->
     <string name="seconds_elapsed">%1$d sec</string>
     <string name="new_game">new game</string>
     <string name="undo">undo</string>

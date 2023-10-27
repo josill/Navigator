@@ -140,6 +140,10 @@ class MainActivity : AppCompatActivity() {
             else resetGame()
         }
 
+        undoButton.setOnClickListener {
+            undo()
+        }
+
         modeToggle.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 appLayout.setBackgroundColor(darkBGColor)
@@ -263,22 +267,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun undo() {
+        Log.d("MainActivityUndo", "undo function")
         if (movesMade.isNotEmpty()) {
+            Log.d("MainActivityUndo", "undoing has moves")
             val lastMoveValue = movesMade.pop()
-
             val emptyTileR = tileIds[lastMoveValue]
-            Log.d("emptytiler", emptyTileR.toString())
             val emptyTile = findViewById<Button>(emptyTileR)
-            Log.d("emptytile", emptyTile.toString())
-
-
             val emptyTileId = resources.getResourceEntryName(emptyTile.id)
-//                Log.d("emptytiler", emptyTileR.toString())
+
             handleTileClick(emptyTileId, undoMove = true)
         }
     }
 
     private fun handleTileClick(tileId: String, undoMove: Boolean = false) {
+        Log.d("MainActivityUndo", "handleTileClick function")
         val clickedTileNumber = tileId.split("tile")[1].toInt()
         val clickedTileR = tileIds[clickedTileNumber - 1]
         val clickedTile = findViewById<Button>(clickedTileR)
@@ -297,9 +299,14 @@ class MainActivity : AppCompatActivity() {
                 val neighbourTile = findViewById<Button>(neighbourTileR)
 
                 if (neighbourTile.text == "") {
+                    if (clickedTileNumber in setOf(4, 8, 12, 16) && i == 4) continue // special case for rightmost tiles
+                    if (clickedTileNumber in setOf(1, 5, 9, 13) && i == 3) continue // special case for leftmost tiles
+
                     if (!undoMove) {
                         increaseMoveCount()
                         movesMade.push(neighbourTileNumber - 1)
+                    } else {
+                        decreaseMoveCount()
                     }
 
                     neighbourTile.text = clickedTileValue
@@ -347,6 +354,11 @@ class MainActivity : AppCompatActivity() {
         movesMadeView.text = moveCount.toString()
     }
 
+    private fun decreaseMoveCount() {
+        moveCount--
+        movesMadeView.text = moveCount.toString()
+    }
+
     private fun checkPosition() {
         var correctCount = 0
 
@@ -379,7 +391,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startTimer() {
-        Log.d("MainActivityBroadcast", "started timer")
         startService(serviceIntent)
         timerStarted = true
     }
