@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA559962B027C4500D0E3D8 /* LoginView.swift */; };
+		FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA559982B0284BC00D0E3D8 /* RegisterView.swift */; };
+		FEA5599B2B0284E500D0E3D8 /* LoginOrRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA5599A2B0284E500D0E3D8 /* LoginOrRegisterView.swift */; };
+		FEA5599D2B02C35200D0E3D8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA5599C2B02C35200D0E3D8 /* MapView.swift */; };
+		FEA559A12B02D5CD00D0E3D8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA559A02B02D5CD00D0E3D8 /* Location.swift */; };
+		FEA559A32B02D62A00D0E3D8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA559A22B02D62A00D0E3D8 /* LocationManager.swift */; };
+		FEA559A52B02D92C00D0E3D8 /* LocationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA559A42B02D92C00D0E3D8 /* LocationRequestView.swift */; };
 		FEBE74532AF4E317005A98C0 /* NavigatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE74522AF4E317005A98C0 /* NavigatorApp.swift */; };
 		FEBE74552AF4E317005A98C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE74542AF4E317005A98C0 /* ContentView.swift */; };
 		FEBE74572AF4E31A005A98C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEBE74562AF4E31A005A98C0 /* Assets.xcassets */; };
@@ -35,6 +42,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FEA559962B027C4500D0E3D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		FEA559982B0284BC00D0E3D8 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		FEA5599A2B0284E500D0E3D8 /* LoginOrRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterView.swift; sourceTree = "<group>"; };
+		FEA5599C2B02C35200D0E3D8 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		FEA559A02B02D5CD00D0E3D8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		FEA559A22B02D62A00D0E3D8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		FEA559A42B02D92C00D0E3D8 /* LocationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequestView.swift; sourceTree = "<group>"; };
 		FEBE744F2AF4E317005A98C0 /* Navigator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEBE74522AF4E317005A98C0 /* NavigatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorApp.swift; sourceTree = "<group>"; };
 		FEBE74542AF4E317005A98C0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,12 +111,19 @@
 		FEBE74512AF4E317005A98C0 /* Navigator */ = {
 			isa = PBXGroup;
 			children = (
+				FEA5599C2B02C35200D0E3D8 /* MapView.swift */,
 				FEBE74522AF4E317005A98C0 /* NavigatorApp.swift */,
 				FEBE74542AF4E317005A98C0 /* ContentView.swift */,
 				FEBE74562AF4E31A005A98C0 /* Assets.xcassets */,
 				FEBE74582AF4E31A005A98C0 /* Navigator.entitlements */,
 				FEBE74592AF4E31A005A98C0 /* Preview Content */,
 				FEBE747D2AF4E365005A98C0 /* LocationViewRepresentable.swift */,
+				FEA559962B027C4500D0E3D8 /* LoginView.swift */,
+				FEA559982B0284BC00D0E3D8 /* RegisterView.swift */,
+				FEA5599A2B0284E500D0E3D8 /* LoginOrRegisterView.swift */,
+				FEA559A02B02D5CD00D0E3D8 /* Location.swift */,
+				FEA559A22B02D62A00D0E3D8 /* LocationManager.swift */,
+				FEA559A42B02D92C00D0E3D8 /* LocationRequestView.swift */,
 			);
 			path = Navigator;
 			sourceTree = "<group>";
@@ -262,9 +283,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEA5599D2B02C35200D0E3D8 /* MapView.swift in Sources */,
 				FEBE74552AF4E317005A98C0 /* ContentView.swift in Sources */,
+				FEA559A12B02D5CD00D0E3D8 /* Location.swift in Sources */,
+				FEA559A52B02D92C00D0E3D8 /* LocationRequestView.swift in Sources */,
+				FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */,
+				FEA5599B2B0284E500D0E3D8 /* LoginOrRegisterView.swift in Sources */,
 				FEBE74532AF4E317005A98C0 /* NavigatorApp.swift in Sources */,
+				FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */,
 				FEBE747E2AF4E365005A98C0 /* LocationViewRepresentable.swift in Sources */,
+				FEA559A32B02D62A00D0E3D8 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +456,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please share your location with us";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -467,6 +496,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please share your location with us";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
