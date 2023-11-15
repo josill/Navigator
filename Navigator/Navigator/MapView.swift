@@ -32,6 +32,8 @@ struct MapView: View {
                 .mapStyle(.standard(elevation: .realistic))
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 .navigationBarBackButtonHidden(true)
+                
+                CompassView()
             }
         }
     }

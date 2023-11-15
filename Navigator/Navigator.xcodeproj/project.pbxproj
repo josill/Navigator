@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE7E55162B057C6200521F39 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E55152B057C6200521F39 /* CompassView.swift */; };
+		FE7E55182B057E3900521F39 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E55172B057E3900521F39 /* Marker.swift */; };
+		FE7E551C2B057F3B00521F39 /* CompassMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E551B2B057F3B00521F39 /* CompassMarkerView.swift */; };
+		FE7E551E2B05851D00521F39 /* CompassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E551D2B05851D00521F39 /* CompassManager.swift */; };
 		FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA559962B027C4500D0E3D8 /* LoginView.swift */; };
 		FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA559982B0284BC00D0E3D8 /* RegisterView.swift */; };
 		FEA5599B2B0284E500D0E3D8 /* LoginOrRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA5599A2B0284E500D0E3D8 /* LoginOrRegisterView.swift */; };
@@ -42,6 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE7E55152B057C6200521F39 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
+		FE7E55172B057E3900521F39 /* Marker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
+		FE7E551B2B057F3B00521F39 /* CompassMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassMarkerView.swift; sourceTree = "<group>"; };
+		FE7E551D2B05851D00521F39 /* CompassManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassManager.swift; sourceTree = "<group>"; };
 		FEA559962B027C4500D0E3D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FEA559982B0284BC00D0E3D8 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		FEA5599A2B0284E500D0E3D8 /* LoginOrRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterView.swift; sourceTree = "<group>"; };
@@ -124,6 +132,10 @@
 				FEA559A02B02D5CD00D0E3D8 /* Location.swift */,
 				FEA559A22B02D62A00D0E3D8 /* LocationManager.swift */,
 				FEA559A42B02D92C00D0E3D8 /* LocationRequestView.swift */,
+				FE7E55152B057C6200521F39 /* CompassView.swift */,
+				FE7E55172B057E3900521F39 /* Marker.swift */,
+				FE7E551B2B057F3B00521F39 /* CompassMarkerView.swift */,
+				FE7E551D2B05851D00521F39 /* CompassManager.swift */,
 			);
 			path = Navigator;
 			sourceTree = "<group>";
@@ -286,12 +298,16 @@
 				FEA5599D2B02C35200D0E3D8 /* MapView.swift in Sources */,
 				FEBE74552AF4E317005A98C0 /* ContentView.swift in Sources */,
 				FEA559A12B02D5CD00D0E3D8 /* Location.swift in Sources */,
+				FE7E551C2B057F3B00521F39 /* CompassMarkerView.swift in Sources */,
 				FEA559A52B02D92C00D0E3D8 /* LocationRequestView.swift in Sources */,
+				FE7E55162B057C6200521F39 /* CompassView.swift in Sources */,
+				FE7E55182B057E3900521F39 /* Marker.swift in Sources */,
 				FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */,
 				FEA5599B2B0284E500D0E3D8 /* LoginOrRegisterView.swift in Sources */,
 				FEBE74532AF4E317005A98C0 /* NavigatorApp.swift in Sources */,
 				FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */,
 				FEBE747E2AF4E365005A98C0 /* LocationViewRepresentable.swift in Sources */,
+				FE7E551E2B05851D00521F39 /* CompassManager.swift in Sources */,
 				FEA559A32B02D62A00D0E3D8 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
