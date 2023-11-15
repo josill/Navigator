@@ -11,7 +11,9 @@ import MapKit
 struct MapView: View {
     // TODO do this without shared?
     @ObservedObject var locationManager = LocationManager.shared
-    @State private var userPosition: MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var userInitialLocation: MapCameraPosition = .userLocation(fallback: .automatic)
+    // @State private var userLocation: CLLocationCoordinate2D?
+    // @State private var userLocations: [CLLocationCoordinate2D]?
     
     var body: some View {
         // TODO think if displaying your own request view is wise
@@ -22,8 +24,12 @@ struct MapView: View {
                 LocationRequestView()
             } else {
                 Text("\(locationManager.userLocation!)")
-                Map(position: $userPosition) {
-                    
+                Map(position: $userInitialLocation) {
+                    UserAnnotation()
+                    if let locations = locationManager.userLocations {
+                        MapPolyline(coordinates: locations)
+                            .stroke(Color.blue, lineWidth: 12)
+                    }
                 }
                 .mapStyle(.standard(elevation: .realistic))
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
@@ -31,6 +37,11 @@ struct MapView: View {
             }
         }
     }
+}
+
+extension CLLocationCoordinate2D {
+    static let bigBen = CLLocationCoordinate2D(latitude: 51.500685, longitude: -0.124570)
+    static let towerBridge = CLLocationCoordinate2D(latitude: 51.505507, longitude: -0.075402)
 }
 
 #Preview {

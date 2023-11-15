@@ -10,6 +10,7 @@ import CoreLocation
 class LocationManager: NSObject, ObservableObject {
     private let manager = CLLocationManager()
     @Published var userLocation: CLLocation?
+    @Published var userLocations: [CLLocationCoordinate2D]?
     static let shared = LocationManager() // access LocationManager from anywhere in the project
     
     override init() {
@@ -21,6 +22,7 @@ class LocationManager: NSObject, ObservableObject {
     }
     
     func requestLocation() {
+        print("here")
         manager.requestWhenInUseAuthorization()
     }
 }
@@ -46,5 +48,12 @@ extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         self.userLocation = location
+        
+        if var locationsArray = userLocations {
+            locationsArray.append(location.coordinate)
+            userLocations = locationsArray
+        } else {
+            userLocations = [location.coordinate]
+        }   
     }
 }
