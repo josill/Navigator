@@ -12,8 +12,6 @@ struct MapView: View {
     // TODO do this without shared?
     @ObservedObject var locationManager = LocationManager.shared
     @State private var userInitialLocation: MapCameraPosition = .userLocation(fallback: .automatic)
-    // @State private var userLocation: CLLocationCoordinate2D?
-    // @State private var userLocations: [CLLocationCoordinate2D]?
     
     var body: some View {
         // TODO think if displaying your own request view is wise
