@@ -19,11 +19,18 @@ class LocationManager: NSObject, ObservableObject {
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.startUpdatingLocation()
+        self.setup()
     }
     
     func requestLocation() {
-        print("here")
         manager.requestWhenInUseAuthorization()
+    }
+    
+    private func setup() {
+        if CLLocationManager.headingAvailable() {
+            manager.startUpdatingLocation()
+            manager.startUpdatingHeading()
+        }
     }
 }
 
@@ -47,13 +54,21 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        self.userLocation = location
         
-        if var locationsArray = userLocations {
-            locationsArray.append(location.coordinate)
-            userLocations = locationsArray
+        if let previousLocation = userLocations?.last {
+            let distance = location.distance(from: CLLocation(latitude: previousLocation.latitude, longitude: previousLocation.longitude))
+            print(distance)
+            
+            if distance > 0 && distance <= 10.0 { userLocations!.append(location.coordinate) } // I know that the array exists otherwise I would not make it here
         } else {
             userLocations = [location.coordinate]
-        }   
+        }
+        
+        self.userLocation = location
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        CompassManager.shared.degrees = -1 * newHeading.magneticHeading
+        print(newHeading.magneticHeading)
     }
 }
