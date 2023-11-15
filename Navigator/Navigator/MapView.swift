@@ -37,11 +37,6 @@ struct MapView: View {
     }
 }
 
-extension CLLocationCoordinate2D {
-    static let bigBen = CLLocationCoordinate2D(latitude: 51.500685, longitude: -0.124570)
-    static let towerBridge = CLLocationCoordinate2D(latitude: 51.505507, longitude: -0.075402)
-}
-
 #Preview {
     MapView()
 }
