@@ -12,16 +12,16 @@ struct MapView: View {
     // TODO do this without shared?
     @ObservedObject var locationManager = LocationManager.shared
     @State private var userInitialLocation: MapCameraPosition = .userLocation(fallback: .automatic)
+    @State private var isMapOptionsVisible = false
     
     var body: some View {
         // TODO think if displaying your own request view is wise
         // it should come automatically, check other tutorial
-        
-        Group {
+            
+        ZStack(alignment: .top) {
             if locationManager.userLocation == nil {
                 LocationRequestView()
             } else {
-                Text("\(locationManager.userLocation!)")
                 Map(position: $userInitialLocation) {
                     UserAnnotation()
                     if let locations = locationManager.userLocations {
@@ -32,8 +32,40 @@ struct MapView: View {
                 .mapStyle(.standard(elevation: .realistic))
                 .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 .navigationBarBackButtonHidden(true)
+                .onTapGesture {
+                    isMapOptionsVisible.toggle()
+                }
                 
-                CompassView()
+                VStack {                    
+                    if isMapOptionsVisible {
+                        MapOptionsView()
+                            .cornerRadius(16)
+                            .padding()
+                    }
+                    
+                    Spacer()
+                    
+                    MapStatisticsView()
+                        .background(.white)
+                        .frame(height: 200)
+                        .padding()
+                }
+                .onTapGesture {
+                    isMapOptionsVisible.toggle()
+                }
+                
+//                if isMapOptionsVisible {
+//                    MapOptionsView()
+//                        .cornerRadius(16)
+//                        .padding()
+//                }
+//                
+//                VStack {
+//                    MapStatisticsView()
+//                        .background(.white)
+//                        .frame(height: 200)
+//                        .padding()
+//                }
             }
         }
     }
