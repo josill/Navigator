@@ -33,24 +33,31 @@ struct MapStatisticsView: View {
         ZStack {
            TabView(selection: $modeSelected) {
                ZStack {
-                   Circle().scale(1).foregroundColor(.white)
-
+                   Circle()
+                       .scale(1)
+                       .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
+                   
                    VStack(spacing: 8) {
                        Text("From start")
                            .font(.title)
                            .fontWeight(.bold)
                            .padding(.bottom, 8)
+                           .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                        
                        Text("Distance covered: \(distanceCovered)")
                            .font(.subheadline)
+                           .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
                        Text("Session duration: \(sessionDuration)")
                            .font(.subheadline)
+                           .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
                        Text("Average speed: \(averageSpeed)")
                            .font(.subheadline)
+                           .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+
                    }
-                   .background(.white)
+                   .background(colorScheme == .dark ? Color.black : Color.white)
                }
                .tag(Mode.main)
                .tabItem {
@@ -116,14 +123,9 @@ struct MapStatisticsView: View {
                        .imageScale(.large)
                }
            }
-           .frame(
-               width: UIScreen.main.bounds.width ,
-               height: 300
-           )
+           .frame(width: UIScreen.main.bounds.width, height: 200)
            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-           .padding()
            .font(.system(size: 24))
-           .background(colorScheme == .dark ? Color.black : Color.white)
        }
         .ignoresSafeArea()
     }

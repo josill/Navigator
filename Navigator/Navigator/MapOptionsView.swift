@@ -54,7 +54,6 @@ struct MapOptionsView: View {
             
             Spacer()
         }
-        .padding(.bottom, 16)
     }
 }
 
