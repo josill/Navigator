@@ -36,36 +36,24 @@ struct MapView: View {
                     isMapOptionsVisible.toggle()
                 }
                 
-                VStack {                    
-                    if isMapOptionsVisible {
-                        MapOptionsView()
-                            .cornerRadius(16)
-                            .padding()
-                    }
-                    
-                    Spacer()
-                    
-                    MapStatisticsView()
-                        .background(.white)
-                        .frame(height: 200)
-                        .padding()
-                }
-                .onTapGesture {
-                    isMapOptionsVisible.toggle()
-                }
-                
-//                if isMapOptionsVisible {
-//                    MapOptionsView()
-//                        .cornerRadius(16)
-//                        .padding()
-//                }
-//                
-//                VStack {
+//                VStack {                    
+//                    if isMapOptionsVisible {
+//                        MapOptionsView()
+//                            .cornerRadius(16)
+//                            .padding()
+//                    }
+//                    
+//                    Spacer()
+//                    
 //                    MapStatisticsView()
 //                        .background(.white)
 //                        .frame(height: 200)
 //                        .padding()
 //                }
+//                .onTapGesture {
+//                    isMapOptionsVisible.toggle()
+//                }
+                SlideOverCard()
             }
         }
     }

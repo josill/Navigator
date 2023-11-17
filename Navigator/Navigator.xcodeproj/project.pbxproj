@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		FE72502F2B064F4000068114 /* MapOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72502E2B064F4000068114 /* MapOptionsView.swift */; };
 		FE7250312B0652FC00068114 /* MapStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7250302B0652FC00068114 /* MapStatisticsView.swift */; };
+		FE75A38F2B07BDF600FE3757 /* SlideOverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A38E2B07BDF600FE3757 /* SlideOverCard.swift */; };
+		FE75A3912B07C2D100FE3757 /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A3902B07C2D100FE3757 /* Handle.swift */; };
 		FE7E55162B057C6200521F39 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E55152B057C6200521F39 /* CompassView.swift */; };
 		FE7E55182B057E3900521F39 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E55172B057E3900521F39 /* Marker.swift */; };
 		FE7E551C2B057F3B00521F39 /* CompassMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E551B2B057F3B00521F39 /* CompassMarkerView.swift */; };
@@ -50,6 +52,8 @@
 /* Begin PBXFileReference section */
 		FE72502E2B064F4000068114 /* MapOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOptionsView.swift; sourceTree = "<group>"; };
 		FE7250302B0652FC00068114 /* MapStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStatisticsView.swift; sourceTree = "<group>"; };
+		FE75A38E2B07BDF600FE3757 /* SlideOverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOverCard.swift; sourceTree = "<group>"; };
+		FE75A3902B07C2D100FE3757 /* Handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handle.swift; sourceTree = "<group>"; };
 		FE7E55152B057C6200521F39 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
 		FE7E55172B057E3900521F39 /* Marker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
 		FE7E551B2B057F3B00521F39 /* CompassMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassMarkerView.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 				FE7E551D2B05851D00521F39 /* CompassManager.swift */,
 				FE72502E2B064F4000068114 /* MapOptionsView.swift */,
 				FE7250302B0652FC00068114 /* MapStatisticsView.swift */,
+				FE75A38E2B07BDF600FE3757 /* SlideOverCard.swift */,
+				FE75A3902B07C2D100FE3757 /* Handle.swift */,
 			);
 			path = Navigator;
 			sourceTree = "<group>";
@@ -312,8 +318,10 @@
 				FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */,
 				FE72502F2B064F4000068114 /* MapOptionsView.swift in Sources */,
 				FEA5599B2B0284E500D0E3D8 /* LoginOrRegisterView.swift in Sources */,
+				FE75A3912B07C2D100FE3757 /* Handle.swift in Sources */,
 				FEBE74532AF4E317005A98C0 /* NavigatorApp.swift in Sources */,
 				FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */,
+				FE75A38F2B07BDF600FE3757 /* SlideOverCard.swift in Sources */,
 				FEBE747E2AF4E365005A98C0 /* LocationViewRepresentable.swift in Sources */,
 				FE7E551E2B05851D00521F39 /* CompassManager.swift in Sources */,
 				FEA559A32B02D62A00D0E3D8 /* LocationManager.swift in Sources */,

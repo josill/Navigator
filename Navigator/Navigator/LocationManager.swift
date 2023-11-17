@@ -69,6 +69,5 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         CompassManager.shared.degrees = -1 * newHeading.magneticHeading
-        print(newHeading.magneticHeading)
     }
 }

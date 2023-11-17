@@ -10,9 +10,8 @@ import SwiftUI
 struct MapOptionsView: View {
     var body: some View {
         HStack {
-            // CompassView()
             Spacer()
-
+            
             Button {
                 print("North-up")
             } label: {
@@ -24,27 +23,13 @@ struct MapOptionsView: View {
             .foregroundColor(.white)
             .clipShape(Capsule())
             .font(.system(size: 24))
-
+            
             Spacer()
             
             Button {
                 print("Reset")
             } label: {
                 Image(systemName: "gobackward")
-            }
-            .padding()
-            .cornerRadius(12.0)
-            .background(.blue)
-            .foregroundColor(.white)
-            .clipShape(Capsule())
-            .font(.system(size: 24))
-            
-            Spacer()
-            
-            Button {
-                print("Compass")
-            } label: {
-                Image(systemName: "location.north.circle")
             }
             .padding()
             .cornerRadius(12.0)
@@ -69,7 +54,8 @@ struct MapOptionsView: View {
             
             Spacer()
         }
-        .padding()    }
+        .padding(.bottom, 16)
+    }
 }
 
 #Preview {
