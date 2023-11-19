@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MapStatisticsView: View {
     @Environment(\.colorScheme) var colorScheme
+    @ObservedObject var locationManager = LocationManager.shared
     
     enum Mode {
         case main
@@ -17,26 +18,11 @@ struct MapStatisticsView: View {
         case compass
     }
     @State private var modeSelected = Mode.main
-    @State private var distanceCovered = "100 m"
-    @State private var sessionDuration = "00:30 h"
-    @State private var averageSpeed = "4.8 km/h"
-    
-    @State private var distanceCoveredCp = "200 m"
-    @State private var directLineCp = "01:30 h"
-    @State private var averageSpeedCp = "5.2 km/h"
-    
-    @State private var distanceCoveredWp = "300 m"
-    @State private var directLineWp = "02:30 h"
-    @State private var averageSpeedWp = "5.6 km/h"
     
     var body: some View {
         ZStack {
            TabView(selection: $modeSelected) {
                ZStack {
-                   Circle()
-                       .scale(1)
-                       .foregroundColor(colorScheme == .dark ? Color.black : Color.white)
-                   
                    VStack(spacing: 8) {
                        Text("From start")
                            .font(.title)
@@ -44,15 +30,15 @@ struct MapStatisticsView: View {
                            .padding(.bottom, 8)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                        
-                       Text("Distance covered: \(distanceCovered)")
+                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceCovered ?? 0.0)) m")
                            .font(.subheadline)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
-                       Text("Session duration: \(sessionDuration)")
+                       Text("Session duration: \(locationManager.sessionDuration ?? 0.0)")
                            .font(.subheadline)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
-                       Text("Average speed: \(averageSpeed)")
+                       Text("Average speed: \(locationManager.averageSpeed ?? 0.0) km/h")
                            .font(.subheadline)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
@@ -67,21 +53,19 @@ struct MapStatisticsView: View {
                
                
                ZStack {
-                   Circle().scale(1).foregroundColor(.white)
-                   
                    VStack(spacing: 8) {
                        Text("From checkpoint")
                            .font(.title)
                            .fontWeight(.bold)
                            .padding(.bottom, 8)
                        
-                       Text("Distance covered: \(distanceCoveredCp)")
+                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceFromCp ?? 0.0)) m")
                            .font(.subheadline)
 
-                       Text("Direct line distance: \(directLineCp)")
+                       Text("Direct line distance: \(String(format: "%.2f", locationManager.directLineFromCp ?? 0.0)) m")
                            .font(.subheadline)
 
-                       Text("Average speed: \(averageSpeedCp)")
+                       Text("Average speed: \(locationManager.averageSpeedFromCp ?? 0.0) km/h")
                            .font(.subheadline)
                    }
                }
@@ -90,22 +74,20 @@ struct MapStatisticsView: View {
                    Label("Checkpoint", systemImage: "2.square.fill")
                }
                
-               ZStack {
-                   Circle().scale(1).foregroundColor(.white)
-                   
+               ZStack {                   
                    VStack(spacing: 8) {
                        Text("From waypoint")
                            .font(.title)
                            .fontWeight(.bold)
                            .padding(.bottom, 8)
                        
-                       Text("Distance covered: \(distanceCoveredWp)")
+                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceFromWp ?? 0.0))")
                            .font(.subheadline)
 
-                       Text("Direct line distance: \(directLineWp)")
+                       Text("Direct line distance: \(String(format: "%.2f", locationManager.directLineFromWp ?? 0.0))")
                            .font(.subheadline)
 
-                       Text("Average speed: \(averageSpeedWp)")
+                       Text("Average speed: \(locationManager.averageSpeedFromWp ?? 0.0)")
                            .font(.subheadline)
                    }
                }

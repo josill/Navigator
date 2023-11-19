@@ -71,12 +71,19 @@ extension LocationManager: CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         
         addUserLocation(location: location)
+        updateStatistics()
         
-        calculateDistance()
+        calculateDistances()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         CompassManager.shared.degrees = -1 * newHeading.magneticHeading
+    }
+    
+    func startSession() {
+        trackingEnabled = !trackingEnabled
+        // TODO: implement Timer class
+        // TODO: implement average speed calculation
     }
     
     func addUserLocation(location: CLLocation) {
@@ -84,7 +91,7 @@ extension LocationManager: CLLocationManagerDelegate {
             if let previousLocation = userLocations?.last {
                 let distance = location.distance(from: CLLocation(latitude: previousLocation.latitude, longitude: previousLocation.longitude))
                 
-                if distance > 0 && distance <= 10.0 { userLocations!.append(location.coordinate) }
+                if distance > 0 && distance <= 3.0 { userLocations!.append(location.coordinate) }
             } else {
                 userLocations = [location.coordinate]
             }
@@ -97,12 +104,18 @@ extension LocationManager: CLLocationManagerDelegate {
         if trackingEnabled {
             let checkpointName = "Checkpoint \(checkpoints.count + 1)"
             checkpoints[checkpointName] = userLocation!.coordinate
+            
+            distanceFromCp = 0.0
+            directLineFromCp = 0.0
         }
     }
     
     func addWaypoint() {
         if trackingEnabled {
             waypoint = userLocation!.coordinate
+            
+            distanceFromWp = 0.0
+            directLineFromWp = 0.0
         }
     }
     
@@ -110,17 +123,54 @@ extension LocationManager: CLLocationManagerDelegate {
         userLocations = nil
         checkpoints = [:]
         waypoint = nil
+        
+        distanceFromCp = 0.0
+        directLineFromCp = 0.0
+        distanceFromWp = 0.0
+        directLineFromWp = 0.0
     }
     
-    private func calculateDistance() {
+    private func updateStatistics() {
+        calculateDistances()
+        // TODO other methods
+    }
+    
+    private func calculateDistances() {
         guard let locations = userLocations, locations.count >= 2 else { return }
-
-        let firstLocation = CLLocation(latitude: locations.first!.latitude, longitude: locations.first!.longitude)
+        
         let lastLocation = CLLocation(latitude: locations.last!.latitude, longitude: locations.last!.longitude)
-
-        distanceCovered = firstLocation.distance(from: lastLocation)
-
-        print("Distance from the first to the last point: \(distanceCovered) meters")
+        let secondToLastLocation = CLLocation(latitude: userLocations![userLocations!.count - 2].latitude, longitude: userLocations![userLocations!.count - 2].longitude)
+        
+        calculateDistanceCovered(secondToLastLocation: secondToLastLocation, lastLocation: lastLocation)
+        // TODO: disatance covered, from checkpoint and waypoint increases too rapidly
+        calculateDistanceFromCp(secondToLastLocation: secondToLastLocation, lastLocation: lastLocation)
+        calculateDistanceFromWp(secondToLastLocation: secondToLastLocation, lastLocation: lastLocation)
+    }
+    
+    private func calculateDistanceCovered(secondToLastLocation: CLLocation, lastLocation: CLLocation) {
+        if distanceCovered != nil { distanceCovered! += lastLocation.distance(from: secondToLastLocation) }
+        else { distanceCovered = lastLocation.distance(from: secondToLastLocation) }
     }
 
+    private func calculateDistanceFromCp(secondToLastLocation: CLLocation, lastLocation: CLLocation) {
+        guard let lastCheckpointKey = checkpoints.keys.sorted().last, let lastCheckpoint = checkpoints[lastCheckpointKey] else { return }
+
+        let lastCheckpointLocation = CLLocation(latitude: lastCheckpoint.latitude, longitude: lastCheckpoint.longitude)
+
+        if let currentDistance = distanceFromCp { distanceFromCp! += lastLocation.distance(from: secondToLastLocation) }
+        else { distanceFromCp = lastLocation.distance(from: secondToLastLocation) }
+
+        directLineFromCp = lastLocation.distance(from: lastCheckpointLocation)
+    }
+
+    private func calculateDistanceFromWp(secondToLastLocation: CLLocation, lastLocation: CLLocation) {
+        guard waypoint != nil else { return }
+        
+        let waypointLocation = CLLocation(latitude: waypoint!.latitude, longitude: waypoint!.longitude)
+        
+        if distanceFromWp != nil { distanceFromWp! += lastLocation.distance(from: secondToLastLocation) }
+        else { distanceFromWp = lastLocation.distance(from: secondToLastLocation) }
+        
+        directLineFromWp = lastLocation.distance(from: waypointLocation)
+    }
 }

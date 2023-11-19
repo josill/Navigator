@@ -15,8 +15,7 @@ struct MapOptionsView: View {
             Spacer()
             
             Button {
-                print("start tracking")
-                locationManager.trackingEnabled = !locationManager.trackingEnabled
+                locationManager.startSession()
             } label: {
                 Image(systemName: "play")
             }
@@ -24,7 +23,7 @@ struct MapOptionsView: View {
             .cornerRadius(12.0)
             .background(.blue)
             .foregroundColor(.white)
-            .clipShape(Capsule())
+            .clipShape(Circle())
             .font(.system(size: 24))
             
             Spacer()
@@ -38,7 +37,7 @@ struct MapOptionsView: View {
             .cornerRadius(12.0)
             .background(.blue)
             .foregroundColor(.white)
-            .clipShape(Capsule())
+            .clipShape(Circle())
             .font(.system(size: 24))
             
             Spacer()
@@ -52,7 +51,7 @@ struct MapOptionsView: View {
             .cornerRadius(12.0)
             .background(.blue)
             .foregroundColor(.white)
-            .clipShape(Capsule())
+            .clipShape(Circle())
             .font(.system(size: 24))
             
             Spacer()
@@ -66,7 +65,7 @@ struct MapOptionsView: View {
             .cornerRadius(12.0)
             .background(.blue)
             .foregroundColor(.white)
-            .clipShape(Capsule())
+            .clipShape(Circle())
             .font(.system(size: 24))
             
             Spacer()
