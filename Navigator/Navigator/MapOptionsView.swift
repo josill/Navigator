@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct MapOptionsView: View {
+    @ObservedObject var locationManager = LocationManager.shared
+
     var body: some View {
         HStack {
-            // CompassView()
             Spacer()
-
+            
             Button {
-                print("North-up")
+                print("start tracking")
+                locationManager.trackingEnabled = !locationManager.trackingEnabled
             } label: {
-                Image(systemName: "arrowshape.up")
+                Image(systemName: "play")
             }
             .padding()
             .cornerRadius(12.0)
@@ -24,11 +26,39 @@ struct MapOptionsView: View {
             .foregroundColor(.white)
             .clipShape(Capsule())
             .font(.system(size: 24))
-
+            
             Spacer()
             
             Button {
-                print("Reset")
+                locationManager.addCheckpoint()
+            } label: {
+                Image(systemName: "mappin.and.ellipse")
+            }
+            .padding()
+            .cornerRadius(12.0)
+            .background(.blue)
+            .foregroundColor(.white)
+            .clipShape(Capsule())
+            .font(.system(size: 24))
+            
+            Spacer()
+            
+            Button {
+                locationManager.addWaypoint()
+            } label: {
+                Image(systemName: "pin")
+            }
+            .padding()
+            .cornerRadius(12.0)
+            .background(.blue)
+            .foregroundColor(.white)
+            .clipShape(Capsule())
+            .font(.system(size: 24))
+            
+            Spacer()
+            
+            Button {
+                locationManager.reset()
             } label: {
                 Image(systemName: "gobackward")
             }
@@ -40,36 +70,8 @@ struct MapOptionsView: View {
             .font(.system(size: 24))
             
             Spacer()
-            
-            Button {
-                print("Compass")
-            } label: {
-                Image(systemName: "location.north.circle")
-            }
-            .padding()
-            .cornerRadius(12.0)
-            .background(.blue)
-            .foregroundColor(.white)
-            .clipShape(Capsule())
-            .font(.system(size: 24))
-            
-            Spacer()
-            
-            Button {
-                print("Options")
-            } label: {
-                Image(systemName: "gearshape")
-            }
-            .padding()
-            .cornerRadius(12.0)
-            .background(.blue)
-            .foregroundColor(.white)
-            .clipShape(Capsule())
-            .font(.system(size: 24))
-            
-            Spacer()
         }
-        .padding()    }
+    }
 }
 
 #Preview {
