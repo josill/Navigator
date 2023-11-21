@@ -21,7 +21,7 @@ struct MapOptionsView: View {
             }
             .padding()
             .cornerRadius(12.0)
-            .background(.blue)
+            .background(locationManager.trackingEnabled ? .green : .red)
             .foregroundColor(.white)
             .clipShape(Circle())
             .font(.system(size: 24))
@@ -35,7 +35,7 @@ struct MapOptionsView: View {
             }
             .padding()
             .cornerRadius(12.0)
-            .background(.blue)
+            .background(.red)
             .foregroundColor(.white)
             .clipShape(Circle())
             .font(.system(size: 24))
@@ -63,7 +63,7 @@ struct MapOptionsView: View {
             }
             .padding()
             .cornerRadius(12.0)
-            .background(.blue)
+            .background(.orange)
             .foregroundColor(.white)
             .clipShape(Circle())
             .font(.system(size: 24))

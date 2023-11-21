@@ -23,10 +23,13 @@ class LocationManager: NSObject, ObservableObject {
     @Published var directLineFromCp = 0.0
     @Published var directLineFromWp = 0.0
     
-    @Published var sessionDuration = 0.0
-    @Published var averageSpeed: Double?
-    @Published var averageSpeedFromCp: Double?
-    @Published var averageSpeedFromWp: Double?
+    @Published var sessionDurationSec = 0.0
+    @Published var sessionDuration = "00:00:00"
+    @Published var sessionDurationBeforeCp = 0.0
+    @Published var sessionDurationBeforeWp = 0.0
+    @Published var averageSpeed = 0.0
+    @Published var averageSpeedFromCp = 0.0
+    @Published var averageSpeedFromWp = 0.0
     
     static let shared = LocationManager() // access LocationManager from anywhere in the project
     
@@ -35,6 +38,7 @@ class LocationManager: NSObject, ObservableObject {
         
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.distanceFilter = 1.0
         manager.startUpdatingLocation()
         self.setup()
     }
@@ -86,18 +90,13 @@ extension LocationManager: CLLocationManagerDelegate {
         trackingEnabled = !trackingEnabled
 
         if trackingEnabled {
-            // Start the timer when the session starts
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
                 self?.updateElapsedTime()
             }
         } else {
-            // Stop the timer when the session stops
             timer?.invalidate()
             timer = nil
         }
-        
-        // TODO: implement Timer class
-        // TODO: implement average speed calculation
     }
     
     func addUserLocation(location: CLLocation) {
@@ -105,7 +104,8 @@ extension LocationManager: CLLocationManagerDelegate {
             if let previousLocation = userLocations?.last {
                 let distance = location.distance(from: CLLocation(latitude: previousLocation.latitude, longitude: previousLocation.longitude))
                 
-                if distance > 0 && distance <= 3.0 { userLocations!.append(location.coordinate) }
+                if distance > 0 && distance <= 2.0 { userLocations!.append(location.coordinate)
+                }
             } else {
                 userLocations = [location.coordinate]
             }
@@ -121,6 +121,7 @@ extension LocationManager: CLLocationManagerDelegate {
             
             distanceFromCp = 0.0
             directLineFromCp = 0.0
+            sessionDurationBeforeCp = sessionDurationSec
         }
     }
     
@@ -130,6 +131,7 @@ extension LocationManager: CLLocationManagerDelegate {
             
             distanceFromWp = 0.0
             directLineFromWp = 0.0
+            sessionDurationBeforeWp = sessionDurationSec
         }
     }
     
@@ -142,7 +144,8 @@ extension LocationManager: CLLocationManagerDelegate {
         waypoint = nil
         
         distanceCovered = 0.0
-        sessionDuration = 0.0
+        sessionDuration = "00:00:00"
+        sessionDurationSec = 0.0
         distanceFromCp = 0.0
         directLineFromCp = 0.0
         distanceFromWp = 0.0
@@ -151,7 +154,7 @@ extension LocationManager: CLLocationManagerDelegate {
     
     private func updateStatistics() {
         calculateDistances()
-        // TODO other methods
+        calculateSpeeds()
     }
     
     private func calculateDistances() {
@@ -190,7 +193,28 @@ extension LocationManager: CLLocationManagerDelegate {
         directLineFromWp = lastLocation.distance(from: waypointLocation)
     }
     
+    private func calculateSpeeds() {
+        if timer != nil {
+            averageSpeed = (distanceCovered / sessionDurationSec) * 3.6
+        }
+        
+        
+        if checkpoints.count > 0 {
+            averageSpeedFromCp = (distanceFromCp / (sessionDurationSec - sessionDurationBeforeCp)) * 3.6
+        }
+        
+        if waypoint != nil {
+            averageSpeedFromWp = (distanceFromWp / (sessionDurationSec - sessionDurationBeforeWp)) * 3.6
+        }
+    }
+    
     private func updateElapsedTime() {
-        sessionDuration += 1.0
+        sessionDurationSec += 1.0
+
+        let hours = Int(sessionDurationSec) / 3600
+        let minutes = (Int(sessionDurationSec) % 3600) / 60
+        let seconds = Int(sessionDurationSec) % 60
+
+        sessionDuration = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }

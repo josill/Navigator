@@ -34,11 +34,11 @@ struct MapStatisticsView: View {
                            .font(.subheadline)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
-                       Text("Session duration: \(String(format: "%.2f", locationManager.sessionDuration)) s")
+                       Text("Session duration: \(locationManager.sessionDuration)")
                            .font(.subheadline)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
-                       Text("Average speed: \(locationManager.averageSpeed ?? 0.0) km/h")
+                       Text("Average speed: \(String(format: "%.2f", locationManager.averageSpeed)) km/h")
                            .font(.subheadline)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
@@ -65,7 +65,7 @@ struct MapStatisticsView: View {
                        Text("Direct line distance: \(String(format: "%.2f", locationManager.directLineFromCp )) m")
                            .font(.subheadline)
 
-                       Text("Average speed: \(locationManager.averageSpeedFromCp ?? 0.0) km/h")
+                       Text("Average speed: \(String(format: "%.2f", locationManager.averageSpeedFromCp)) km/h")
                            .font(.subheadline)
                    }
                }
@@ -87,7 +87,7 @@ struct MapStatisticsView: View {
                        Text("Direct line distance: \(String(format: "%.2f", locationManager.directLineFromWp ))")
                            .font(.subheadline)
 
-                       Text("Average speed: \(locationManager.averageSpeedFromWp ?? 0.0)")
+                       Text("Average speed: \(String(format: "%.2f", locationManager.averageSpeedFromWp)) km/h")
                            .font(.subheadline)
                    }
                }
@@ -105,11 +105,16 @@ struct MapStatisticsView: View {
                        .imageScale(.large)
                }
            }
-           .frame(width: UIScreen.main.bounds.width, height: 200)
+           .frame(width: UIScreen.main.bounds.width, height: getHeightForCurrentTab())
            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
            .font(.system(size: 24))
        }
         .ignoresSafeArea()
+    }
+    
+    private func getHeightForCurrentTab() -> CGFloat {
+        if modeSelected == .compass { return 600 }
+        else { return 200 }
     }
 }
 
