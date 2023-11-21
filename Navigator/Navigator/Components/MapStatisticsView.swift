@@ -30,11 +30,11 @@ struct MapStatisticsView: View {
                            .padding(.bottom, 8)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                        
-                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceCovered ?? 0.0)) m")
+                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceCovered)) m")
                            .font(.subheadline)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
-                       Text("Session duration: \(locationManager.sessionDuration ?? 0.0)")
+                       Text("Session duration: \(String(format: "%.2f", locationManager.sessionDuration)) s")
                            .font(.subheadline)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
@@ -59,10 +59,10 @@ struct MapStatisticsView: View {
                            .fontWeight(.bold)
                            .padding(.bottom, 8)
                        
-                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceFromCp ?? 0.0)) m")
+                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceFromCp )) m")
                            .font(.subheadline)
 
-                       Text("Direct line distance: \(String(format: "%.2f", locationManager.directLineFromCp ?? 0.0)) m")
+                       Text("Direct line distance: \(String(format: "%.2f", locationManager.directLineFromCp )) m")
                            .font(.subheadline)
 
                        Text("Average speed: \(locationManager.averageSpeedFromCp ?? 0.0) km/h")
@@ -81,10 +81,10 @@ struct MapStatisticsView: View {
                            .fontWeight(.bold)
                            .padding(.bottom, 8)
                        
-                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceFromWp ?? 0.0))")
+                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceFromWp ))")
                            .font(.subheadline)
 
-                       Text("Direct line distance: \(String(format: "%.2f", locationManager.directLineFromWp ?? 0.0))")
+                       Text("Direct line distance: \(String(format: "%.2f", locationManager.directLineFromWp ))")
                            .font(.subheadline)
 
                        Text("Average speed: \(locationManager.averageSpeedFromWp ?? 0.0)")
