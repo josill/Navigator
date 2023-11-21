@@ -57,6 +57,14 @@ struct MapView: View {
                         }
                     }
                 }
+                .onTapGesture { location in
+                    let tapCoordinate = CLLocationCoordinate2D(
+                        latitude: mapCoordinate(from: location).latitude,
+                        longitude: mapCoordinate(from: location).longitude
+                    )
+                    print(tapCoordinate)
+                    locationManager.addCheckpoint(coordinate: tapCoordinate)
+                }
                 .mapControls {
                     MapUserLocationButton()
                     MapScaleView()
@@ -68,6 +76,18 @@ struct MapView: View {
                 SlideOverCard()
             }
         }
+    }
+    
+    private func mapCoordinate(from point: CGPoint) -> CLLocationCoordinate2D {
+        let location = self.pointToCoordinate(point, in: .global)
+        return location
+    }
+    
+    private func pointToCoordinate(_ point: CGPoint, in coordinateSpace: CoordinateSpace) -> CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(
+            latitude: Double(point.y),
+            longitude: Double(point.x)
+        )
     }
 }
 

@@ -114,10 +114,12 @@ extension LocationManager: CLLocationManagerDelegate {
         self.userLocation = location
     }
     
-    func addCheckpoint() {
+    
+    func addCheckpoint(coordinate: CLLocationCoordinate2D) {
         if trackingEnabled {
             let checkpointName = "Checkpoint \(checkpoints.count + 1)"
-            checkpoints[checkpointName] = userLocation!.coordinate
+            checkpoints[checkpointName] = coordinate
+            print(checkpoints)
             
             distanceFromCp = 0.0
             directLineFromCp = 0.0
