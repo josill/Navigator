@@ -43,7 +43,7 @@ struct MapOptionsView: View {
             Spacer()
             
             Button {
-                locationManager.addWaypoint()
+                // locationManager.addWaypoint()
             } label: {
                 Image(systemName: "pin")
             }

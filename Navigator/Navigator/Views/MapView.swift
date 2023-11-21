@@ -12,7 +12,8 @@ struct MapView: View {
     // TODO do this without shared?
     @ObservedObject var locationManager = LocationManager.shared
     @State private var userInitialLocation: MapCameraPosition = .userLocation(fallback: .automatic)
-    
+    private let mapView = MKMapView()
+
     var body: some View {
         // TODO think if displaying your own request view is wise
         // it should come automatically, check other tutorial
@@ -41,7 +42,7 @@ struct MapView: View {
                                     .cornerRadius(4)
                         }
                     }
-                                        
+                                                            
                     ForEach(locationManager.checkpoints.keys.sorted(), id: \.self) { key in
                         if let checkpoint = locationManager.checkpoints[key] {
                             Annotation(
@@ -57,12 +58,21 @@ struct MapView: View {
                         }
                     }
                 }
+                .onAppear {
+                    print(locationManager.userLocation?.coordinate)
+                    let region = MKCoordinateRegion(center: locationManager.userLocation!.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+                    print(region)
+                    mapView.setRegion(region, animated: false)
+                }
                 .onTapGesture { location in
-                    let tapCoordinate = CLLocationCoordinate2D(
+                    let tapCoordinate2 = CLLocationCoordinate2D(
                         latitude: mapCoordinate(from: location).latitude,
                         longitude: mapCoordinate(from: location).longitude
                     )
+                    let tapCoordinate = mapView.convert(location, toCoordinateFrom: mapView)
+                    print(tapCoordinate2)
                     print(tapCoordinate)
+                    locationManager.addWaypoint(coordinate: tapCoordinate)
                     locationManager.addCheckpoint(coordinate: tapCoordinate)
                 }
                 .mapControls {
@@ -72,6 +82,8 @@ struct MapView: View {
                 .mapStyle(.standard(elevation: .realistic))
                 .navigationBarBackButtonHidden(true)
                 .padding(.top, 40)
+                
+                Text("Checkpoints count: \(locationManager.checkpoints.count)")
                 
                 SlideOverCard()
             }

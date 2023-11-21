@@ -6,6 +6,7 @@
 //
 
 import CoreLocation
+import MapKit
 
 class LocationManager: NSObject, ObservableObject {
     private let manager = CLLocationManager()
@@ -127,9 +128,9 @@ extension LocationManager: CLLocationManagerDelegate {
         }
     }
     
-    func addWaypoint() {
+    func addWaypoint(coordinate: CLLocationCoordinate2D) {
         if trackingEnabled {
-            waypoint = userLocation!.coordinate
+            waypoint = coordinate
             
             distanceFromWp = 0.0
             directLineFromWp = 0.0
