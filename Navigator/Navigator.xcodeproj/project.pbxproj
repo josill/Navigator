@@ -30,6 +30,11 @@
 		FEBE74652AF4E31A005A98C0 /* NavigatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE74642AF4E31A005A98C0 /* NavigatorTests.swift */; };
 		FEBE746F2AF4E31A005A98C0 /* NavigatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE746E2AF4E31A005A98C0 /* NavigatorUITests.swift */; };
 		FEBE74712AF4E31A005A98C0 /* NavigatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE74702AF4E31A005A98C0 /* NavigatorUITestsLaunchTests.swift */; };
+		FEC07DC52B1272A1004976D7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DC42B1272A1004976D7 /* Session.swift */; };
+		FEC07DC72B1273D2004976D7 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DC62B1273D2004976D7 /* UserLocation.swift */; };
+		FEC07DC92B12750D004976D7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DC82B12750D004976D7 /* User.swift */; };
+		FEC07DCB2B1276B6004976D7 /* CheckPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DCA2B1276B6004976D7 /* CheckPoint.swift */; };
+		FEC07DCD2B1276DE004976D7 /* WayPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DCC2B1276DE004976D7 /* WayPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +82,11 @@
 		FEBE746A2AF4E31A005A98C0 /* NavigatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEBE746E2AF4E31A005A98C0 /* NavigatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorUITests.swift; sourceTree = "<group>"; };
 		FEBE74702AF4E31A005A98C0 /* NavigatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FEC07DC42B1272A1004976D7 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		FEC07DC62B1273D2004976D7 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		FEC07DC82B12750D004976D7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FEC07DCA2B1276B6004976D7 /* CheckPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPoint.swift; sourceTree = "<group>"; };
+		FEC07DCC2B1276DE004976D7 /* WayPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WayPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +174,7 @@
 		FEBE74512AF4E317005A98C0 /* Navigator */ = {
 			isa = PBXGroup;
 			children = (
+				FEC07DC32B126FA9004976D7 /* Models */,
 				FE3A12642B0C8D4C005474F8 /* Components */,
 				FE3A12632B0C8D44005474F8 /* Views */,
 				FE3A12622B0C8D02005474F8 /* BusinessLogic */,
@@ -199,6 +210,18 @@
 				FEBE74702AF4E31A005A98C0 /* NavigatorUITestsLaunchTests.swift */,
 			);
 			path = NavigatorUITests;
+			sourceTree = "<group>";
+		};
+		FEC07DC32B126FA9004976D7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FEC07DC42B1272A1004976D7 /* Session.swift */,
+				FEC07DC62B1273D2004976D7 /* UserLocation.swift */,
+				FEC07DC82B12750D004976D7 /* User.swift */,
+				FEC07DCA2B1276B6004976D7 /* CheckPoint.swift */,
+				FEC07DCC2B1276DE004976D7 /* WayPoint.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,11 +362,15 @@
 				FEA559A52B02D92C00D0E3D8 /* LocationRequestView.swift in Sources */,
 				FE7E55162B057C6200521F39 /* CompassView.swift in Sources */,
 				FE7E55182B057E3900521F39 /* Marker.swift in Sources */,
+				FEC07DCD2B1276DE004976D7 /* WayPoint.swift in Sources */,
+				FEC07DC92B12750D004976D7 /* User.swift in Sources */,
+				FEC07DC52B1272A1004976D7 /* Session.swift in Sources */,
 				FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */,
 				FE72502F2B064F4000068114 /* MapOptionsView.swift in Sources */,
 				FEA5599B2B0284E500D0E3D8 /* LoginOrRegisterView.swift in Sources */,
 				FE75A3912B07C2D100FE3757 /* Handle.swift in Sources */,
 				FEBE74532AF4E317005A98C0 /* NavigatorApp.swift in Sources */,
+				FEC07DC72B1273D2004976D7 /* UserLocation.swift in Sources */,
 				FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */,
 				FEBD5CB22B0D3C75002E9936 /* MapHelper.swift in Sources */,
 				FE75A38F2B07BDF600FE3757 /* SlideOverCard.swift in Sources */,

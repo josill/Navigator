@@ -16,6 +16,5 @@ class CompassManager: NSObject, ObservableObject {
             objectWillChange.send()
         }
     }
-    private let locationManager = LocationManager.shared
     static let shared = CompassManager()
 }
