@@ -29,7 +29,7 @@ struct MapOptionsView: View {
             Spacer()
             
             Button {
-                locationManager.addCheckpoint()
+                // locationManager.addCheckpoint()
             } label: {
                 Image(systemName: "mappin.and.ellipse")
             }
@@ -43,7 +43,7 @@ struct MapOptionsView: View {
             Spacer()
             
             Button {
-                locationManager.addWaypoint()
+                // locationManager.addWaypoint()
             } label: {
                 Image(systemName: "pin")
             }
