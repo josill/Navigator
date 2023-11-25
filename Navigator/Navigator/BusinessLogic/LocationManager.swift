@@ -10,6 +10,8 @@ import MapKit
 
 class LocationManager: NSObject, ObservableObject {
     private let manager = CLLocationManager()
+    let mapView =  MKMapView()
+    @Published var mapHelper: MapHelper?
     private var timer: Timer?
     
     @Published var userLocation: CLLocation?
@@ -97,6 +99,10 @@ extension LocationManager: CLLocationManagerDelegate {
         } else {
             timer?.invalidate()
             timer = nil
+        }
+        
+        if let userLocation {
+            mapHelper = MapHelper(mapView: mapView, userLocation: userLocation)
         }
     }
     

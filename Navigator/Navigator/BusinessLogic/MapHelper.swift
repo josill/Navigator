@@ -9,16 +9,13 @@ import Foundation
 import MapKit
 
 class MapHelper {
-    private let mapView: MKMapView
     
     init(mapView: MKMapView, userLocation: CLLocation) {
-        self.mapView = mapView
-        
         let region = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(region, animated: false)
     }
 
-    func convertLocationToRegion(location: CLLocation?) {
+    func convertLocationToRegion(location: CLLocation?, mapView: MKMapView) {
         guard let coordinate = location?.coordinate else {
             return
         }
