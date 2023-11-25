@@ -9,14 +9,10 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    // TODO do this without shared?
-    @ObservedObject var locationManager = LocationManager.shared
+    @EnvironmentObject var locationManager: LocationManager
     @State private var userInitialLocation: MapCameraPosition = .userLocation(fallback: .automatic)
     
-    var body: some View {
-        // TODO think if displaying your own request view is wise
-        // it should come automatically, check other tutorial
-            
+    var body: some View {            
         ZStack {
             if locationManager.userLocation == nil {
                 LocationRequestView()

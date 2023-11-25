@@ -9,8 +9,8 @@ import SwiftUI
 
 struct MapStatisticsView: View {
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var locationManager = LocationManager.shared
-    
+    @EnvironmentObject var locationManager: LocationManager
+
     enum Mode {
         case main
         case checkPoint

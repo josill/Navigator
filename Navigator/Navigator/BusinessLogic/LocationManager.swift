@@ -30,9 +30,7 @@ class LocationManager: NSObject, ObservableObject {
     @Published var averageSpeed = 0.0
     @Published var averageSpeedFromCp = 0.0
     @Published var averageSpeedFromWp = 0.0
-    
-    static let shared = LocationManager() // access LocationManager from anywhere in the project
-    
+        
     override init() {
         super.init()
         
