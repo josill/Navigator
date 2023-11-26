@@ -15,7 +15,7 @@ struct Session {
     var distanceCovered: Double
     var timeElapsed: Double
     var averageSpeed: Double
-    var checkPoints: [Location]
-    var wayPoints: [Location]
-    var locations: [Location]
+    var checkPoints: [UserLocation]
+    var wayPoints: [UserLocation]
+    var locations: [UserLocation]
 }

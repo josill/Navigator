@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct NavigatorApp: App {
     @StateObject var locationManager = LocationManager()
+    @StateObject var notificationManager = NotificationManager()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(locationManager)
+                .environmentObject(notificationManager)
         }
     }
 }

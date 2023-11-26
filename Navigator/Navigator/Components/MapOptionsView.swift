@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MapOptionsView: View {
     @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var notificationManager: NotificationManager
 
     var body: some View {
         HStack {
@@ -29,7 +30,25 @@ struct MapOptionsView: View {
             Spacer()
             
             Button {
-                // locationManager.addCheckpoint()
+                notificationManager.sendNotification(
+                    timeInterval: 5,
+                    title: "Hey there!",
+                    body: "This is a reminder you set 5 seconds ago"
+                )
+            } label: {
+                Image(systemName: "bell.circle")
+            }
+            .padding()
+            .cornerRadius(12.0)
+            .background(notificationManager.authorizationStatus != nil ? .green : .red)
+            .foregroundColor(.white)
+            .clipShape(Circle())
+            .font(.system(size: 24))
+            
+            Spacer()
+            
+            Button {
+                locationManager.addCheckpoint(coordinate: locationManager.userLocation!.coordinate)
             } label: {
                 Image(systemName: "mappin.and.ellipse")
             }
@@ -43,7 +62,7 @@ struct MapOptionsView: View {
             Spacer()
             
             Button {
-                // locationManager.addWaypoint()
+                locationManager.addWaypoint(coordinate: locationManager.userLocation!.coordinate)
             } label: {
                 Image(systemName: "pin")
             }
