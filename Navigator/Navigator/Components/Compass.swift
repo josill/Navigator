@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct CompassView: View {
+struct Compass: View {
     @ObservedObject var compassManager = CompassManager.shared
     
     var body: some View {
         VStack {
             ZStack {
                 ForEach(Marker.markers(), id: \.self) { marker in
-                        CompassMarkerView(marker: marker, compassDegrees: 0)
+                        CompassMarker(marker: marker, compassDegrees: 0)
                 }
             }
             .rotationEffect(Angle(degrees: self.compassManager.degrees))
@@ -24,5 +24,5 @@ struct CompassView: View {
 }
 
 #Preview {
-    CompassView()
+    Compass()
 }

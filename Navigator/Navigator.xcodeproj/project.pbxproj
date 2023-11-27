@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FE72502F2B064F4000068114 /* MapOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72502E2B064F4000068114 /* MapOptionsView.swift */; };
-		FE7250312B0652FC00068114 /* MapStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7250302B0652FC00068114 /* MapStatisticsView.swift */; };
-		FE75A38F2B07BDF600FE3757 /* SlideOverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A38E2B07BDF600FE3757 /* SlideOverCard.swift */; };
-		FE75A3912B07C2D100FE3757 /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A3902B07C2D100FE3757 /* Handle.swift */; };
-		FE7E55162B057C6200521F39 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E55152B057C6200521F39 /* CompassView.swift */; };
+		FE72502F2B064F4000068114 /* SessionControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72502E2B064F4000068114 /* SessionControls.swift */; };
+		FE7250312B0652FC00068114 /* SessionStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7250302B0652FC00068114 /* SessionStats.swift */; };
+		FE75A38F2B07BDF600FE3757 /* SlideUpCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A38E2B07BDF600FE3757 /* SlideUpCard.swift */; };
+		FE75A3912B07C2D100FE3757 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A3902B07C2D100FE3757 /* Slider.swift */; };
+		FE7E55162B057C6200521F39 /* Compass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E55152B057C6200521F39 /* Compass.swift */; };
 		FE7E55182B057E3900521F39 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E55172B057E3900521F39 /* Marker.swift */; };
-		FE7E551C2B057F3B00521F39 /* CompassMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E551B2B057F3B00521F39 /* CompassMarkerView.swift */; };
+		FE7E551C2B057F3B00521F39 /* CompassMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E551B2B057F3B00521F39 /* CompassMarker.swift */; };
 		FE7E551E2B05851D00521F39 /* CompassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E551D2B05851D00521F39 /* CompassManager.swift */; };
 		FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA559962B027C4500D0E3D8 /* LoginView.swift */; };
 		FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA559982B0284BC00D0E3D8 /* RegisterView.swift */; };
@@ -55,13 +55,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FE72502E2B064F4000068114 /* MapOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOptionsView.swift; sourceTree = "<group>"; };
-		FE7250302B0652FC00068114 /* MapStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStatisticsView.swift; sourceTree = "<group>"; };
-		FE75A38E2B07BDF600FE3757 /* SlideOverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideOverCard.swift; sourceTree = "<group>"; };
-		FE75A3902B07C2D100FE3757 /* Handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handle.swift; sourceTree = "<group>"; };
-		FE7E55152B057C6200521F39 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
+		FE72502E2B064F4000068114 /* SessionControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionControls.swift; sourceTree = "<group>"; };
+		FE7250302B0652FC00068114 /* SessionStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStats.swift; sourceTree = "<group>"; };
+		FE75A38E2B07BDF600FE3757 /* SlideUpCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideUpCard.swift; sourceTree = "<group>"; };
+		FE75A3902B07C2D100FE3757 /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
+		FE7E55152B057C6200521F39 /* Compass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compass.swift; sourceTree = "<group>"; };
 		FE7E55172B057E3900521F39 /* Marker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
-		FE7E551B2B057F3B00521F39 /* CompassMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassMarkerView.swift; sourceTree = "<group>"; };
+		FE7E551B2B057F3B00521F39 /* CompassMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassMarker.swift; sourceTree = "<group>"; };
 		FE7E551D2B05851D00521F39 /* CompassManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassManager.swift; sourceTree = "<group>"; };
 		FEA559962B027C4500D0E3D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FEA559982B0284BC00D0E3D8 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -119,6 +119,7 @@
 		FE3A12622B0C8D02005474F8 /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
+				FE7E55172B057E3900521F39 /* Marker.swift */,
 				FEA559A22B02D62A00D0E3D8 /* LocationManager.swift */,
 				FE7E551D2B05851D00521F39 /* CompassManager.swift */,
 				FEBD5CB12B0D3C75002E9936 /* MapHelper.swift */,
@@ -143,13 +144,12 @@
 		FE3A12642B0C8D4C005474F8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				FE7E55152B057C6200521F39 /* CompassView.swift */,
-				FE7E55172B057E3900521F39 /* Marker.swift */,
-				FE7E551B2B057F3B00521F39 /* CompassMarkerView.swift */,
-				FE72502E2B064F4000068114 /* MapOptionsView.swift */,
-				FE7250302B0652FC00068114 /* MapStatisticsView.swift */,
-				FE75A38E2B07BDF600FE3757 /* SlideOverCard.swift */,
-				FE75A3902B07C2D100FE3757 /* Handle.swift */,
+				FE7E55152B057C6200521F39 /* Compass.swift */,
+				FE7E551B2B057F3B00521F39 /* CompassMarker.swift */,
+				FE72502E2B064F4000068114 /* SessionControls.swift */,
+				FE7250302B0652FC00068114 /* SessionStats.swift */,
+				FE75A38E2B07BDF600FE3757 /* SlideUpCard.swift */,
+				FE75A3902B07C2D100FE3757 /* Slider.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -359,26 +359,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEA5599D2B02C35200D0E3D8 /* MapView.swift in Sources */,
-				FE7250312B0652FC00068114 /* MapStatisticsView.swift in Sources */,
+				FE7250312B0652FC00068114 /* SessionStats.swift in Sources */,
 				FEBE74552AF4E317005A98C0 /* ContentView.swift in Sources */,
 				FEE26AC72B13562600FEEDBD /* NotificationRequestView.swift in Sources */,
 				FEE26AC52B1353B200FEEDBD /* NotificationManager.swift in Sources */,
-				FE7E551C2B057F3B00521F39 /* CompassMarkerView.swift in Sources */,
+				FE7E551C2B057F3B00521F39 /* CompassMarker.swift in Sources */,
 				FEA559A52B02D92C00D0E3D8 /* LocationRequestView.swift in Sources */,
-				FE7E55162B057C6200521F39 /* CompassView.swift in Sources */,
+				FE7E55162B057C6200521F39 /* Compass.swift in Sources */,
 				FE7E55182B057E3900521F39 /* Marker.swift in Sources */,
 				FEC07DCD2B1276DE004976D7 /* WayPoint.swift in Sources */,
 				FEC07DC92B12750D004976D7 /* User.swift in Sources */,
 				FEC07DC52B1272A1004976D7 /* Session.swift in Sources */,
 				FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */,
-				FE72502F2B064F4000068114 /* MapOptionsView.swift in Sources */,
+				FE72502F2B064F4000068114 /* SessionControls.swift in Sources */,
 				FEA5599B2B0284E500D0E3D8 /* LoginOrRegisterView.swift in Sources */,
-				FE75A3912B07C2D100FE3757 /* Handle.swift in Sources */,
+				FE75A3912B07C2D100FE3757 /* Slider.swift in Sources */,
 				FEBE74532AF4E317005A98C0 /* NavigatorApp.swift in Sources */,
 				FEC07DC72B1273D2004976D7 /* UserLocation.swift in Sources */,
 				FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */,
 				FEBD5CB22B0D3C75002E9936 /* MapHelper.swift in Sources */,
-				FE75A38F2B07BDF600FE3757 /* SlideOverCard.swift in Sources */,
+				FE75A38F2B07BDF600FE3757 /* SlideUpCard.swift in Sources */,
 				FE7E551E2B05851D00521F39 /* CompassManager.swift in Sources */,
 				FEA559A32B02D62A00D0E3D8 /* LocationManager.swift in Sources */,
 			);

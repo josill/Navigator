@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CompassMarkerView: View {
+struct CompassMarker: View {
     let marker: Marker
     let compassDegrees: Double
     
@@ -40,5 +40,5 @@ struct CompassMarkerView: View {
 }
 
 #Preview {
-    CompassMarkerView(marker: Marker(degrees: 0), compassDegrees: 0)
+    CompassMarker(marker: Marker(degrees: 0), compassDegrees: 0)
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MapOptionsView: View {
+struct SessionControls: View {
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var notificationManager: NotificationManager
 
@@ -89,5 +89,5 @@ struct MapOptionsView: View {
 }
 
 #Preview {
-    MapOptionsView()
+    SessionControls()
 }

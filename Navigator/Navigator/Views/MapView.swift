@@ -65,7 +65,7 @@ struct MapView: View {
                 .navigationBarBackButtonHidden(true)
                 .padding(.top, 40)
                 
-                SlideOverCard()
+                SlideUpCard()
             }
         }
     }

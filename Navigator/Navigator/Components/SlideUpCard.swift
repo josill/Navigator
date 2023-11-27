@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SlideOverCard: View {
+struct SlideUpCard: View {
     @Environment(\.colorScheme) var colorScheme
     @GestureState private var dragState = DragState.inactive
     @State var position = CardPosition.bottom
@@ -20,7 +20,7 @@ struct SlideOverCard: View {
             .onEnded(onDragEnded)
         
         return Group {
-            Handle()
+            Slider()
             VStack(spacing: 10) {
                 Capsule()
                     .frame(
@@ -30,9 +30,9 @@ struct SlideOverCard: View {
                     .foregroundColor(.gray)
                     .padding(.top, 10)
                 
-                MapOptionsView()
+                SessionControls()
                                 
-                MapStatisticsView()
+                SessionStats()
                 
                 Spacer()
             }
@@ -100,5 +100,5 @@ struct SlideOverCard: View {
 }
 
 #Preview {
-    SlideOverCard()
+    SlideUpCard()
 }

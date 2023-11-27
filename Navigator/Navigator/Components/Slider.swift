@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Handle: View {
+struct Slider: View {
     private let handleThickness = CGFloat(5.0)
     var body: some View {
         RoundedRectangle(cornerRadius: handleThickness / 2.0)
@@ -18,5 +18,5 @@ struct Handle: View {
 }
 
 #Preview {
-    Handle()
+    Slider()
 }

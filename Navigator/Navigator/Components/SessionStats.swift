@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MapStatisticsView: View {
+struct SessionStats: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var locationManager: LocationManager
 
@@ -97,7 +97,7 @@ struct MapStatisticsView: View {
                }
                
                ZStack {
-                   CompassView()
+                   Compass()
                }
                .tag(Mode.compass)
                .tabItem {
@@ -119,5 +119,5 @@ struct MapStatisticsView: View {
 }
 
 #Preview {
-    MapStatisticsView()
+    SessionStats()
 }
