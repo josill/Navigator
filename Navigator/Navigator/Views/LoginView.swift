@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var username = ""
+    @State private var email = ""
     @State private var password = ""
     
     @State private var usernameError: Float = 0
@@ -30,19 +30,26 @@ struct LoginView: View {
                             .padding()
                             .foregroundColor(.white.opacity(0.8))
                         
-                        TextField("Username", text: $username)
+                        TextField(
+                            "Email",
+                            text: $email,
+                            prompt: Text("email")
+                                .foregroundColor(.black.opacity(0.6)))
                             .padding()
                             .frame(width: 300, height: 50)
                             .background(.white)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .cornerRadius(10)
                             .border(.red, width: CGFloat(usernameError))
                         
-                        SecureField("Password", text: $password)
+                        SecureField(
+                            "Password",
+                            text: $password,
+                            prompt: Text("Password").foregroundColor(.black.opacity(0.6)))
                             .padding()
                             .frame(width: 300, height: 50)
                             .background(.white)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .cornerRadius(10)
                             .border(.red, width: CGFloat(passwordError))
                     }
