@@ -15,8 +15,6 @@ class NotificationManager: NSObject, ObservableObject {
     @Published var notificationsEnabled = true // user wants to get updates
     
     private var timer: Timer?
-
-    static let shared = NotificationManager()
     
     override init() {
         super.init()
@@ -36,6 +34,7 @@ class NotificationManager: NSObject, ObservableObject {
             if success { self.startSendingNotifications() }
             
             self.changeAuthorizationStatus()
+            self.changeNotificationsEnabled()
         }
     }
     

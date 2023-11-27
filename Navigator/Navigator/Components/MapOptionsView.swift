@@ -30,17 +30,13 @@ struct MapOptionsView: View {
             Spacer()
             
             Button {
-                notificationManager.sendNotification(
-                    timeInterval: 5,
-                    title: "Hey there!",
-                    body: "This is a reminder you set 5 seconds ago"
-                )
+                notificationManager.changeNotificationsEnabled()
             } label: {
                 Image(systemName: "bell.circle")
             }
             .padding()
             .cornerRadius(12.0)
-            .background(notificationManager.notificationsAllowed ? .green : .red)
+            .background(notificationManager.notificationsEnabled ? .green : .red)
             .foregroundColor(.white)
             .clipShape(Circle())
             .font(.system(size: 24))
