@@ -11,8 +11,8 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     
-    @State private var usernameError: Float = 0
-    @State private var passwordError: Float = 0
+    @State private var emailError = false
+    @State private var passwordError = false
     
     @State private var loginSuccessful = false;
 
@@ -33,14 +33,14 @@ struct LoginView: View {
                         TextField(
                             "Email",
                             text: $email,
-                            prompt: Text("email")
+                            prompt: Text("Email")
                                 .foregroundColor(.black.opacity(0.6)))
                             .padding()
                             .frame(width: 300, height: 50)
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(usernameError))
+                            .border(.red, width: CGFloat(emailError ? 3 : 0))
                         
                         SecureField(
                             "Password",
@@ -51,11 +51,11 @@ struct LoginView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(passwordError))
+                            .border(.red, width: CGFloat(passwordError ? 3 : 0))
                     }
                     
                     Button("Login") {
-                        loginSuccessful = true
+                        login()
                     }
                         .frame(maxWidth: 265)
                         .padding()
@@ -74,10 +74,38 @@ struct LoginView: View {
                         isPresented: $loginSuccessful) {
                             MapView()
                         }
- 
                 }
             }
         }
+    }
+    
+    func validateEmail() -> Bool {
+        let emailRegex = #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"#
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        
+        let emailCorrect = emailPredicate.evaluate(with: email)
+        
+        if (emailCorrect) { emailError = false }
+        else { emailError = true }
+        
+        return emailCorrect
+    }
+    
+    func validatePassword() -> Bool {
+        let passwordCorrect = password.count > 3
+        
+        if passwordCorrect { passwordError = false }
+        else { passwordError = true }
+        
+        return passwordCorrect
+    }
+    
+    func login() {
+        let emailCorrect = validateEmail()
+        let passwordsMatch = validatePassword()
+        
+        if !emailCorrect || !passwordsMatch { return }
+        loginSuccessful = true
     }
 }
 
