@@ -17,7 +17,7 @@ struct MapView: View {
         ZStack {
             if locationManager.userLocation == nil {
                 LocationRequestView()
-            } else if notificationManager.authorizationStatus == .notDetermined {
+            } else if !notificationManager.notificationsAllowed {
                 NotificationRequestView()
             } else {
                 Map(position: $userInitialLocation) {

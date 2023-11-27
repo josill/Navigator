@@ -40,7 +40,7 @@ struct MapOptionsView: View {
             }
             .padding()
             .cornerRadius(12.0)
-            .background(notificationManager.authorizationStatus != nil ? .green : .red)
+            .background(notificationManager.notificationsAllowed ? .green : .red)
             .foregroundColor(.white)
             .clipShape(Circle())
             .font(.system(size: 24))
