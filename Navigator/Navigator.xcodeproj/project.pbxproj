@@ -35,6 +35,7 @@
 		FEC07DCD2B1276DE004976D7 /* WayPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DCC2B1276DE004976D7 /* WayPoint.swift */; };
 		FEE26AC52B1353B200FEEDBD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE26AC42B1353B200FEEDBD /* NotificationManager.swift */; };
 		FEE26AC72B13562600FEEDBD /* NotificationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE26AC62B13562600FEEDBD /* NotificationRequestView.swift */; };
+		FEEA24912B160220001D1981 /* AuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEA24902B160220001D1981 /* AuthenticationHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		FEE26AC42B1353B200FEEDBD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		FEE26AC62B13562600FEEDBD /* NotificationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestView.swift; sourceTree = "<group>"; };
 		FEE26AC82B135F1500FEEDBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FEEA24902B160220001D1981 /* AuthenticationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				FEA559A22B02D62A00D0E3D8 /* LocationManager.swift */,
 				FE7E551D2B05851D00521F39 /* CompassManager.swift */,
 				FEBD5CB12B0D3C75002E9936 /* MapHelper.swift */,
+				FEEA24902B160220001D1981 /* AuthenticationHelper.swift */,
 			);
 			path = BusinessLogic;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				FEBE74552AF4E317005A98C0 /* ContentView.swift in Sources */,
 				FEE26AC72B13562600FEEDBD /* NotificationRequestView.swift in Sources */,
 				FEE26AC52B1353B200FEEDBD /* NotificationManager.swift in Sources */,
+				FEEA24912B160220001D1981 /* AuthenticationHelper.swift in Sources */,
 				FE7E551C2B057F3B00521F39 /* CompassMarker.swift in Sources */,
 				FEA559A52B02D92C00D0E3D8 /* LocationRequestView.swift in Sources */,
 				FE7E55162B057C6200521F39 /* Compass.swift in Sources */,

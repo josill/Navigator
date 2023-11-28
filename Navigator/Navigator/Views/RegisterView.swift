@@ -8,18 +8,13 @@
 import SwiftUI
 
 struct RegisterView: View {
+    @ObservedObject var authHelper = AuthenticationHelper()
+    
     @State private var firstName = ""
     @State private var lastName = ""
     @State private var email = ""
-    @State private var password = ""
+    @State private var password1 = ""
     @State private var password2 = ""
-    
-    @State private var firstNameError = false
-    @State private var lastNameError = false
-    @State private var emailError = false
-    @State private var passwordsError = false
-    
-    @State private var registerSuccessful = false;
     
     var body: some View {
         NavigationStack {
@@ -44,7 +39,7 @@ struct RegisterView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(firstNameError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.firstNameError ? 3 : 0))
                         
                         TextField(
                             "Last name",
@@ -55,7 +50,7 @@ struct RegisterView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(lastNameError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.lastNameError ? 3 : 0))
                         
                         TextField(
                             "Email",
@@ -66,18 +61,18 @@ struct RegisterView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(emailError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.emailError ? 3 : 0))
                         
                         SecureField(
                             "Password",
-                            text: $password,
+                            text: $password1,
                             prompt: Text("Password").foregroundColor(.black.opacity(0.6)))
                             .padding()
                             .frame(width: 300, height: 50)
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(passwordsError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.passwordsError ? 3 : 0))
                         
                         SecureField(
                             "Password again",
@@ -88,11 +83,17 @@ struct RegisterView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(passwordsError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.passwordsError ? 3 : 0))
                     }
                     
                     Button("Create") {
-                        register()
+                        authHelper.register(
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email,
+                            password1: password1,
+                            password2: password2
+                        )
                     }
                         .frame(maxWidth: 265)
                         .padding()
@@ -108,58 +109,12 @@ struct RegisterView: View {
                     }
                     .hidden()
                     .navigationDestination(
-                        isPresented: $registerSuccessful) {
+                        isPresented: $authHelper.registerSuccessful) {
                             LoginView()
                         }
                 }
             }
         }
-    }
-    
-    func validateNames() -> Bool {
-        let firstNameCorrect = firstName.count > 3
-        let lastNameCorrect = lastName.count > 3
-        
-        if firstNameCorrect { firstNameError = false }
-        else { firstNameError = true }
-        
-        if firstNameCorrect { lastNameError = false }
-        else { lastNameError = true }
-        
-        return firstNameCorrect && lastNameCorrect
-    }
-    
-    func validateEmail() -> Bool {
-        let emailRegex = #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"#
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        
-        let emailCorrect = emailPredicate.evaluate(with: email)
-        
-        if (emailCorrect) { emailError = false }
-        else { emailError = true }
-        
-        return emailCorrect
-    }
-    
-    func validatePasswords() -> Bool {
-        let passwordsCorrect =
-        password == password2 &&
-        password.count > 3 &&
-        password2.count > 3
-        
-        if (passwordsCorrect) { passwordsError = false }
-        else { passwordsError = true }
-        
-        return passwordsCorrect
-    }
-    
-    func register() {
-        let namesCorrect = validateNames()
-        let emailCorrect = validateEmail()
-        let passwordsMatch = validatePasswords()
-        
-        if !namesCorrect || !emailCorrect || !passwordsMatch { return }
-        registerSuccessful = true
     }
 }
 

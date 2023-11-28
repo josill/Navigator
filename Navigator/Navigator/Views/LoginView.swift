@@ -8,13 +8,10 @@
 import SwiftUI
 
 struct LoginView: View {
+    @ObservedObject var authHelper = AuthenticationHelper()
+    
     @State private var email = ""
     @State private var password = ""
-    
-    @State private var emailError = false
-    @State private var passwordError = false
-    
-    @State private var loginSuccessful = false;
 
     var body: some View {
         NavigationStack {
@@ -40,7 +37,7 @@ struct LoginView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(emailError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.emailError ? 3 : 0))
                         
                         SecureField(
                             "Password",
@@ -51,11 +48,14 @@ struct LoginView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(passwordError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.passwordError ? 3 : 0))
                     }
                     
                     Button("Login") {
-                        login()
+                        authHelper.login(
+                            email: email,
+                            password: password
+                        )
                     }
                         .frame(maxWidth: 265)
                         .padding()
@@ -71,41 +71,12 @@ struct LoginView: View {
                     }
                     .hidden()
                     .navigationDestination(
-                        isPresented: $loginSuccessful) {
+                        isPresented: $authHelper.loginSuccessful) {
                             MapView()
                         }
                 }
             }
         }
-    }
-    
-    func validateEmail() -> Bool {
-        let emailRegex = #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"#
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        
-        let emailCorrect = emailPredicate.evaluate(with: email)
-        
-        if (emailCorrect) { emailError = false }
-        else { emailError = true }
-        
-        return emailCorrect
-    }
-    
-    func validatePassword() -> Bool {
-        let passwordCorrect = password.count > 3
-        
-        if passwordCorrect { passwordError = false }
-        else { passwordError = true }
-        
-        return passwordCorrect
-    }
-    
-    func login() {
-        let emailCorrect = validateEmail()
-        let passwordsMatch = validatePassword()
-        
-        if !emailCorrect || !passwordsMatch { return }
-        loginSuccessful = true
     }
 }
 
