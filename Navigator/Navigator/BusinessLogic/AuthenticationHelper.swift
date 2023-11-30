@@ -6,8 +6,13 @@
 //
 
 import Foundation
+import CryptoKit
 
 class AuthenticationHelper: ObservableObject {
+    let config = Configuration()
+    
+    @Published var isLoading = false
+    
     @Published var firstNameError = false
     @Published var lastNameError = false
     @Published var emailError = false
@@ -63,13 +68,92 @@ class AuthenticationHelper: ObservableObject {
         return passwordsCorrect
     }
     
-    func register(firstName: String, lastName: String, email: String, password1: String, password2: String) {
+    private func generateSalt() -> String {
+        let randomData = Data.random(count: 16)
+        return randomData.base64EncodedString()
+    }
+
+    private func hashPassword(password: String, salt: String) -> String {
+        let saltedPassword = password + salt
+        let passwordData = Data(saltedPassword.utf8)
+        let hashed = SHA256.hash(data: passwordData)
+        return hashed.compactMap { String(format: "%02hhx", $0) }.joined()
+    }
+    
+    func register(firstName: String, lastName: String, email: String, password1: String, password2: String) async {
+        isLoading = true
+        
         let namesCorrect = validateNames(firstName: firstName, lastName: lastName)
         let emailCorrect = validateEmail(email: email)
         let passwordsMatch = validatePasswords(password1: password1, password2: password2)
         
         if !namesCorrect || !emailCorrect || !passwordsMatch { return }
-        registerSuccessful = true
+        
+        let urlString = "\(config.baseUrl)/api/v1.0/account/register"
+        
+        let salt = generateSalt()
+        let user = User(
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            salt: salt,
+            passwordHash: hashPassword(password: password1, salt: salt)
+        )
+        let data = [
+            "firstName": firstName,
+            "lastName": lastName,
+            "email": email,
+            "password": user.passwordHash,
+        ]
+        
+        guard let url = URL(string: urlString) else {
+            print("unable to make string: \(urlString) to URL object")
+            return
+        }
+        
+        guard let encoded = try? JSONEncoder().encode(data) else {
+            print("Failed to encode data: \(data)")
+            return
+        }
+        
+        var req = URLRequest(url: url)
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.httpMethod = "POST"
+        
+        do {
+            let (data, response) = try await URLSession.shared.upload(for: req, from: encoded)
+
+            guard let res = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+            
+            if res.statusCode == 200 {
+                // Process the successful response
+                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let token = json["token"] as? String {
+                    print("Token: \(token)")
+                    // Now you have the token, you can use it as needed
+                    
+                    registerSuccessful = true
+                }
+            } else {
+                print("HTTP Status Code: \(res.statusCode)")
+
+                if let responseString = String(data: data, encoding: .utf8) {
+                    print("Response Data: \(responseString)")
+                    // Handle the error using the responseString
+                } else {
+                    print("Failed to convert response data to string.")
+                    // Handle the error appropriately
+                }
+                // Handle the error appropriately
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        isLoading = false
     }
     
     func login(email: String, password: String) {
@@ -79,4 +163,12 @@ class AuthenticationHelper: ObservableObject {
         if !emailCorrect || !passwordsMatch { return }
         loginSuccessful = true
     }
+}
+
+extension Data {
+    static func random(count: Int) -> Data {
+        var data = Data(count: count)
+        _ = data.withUnsafeMutableBytes { SecRandomCopyBytes(kSecRandomDefault, count, $0.baseAddress!) }
+        return data
+   }
 }

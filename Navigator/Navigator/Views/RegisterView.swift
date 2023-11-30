@@ -86,21 +86,31 @@ struct RegisterView: View {
                             .border(.red, width: CGFloat(authHelper.passwordsError ? 3 : 0))
                     }
                     
-                    Button("Create") {
-                        authHelper.register(
-                            firstName: firstName,
-                            lastName: lastName,
-                            email: email,
-                            password1: password1,
-                            password2: password2
-                        )
-                    }
-                        .frame(maxWidth: 265)
-                        .padding()
-                        .background(.blue)
-                        .foregroundColor(.white.opacity(0.9))
-                        .font(.headline)
-                        .cornerRadius(12.0)
+                    Button(action: {
+                        Task {
+                            await authHelper.register(
+                                firstName: firstName,
+                                lastName: lastName,
+                                email: email,
+                                password1: password1,
+                                password2: password2
+                            )
+                        }
+                    }, label: {
+                        if authHelper.isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        } else {
+                            Text("Create")
+                        }
+                    })
+                    .disabled(authHelper.isLoading)
+                    .frame(maxWidth: 265)
+                    .padding()
+                    .background(.blue)
+                    .foregroundColor(.white.opacity(0.9))
+                    .font(.headline)
+                    .cornerRadius(12.0)
                     
                     NavigationLink {
                         ContentView()
