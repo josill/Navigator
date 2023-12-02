@@ -41,7 +41,7 @@ struct SlideUpCardCompact: View {
         .background(colorScheme == .dark ? Color.black : Color.white)
         .cornerRadius(10.0)
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.13), radius: 10.0)
-        .offset(x: (-UIScreen.main.bounds.width / 2.5) + 100, y: self.position.rawValue)
+        .offset(x: (-UIScreen.main.bounds.width / 2.5) + 120, y: self.position.rawValue)
         .animation(self.dragState.isDragging ? nil : .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
         .gesture(drag)
     }
