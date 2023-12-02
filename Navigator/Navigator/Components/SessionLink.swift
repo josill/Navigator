@@ -15,7 +15,7 @@ struct SessionLink: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text("\(session.sessionName)")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(.blue)
                     Text("Created at: \(formatDateString(session.createdAt))")
                         .foregroundColor(.white)
                     Text("Distance covered: \(String(format: "%.2f", session.distanceCovered))")
