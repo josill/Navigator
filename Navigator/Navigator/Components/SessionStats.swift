@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SessionStats: View {
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var locationManager: LocationManager
 
@@ -96,13 +98,15 @@ struct SessionStats: View {
                    Label("Waypoint", systemImage: "3.square.fill")
                }
                
-               ZStack {
-                   Compass()
-               }
-               .tag(Mode.compass)
-               .tabItem {
-                   Label("Compass", systemImage: "location.north.circle")
-                       .imageScale(.large)
+               if verticalSizeClass != .compact {
+                   ZStack {
+                       Compass()
+                   }
+                   .tag(Mode.compass)
+                   .tabItem {
+                       Label("Compass", systemImage: "location.north.circle")
+                           .imageScale(.large)
+                   }
                }
            }
            .frame(width: UIScreen.main.bounds.width, height: getHeightForCurrentTab())

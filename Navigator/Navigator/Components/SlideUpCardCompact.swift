@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SlideUpCard: View {
+struct SlideUpCardCompact: View {
     @Environment(\.colorScheme) var colorScheme
     @GestureState private var dragState = DragState.inactive
     @State var position = CardPosition.bottom
@@ -36,13 +36,12 @@ struct SlideUpCard: View {
                 
                 Spacer()
             }
-            
         }
-        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        .frame(width: UIScreen.main.bounds.width / 2.5, height: UIScreen.main.bounds.height)
         .background(colorScheme == .dark ? Color.black : Color.white)
         .cornerRadius(10.0)
         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.13), radius: 10.0)
-        .offset(y: self.position.rawValue + self.dragState.translation.height)
+        .offset(x: (-UIScreen.main.bounds.width / 2.5) + 100, y: self.position.rawValue)
         .animation(self.dragState.isDragging ? nil : .interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0))
         .gesture(drag)
     }
@@ -53,33 +52,32 @@ struct SlideUpCard: View {
         let positionAbove: CardPosition
         let positionBelow: CardPosition
         let closestPosition: CardPosition
-        
-        if cardTopEdgeLocation <= CardPosition.middle.rawValue {
+
+        if cardTopEdgeLocation <= CardPosition.top.rawValue {
             positionAbove = .top
-            positionBelow = .middle
+            positionBelow = .bottom
         } else {
-            positionAbove = .middle
+            positionAbove = .top
             positionBelow = .bottom
         }
-        
+
         if (cardTopEdgeLocation - positionAbove.rawValue) < (positionBelow.rawValue - cardTopEdgeLocation) { closestPosition = positionAbove }
         else { closestPosition = positionBelow }
-        
+
         if verticalDirection > 0 { self.position = positionBelow }
         else if verticalDirection < 0 { self.position = positionAbove}
         else { self.position = closestPosition }
     }
-    
+
     enum CardPosition: CGFloat {
-        case top = 100
-        case middle = 500
-        case bottom = 720
+        case top = 50
+        case bottom = 300
     }
-    
+
     enum DragState {
         case inactive
         case dragging(translation: CGSize)
-        
+
         var translation: CGSize {
             switch self {
             case .inactive:
@@ -88,7 +86,7 @@ struct SlideUpCard: View {
                 return translation
             }
         }
-        
+
         var isDragging: Bool {
             switch self {
             case .inactive:
@@ -101,5 +99,5 @@ struct SlideUpCard: View {
 }
 
 #Preview {
-    SlideUpCard()
+    SlideUpCardCompact()
 }

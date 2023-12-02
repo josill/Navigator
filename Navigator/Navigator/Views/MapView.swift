@@ -9,6 +9,8 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+    
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var notificationManager: NotificationManager
     @State private var userInitialLocation: MapCameraPosition = .userLocation(fallback: .automatic)
@@ -63,9 +65,13 @@ struct MapView: View {
                 }
                 .mapStyle(.standard(elevation: .realistic))
                 .navigationBarBackButtonHidden(true)
-                .padding(.top, 40)
-                
-                SlideUpCard()
+                .padding(.top, verticalSizeClass != .compact ? 40 : 10)
+
+                if verticalSizeClass == .compact {
+                    SlideUpCardCompact()
+                } else {
+                    SlideUpCard()
+                }
             }
         }
     }
