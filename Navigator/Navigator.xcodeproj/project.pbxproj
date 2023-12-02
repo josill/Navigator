@@ -15,6 +15,7 @@
 		FE7E55182B057E3900521F39 /* Marker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E55172B057E3900521F39 /* Marker.swift */; };
 		FE7E551C2B057F3B00521F39 /* CompassMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E551B2B057F3B00521F39 /* CompassMarker.swift */; };
 		FE7E551E2B05851D00521F39 /* CompassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E551D2B05851D00521F39 /* CompassManager.swift */; };
+		FE9ABD732B1BBC1E00C9AA0C /* SessionLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9ABD722B1BBC1E00C9AA0C /* SessionLink.swift */; };
 		FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA559962B027C4500D0E3D8 /* LoginView.swift */; };
 		FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA559982B0284BC00D0E3D8 /* RegisterView.swift */; };
 		FEA5599B2B0284E500D0E3D8 /* LoginOrRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA5599A2B0284E500D0E3D8 /* LoginOrRegisterView.swift */; };
@@ -67,6 +68,7 @@
 		FE7E55172B057E3900521F39 /* Marker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marker.swift; sourceTree = "<group>"; };
 		FE7E551B2B057F3B00521F39 /* CompassMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassMarker.swift; sourceTree = "<group>"; };
 		FE7E551D2B05851D00521F39 /* CompassManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassManager.swift; sourceTree = "<group>"; };
+		FE9ABD722B1BBC1E00C9AA0C /* SessionLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionLink.swift; sourceTree = "<group>"; };
 		FEA559962B027C4500D0E3D8 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FEA559982B0284BC00D0E3D8 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		FEA5599A2B0284E500D0E3D8 /* LoginOrRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOrRegisterView.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				FE75A38E2B07BDF600FE3757 /* SlideUpCard.swift */,
 				FE75A3902B07C2D100FE3757 /* Slider.swift */,
 				FEB3DAC52B1B965D00262CB7 /* SlideUpCardCompact.swift */,
+				FE9ABD722B1BBC1E00C9AA0C /* SessionLink.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				FEBD5CB22B0D3C75002E9936 /* MapHelper.swift in Sources */,
 				FE75A38F2B07BDF600FE3757 /* SlideUpCard.swift in Sources */,
 				FE7E551E2B05851D00521F39 /* CompassManager.swift in Sources */,
+				FE9ABD732B1BBC1E00C9AA0C /* SessionLink.swift in Sources */,
 				FEA559A32B02D62A00D0E3D8 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

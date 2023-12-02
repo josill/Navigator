@@ -16,7 +16,6 @@ struct SessionsView: View {
         Session(sessionId: UUID(), userId: UUID(), sessionName: "Session 3", createdAt: Date(), distanceCovered: 8.2, timeElapsed: 3000, averageSpeed: 4.0, checkPoints: [], wayPoints: [], locations: []),
         Session(sessionId: UUID(), userId: UUID(), sessionName: "Session 4", createdAt: Date(), distanceCovered: 20.1, timeElapsed: 6000, averageSpeed: 6.7, checkPoints: [], wayPoints: [], locations: []),
         Session(sessionId: UUID(), userId: UUID(), sessionName: "Session 5", createdAt: Date(), distanceCovered: 12.3, timeElapsed: 4200, averageSpeed: 5.8, checkPoints: [], wayPoints: [], locations: []),
-        // Add more sessions as needed
     ]
 
     var body: some View {
@@ -28,50 +27,13 @@ struct SessionsView: View {
                     .padding(.top, 20)
                 
                 List(sessions, id: \.sessionId) { session in
-                    NavigationLink(destination: MapView()) {
-                        EmptyView()
-                    }
-                    .background(.black)
-                    .listRowBackground(Color.black)
-                    .listRowSeparator(.hidden)
-                    .hidden()
-
-                    HStack {
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text("\(session.sessionName)")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                            Text("Created at: \(formatDateString(session.createdAt))")
-                                .foregroundColor(.white)
-                            Text("Distance covered: \(String(format: "%.2f", session.distanceCovered))")
-                                .foregroundColor(.white)
-                            Text("Time elapsed: \(session.timeElapsed)")
-                                .foregroundColor(.white)
-                            Text("Average speed: \(String(format: "%.2f", session.averageSpeed))")
-                                .foregroundColor(.white)
-                        }
-                        .padding(10)
-                        
-                        Image(systemName: "chevron.right")
-                        .foregroundColor(.blue)
-                        .font(.title)
-                    }
-                    .background(.black)
-                    .listRowBackground(Color.black)
-                    .listRowSeparatorTint(.blue)
-                    .offset(y: -25)
+                    SessionLink(session: session)
                 }
                .background(.black)
                .scrollContentBackground(.hidden)
             }
             .background(.black)
         }
-    }
-    
-    func formatDateString(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.mm.yyyy 'at' h:mm a"
-        return dateFormatter.string(from: date)
     }
 }
 
