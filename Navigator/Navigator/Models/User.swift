@@ -47,6 +47,7 @@ class User: Codable {
         self.email = email
         self.salt = salt
         self.passwordHash = passwordHash
+        self.sessions = []
                 
         if let jwtToken = jwtToken {
             self.jwtToken = jwtToken

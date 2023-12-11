@@ -21,6 +21,5 @@ struct NavigatorApp: App {
                 .environmentObject(locationManager)
                 .environmentObject(notificationManager)
         }
-        .modelContainer(for: User.self)
     }
 }
