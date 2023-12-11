@@ -39,7 +39,7 @@ class LocationManager: NSObject, ObservableObject {
         
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.distanceFilter = 1.0
+        // manager.distanceFilter = 10.0
         manager.startUpdatingLocation()
         self.setup()
     }
@@ -77,11 +77,8 @@ extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         
-        print(location)
         addUserLocation(location: location)
-        updateStatistics()
-        
-        calculateDistances()
+        calculateSpeeds()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
@@ -110,8 +107,13 @@ extension LocationManager: CLLocationManagerDelegate {
             if let previousLocation = userLocations?.last {
                 let distance = location.distance(from: CLLocation(latitude: previousLocation.latitude, longitude: previousLocation.longitude))
                 
-                if distance > 0 && distance <= 2.0 { userLocations!.append(location.coordinate)
+                if distance > 1 && distance <= 5.0 {
+                    print("added loc")
+                    
+                    userLocations!.append(location.coordinate)
+                    calculateDistances()
                 }
+                // userLocations!.append(location.coordinate)
             } else {
                 userLocations = [location.coordinate]
             }
@@ -144,6 +146,8 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func reset() {
+        trackingEnabled = false
+        
         timer?.invalidate()
         timer = nil
         
@@ -160,10 +164,10 @@ extension LocationManager: CLLocationManagerDelegate {
         directLineFromWp = 0.0
     }
     
-    private func updateStatistics() {
-        calculateDistances()
-        calculateSpeeds()
-    }
+//    private func updateStatistics() {
+//        calculateDistances()
+//        calculateSpeeds()
+//    }
     
     private func calculateDistances() {
         guard let locations = userLocations, locations.count >= 2 else { return }
@@ -205,7 +209,6 @@ extension LocationManager: CLLocationManagerDelegate {
         if timer != nil {
             averageSpeed = (distanceCovered / sessionDurationSec) * 3.6
         }
-        
         
         if checkpoints.count > 0 {
             averageSpeedFromCp = (distanceFromCp / (sessionDurationSec - sessionDurationBeforeCp)) * 3.6

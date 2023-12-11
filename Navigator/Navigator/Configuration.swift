@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 struct Configuration {
     let baseUrl = "https://sportmap.akaver.com"

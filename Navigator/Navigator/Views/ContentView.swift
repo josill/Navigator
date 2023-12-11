@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        // LoginOrRegisterView()
+         LoginOrRegisterView()
         // MapView()
-        SessionsView()
+//        SessionsView()
     }
 }
 

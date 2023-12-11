@@ -76,9 +76,6 @@ class NotificationManager: NSObject, ObservableObject {
     }
     
     func sendNotification(timeInterval: Double = 10, title: String, body: String) {
-        print("sendNotification")
-        print("notifications allowed: \(notificationsAllowed)")
-
         let id = "1"
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
 
