@@ -12,6 +12,7 @@ import SwiftData
 class Session: Codable {
     var sessionId : UUID
     var sessionName: String
+    var sessionDescription: String
     var createdAt: Date
     var distanceCovered: Double
     var timeElapsed: Double
@@ -27,6 +28,7 @@ class Session: Codable {
     enum CodingKeys: String, CodingKey {
         case sessionId
         case sessionName
+        case sessionDescription
         case createdAt
         case distanceCovered
         case timeElapsed
@@ -38,9 +40,10 @@ class Session: Codable {
     }
     
     init(
-        sessionId: UUID, 
+        sessionId: UUID = UUID(), 
         sessionName: String,
-        createdAt: Date,
+        sessionDescription: String,
+        createdAt: Date = Date(),
         distanceCovered: Double,
         timeElapsed: Double,
         averageSpeed: Double,
@@ -50,6 +53,7 @@ class Session: Codable {
     ) {
         self.sessionId = sessionId
         self.sessionName = sessionName
+        self.sessionDescription = sessionDescription
         self.createdAt = createdAt
         self.distanceCovered = distanceCovered
         self.timeElapsed = timeElapsed
@@ -63,6 +67,7 @@ class Session: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         sessionId = try container.decode(UUID.self, forKey: .sessionId)
         sessionName = try container.decode(String.self, forKey: .sessionName)
+        sessionDescription = try container.decode(String.self, forKey: .sessionDescription)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
         distanceCovered = try container.decode(Double.self, forKey: .distanceCovered)
         timeElapsed = try container.decode(Double.self, forKey: .timeElapsed)
@@ -76,6 +81,7 @@ class Session: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(sessionId, forKey: .sessionId)
         try container.encode(sessionName, forKey: .sessionName)
+        try container.encode(sessionDescription, forKey: .sessionDescription)
         try container.encode(createdAt, forKey: .createdAt)
         try container.encode(distanceCovered, forKey: .distanceCovered)
         try container.encode(averageSpeed, forKey: .averageSpeed)

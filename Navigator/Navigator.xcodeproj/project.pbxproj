@@ -39,6 +39,7 @@
 		FEC07DC92B12750D004976D7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DC82B12750D004976D7 /* User.swift */; };
 		FEE26AC52B1353B200FEEDBD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE26AC42B1353B200FEEDBD /* NotificationManager.swift */; };
 		FEE26AC72B13562600FEEDBD /* NotificationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE26AC62B13562600FEEDBD /* NotificationRequestView.swift */; };
+		FEE3023B2B27DE4B00BF48CB /* CreateSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE3023A2B27DE4A00BF48CB /* CreateSessionView.swift */; };
 		FEEA24912B160220001D1981 /* AuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEA24902B160220001D1981 /* AuthenticationHelper.swift */; };
 		FEEA24932B16067F001D1981 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEA24922B16067F001D1981 /* Configuration.swift */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,7 @@
 		FEE26AC42B1353B200FEEDBD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		FEE26AC62B13562600FEEDBD /* NotificationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestView.swift; sourceTree = "<group>"; };
 		FEE26AC82B135F1500FEEDBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FEE3023A2B27DE4A00BF48CB /* CreateSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionView.swift; sourceTree = "<group>"; };
 		FEEA24902B160220001D1981 /* AuthenticationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelper.swift; sourceTree = "<group>"; };
 		FEEA24922B16067F001D1981 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +155,7 @@
 				FEA5599C2B02C35200D0E3D8 /* MapView.swift */,
 				FEE26AC62B13562600FEEDBD /* NotificationRequestView.swift */,
 				FEB3DAC72B1BA0E900262CB7 /* SessionsView.swift */,
+				FEE3023A2B27DE4A00BF48CB /* CreateSessionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				FEC07DC52B1272A1004976D7 /* Session.swift in Sources */,
 				FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */,
 				FE72502F2B064F4000068114 /* SessionControls.swift in Sources */,
+				FEE3023B2B27DE4B00BF48CB /* CreateSessionView.swift in Sources */,
 				FEA5599B2B0284E500D0E3D8 /* LoginOrRegisterView.swift in Sources */,
 				FE75A3912B07C2D100FE3757 /* Slider.swift in Sources */,
 				FEBE74532AF4E317005A98C0 /* NavigatorApp.swift in Sources */,

@@ -22,8 +22,12 @@ class AuthenticationHelper: ObservableObject {
     @Published var passwordError = false
     @Published var passwordsError = false
     
-    @Published var registerSuccessful = false;
-    @Published var loginSuccessful = false;
+    @Published var sessionNameError = false
+    @Published var sessionDescriptionError = false
+    
+    @Published var registerSuccessful = false
+    @Published var loginSuccessful = false
+    @Published var createSessionSuccessful = false
     
     func validateNames(firstName: String, lastName: String) -> Bool {
         let firstNameCorrect = firstName.count > 3
@@ -78,28 +82,6 @@ class AuthenticationHelper: ObservableObject {
         return passwordsCorrect
     }
     
-    //    func fetchUser(email: String) async throws -> [User] {
-    //        do {
-    //            
-    ////            let fetchDescriptor = FetchDescriptor(predicate: #Predicate { (user: User) in
-    ////                user.email == email
-    ////            })
-    ////            let fetchDescriptor = Query()
-    ////            let user = try self.context.fetch(fetchDescriptor)
-    //            @Query var users = Query<User>()
-    //            
-    //            user.forEach { user in
-    //                print("User ID: \(user.id)")
-    //            }
-    //            
-    //            print("user fetched")
-    //            return user
-    //        } catch {
-    //            print("Failed to fetch users: \(error)")
-    //            throw error
-    //        }
-    //    }
-    
     func register(firstName: String, lastName: String, email: String, password1: String, password2: String) async {
         isLoading = true
         
@@ -147,13 +129,13 @@ class AuthenticationHelper: ObservableObject {
                    let token = json["token"] as? String {
                     print("Token: \(token)")
                     
-                    registerSuccessful = true
                     dbService.saveUser(
                         firstName: firstName,
                         lastName: lastName,
                         email: email,
                         password: password1
                     )
+                    registerSuccessful = true
                 }
             } else {
                 print("HTTP Status Code: \(res.statusCode)")
@@ -220,11 +202,67 @@ class AuthenticationHelper: ObservableObject {
                    let token = json["token"] as? String {
                     print("Token: \(token)")
                     
-                    loginSuccessful = true
                     dbService.updateJwt(
                         email: email,
                         jwt: token
                     )
+                    loginSuccessful = true
+                }
+            } else {
+                print("HTTP Status Code: \(res.statusCode)")
+                
+                if let responseString = String(data: data, encoding: .utf8) {
+                    print("Response Data: \(responseString)")
+                    // Handle the error using the responseString
+                } else {
+                    print("Failed to convert response data to string.")
+                    // Handle the error appropriately
+                }
+                // Handle the error appropriately
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        isLoading = false
+    }
+    
+    func createSession(name: String, description: String) async {
+        isLoading = true
+        
+        let urlString = "\(config.baseUrl)/api/v1.0/GpsSessions"
+        let session = dbService.saveSession(
+            name: name,
+            description: description
+        )
+        
+        guard let url = URL(string: urlString) else {
+            print("unable to make string: \(urlString) to URL object")
+            return
+        }
+        guard let encoded = try? JSONEncoder().encode(session) else {
+            print("Failed to encode data: \(session)")
+            return
+        }
+        
+        var req = URLRequest(url: url)
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.httpMethod = "POST"
+        
+        do {
+            let (data, response) = try await URLSession.shared.upload(for: req, from: encoded)
+            
+            guard let res = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+            
+            if res.statusCode == 200 {
+                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let token = json["token"] as? String {
+                    print("Token: \(token)")
+                    
+                    createSessionSuccessful = true
                 }
             } else {
                 print("HTTP Status Code: \(res.statusCode)")

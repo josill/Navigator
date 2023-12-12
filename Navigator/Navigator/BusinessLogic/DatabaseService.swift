@@ -80,6 +80,31 @@ class DatabaseService: ObservableObject {
         }
     }
     
+    func saveSession(name: String, description: String) -> Session? {
+        let session = Session(
+            sessionName: name,
+            sessionDescription: description,
+            distanceCovered: 0,
+            timeElapsed: 0,
+            averageSpeed: 0,
+            checkPoints: [],
+            wayPoints: [],
+            locations: []
+        )
+        
+        context!.insert(session)
+        
+        do {
+            try context!.save()
+            
+            return session
+        } catch {
+            print("Error updating db: \(error)")
+        }
+        
+        return nil
+    }
+    
     func updateJwt(email: String, jwt: String) {
         var _: () = getAllUsers { users in
             for user in users {

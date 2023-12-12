@@ -17,10 +17,16 @@ struct SessionsView: View {
     private var currentUser = DatabaseService.shared.currentUser
     
     init() {
-        _sessions = Query(filter: #Predicate {
-            if searchText.isEmpty { return true }
-            else { return $0.sessionName.contains(searchText) }
-        }, sort: [SortDescriptor(\Session.createdAt)])
+        _sessions = Query(
+            filter: #Predicate {
+                if let user = $0.user {
+                    if user.email == currentUser!.email { return true }
+                    else { return false }
+                }
+                else { return false }
+            },
+            sort: [SortDescriptor(\Session.createdAt)]
+        )
         
     }
     
@@ -30,7 +36,11 @@ struct SessionsView: View {
                 Color.black.edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    Text("Your sessions, \(currentUser!.firstName):")
+                    VStack {
+                            Text("Your sessions")
+                                                        
+                            Text("\(currentUser?.firstName ?? "w")")
+                        }
                         .font(.largeTitle)
                         .foregroundColor(.white)
                         .padding(.top, 20)
