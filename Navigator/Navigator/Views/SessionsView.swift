@@ -14,7 +14,7 @@ struct SessionsView: View {
     @Query(sort: [SortDescriptor(\Session.createdAt)]) var sessions: [Session]
     @State private var searchText = ""
     private var currentUser = DatabaseService.shared.currentUser
-    private var context = DatabaseService.shared.context
+//    private var context = DatabaseService.shared.context
     
     init() {
         _sessions = Query(
@@ -60,15 +60,13 @@ struct SessionsView: View {
                         }
                         .padding(.bottom, 30)
                         
-                        NavigationLink {
-                            CreateSessionView()
-                        } label: {
+                    NavigationLink(destination: CreateSessionView()) {
                             Text("Create session")
                         }
                         .frame(maxWidth: 265)
                         .padding()
-                        .background(.blue)
-                        .foregroundColor(.white.opacity(0.9))
+                        .background(Color.blue)
+                        .foregroundColor(Color.white.opacity(0.9))
                         .font(.headline)
                         .cornerRadius(12.0)
                         
@@ -79,7 +77,7 @@ struct SessionsView: View {
                             ForEach(sessions) { session in
                                 SessionLink(session: session)
                             }
-                            .onDelete(perform: deleteSession)
+//                            .onDelete(perform: deleteSession)
                         }
                         .background(.black)
                         .scrollContentBackground(.hidden)
@@ -92,12 +90,12 @@ struct SessionsView: View {
         }
     }
     
-    func deleteSession(_ indexSet: IndexSet) {
-        for i in indexSet {
-            let session = sessions[i]
-            context!.delete(session)
-        }
-    }
+//    func deleteSession(_ indexSet: IndexSet) {
+//        for i in indexSet {
+//            let session = sessions[i]
+//            context!.delete(session)
+//        }
+//    }
 }
 
 #Preview {

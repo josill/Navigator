@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CreateSessionView: View {
     @ObservedObject var authHelper = AuthenticationHelper()
-    @Environment (\.modelContext) var modelContext
     
     @State private var sessionName = ""
     @State private var sessionDescription = ""
