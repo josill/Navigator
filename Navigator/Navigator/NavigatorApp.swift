@@ -21,5 +21,17 @@ struct NavigatorApp: App {
                 .environmentObject(locationManager)
                 .environmentObject(notificationManager)
         }
+        .modelContainer(for: [User.self, UserLocation.self, Session.self], onSetup: handleSetup)
+    }
+    
+    func handleSetup(result: Result<ModelContainer, Error>) {
+        switch result {
+        case .success(let modelContainer):
+            DispatchQueue.main.async {
+                self.dbService.setContext(modelContainer: modelContainer)
+            }
+        case .failure(let error):
+            print("Error: \(error.localizedDescription)")
+        }
     }
 }

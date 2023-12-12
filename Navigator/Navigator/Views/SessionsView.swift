@@ -9,12 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct SessionsView: View {
-    @Environment (\.modelContext) var modelContext
     
     @ObservedObject var authHelper = AuthenticationHelper()
     @Query(sort: [SortDescriptor(\Session.createdAt)]) var sessions: [Session]
     @State private var searchText = ""
     private var currentUser = DatabaseService.shared.currentUser
+    private var context = DatabaseService.shared.context
     
     init() {
         _sessions = Query(
@@ -27,7 +27,6 @@ struct SessionsView: View {
             },
             sort: [SortDescriptor(\Session.createdAt)]
         )
-        
     }
     
     var body: some View {
@@ -61,8 +60,10 @@ struct SessionsView: View {
                         }
                         .padding(.bottom, 30)
                         
-                        Button("New session") {
-                            print("create session")
+                        NavigationLink {
+                            CreateSessionView()
+                        } label: {
+                            Text("Create session")
                         }
                         .frame(maxWidth: 265)
                         .padding()
@@ -94,7 +95,7 @@ struct SessionsView: View {
     func deleteSession(_ indexSet: IndexSet) {
         for i in indexSet {
             let session = sessions[i]
-            modelContext.delete(session)
+            context!.delete(session)
         }
     }
 }
@@ -105,18 +106,7 @@ struct SessionsView: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Session.self, configurations: config)
         let context = ModelContext(container)
-//        let exampleSessions = [
-//            Session(sessionId: UUID(), userId: UUID(), sessionName: "Session 1", createdAt: Date(), distanceCovered: 10.5, timeElapsed: 3600, averageSpeed: 5.0, checkPoints: [], wayPoints: [], locations: []),
-//            Session(sessionId: UUID(), userId: UUID(), sessionName: "Session 2", createdAt: Date(), distanceCovered: 15.7, timeElapsed: 4500, averageSpeed: 7.0, checkPoints: [], wayPoints: [], locations: []),
-//            Session(sessionId: UUID(), userId: UUID(), sessionName: "Session 3", createdAt: Date(), distanceCovered: 8.2, timeElapsed: 3000, averageSpeed: 4.0, checkPoints: [], wayPoints: [], locations: []),
-//            Session(sessionId: UUID(), userId: UUID(), sessionName: "Session 4", createdAt: Date(), distanceCovered: 20.1, timeElapsed: 6000, averageSpeed: 6.7, checkPoints: [], wayPoints: [], locations: []),
-//            Session(sessionId: UUID(), userId: UUID(), sessionName: "Session 5", createdAt: Date(), distanceCovered: 12.3, timeElapsed: 4200, averageSpeed: 5.8, checkPoints: [], wayPoints: [], locations: [])
-//        ]
-//        context.insert(exampleSessions[0])
-//        context.insert(exampleSessions[1])
-//        context.insert(exampleSessions[2])
-//        context.insert(exampleSessions[3])
-//        context.insert(exampleSessions[4])
+        
         return SessionsView()
             .modelContainer(container)
     } catch {

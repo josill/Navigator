@@ -30,15 +30,22 @@ class DatabaseService: ObservableObject {
         }
     }
     
-    init() {
-        do {
-            print("init modelcontainer")
-            container = try ModelContainer(for: User.self, Session.self, UserLocation.self)
-            if let container = container {
-                context = ModelContext(container)
-            }
-        } catch {
-            print("Error setting up the database: \(error)")
+//    init() {
+//        do {
+//            print("init modelcontainer")
+//            if let container = container {
+//                context = ModelContext(container)
+//            }
+//        } catch {
+//            print("Error setting up the database: \(error)")
+//        }
+//    }
+    
+    func setContext(modelContainer: ModelContainer) {
+        container = modelContainer
+        
+        if let container = container {
+            context = ModelContext(container)
         }
     }
     

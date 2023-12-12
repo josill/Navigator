@@ -40,5 +40,5 @@ struct SessionLink: View {
 }
 
 #Preview {
-    SessionLink(session: Session(sessionId: UUID(), sessionName: "Sample Session", createdAt: Date(), distanceCovered: 10.5, timeElapsed: 3600, averageSpeed: 5.0, checkPoints: [], wayPoints: [], locations: []))
+    SessionLink(session: Session(sessionId: UUID(), sessionName: "Sample Session", sessionDescription: "bla bla", createdAt: Date(), distanceCovered: 10.5, timeElapsed: 3600, averageSpeed: 5.0, checkPoints: [], wayPoints: [], locations: []))
 }
