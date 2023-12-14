@@ -162,9 +162,6 @@ class AuthenticationHelper: ObservableObject {
         let emailCorrect = validateEmail(email: email)
         let passwordValid = validatePassword(password: password)
         
-        print(emailCorrect)
-        print(passwordValid)
-        
         if !emailCorrect && !passwordValid {
             isLoading = false
             return
@@ -227,13 +224,24 @@ class AuthenticationHelper: ObservableObject {
         isLoading = false
     }
     
+    func logOut() -> User? {
+        print("current user1 : \(dbService.currentUser)")
+        return dbService.removeCurrentUser()
+    }
+    
     func createSession(name: String, description: String) async {
         isLoading = true
         
+        if name == "" {
+            sessionNameError = true
+            isLoading = false
+            return
+        }
+        
         let urlString = "\(config.baseUrl)/api/v1.0/GpsSessions"
-        let session = dbService.saveSession(
-            name: name,
-            description: description
+        let session = Session(
+            sessionName: name,
+            sessionDescription: description
         )
         
         guard let url = URL(string: urlString) else {
@@ -245,8 +253,11 @@ class AuthenticationHelper: ObservableObject {
             return
         }
         
+        print("jwttoken is: " + (dbService.currentUser?.jwtToken)!)
+        
         var req = URLRequest(url: url)
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.setValue("Bearer \(String(describing: dbService.currentUser!.jwtToken))", forHTTPHeaderField: "Authorization")
         req.httpMethod = "POST"
         
         do {
@@ -261,6 +272,8 @@ class AuthenticationHelper: ObservableObject {
                 if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                    let token = json["token"] as? String {
                     print("Token: \(token)")
+                    
+                    dbService.saveSession(session: session) // TODO check if session was created successfully
                     
                     createSessionSuccessful = true
                 }

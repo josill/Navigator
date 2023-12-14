@@ -44,12 +44,12 @@ class Session: Codable {
         sessionName: String,
         sessionDescription: String,
         createdAt: Date = Date(),
-        distanceCovered: Double,
-        timeElapsed: Double,
-        averageSpeed: Double,
-        checkPoints: [UserLocation],
-        wayPoints: [UserLocation],
-        locations: [UserLocation]
+        distanceCovered: Double = 0,
+        timeElapsed: Double = 0,
+        averageSpeed: Double = 0,
+        checkPoints: [UserLocation] = [],
+        wayPoints: [UserLocation] = [],
+        locations: [UserLocation] = []
     ) {
         self.sessionId = sessionId
         self.sessionName = sessionName

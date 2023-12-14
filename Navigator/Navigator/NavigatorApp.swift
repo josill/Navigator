@@ -14,6 +14,17 @@ struct NavigatorApp: App {
     @StateObject var locationManager = LocationManager()
     @StateObject var notificationManager = NotificationManager()
     
+    let modelContainer: ModelContainer
+        
+        init() {
+            do {
+                modelContainer = try ModelContainer(for: User.self, UserLocation.self, Session.self)
+                dbService.setContext(modelContainer: modelContainer)
+            } catch {
+                fatalError("Could not initialize ModelContainer")
+            }
+        }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -21,7 +32,7 @@ struct NavigatorApp: App {
                 .environmentObject(locationManager)
                 .environmentObject(notificationManager)
         }
-        .modelContainer(for: [User.self, UserLocation.self, Session.self], onSetup: handleSetup)
+        .modelContainer(modelContainer)
     }
     
     func handleSetup(result: Result<ModelContainer, Error>) {

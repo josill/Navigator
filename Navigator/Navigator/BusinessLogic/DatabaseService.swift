@@ -30,17 +30,6 @@ class DatabaseService: ObservableObject {
         }
     }
     
-//    init() {
-//        do {
-//            print("init modelcontainer")
-//            if let container = container {
-//                context = ModelContext(container)
-//            }
-//        } catch {
-//            print("Error setting up the database: \(error)")
-//        }
-//    }
-    
     func setContext(modelContainer: ModelContainer) {
         container = modelContainer
         
@@ -87,18 +76,7 @@ class DatabaseService: ObservableObject {
         }
     }
     
-    func saveSession(name: String, description: String) -> Session? {
-        let session = Session(
-            sessionName: name,
-            sessionDescription: description,
-            distanceCovered: 0,
-            timeElapsed: 0,
-            averageSpeed: 0,
-            checkPoints: [],
-            wayPoints: [],
-            locations: []
-        )
-        
+    func saveSession(session: Session) -> Session? {
         context!.insert(session)
         
         do {
@@ -115,15 +93,33 @@ class DatabaseService: ObservableObject {
     func updateJwt(email: String, jwt: String) {
         var _: () = getAllUsers { users in
             for user in users {
-                if user.email == email {
+                if user.email.lowercased() == email.lowercased() {
                     user.jwtToken = jwt
                     self.currentUser = user
                     print("jwt updated successfully")
                 }
-                print(user)
+                print("jwt update user email: \(user.email) and our email: \(email)")
             }
-            print("All users: \(users)")
+            
+            print("jwt update, all users: \(users)")
         }
+    }
+    
+    func removeCurrentUser() -> User? {
+        if let user = currentUser {
+            context?.delete(user)
+            currentUser = nil
+            
+            do {
+                try context!.save()
+                
+                return user
+            } catch {
+                print("Error updating db: \(error)")
+            }
+        }
+        
+        return nil
     }
     
     func getUser(email: String, completion: @escaping (User?) -> Void) {

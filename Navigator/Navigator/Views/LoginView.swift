@@ -82,7 +82,7 @@ struct LoginView: View {
                     .hidden()
                     .navigationDestination(
                         isPresented: $authHelper.loginSuccessful) {
-                            SessionsView()
+                            MenuView()
                         }
                 }
             }

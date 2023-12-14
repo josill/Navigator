@@ -11,23 +11,32 @@ import SwiftData
 struct SessionsView: View {
     
     @ObservedObject var authHelper = AuthenticationHelper()
-    @Query(sort: [SortDescriptor(\Session.createdAt)]) var sessions: [Session]
-    @State private var searchText = ""
+    private var context = DatabaseService.shared.context
     private var currentUser = DatabaseService.shared.currentUser
-//    private var context = DatabaseService.shared.context
     
-    init() {
-        _sessions = Query(
-            filter: #Predicate {
-                if let user = $0.user {
-                    if user.email == currentUser!.email { return true }
-                    else { return false }
-                }
-                else { return false }
-            },
+    @Query(
+//        filter: #Predicate {
+//                guard let user = $0.user else {
+//                    return false
+//                }
+//
+//                return DatabaseService.shared.currentUser?.email == user.email
+//            },
             sort: [SortDescriptor(\Session.createdAt)]
-        )
-    }
+        ) var sessions: [Session]
+
+//    init() {
+//        _sessions = Query(
+//            filter: #Predicate {
+//                if let user = $0.user {
+//                    if user.email == currentUser!.email { return true }
+//                    else { return false }
+//                }
+//                else { return false }
+//            },
+//            sort: [SortDescriptor(\Session.createdAt)]
+//        )
+//    }
     
     var body: some View {
         NavigationStack {
@@ -38,7 +47,7 @@ struct SessionsView: View {
                     VStack {
                             Text("Your sessions")
                                                         
-                            Text("\(currentUser?.firstName ?? "w")")
+                            Text("\(currentUser?.firstName ?? "no current user")")
                         }
                         .font(.largeTitle)
                         .foregroundColor(.white)
@@ -77,7 +86,7 @@ struct SessionsView: View {
                             ForEach(sessions) { session in
                                 SessionLink(session: session)
                             }
-//                            .onDelete(perform: deleteSession)
+                            .onDelete(perform: deleteSession)
                         }
                         .background(.black)
                         .scrollContentBackground(.hidden)
@@ -86,16 +95,15 @@ struct SessionsView: View {
                 .background(.black)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .searchable(text: $searchText)
         }
     }
     
-//    func deleteSession(_ indexSet: IndexSet) {
-//        for i in indexSet {
-//            let session = sessions[i]
-//            context!.delete(session)
-//        }
-//    }
+    func deleteSession(_ indexSet: IndexSet) {
+        for i in indexSet {
+            let session = sessions[i]
+            context!.delete(session)
+        }
+    }
 }
 
 #Preview {
