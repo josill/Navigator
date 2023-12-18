@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NotificationRequestView: View {
     @State private var selectedDate = Date()
+    @State private var redirectToMenu = false
     let notify = NotificationManager()
     
     var body: some View {
@@ -51,7 +52,8 @@ struct NotificationRequestView: View {
                     .clipShape(Capsule())
                     
                     Button {
-                        // TODO: allow location later action
+                        redirectToMenu = true
+                        print("notify redirect: \(redirectToMenu)")
                     } label: {
                         Text("Maybe later")
                             .padding()
@@ -63,6 +65,11 @@ struct NotificationRequestView: View {
                     .padding(.horizontal, -32)
                     .background(.white)
                     .clipShape(Capsule())
+                    
+                    NavigationLink(destination: LoginOrRegisterView(), isActive: $redirectToMenu) {
+                        EmptyView()
+                    }
+                    .hidden()
                 }
                 .padding(32)
             }

@@ -10,7 +10,7 @@ import SwiftUI
 struct MenuView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var authHelper = AuthenticationHelper()
-    @State private var currentUser: User? = DatabaseService.shared.currentUser
+    @State private var firstName: String = DatabaseService.shared.currentUser?.firstName ?? ""
     @State private var isLogoutAlertPresented = false
     @State private var logoutSuccessful = false
     
@@ -32,7 +32,7 @@ struct MenuView: View {
                             Image(systemName: "person")
                                 .foregroundColor(.white)
                             
-                            Text("\(currentUser!.firstName)")
+                            Text(firstName)
                         }
                     }
                     .font(.largeTitle)
@@ -73,6 +73,11 @@ struct MenuView: View {
                                 .font(.headline)
                                 .cornerRadius(12.0)
                         }
+                        
+                        NavigationLink(destination: LoginOrRegisterView(), isActive: $logoutSuccessful) {
+                            EmptyView()
+                        }
+                        .hidden()
                     }
                     .background(.black)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -85,11 +90,7 @@ struct MenuView: View {
                 message: Text("Are you sure you want to log out?"),
                 primaryButton: .default(Text("Cancel")),
                 secondaryButton: .destructive(Text("Log Out")) {
-                    let logoutSuccessful = authHelper.logOut()
-                    
-                    if (logoutSuccessful != nil) {
-                        presentationMode.wrappedValue.dismiss()
-                    }
+                    logoutSuccessful = authHelper.logOut() != nil
                 }
             )
         }

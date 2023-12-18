@@ -16,40 +16,41 @@ class AuthenticationHelper: ObservableObject {
     
     @Published var isLoading = false
     
-    @Published var firstNameError = false
-    @Published var lastNameError = false
-    @Published var emailError = false
-    @Published var passwordError = false
-    @Published var passwordsError = false
+    @Published var firstNameError = ""
+    @Published var lastNameError = ""
+    @Published var emailError = ""
+    @Published var passwordError = ""
+    @Published var passwordsError = ""
+    
+    @Published var loginError = ""
+    @Published var registerError = ""
     
     @Published var sessionNameError = false
     @Published var sessionDescriptionError = false
     
-    @Published var registerSuccessful = false
-    @Published var loginSuccessful = false
     @Published var createSessionSuccessful = false
     
-    func validateNames(firstName: String, lastName: String) -> Bool {
+    func validateNames(_ firstName: String, _ lastName: String) -> Bool {
         let firstNameCorrect = firstName.count > 3
         let lastNameCorrect = lastName.count > 3
         
-        if firstNameCorrect { firstNameError = false }
-        else { firstNameError = true }
+        if firstNameCorrect { firstNameError = "" }
+        else { firstNameError = "First name is too short!" }
         
-        if lastNameCorrect { lastNameError = false }
-        else { lastNameError = true }
+        if lastNameCorrect { lastNameError = "" }
+        else { lastNameError = "Last name is too short!" }
         
         return firstNameCorrect && lastNameCorrect
     }
     
-    func validateEmail(email: String) -> Bool {
+    func validateEmail(_ email: String) -> Bool {
         let emailRegex = #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"#
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         
         let emailCorrect = emailPredicate.evaluate(with: email)
         
-        if (emailCorrect) { emailError = false }
-        else { emailError = true }
+        if (emailCorrect) { emailError = "" }
+        else { emailError = "Email is not valid!" }
         
         return emailCorrect
     }
@@ -62,36 +63,48 @@ class AuthenticationHelper: ObservableObject {
         return passwordPredicate.evaluate(with: password)
     }
     
-    func validatePassword(password: String) -> Bool {
-        let passwordCorrect = password.count > 3
+    func validatePassword(_ password: String) -> Bool {
+        let passwordCorrect = passwordMeetsRequirements(password)
         
-        if passwordCorrect { passwordError = false }
-        else { passwordError = true }
+        if passwordCorrect { passwordError = "" }
+        else { passwordError = """
+            Password doesnt contain:
+            - one lowercase letter
+            - one uppercase letter
+            - one number
+            - one symbol
+            """ }
         
         return passwordCorrect
     }
     
-    func validatePasswords(password1: String, password2: String) -> Bool {
+    func validatePasswords(_ password1: String, _ password2: String) -> Bool {
         let passwordsCorrect =
         password1 == password2 &&
-        passwordMeetsRequirements(password1)
+        validatePassword(password1)
         
-        if (passwordsCorrect) { passwordsError = false }
-        else { passwordsError = true }
+        if passwordsCorrect { passwordsError = "" }
+        else if password1 != password2 { passwordsError = "Passwords don't match!" }
         
         return passwordsCorrect
     }
     
-    func register(firstName: String, lastName: String, email: String, password1: String, password2: String) async {
+    func register(firstName: String, lastName: String, email: String, password1: String, password2: String) async -> User? {
         isLoading = true
-        
-        let namesCorrect = validateNames(firstName: firstName, lastName: lastName)
-        let emailCorrect = validateEmail(email: email)
-        let passwordsMatch = validatePasswords(password1: password1, password2: password2)
-        
-        if !namesCorrect || !emailCorrect || !passwordsMatch { 
+                
+        if !validateNames(firstName, lastName) {
             isLoading = false
-            return
+            return nil
+        }
+                
+        if !validateEmail(email) {
+            isLoading = false
+            return nil
+        }
+        
+        if !validatePasswords(password1, password2) {
+            isLoading = false
+            return nil
         }
         
         let urlString = "\(config.baseUrl)/api/v1.0/account/register"
@@ -103,12 +116,16 @@ class AuthenticationHelper: ObservableObject {
         ]
         
         guard let url = URL(string: urlString) else {
+            registerError = "Something went wrong!"
             print("unable to make string: \(urlString) to URL object")
-            return
+            isLoading = false
+            return nil
         }
         guard let encoded = try? JSONEncoder().encode(data) else {
+            registerError = "Something went wrong!"
             print("Failed to encode data: \(data)")
-            return
+            isLoading = false
+            return nil
         }
         
         var req = URLRequest(url: url)
@@ -119,8 +136,10 @@ class AuthenticationHelper: ObservableObject {
             let (data, response) = try await URLSession.shared.upload(for: req, from: encoded)
             
             guard let res = response as? HTTPURLResponse else {
+                registerError = "Something went wrong!"
                 print("Invalid response")
-                return
+                isLoading = false
+                return nil
             }
             
             if res.statusCode == 200 {
@@ -129,15 +148,19 @@ class AuthenticationHelper: ObservableObject {
                    let token = json["token"] as? String {
                     print("Token: \(token)")
                     
-                    dbService.saveUser(
+                    isLoading = false
+                    return dbService.saveUser(
                         firstName: firstName,
                         lastName: lastName,
                         email: email,
                         password: password1
                     )
-                    registerSuccessful = true
                 }
+            } else if res.statusCode == 404 {
+                registerError = "User with this email already exists!"
             } else {
+                registerError = "Something went wrong!"
+                
                 print("HTTP Status Code: \(res.statusCode)")
                 
                 if let responseString = String(data: data, encoding: .utf8) {
@@ -150,21 +173,25 @@ class AuthenticationHelper: ObservableObject {
                 // Handle the error appropriately
             }
         } catch {
+            registerError = "Something went wrong!"
             print("Error: \(error)")
         }
         
         isLoading = false
+        return nil
     }
     
-    func login(email: String, password: String) async {
+    func login(email: String, password: String) async -> User? {
         isLoading = true
         
-        let emailCorrect = validateEmail(email: email)
-        let passwordValid = validatePassword(password: password)
-        
-        if !emailCorrect && !passwordValid {
+        if !validateEmail(email) {
             isLoading = false
-            return
+            return nil
+        }
+        
+        if !validatePassword(password) {
+            isLoading = false
+            return nil
         }
         
         let urlString = "\(config.baseUrl)/api/v1.0/account/login"
@@ -174,12 +201,16 @@ class AuthenticationHelper: ObservableObject {
         ]
         
         guard let url = URL(string: urlString) else {
+            loginError = "Something went wrong!"
             print("unable to make string: \(urlString) to URL object")
-            return
+            isLoading = false
+            return nil
         }
         guard let encoded = try? JSONEncoder().encode(data) else {
+            loginError = "Something went wrong!"
             print("Failed to encode data: \(data)")
-            return
+            isLoading = false
+            return nil
         }
         
         var req = URLRequest(url: url)
@@ -190,8 +221,10 @@ class AuthenticationHelper: ObservableObject {
             let (data, response) = try await URLSession.shared.upload(for: req, from: encoded)
             
             guard let res = response as? HTTPURLResponse else {
+                loginError = "Something went wrong!"
                 print("Invalid response")
-                return
+                isLoading = false
+                return nil
             }
             
             if res.statusCode == 200 {
@@ -199,13 +232,27 @@ class AuthenticationHelper: ObservableObject {
                    let token = json["token"] as? String {
                     print("Token: \(token)")
                     
-                    dbService.updateJwt(
+                    isLoading = false
+                    
+                    // TODO: Handle when the user is registered in backend but not locally
+//                    dbService.getUser(email: email) { user in
+//                        if let foundUser != user {
+//                            return dbService.saveUser(
+//                                firstName: <#T##String#>,
+//                                lastName: <#T##String#>,
+//                                email: <#T##String#>,
+//                                password: <#T##String#>
+//                            )
+//                        }
+//                    }
+                    
+                    return dbService.updateJwt(
                         email: email,
                         jwt: token
                     )
-                    loginSuccessful = true
                 }
             } else {
+                loginError = "Wrong email or password!"
                 print("HTTP Status Code: \(res.statusCode)")
                 
                 if let responseString = String(data: data, encoding: .utf8) {
@@ -218,65 +265,79 @@ class AuthenticationHelper: ObservableObject {
                 // Handle the error appropriately
             }
         } catch {
+            loginError = "Something went wrong!"
             print("Error: \(error)")
         }
         
         isLoading = false
+        return nil
     }
     
     func logOut() -> User? {
-        print("current user1 : \(dbService.currentUser)")
         return dbService.removeCurrentUser()
     }
     
-    func createSession(name: String, description: String) async {
+    func createSession(name: String, description: String) async -> Session? {
         isLoading = true
         
         if name == "" {
             sessionNameError = true
             isLoading = false
-            return
+            return nil
+        } else if description == "" {
+            sessionDescriptionError = true
+            isLoading = false
+            return nil
         }
         
         let urlString = "\(config.baseUrl)/api/v1.0/GpsSessions"
-        let session = Session(
-            sessionName: name,
-            sessionDescription: description
-        )
+        let data = [
+            "name": name,
+            "description": description,
+            "gpsSession": "ok",
+            "paceMin": "420.0",
+            "paceMax": "600.0",
+        ]
         
         guard let url = URL(string: urlString) else {
             print("unable to make string: \(urlString) to URL object")
-            return
+            isLoading = false
+            return nil
         }
-        guard let encoded = try? JSONEncoder().encode(session) else {
-            print("Failed to encode data: \(session)")
-            return
+        guard let encoded = try? JSONEncoder().encode(data) else {
+            print("Failed to encode data: \(data)")
+            isLoading = false
+            return nil
         }
         
-        print("jwttoken is: " + (dbService.currentUser?.jwtToken)!)
+        print("encoded data: \(encoded)")
+                
+        guard let token = dbService.currentUser?.jwtToken else {
+            print("Failed to receive token: \(dbService.currentUser?.jwtToken)")
+            isLoading = false
+            return nil
+        }
         
         var req = URLRequest(url: url)
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        req.setValue("Bearer \(String(describing: dbService.currentUser!.jwtToken))", forHTTPHeaderField: "Authorization")
+        req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         req.httpMethod = "POST"
-        
+    
         do {
             let (data, response) = try await URLSession.shared.upload(for: req, from: encoded)
             
             guard let res = response as? HTTPURLResponse else {
                 print("Invalid response")
-                return
+                isLoading = false
+                return nil
             }
             
             if res.statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let token = json["token"] as? String {
-                    print("Token: \(token)")
-                    
-                    dbService.saveSession(session: session) // TODO check if session was created successfully
-                    
-                    createSessionSuccessful = true
-                }
+                let session = dbService.saveSession(session: Session(sessionName: name, sessionDescription: description))
+                
+                print("session created successfully")
+                isLoading = false
+                return session
             } else {
                 print("HTTP Status Code: \(res.statusCode)")
                 
@@ -294,6 +355,7 @@ class AuthenticationHelper: ObservableObject {
         }
         
         isLoading = false
+        return nil
     }
 }
 

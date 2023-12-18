@@ -22,10 +22,15 @@ struct CreateSessionView: View {
                 
                 VStack(spacing: 20) {
                     VStack {
-                        Text("Create session")
-                            .font(.title)
-                            .padding()
-                            .foregroundColor(.white.opacity(0.8))
+                        HStack {
+                            Image(systemName: "figure.hiking")
+                                .foregroundColor(.white)
+                            
+                            Text("Create session")
+                                .font(.title)
+                                .padding()
+                                .foregroundColor(.white.opacity(0.8))
+                        }
                         
                         TextField(
                             "Session name",

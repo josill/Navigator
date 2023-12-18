@@ -14,6 +14,8 @@ class Session: Codable {
     var sessionName: String
     var sessionDescription: String
     var createdAt: Date
+    var minSpeed: Double
+    var maxSpeed: Double
     var distanceCovered: Double
     var timeElapsed: Double
     var averageSpeed: Double
@@ -30,6 +32,8 @@ class Session: Codable {
         case sessionName
         case sessionDescription
         case createdAt
+        case minSpeed
+        case maxSpeed
         case distanceCovered
         case timeElapsed
         case averageSpeed
@@ -44,6 +48,8 @@ class Session: Codable {
         sessionName: String,
         sessionDescription: String,
         createdAt: Date = Date(),
+        minSpeed: Double = 60,
+        maxSpeed: Double = 600,
         distanceCovered: Double = 0,
         timeElapsed: Double = 0,
         averageSpeed: Double = 0,
@@ -55,6 +61,8 @@ class Session: Codable {
         self.sessionName = sessionName
         self.sessionDescription = sessionDescription
         self.createdAt = createdAt
+        self.minSpeed = minSpeed
+        self.maxSpeed = maxSpeed
         self.distanceCovered = distanceCovered
         self.timeElapsed = timeElapsed
         self.averageSpeed = averageSpeed
@@ -69,6 +77,8 @@ class Session: Codable {
         sessionName = try container.decode(String.self, forKey: .sessionName)
         sessionDescription = try container.decode(String.self, forKey: .sessionDescription)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
+        minSpeed = try container.decode(Double.self, forKey: .minSpeed)
+        maxSpeed = try container.decode(Double.self, forKey: .maxSpeed)
         distanceCovered = try container.decode(Double.self, forKey: .distanceCovered)
         timeElapsed = try container.decode(Double.self, forKey: .timeElapsed)
         averageSpeed = try container.decode(Double.self, forKey: .averageSpeed)
@@ -83,6 +93,8 @@ class Session: Codable {
         try container.encode(sessionName, forKey: .sessionName)
         try container.encode(sessionDescription, forKey: .sessionDescription)
         try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(minSpeed, forKey: .minSpeed)
+        try container.encode(maxSpeed, forKey: .maxSpeed)
         try container.encode(distanceCovered, forKey: .distanceCovered)
         try container.encode(averageSpeed, forKey: .averageSpeed)
         try container.encode(checkPoints, forKey: .checkPoints)

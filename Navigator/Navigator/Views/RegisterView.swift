@@ -16,6 +16,8 @@ struct RegisterView: View {
     @State private var password1 = ""
     @State private var password2 = ""
     
+    @State private var registerSuccessful = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -25,10 +27,16 @@ struct RegisterView: View {
                 
                 VStack(spacing: 20) {
                     VStack {
-                        Text("Create account")
-                            .font(.title)
-                            .padding()
-                            .foregroundColor(.white.opacity(0.8))
+                        HStack {
+                            Image(systemName: "pencil.and.list.clipboard")
+                                .foregroundColor(.white)
+                                .font(.title2)
+                            
+                            Text("Create account")
+                                .font(.title)
+                                .padding()
+                                .foregroundColor(.white.opacity(0.8))
+                        }
                         
                         TextField(
                             "First name",
@@ -39,7 +47,7 @@ struct RegisterView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(authHelper.firstNameError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.firstNameError != "" ? 3 : 0))
                         
                         TextField(
                             "Last name",
@@ -50,7 +58,7 @@ struct RegisterView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(authHelper.lastNameError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.lastNameError != "" ? 3 : 0))
                         
                         TextField(
                             "Email",
@@ -61,7 +69,7 @@ struct RegisterView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(authHelper.emailError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.emailError != "" ? 3 : 0))
                         
                         SecureField(
                             "Password",
@@ -72,7 +80,7 @@ struct RegisterView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(authHelper.passwordsError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.passwordsError != "" ? 3 : 0))
                         
                         SecureField(
                             "Password again",
@@ -83,18 +91,18 @@ struct RegisterView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(authHelper.passwordsError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.passwordsError != "" ? 3 : 0))
                     }
                     
                     Button(action: {
                         Task {
-                            await authHelper.register(
+                            registerSuccessful = await authHelper.register(
                                 firstName: firstName,
                                 lastName: lastName,
                                 email: email,
                                 password1: password1,
                                 password2: password2
-                            )
+                            ) != nil ? true : false
                         }
                     }, label: {
                         if authHelper.isLoading {
@@ -112,6 +120,24 @@ struct RegisterView: View {
                     .font(.headline)
                     .cornerRadius(12.0)
                     
+                    VStack {
+                        if authHelper.firstNameError != "" {
+                            Text(authHelper.firstNameError)
+                        } else if authHelper.lastNameError != "" {
+                            Text(authHelper.lastNameError)
+                        } else if authHelper.emailError != "" {
+                            Text(authHelper.emailError)
+                        } else if authHelper.passwordError != "" {
+                            Text(authHelper.passwordError)
+                        } else if authHelper.passwordsError != "" {
+                            Text(authHelper.passwordsError)
+                        } else if authHelper.registerError != "" {
+                            Text(authHelper.registerError)
+                        }
+                    }
+                    .foregroundColor(.red)
+                    .padding(.top, 40)
+                    
                     NavigationLink {
                         ContentView()
                     } label: {
@@ -119,7 +145,7 @@ struct RegisterView: View {
                     }
                     .hidden()
                     .navigationDestination(
-                        isPresented: $authHelper.registerSuccessful) {
+                        isPresented: $registerSuccessful) {
                             LoginView()
                         }
                 }

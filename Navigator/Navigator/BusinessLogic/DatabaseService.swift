@@ -55,7 +55,7 @@ class DatabaseService: ObservableObject {
         lastName: String,
         email: String,
         password: String
-    ) {
+    ) -> User? {
         let salt = generateSalt()
         let passwordHash = hashPassword(password: password, salt: salt)
         
@@ -71,9 +71,13 @@ class DatabaseService: ObservableObject {
         
         do {
             try context!.save()
+            
+            return user
         } catch {
-            print("Error updating db: \(error)")
+            print("Error updating db in saveUser method: \(error)")
         }
+        
+        return nil
     }
     
     func saveSession(session: Session) -> Session? {
@@ -84,25 +88,30 @@ class DatabaseService: ObservableObject {
             
             return session
         } catch {
-            print("Error updating db: \(error)")
+            print("Error updating db in saveSession method: \(error)")
         }
         
         return nil
     }
     
-    func updateJwt(email: String, jwt: String) {
-        var _: () = getAllUsers { users in
+    func updateJwt(email: String, jwt: String) -> User? {
+        var updatedUser: User?
+        
+        getAllUsers { users in
             for user in users {
                 if user.email.lowercased() == email.lowercased() {
                     user.jwtToken = jwt
                     self.currentUser = user
-                    print("jwt updated successfully")
+                    print("JWT updated for user: \(user.email)")
+                    print("currentUser: \(self.currentUser)")
+                    updatedUser = user
+                    break
                 }
-                print("jwt update user email: \(user.email) and our email: \(email)")
+                print("JWT update user email: \(user.email) and our email: \(email)")
             }
-            
-            print("jwt update, all users: \(users)")
         }
+        
+        return updatedUser
     }
     
     func removeCurrentUser() -> User? {

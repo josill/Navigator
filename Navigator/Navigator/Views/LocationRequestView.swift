@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LocationRequestView: View {
     @EnvironmentObject var locationManager: LocationManager
+    
+    @State private var redirectToMenu = false
 
     var body: some View {
         ZStack {
@@ -50,7 +52,8 @@ struct LocationRequestView: View {
                     .clipShape(Capsule())
                     
                     Button {
-                        // TODO: allow location later action
+                        redirectToMenu = true
+                        print("location redirect: \(redirectToMenu)")
                     } label: {
                         Text("Maybe later")
                             .padding()
@@ -62,6 +65,11 @@ struct LocationRequestView: View {
                     .padding(.horizontal, -32)
                     .background(.white)
                     .clipShape(Capsule())
+                    
+                    NavigationLink(destination: LoginOrRegisterView(), isActive: $redirectToMenu) {
+                        EmptyView()
+                    }
+                    .hidden()
                 }
                 .padding(32)
             }

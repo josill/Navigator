@@ -12,6 +12,8 @@ struct LoginView: View {
     
     @State private var email = ""
     @State private var password = ""
+    
+    @State private var loginSuccessful = false
 
     var body: some View {
         NavigationStack {
@@ -22,10 +24,15 @@ struct LoginView: View {
                 
                 VStack(spacing: 20) {
                     VStack {
-                        Text("Login")
-                            .font(.title)
-                            .padding()
-                            .foregroundColor(.white.opacity(0.8))
+                        HStack {
+                            Image(systemName: "link")
+                                .foregroundColor(.white)
+                            
+                            Text("Login")
+                                .font(.title)
+                                .padding()
+                                .foregroundColor(.white.opacity(0.8))
+                        }
                         
                         TextField(
                             "Email",
@@ -37,7 +44,7 @@ struct LoginView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(authHelper.emailError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.emailError != "" ? 3 : 0))
                         
                         SecureField(
                             "Password",
@@ -48,15 +55,15 @@ struct LoginView: View {
                             .background(.white)
                             .foregroundColor(.black)
                             .cornerRadius(10)
-                            .border(.red, width: CGFloat(authHelper.passwordError ? 3 : 0))
+                            .border(.red, width: CGFloat(authHelper.passwordError != "" ? 3 : 0))
                     }
                     
                     Button(action: {
                         Task {
-                            await authHelper.login(
+                            loginSuccessful = await authHelper.login(
                                 email: email,
                                 password: password
-                            )
+                            ) != nil ? true : false
                         }
                     }, label: {
                         if authHelper.isLoading {
@@ -74,6 +81,18 @@ struct LoginView: View {
                     .font(.headline)
                     .cornerRadius(12.0)
                     
+                    VStack {
+                        if authHelper.emailError != "" {
+                            Text(authHelper.emailError)
+                        } else if authHelper.passwordError != "" {
+                            Text(authHelper.passwordError)
+                        } else if authHelper.loginError != "" {
+                            Text(authHelper.loginError)
+                        }
+                    }
+                    .foregroundColor(.red)
+                    .padding(.top, 40)
+                    
                     NavigationLink() {
                         ContentView()
                     } label: {
@@ -81,7 +100,7 @@ struct LoginView: View {
                     }
                     .hidden()
                     .navigationDestination(
-                        isPresented: $authHelper.loginSuccessful) {
+                        isPresented: $loginSuccessful) {
                             MenuView()
                         }
                 }

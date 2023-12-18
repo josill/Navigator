@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var currentUser = DatabaseService.shared.currentUser
-
+    
     var body: some View {
         if currentUser == nil {
-            LoginOrRegisterView()
+            MapView()
+            // LoginOrRegisterView()
         } else {
             MenuView()
         }
