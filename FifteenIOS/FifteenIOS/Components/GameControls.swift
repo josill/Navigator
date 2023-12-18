@@ -21,6 +21,7 @@ struct GameControls: View {
                     }) {
                         Image(systemName: "circle.lefthalf.filled")
                             .foregroundColor(.white)
+                            .font(.title2)
                     }
                 }
                 .padding(.horizontal, 80)
@@ -30,9 +31,11 @@ struct GameControls: View {
                     Spacer()
                     Text("Time:")
                         .foregroundColor(.white)
+                        .font(.title2)
                     Spacer()
                     Text("Moves:")
                         .foregroundColor(.white)
+                        .font(.title2)
                     Spacer()
                 }
                 
@@ -42,9 +45,7 @@ struct GameControls: View {
                     Button(action: {
                         
                     }) {
-                        HStack(spacing: 20) {
-                            Image(systemName: "arrowshape.turn.up.backward")
-                        }
+                        Image(systemName: "arrowshape.turn.up.backward")
                     }
                     .frame(maxWidth: 50)
                     .padding()
@@ -56,9 +57,9 @@ struct GameControls: View {
                     Spacer()
                     
                     Button(action: {
-                        Image(systemName: "play")
+                        
                     }) {
-                        Text("Undo")
+                        Image(systemName: "play")
                     }
                     .frame(maxWidth: 50)
                     .padding()
@@ -69,7 +70,9 @@ struct GameControls: View {
                     
                     Spacer()
                 }
+                .padding(.top, 20)
             }
+            .padding(.top, 80)
         }
     }
 }

@@ -8,40 +8,39 @@
 import SwiftUI
 
 struct GameBoard: View {
-    var matrix: [[Int]] = {
-            var matrix: [[Int]] = []
-            for row in 0..<4 {
-                var rowArray: [Int] = []
-                for column in 0..<4 {
-                    let number = row * 4 + column
-                    rowArray.append(number)
-                }
-                matrix.append(rowArray)
-            }
-            return matrix
-        }()
+    @StateObject private var gameBrain = GameBrain()
     
     var body: some View {
         ZStack {
             Color
                 .black
             
-            VStack(spacing: 1) {
+            VStack(spacing: 5) {
                 ForEach(0..<4) { row in
-                    HStack(spacing: 1) {
-                        ForEach(0..<4) { tile in
+                    HStack(spacing: 5) {
+                        ForEach(0..<4) { col in
+                            let tileValue = gameBrain.tiles[row][col]
+                            let correctValue = row * 4 + col + 1
+                            
                             Button(action: {
-                                print("tapped \(matrix[row][tile])")
+                                withAnimation {
+                                    gameBrain.handleTap(
+                                        row: row,
+                                        col: col
+                                    )
+                                }
                             }) {
-                                Text("\(matrix[row][tile])")
+                                if tileValue != 0 {
+                                    Text("\(tileValue)")
+                                }
                             }
                             .font(.title)
                             .padding()
                             .foregroundColor(.white)
                             .cornerRadius(0)
                             .frame(width: 85, height: 85)
+                            .background(tileValue == 0 ? .white : correctValue == tileValue ? .green : .cyan)
                         }
-                        .background(.cyan)
                     }
                 }
             }

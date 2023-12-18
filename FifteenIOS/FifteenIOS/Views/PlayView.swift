@@ -11,10 +11,10 @@ struct PlayView: View {
     var body: some View {
         VStack(spacing: 0) {
             GameControls()
-                .frame(height: UIScreen.main.bounds.height / 4)
+                .frame(height: UIScreen.main.bounds.height / 3)
             
             GameBoard()
-                .frame(height: (UIScreen.main.bounds.height / 4) * 3)
+                .frame(height: (UIScreen.main.bounds.height / 3) * 2)
         }
         .ignoresSafeArea()
     }

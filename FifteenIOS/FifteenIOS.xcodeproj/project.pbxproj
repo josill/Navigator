@@ -18,6 +18,7 @@
 		FE51C4772B30A79A00115F70 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE51C4762B30A79A00115F70 /* PlayView.swift */; };
 		FE51C47B2B30AC4D00115F70 /* GameControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE51C47A2B30AC4D00115F70 /* GameControls.swift */; };
 		FE51C47D2B30AC8000115F70 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE51C47C2B30AC8000115F70 /* GameBoard.swift */; };
+		FEFC62692B30DBBC00BD2BAC /* GameBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFC62682B30DBBC00BD2BAC /* GameBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		FE51C4762B30A79A00115F70 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		FE51C47A2B30AC4D00115F70 /* GameControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameControls.swift; sourceTree = "<group>"; };
 		FE51C47C2B30AC8000115F70 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
+		FEFC62682B30DBBC00BD2BAC /* GameBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +108,6 @@
 				FE51C4732B30A5F900115F70 /* BusinessLogic */,
 				FE51C4722B30A5F300115F70 /* Views */,
 				FE51C4482B30A46D00115F70 /* FifteenIOSApp.swift */,
-				FE51C44A2B30A46D00115F70 /* ContentView.swift */,
 				FE51C44C2B30A46E00115F70 /* Assets.xcassets */,
 				FE51C44E2B30A46E00115F70 /* Preview Content */,
 			);
@@ -141,6 +142,7 @@
 		FE51C4722B30A5F300115F70 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FE51C44A2B30A46D00115F70 /* ContentView.swift */,
 				FE51C4742B30A60F00115F70 /* MenuView.swift */,
 				FE51C4762B30A79A00115F70 /* PlayView.swift */,
 			);
@@ -150,6 +152,7 @@
 		FE51C4732B30A5F900115F70 /* BusinessLogic */ = {
 			isa = PBXGroup;
 			children = (
+				FEFC62682B30DBBC00BD2BAC /* GameBrain.swift */,
 			);
 			path = BusinessLogic;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 			files = (
 				FE51C44B2B30A46D00115F70 /* ContentView.swift in Sources */,
 				FE51C47B2B30AC4D00115F70 /* GameControls.swift in Sources */,
+				FEFC62692B30DBBC00BD2BAC /* GameBrain.swift in Sources */,
 				FE51C4752B30A60F00115F70 /* MenuView.swift in Sources */,
 				FE51C4772B30A79A00115F70 /* PlayView.swift in Sources */,
 				FE51C47D2B30AC8000115F70 /* GameBoard.swift in Sources */,
@@ -462,6 +466,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FifteenIOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 2US4L4HG86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -490,6 +495,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FifteenIOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 2US4L4HG86;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

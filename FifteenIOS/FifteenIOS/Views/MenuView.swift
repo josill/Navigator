@@ -20,7 +20,7 @@ struct MenuView: View {
                 }
                 .font(.title)
                 
-                NavigationLink(destination: PlayView()) {
+                NavigationLink(destination: PlayView().navigationBarBackButtonHidden()) {
                     Text("Play")
                         .padding()
                         .foregroundColor(.white)
