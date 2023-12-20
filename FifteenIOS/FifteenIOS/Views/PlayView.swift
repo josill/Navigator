@@ -8,15 +8,29 @@
 import SwiftUI
 
 struct PlayView: View {
+    @Environment(\.verticalSizeClass) var orientation
+    
+    @StateObject private var gameBrain = GameBrain()
+
     var body: some View {
-        VStack(spacing: 0) {
-            GameControls()
-                .frame(height: UIScreen.main.bounds.height / 3)
-            
-            GameBoard()
-                .frame(height: (UIScreen.main.bounds.height / 3) * 2)
+        if orientation == .compact {
+            HStack {
+                GameControls(gameBrain: gameBrain)
+                    .frame(height: UIScreen.main.bounds.height / 3)
+                
+                GameBoard(gameBrain: gameBrain)
+                    .frame(height: (UIScreen.main.bounds.height / 3) * 2)
+            }
+        } else {
+            VStack(spacing: 0) {
+                GameControls(gameBrain: gameBrain)
+                    .frame(height: UIScreen.main.bounds.height / 3)
+                
+                GameBoard(gameBrain: gameBrain)
+                    .frame(height: (UIScreen.main.bounds.height / 3) * 2)
+            }
+            .ignoresSafeArea()
         }
-        .ignoresSafeArea()
     }
 }
 

@@ -15,16 +15,19 @@ struct MenuView: View {
                 
                 HStack(spacing: 10) {
                     Image(systemName: "figure")
+                        .foregroundColor(.text)
                     Text("Welcome to Fifteen")
+                        .foregroundColor(.text)
                     Image(systemName: "figure")
+                        .foregroundColor(.text)
                 }
                 .font(.title)
                 
                 NavigationLink(destination: PlayView().navigationBarBackButtonHidden()) {
                     Text("Play")
                         .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
+                        .foregroundColor(.text)
+                        .background(.button)
                         .cornerRadius(10)
                 }
                 

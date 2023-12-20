@@ -8,30 +8,31 @@
 import SwiftUI
 
 struct GameBoard: View {
-    @StateObject private var gameBrain = GameBrain()
-    
+    @StateObject var gameBrain: GameBrain
+
     var body: some View {
         ZStack {
             Color
-                .black
+                .background
             
             VStack(spacing: 5) {
-                ForEach(0..<4) { row in
+                ForEach(0..<4, id: \.self) { row in
                     HStack(spacing: 5) {
-                        ForEach(0..<4) { col in
+                        ForEach(0..<4, id: \.self) { col in
                             let tileValue = gameBrain.tiles[row][col]
                             let correctValue = row * 4 + col + 1
                             
                             Button(action: {
                                 withAnimation {
                                     gameBrain.handleTap(
-                                        row: row,
-                                        col: col
+                                        row,
+                                        col
                                     )
                                 }
                             }) {
                                 if tileValue != 0 {
                                     Text("\(tileValue)")
+                                        .foregroundColor(.text)
                                 }
                             }
                             .font(.title)
@@ -39,7 +40,7 @@ struct GameBoard: View {
                             .foregroundColor(.white)
                             .cornerRadius(0)
                             .frame(width: 85, height: 85)
-                            .background(tileValue == 0 ? .white : correctValue == tileValue ? .green : .cyan)
+                            .background(tileValue == 0 ? .tileSecondary : correctValue == tileValue ? .tileTertiary : .tileMain)
                         }
                     }
                 }
@@ -48,6 +49,6 @@ struct GameBoard: View {
     }
 }
 
-#Preview {
-    GameBoard()
-}
+//#Preview {
+//    GameBoard()
+//}

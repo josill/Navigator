@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct GameControls: View {
+    @AppStorage("isDarkMode") private var isDarkMode = false
+    
+    @StateObject var gameBrain: GameBrain
+    
     var body: some View {
         ZStack {
-            Color.black
+            Color.background
             
             VStack {
                 HStack {
                     Spacer()
                     
                     Button(action: {
-                        
+                        isDarkMode.toggle()
                     }) {
                         Image(systemName: "circle.lefthalf.filled")
-                            .foregroundColor(.white)
+                            .foregroundColor(.text)
                             .font(.title2)
                     }
                 }
@@ -30,11 +34,11 @@ struct GameControls: View {
                 HStack {
                     Spacer()
                     Text("Time:")
-                        .foregroundColor(.white)
+                        .foregroundColor(.text)
                         .font(.title2)
                     Spacer()
                     Text("Moves:")
-                        .foregroundColor(.white)
+                        .foregroundColor(.text)
                         .font(.title2)
                     Spacer()
                 }
@@ -43,28 +47,29 @@ struct GameControls: View {
                     Spacer()
                     
                     Button(action: {
-                        
+                        gameBrain.undo()
                     }) {
                         Image(systemName: "arrowshape.turn.up.backward")
                     }
                     .frame(maxWidth: 50)
                     .padding()
-                    .background(.blue)
-                    .foregroundColor(.white.opacity(0.9))
+                    .background(.button)
+                    .foregroundColor(.text)
                     .font(.headline)
                     .cornerRadius(12.0)
+                    .disabled(gameBrain.undoDisabled)
                     
                     Spacer()
                     
                     Button(action: {
-                        
+                        gameBrain.restart()
                     }) {
                         Image(systemName: "play")
                     }
                     .frame(maxWidth: 50)
                     .padding()
-                    .background(.blue)
-                    .foregroundColor(.white.opacity(0.9))
+                    .background(.button)
+                    .foregroundColor(.text)
                     .font(.headline)
                     .cornerRadius(12.0)
                     
@@ -77,6 +82,6 @@ struct GameControls: View {
     }
 }
 
-#Preview {
-    GameControls()
-}
+//#Preview {
+//    GameControls()
+//}
