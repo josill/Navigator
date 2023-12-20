@@ -14,18 +14,22 @@ class DatabaseService: ObservableObject {
     var container: ModelContainer?
     var context: ModelContext?
     
+    @Published var currentUserStored: User?
+    
+    init() {
+        self.currentUserStored = loadCurrentUserFromUserDefaults()
+    }
+    
     var currentUser: User? {
         get {
-            if let userData = UserDefaults.standard.data(forKey: "currentUser"),
-               let user = try? JSONDecoder().decode(User.self, from: userData) {
-                return user
-            }
-            
-            return nil
+            return currentUserStored
         }
         set {
             if let encoded = try? JSONEncoder().encode(newValue) {
                 UserDefaults.standard.set(encoded, forKey: "currentUser")
+                currentUserStored = newValue
+            } else {
+                currentUserStored = nil
             }
         }
     }
@@ -36,6 +40,14 @@ class DatabaseService: ObservableObject {
         if let container = container {
             context = ModelContext(container)
         }
+    }
+    
+    private func loadCurrentUserFromUserDefaults() -> User? {
+        if let userData = UserDefaults.standard.data(forKey: "currentUser"),
+           let user = try? JSONDecoder().decode(User.self, from: userData) {
+            return user
+        }
+        return nil
     }
     
     private func generateSalt() -> String {
@@ -115,17 +127,8 @@ class DatabaseService: ObservableObject {
     }
     
     func removeCurrentUser() -> User? {
-        if let user = currentUser {
-            context?.delete(user)
+        if let user = currentUserStored {
             currentUser = nil
-            
-            do {
-                try context!.save()
-                
-                return user
-            } catch {
-                print("Error updating db: \(error)")
-            }
         }
         
         return nil

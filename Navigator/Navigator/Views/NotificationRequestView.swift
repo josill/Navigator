@@ -10,68 +10,69 @@ import SwiftUI
 struct NotificationRequestView: View {
     @State private var selectedDate = Date()
     @State private var redirectToMenu = false
-    let notify = NotificationManager()
+    let notificationManager = NotificationManager()
     
     var body: some View {
-        ZStack {
-            Color
-                .black
-                .ignoresSafeArea()
-            
-            VStack {
-                Spacer()
-                
-                Image(systemName: "bell.circle")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-                    .padding(.bottom, 32)
-                    .foregroundColor(.white)
-                
-                Text("Please allow us to send notifications")
-                    .font(.title)
-                    .padding()
-                    .foregroundColor(.white.opacity(0.8))
-                    .multilineTextAlignment(.center)
-                
-                Spacer()
+        NavigationStack {
+            ZStack {
+                Color
+                    .black
+                    .ignoresSafeArea()
                 
                 VStack {
-                    Button {
-                        notify.requestNotificationsPermission()
-                    } label: {
-                        Text("Allow Notifications")
-                            .padding()
-                            .foregroundColor(.white.opacity(0.9))
-                            .font(.headline)
-                    }
-                    .cornerRadius(12.0)
-                    .frame(width: UIScreen.main.bounds.width)
-                    .padding(.horizontal, -32)
-                    .background(.blue)
-                    .clipShape(Capsule())
+                    Spacer()
                     
-                    Button {
-                        redirectToMenu = true
-                        print("notify redirect: \(redirectToMenu)")
-                    } label: {
-                        Text("Maybe later")
-                            .padding()
-                            .foregroundColor(.blue.opacity(0.9))
-                            .font(.headline)
-                    }
-                    .cornerRadius(12.0)
-                    .frame(width: UIScreen.main.bounds.width)
-                    .padding(.horizontal, -32)
-                    .background(.white)
-                    .clipShape(Capsule())
+                    Image(systemName: "bell.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .padding(.bottom, 32)
+                        .foregroundColor(.white)
                     
-                    NavigationLink(destination: LoginOrRegisterView(), isActive: $redirectToMenu) {
-                        EmptyView()
+                    Text("Please allow us to send notifications")
+                        .font(.title)
+                        .padding()
+                        .foregroundColor(.white.opacity(0.8))
+                        .multilineTextAlignment(.center)
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Button {
+                            notificationManager.requestNotificationsPermission()
+                        } label: {
+                            Text("Allow Notifications")
+                                .padding()
+                                .foregroundColor(.white.opacity(0.9))
+                                .font(.headline)
+                        }
+                        .cornerRadius(12.0)
+                        .frame(width: UIScreen.main.bounds.width)
+                        .padding(.horizontal, -32)
+                        .background(.blue)
+                        .clipShape(Capsule())
+                        
+                        Button {
+                            redirectToMenu = true
+                        } label: {
+                            Text("Maybe later")
+                                .padding()
+                                .foregroundColor(.blue.opacity(0.9))
+                                .font(.headline)
+                        }
+                        .cornerRadius(12.0)
+                        .frame(width: UIScreen.main.bounds.width)
+                        .padding(.horizontal, -32)
+                        .background(.white)
+                        .clipShape(Capsule())
+                        
+                        NavigationLink(destination: LoginOrRegisterView().navigationBarBackButtonHidden(), isActive: $redirectToMenu) {
+                            EmptyView()
+                        }
+                        .hidden()
                     }
-                    .hidden()
+                    .padding(32)
                 }
-                .padding(32)
             }
         }
     }

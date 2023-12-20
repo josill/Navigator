@@ -35,13 +35,17 @@ class NotificationManager: NSObject, ObservableObject {
             
             self.changeAuthorizationStatus()
             self.changeNotificationsEnabled()
-        }
-    }
+        }}
     
     func changeAuthorizationStatus() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
+            print("settings: \(settings)")
             DispatchQueue.main.async {
+                print("status: \(settings.authorizationStatus)")
+                
                 self.notificationsAllowed = settings.authorizationStatus.rawValue == 2 ? true : false
+                
+                print("notifications allowed: \(self.notificationsAllowed)")
             }
         }
     }
@@ -66,7 +70,7 @@ class NotificationManager: NSObject, ObservableObject {
             
             self.sendNotification(title: "Your session", body: body)
         }
-
+        
         RunLoop.current.add(timer!, forMode: .common)
     }
     
@@ -78,7 +82,7 @@ class NotificationManager: NSObject, ObservableObject {
     func sendNotification(timeInterval: Double = 10, title: String, body: String) {
         let id = "1"
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
-
+        
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
@@ -92,7 +96,7 @@ class NotificationManager: NSObject, ObservableObject {
     @objc func appDidEnterBackground() {
         stopSendingNotifications()
     }
-
+    
     @objc func appWillEnterForeground() {
         startSendingNotifications()
     }

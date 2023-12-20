@@ -10,7 +10,7 @@ import SwiftUI
 struct MenuView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var authHelper = AuthenticationHelper()
-    @State private var firstName: String = DatabaseService.shared.currentUser?.firstName ?? ""
+    @State private var firstName: String = DatabaseService.shared.currentUserStored?.firstName ?? ""
     @State private var isLogoutAlertPresented = false
     @State private var logoutSuccessful = false
     
