@@ -13,6 +13,11 @@ struct CreateSessionView: View {
     @State private var sessionName = ""
     @State private var sessionDescription = ""
     
+    @State private var selectedValue = 0
+    let values = ["figure.walk", "figure.run"]
+    
+    @State private var createSessionSuccessful = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -57,14 +62,24 @@ struct CreateSessionView: View {
                             .foregroundColor(.black)
                             .cornerRadius(10)
                             .border(.red, width: CGFloat(authHelper.sessionDescriptionError ? 3 : 0))
+                        
+                        Picker("Select an option", selection: $selectedValue) {
+                                        ForEach(0 ..< values.count) {
+                                            Image(systemName: self.values[$0])
+                                        }
+                                    }
+                                    .pickerStyle(SegmentedPickerStyle())
+                                    .frame(width: 300, height: 120)
+
                     }
                     
                     Button(action: {
                         Task {
-                            await authHelper.createSession(
+                            createSessionSuccessful = await authHelper.createSession(
                                 name: sessionName,
-                                description: sessionDescription
-                            )
+                                description: sessionDescription,
+                                mode: selectedValue == 0 ? .walking : .running
+                            ) != nil ? true : false
                         }
                     }, label: {
                         if authHelper.isLoading {
@@ -89,7 +104,7 @@ struct CreateSessionView: View {
                     }
                     .hidden()
                     .navigationDestination(
-                        isPresented: $authHelper.createSessionSuccessful) {
+                        isPresented: $createSessionSuccessful) {
                             MapView()
                         }
                 }

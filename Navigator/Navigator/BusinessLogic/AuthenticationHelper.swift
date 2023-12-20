@@ -30,6 +30,8 @@ class AuthenticationHelper: ObservableObject {
     
     @Published var createSessionSuccessful = false
     
+    enum gpsSessionType { case walking, running }
+    
     func validateNames(_ firstName: String, _ lastName: String) -> Bool {
         let firstNameCorrect = firstName.count > 3
         let lastNameCorrect = lastName.count > 3
@@ -91,12 +93,12 @@ class AuthenticationHelper: ObservableObject {
     
     func register(firstName: String, lastName: String, email: String, password1: String, password2: String) async -> User? {
         isLoading = true
-                
+        
         if !validateNames(firstName, lastName) {
             isLoading = false
             return nil
         }
-                
+        
         if !validateEmail(email) {
             isLoading = false
             return nil
@@ -235,16 +237,16 @@ class AuthenticationHelper: ObservableObject {
                     isLoading = false
                     
                     // TODO: Handle when the user is registered in backend but not locally
-//                    dbService.getUser(email: email) { user in
-//                        if let foundUser != user {
-//                            return dbService.saveUser(
-//                                firstName: <#T##String#>,
-//                                lastName: <#T##String#>,
-//                                email: <#T##String#>,
-//                                password: <#T##String#>
-//                            )
-//                        }
-//                    }
+                    //                    dbService.getUser(email: email) { user in
+                    //                        if let foundUser != user {
+                    //                            return dbService.saveUser(
+                    //                                firstName: <#T##String#>,
+                    //                                lastName: <#T##String#>,
+                    //                                email: <#T##String#>,
+                    //                                password: <#T##String#>
+                    //                            )
+                    //                        }
+                    //                    }
                     
                     return dbService.updateJwt(
                         email: email,
@@ -277,7 +279,7 @@ class AuthenticationHelper: ObservableObject {
         return dbService.removeCurrentUser()
     }
     
-    func createSession(name: String, description: String) async -> Session? {
+    func createSession(name: String, description: String, mode: gpsSessionType) async -> Session? {
         isLoading = true
         
         if name == "" {
@@ -294,24 +296,23 @@ class AuthenticationHelper: ObservableObject {
         let data = [
             "name": name,
             "description": description,
-            "gpsSession": "ok",
-            "paceMin": "420.0",
-            "paceMax": "600.0",
-        ]
+            "gpsSessionTypeId": mode == .walking ? "00000000-0000-0000-0000-000000000003" : "00000000-0000-0000-0000-000000000001",
+            "paceMin": 420.0,
+            "paceMax": 600.0,
+        ] as [String: Any]
         
         guard let url = URL(string: urlString) else {
             print("unable to make string: \(urlString) to URL object")
             isLoading = false
             return nil
         }
-        guard let encoded = try? JSONEncoder().encode(data) else {
+        
+        guard let encoded = try? JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.prettyPrinted) else {
             print("Failed to encode data: \(data)")
             isLoading = false
             return nil
         }
         
-        print("encoded data: \(encoded)")
-                
         guard let token = dbService.currentUser?.jwtToken else {
             print("Failed to receive token: \(dbService.currentUser?.jwtToken)")
             isLoading = false
@@ -322,7 +323,7 @@ class AuthenticationHelper: ObservableObject {
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         req.httpMethod = "POST"
-    
+        
         do {
             let (data, response) = try await URLSession.shared.upload(for: req, from: encoded)
             
@@ -332,7 +333,7 @@ class AuthenticationHelper: ObservableObject {
                 return nil
             }
             
-            if res.statusCode == 200 {
+            if res.statusCode == 201 {
                 let session = dbService.saveSession(session: Session(sessionName: name, sessionDescription: description))
                 
                 print("session created successfully")
