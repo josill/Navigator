@@ -234,24 +234,28 @@ class AuthenticationHelper: ObservableObject {
                    let token = json["token"] as? String {
                     print("Token: \(token)")
                     
+                    var savedUser: User? = nil
+                    
+                    dbService.getUser(email: email) { user in
+                        if user != nil {
+                            savedUser = self.dbService.updateJwt(
+                                email: email,
+                                jwt: token
+                            )
+                            
+                            if savedUser == nil { self.loginError = "Something went wrong!" }
+                        } else {
+                            savedUser = self.dbService.saveUser(
+                                email: email,
+                                password: password
+                            )
+                            
+                            if savedUser == nil { self.loginError = "Something went wrong!" }
+                        }
+                    }
+                    
                     isLoading = false
-                    
-                    // TODO: Handle when the user is registered in backend but not locally
-                    //                    dbService.getUser(email: email) { user in
-                    //                        if let foundUser != user {
-                    //                            return dbService.saveUser(
-                    //                                firstName: <#T##String#>,
-                    //                                lastName: <#T##String#>,
-                    //                                email: <#T##String#>,
-                    //                                password: <#T##String#>
-                    //                            )
-                    //                        }
-                    //                    }
-                    
-                    return dbService.updateJwt(
-                        email: email,
-                        jwt: token
-                    )
+                    return savedUser
                 }
             } else {
                 loginError = "Wrong email or password!"

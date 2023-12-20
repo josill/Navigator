@@ -113,7 +113,6 @@ extension LocationManager: CLLocationManagerDelegate {
                     userLocations!.append(location.coordinate)
                     calculateDistances()
                 }
-                // userLocations!.append(location.coordinate)
             } else {
                 userLocations = [location.coordinate]
             }

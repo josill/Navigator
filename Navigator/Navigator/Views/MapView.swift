@@ -17,12 +17,13 @@ struct MapView: View {
     
     var body: some View {            
         ZStack {
-//            if locationManager.userLocation == nil {
-//                LocationRequestView()
-//            } else 
-            if !notificationManager.notificationsAllowed {
-                NotificationRequestView()
-            } else {
+            if locationManager.userLocation == nil {
+                LocationRequestView()
+            } 
+//            else if !notificationManager.notificationsAllowed {
+//                NotificationRequestView()
+//            } 
+            else {
                 Map(position: $userInitialLocation) {
                     UserAnnotation()
                     

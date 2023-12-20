@@ -63,8 +63,8 @@ class DatabaseService: ObservableObject {
     }
     
     func saveUser(
-        firstName: String,
-        lastName: String,
+        firstName: String? = nil,
+        lastName: String? = nil,
         email: String,
         password: String
     ) -> User? {

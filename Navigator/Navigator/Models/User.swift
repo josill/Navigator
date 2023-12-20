@@ -12,8 +12,8 @@ import CryptoKit
 @Model
 class User: Codable {
     var userId: UUID
-    var firstName: String
-    var lastName: String
+    var firstName: String?
+    var lastName: String?
     @Attribute(.unique) var email: String
     var salt: String
     var passwordHash: String
@@ -34,24 +34,22 @@ class User: Codable {
     
     init(
         userId: UUID = UUID(),
-        firstName: String,
-        lastName: String,
+        firstName: String? = nil,
+        lastName: String? = nil,
         email: String,
         salt: String,
         passwordHash: String,
         jwtToken: String? = nil
     ) {
         self.userId = userId
-        self.firstName = firstName
-        self.lastName = lastName
+        if let firstName = firstName { self.firstName = firstName }
+        if let lastName = lastName { self.lastName = lastName }
         self.email = email
         self.salt = salt
         self.passwordHash = passwordHash
         self.sessions = []
                 
-        if let jwtToken = jwtToken {
-            self.jwtToken = jwtToken
-        }
+        if let jwtToken = jwtToken { self.jwtToken = jwtToken }
     }
     
     required init(from decoder: Decoder) throws {
