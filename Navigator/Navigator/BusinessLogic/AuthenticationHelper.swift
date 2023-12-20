@@ -250,6 +250,11 @@ class AuthenticationHelper: ObservableObject {
                                 password: password
                             )
                             
+                            savedUser = self.dbService.updateJwt(
+                                email: email,
+                                jwt: token
+                            )
+                            
                             if savedUser == nil { self.loginError = "Something went wrong!" }
                         }
                     }
@@ -285,6 +290,8 @@ class AuthenticationHelper: ObservableObject {
     
     func createSession(name: String, description: String, mode: gpsSessionType) async -> Session? {
         isLoading = true
+        
+        print("currentUser: \(dbService.currentUser!.jwtToken)")
         
         if name == "" {
             sessionNameError = true
