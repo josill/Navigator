@@ -10,7 +10,7 @@ import SwiftData
 
 @main
 struct NavigatorApp: App {
-    @StateObject var dbService = DatabaseService()
+    @StateObject var dbService = DatabaseService.shared
     @StateObject var locationManager = LocationManager()
     @StateObject var notificationManager = NotificationManager()
     
