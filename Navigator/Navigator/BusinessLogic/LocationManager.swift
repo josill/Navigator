@@ -12,6 +12,7 @@ class LocationManager: NSObject, ObservableObject {
     private let manager = CLLocationManager()
     let mapView =  MKMapView()
     @Published var mapHelper: MapHelper?
+    @Published var authHelper = AuthenticationHelper()
     private var timer: Timer?
     
     @Published var userLocation: CLLocation?
@@ -37,6 +38,7 @@ class LocationManager: NSObject, ObservableObject {
     override init() {
         super.init()
         
+        manager.allowsBackgroundLocationUpdates = true
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         // manager.distanceFilter = 10.0
@@ -77,6 +79,7 @@ extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         
+
         addUserLocation(location: location)
         calculateSpeeds()
     }
@@ -109,6 +112,13 @@ extension LocationManager: CLLocationManagerDelegate {
                 
                 if distance > 1 && distance <= 5.0 {
                     print("added loc")
+                    
+                    Task {
+                        let loc = await authHelper.updateLocation(
+                            latitude: location.coordinate.latitude,
+                            longitude: location.coordinate.longitude,
+                            locationType: .location)
+                    }
                     
                     userLocations!.append(location.coordinate)
                     calculateDistances()

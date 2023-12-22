@@ -15,6 +15,7 @@ class DatabaseService: ObservableObject {
     var context: ModelContext?
     
     @Published var currentUserStored: User?
+    @Published var currentSession: Session?
     
     init() {
         self.currentUserStored = loadCurrentUserFromUserDefaults()
@@ -92,11 +93,31 @@ class DatabaseService: ObservableObject {
         return nil
     }
     
-    func saveSession(session: Session) -> Session? {
+    func saveSession(
+        sessionId id: String,
+        sessionName: String,
+        sessionDescription: String,
+        minSpeed: Double,
+        maxSpeed: Double
+    ) -> Session? {
+        guard let id = UUID(uuidString: id) else {
+            print("Error generating UUID in saveSession method")
+            return nil
+        }
+        
+        let session = Session(
+            sessionId: id,
+            sessionName: sessionName,
+            sessionDescription: sessionDescription,
+            minSpeed: minSpeed,
+            maxSpeed: maxSpeed
+        )
+        
         context!.insert(session)
         
         do {
             try context!.save()
+            currentSession = session
             
             return session
         } catch {
@@ -138,6 +159,7 @@ class DatabaseService: ObservableObject {
         var descriptor = FetchDescriptor<User>(predicate: #Predicate {
             return $0.email == email
         })
+        
         do {
             let users = try context!.fetch(descriptor)
             if let user = users.first {
@@ -147,6 +169,24 @@ class DatabaseService: ObservableObject {
             }
         } catch {
             print("Error fetching user: \(error)")
+            completion(nil)
+        }
+    }
+    
+    func getSession(id: UUID, completion: @escaping (Session?) -> Void) {
+        var descriptor = FetchDescriptor<Session>(predicate: #Predicate {
+            return $0.sessionId == id
+        })
+        
+        do {
+            let sessions = try context!.fetch(descriptor)
+            if let session = sessions.first {
+                completion(session)
+            } else {
+                completion(nil)
+            }
+        } catch {
+            print("Error fetching session: \(error)")
             completion(nil)
         }
     }

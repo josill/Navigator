@@ -17,9 +17,9 @@ class UserLocation: Codable {
     var sessionId: UUID
     var latitude: CLLocationDegrees
     var longitude: CLLocationDegrees
-    var accuracy: CLLocationAccuracy
-    var verticalAccuracy: CLLocationAccuracy
-    var altitude: Double
+    var accuracy: CLLocationAccuracy?
+    var verticalAccuracy: CLLocationAccuracy?
+    var altitude: Double?
     var session: Session?
     
     enum CodingKeys: String, CodingKey {
@@ -41,9 +41,9 @@ class UserLocation: Codable {
         sessionId: UUID,
         latitude: CLLocationDegrees,
         longitude: CLLocationDegrees,
-        accuracy: CLLocationAccuracy,
-        verticalAccuracy: CLLocationAccuracy,
-        altitude: Double,
+        accuracy: CLLocationAccuracy? = 0,
+        verticalAccuracy: CLLocationAccuracy? = 0,
+        altitude: Double? = 0,
         session: Session?
     ) {
         self.createdAt = Date()
@@ -52,9 +52,9 @@ class UserLocation: Codable {
         self.sessionId = sessionId
         self.latitude = latitude
         self.longitude = longitude
-        self.accuracy = accuracy
-        self.verticalAccuracy = verticalAccuracy
-        self.altitude = altitude
+        if let accuracy = accuracy { self.accuracy = accuracy }
+        if let verticalAccuracy = verticalAccuracy { self.verticalAccuracy = verticalAccuracy }
+        if let altitude = altitude { self.altitude = altitude }
         self.session = session
     }
     

@@ -7,6 +7,7 @@
 
 import Foundation
 import CryptoKit
+import MapKit
 import SwiftData
 
 class AuthenticationHelper: ObservableObject {
@@ -30,7 +31,8 @@ class AuthenticationHelper: ObservableObject {
     
     @Published var createSessionSuccessful = false
     
-    enum gpsSessionType { case walking, running }
+    enum GpsSessionType { case walking, running }
+    enum LocationType { case location, checkPoint, wayPoint }
     
     func validateNames(_ firstName: String, _ lastName: String) -> Bool {
         let firstNameCorrect = firstName.count > 3
@@ -146,8 +148,14 @@ class AuthenticationHelper: ObservableObject {
             
             if res.statusCode == 200 {
                 // Process the successful response
-                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let token = json["token"] as? String {
+                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                    print("json as data from register: \(json)")
+                    
+                    guard let token = json["token"] else {
+                        isLoading = false
+                        registerError = "Something went wrong!"
+                        return nil
+                    }
                     print("Token: \(token)")
                     
                     isLoading = false
@@ -230,8 +238,11 @@ class AuthenticationHelper: ObservableObject {
             }
             
             if res.statusCode == 200 {
-                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let token = json["token"] as? String {
+                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                    print("json data from login: \(json)")
+                    
+                    let token = json["token"] as! String
+                    
                     print("Token: \(token)")
                     
                     var savedUser: User? = nil
@@ -288,11 +299,9 @@ class AuthenticationHelper: ObservableObject {
         return dbService.removeCurrentUser()
     }
     
-    func createSession(name: String, description: String, mode: gpsSessionType) async -> Session? {
+    func createSession(name: String, description: String, mode: GpsSessionType) async -> Session? {
         isLoading = true
-        
-        print("currentUser: \(dbService.currentUser!.jwtToken)")
-        
+                
         if name == "" {
             sessionNameError = true
             isLoading = false
@@ -304,12 +313,14 @@ class AuthenticationHelper: ObservableObject {
         }
         
         let urlString = "\(config.baseUrl)/api/v1.0/GpsSessions"
+        let minSpeed = mode == .walking ? 360.0 : 360.0
+        let maxSpeed = mode == .walking ? 720.0 : 600.0
         let data = [
             "name": name,
             "description": description,
             "gpsSessionTypeId": mode == .walking ? "00000000-0000-0000-0000-000000000003" : "00000000-0000-0000-0000-000000000001",
-            "paceMin": 420.0,
-            "paceMax": 600.0,
+            "paceMin": minSpeed,
+            "paceMax": maxSpeed,
         ] as [String: Any]
         
         guard let url = URL(string: urlString) else {
@@ -345,11 +356,30 @@ class AuthenticationHelper: ObservableObject {
             }
             
             if res.statusCode == 201 {
-                let session = dbService.saveSession(session: Session(sessionName: name, sessionDescription: description))
-                
                 print("session created successfully")
-                isLoading = false
-                return session
+                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                    guard let userId = json["appUserId"] as? String,
+                          let sessionId = json["id"] as? String else {
+                        print("Error getting data from json: \(json)")
+                        isLoading = false
+                        return nil
+                    }
+                    
+                    let session = dbService.saveSession(
+                        sessionId: sessionId,
+                        sessionName: name,
+                        sessionDescription: description,
+                        minSpeed: minSpeed,
+                        maxSpeed: maxSpeed
+                    )
+                    
+                    isLoading = false
+                    return session
+                } else {
+                    print("Error inserting session to db")
+                    isLoading = false
+                    return nil
+                }
             } else {
                 print("HTTP Status Code: \(res.statusCode)")
                 
@@ -367,6 +397,117 @@ class AuthenticationHelper: ObservableObject {
         }
         
         isLoading = false
+        return nil
+    }
+    
+    func updateLocation(
+        latitude: CLLocationDegrees,
+        longitude: CLLocationDegrees,
+        locationType: LocationType
+    ) async -> UserLocation? {
+        if dbService.currentSession == nil { return nil }
+        
+        let urlString = "\(config.baseUrl)/api/v1.0/gpsLocations"
+        let locTypeId = locationType == .location ? "00000000-0000-0000-0000-000000000001" : locationType == .checkPoint ? "00000000-0000-0000-0000-000000000002" : "00000000-0000-0000-0000-000000000003"
+        guard let sessionIdString = dbService.currentSession?.sessionId as? String else {
+            print("error getting session id in method updateLocation")
+            return nil
+        }
+        let data = [
+            "gpsSessionId": sessionIdString,
+            "gpsLocationTypeId": locTypeId,
+            "latitude": latitude,
+            "longitude": longitude,
+        ] as [String: Any]
+        
+        guard let url = URL(string: urlString) else {
+            print("unable to make string: \(urlString) to URL object")
+            isLoading = false
+            return nil
+        }
+        
+        guard let encoded = try? JSONSerialization.data(withJSONObject: data, options: JSONSerialization.WritingOptions.prettyPrinted) else {
+            print("Failed to encode data: \(data)")
+            isLoading = false
+            return nil
+        }
+        
+        guard let token = dbService.currentUser?.jwtToken else {
+            print("Failed to receive token: \(dbService.currentUser?.jwtToken)")
+            isLoading = false
+            return nil
+        }
+        
+        var req = URLRequest(url: url)
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        req.httpMethod = "POST"
+        
+        do {
+            let (data, response) = try await URLSession.shared.upload(for: req, from: encoded)
+            
+            guard let res = response as? HTTPURLResponse else {
+                print("Invalid response")
+                isLoading = false
+                return nil
+            }
+            
+            if res.statusCode == 201 {
+                print("location updated successfully")
+                
+                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                    print("json from location: \(json)")
+                    
+                    guard let locId = json["id"] as? String else {
+                        print("Error getting data from json: \(json)")
+                        isLoading = false
+                        return nil
+                    }
+                    
+                    guard let locId = UUID(uuidString: locId),
+                          let sessionId = UUID(uuidString: sessionIdString),
+                    let locTypeId = UUID(uuidString: locTypeId)
+                    else {
+                        print("Error getting data from json: \(json)")
+                        return nil
+                    }
+                    
+                    var session: Session? = nil
+                    let sessions = dbService.getSession(id: sessionId) { s in
+                        session = s
+                    }
+                    
+                    let location = UserLocation(
+                        locationId: locId,
+                        locationTypeId: locTypeId,
+                        sessionId: sessionId,
+                        latitude: latitude,
+                        longitude: longitude,
+                        session: session
+                    )
+                    
+                    return location
+                } else {
+                    print("Error inserting session to db")
+                    isLoading = false
+                    return nil
+                }
+            } else {
+                print("HTTP Status Code: \(res.statusCode)")
+                
+                if let responseString = String(data: data, encoding: .utf8) {
+                    print("Response Data: \(responseString)")
+                    // Handle the error using the responseString
+                } else {
+                    print("Failed to convert response data to string.")
+                    // Handle the error appropriately
+                }
+                // Handle the error appropriately
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+        
         return nil
     }
 }

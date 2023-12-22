@@ -56,6 +56,7 @@ class GameBrain: ObservableObject {
                 }
             }
         
+        print("inv \(invCount)")
         return invCount % 2 == 0
     }
     

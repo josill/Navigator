@@ -1,0 +1,619 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FE9A6CAC2B35710E0042E476 /* gpsmapdemo23fApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9A6CAB2B35710E0042E476 /* gpsmapdemo23fApp.swift */; };
+		FE9A6CAE2B35710E0042E476 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9A6CAD2B35710E0042E476 /* ContentView.swift */; };
+		FE9A6CB02B3571100042E476 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE9A6CAF2B3571100042E476 /* Assets.xcassets */; };
+		FE9A6CB32B3571100042E476 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE9A6CB22B3571100042E476 /* Preview Assets.xcassets */; };
+		FE9A6CBD2B3571100042E476 /* gpsmapdemo23fTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9A6CBC2B3571100042E476 /* gpsmapdemo23fTests.swift */; };
+		FE9A6CC72B3571100042E476 /* gpsmapdemo23fUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9A6CC62B3571100042E476 /* gpsmapdemo23fUITests.swift */; };
+		FE9A6CC92B3571100042E476 /* gpsmapdemo23fUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9A6CC82B3571100042E476 /* gpsmapdemo23fUITestsLaunchTests.swift */; };
+		FE9A6CD62B357A7D0042E476 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9A6CD52B357A7D0042E476 /* LocationViewModel.swift */; };
+		FE9A6CD92B3587630042E476 /* RequestLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9A6CD82B3587630042E476 /* RequestLocationView.swift */; };
+		FE9A6CDB2B3589010042E476 /* TrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9A6CDA2B3589010042E476 /* TrackingView.swift */; };
+		FE9A6CDD2B358A0E0042E476 /* PairView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9A6CDC2B358A0E0042E476 /* PairView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FE9A6CB92B3571100042E476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE9A6CA02B35710E0042E476 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE9A6CA72B35710E0042E476;
+			remoteInfo = gpsmapdemo23f;
+		};
+		FE9A6CC32B3571100042E476 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE9A6CA02B35710E0042E476 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE9A6CA72B35710E0042E476;
+			remoteInfo = gpsmapdemo23f;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FE9A6CA82B35710E0042E476 /* gpsmapdemo23f.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gpsmapdemo23f.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE9A6CAB2B35710E0042E476 /* gpsmapdemo23fApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gpsmapdemo23fApp.swift; sourceTree = "<group>"; };
+		FE9A6CAD2B35710E0042E476 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		FE9A6CAF2B3571100042E476 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE9A6CB22B3571100042E476 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		FE9A6CB82B3571100042E476 /* gpsmapdemo23fTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gpsmapdemo23fTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE9A6CBC2B3571100042E476 /* gpsmapdemo23fTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gpsmapdemo23fTests.swift; sourceTree = "<group>"; };
+		FE9A6CC22B3571100042E476 /* gpsmapdemo23fUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = gpsmapdemo23fUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE9A6CC62B3571100042E476 /* gpsmapdemo23fUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gpsmapdemo23fUITests.swift; sourceTree = "<group>"; };
+		FE9A6CC82B3571100042E476 /* gpsmapdemo23fUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gpsmapdemo23fUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FE9A6CD52B357A7D0042E476 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		FE9A6CD72B3586960042E476 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FE9A6CD82B3587630042E476 /* RequestLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLocationView.swift; sourceTree = "<group>"; };
+		FE9A6CDA2B3589010042E476 /* TrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingView.swift; sourceTree = "<group>"; };
+		FE9A6CDC2B358A0E0042E476 /* PairView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FE9A6CA52B35710E0042E476 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE9A6CB52B3571100042E476 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE9A6CBF2B3571100042E476 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FE9A6C9F2B35710E0042E476 = {
+			isa = PBXGroup;
+			children = (
+				FE9A6CAA2B35710E0042E476 /* gpsmapdemo23f */,
+				FE9A6CBB2B3571100042E476 /* gpsmapdemo23fTests */,
+				FE9A6CC52B3571100042E476 /* gpsmapdemo23fUITests */,
+				FE9A6CA92B35710E0042E476 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FE9A6CA92B35710E0042E476 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE9A6CA82B35710E0042E476 /* gpsmapdemo23f.app */,
+				FE9A6CB82B3571100042E476 /* gpsmapdemo23fTests.xctest */,
+				FE9A6CC22B3571100042E476 /* gpsmapdemo23fUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE9A6CAA2B35710E0042E476 /* gpsmapdemo23f */ = {
+			isa = PBXGroup;
+			children = (
+				FE9A6CD72B3586960042E476 /* Info.plist */,
+				FE9A6CAB2B35710E0042E476 /* gpsmapdemo23fApp.swift */,
+				FE9A6CAD2B35710E0042E476 /* ContentView.swift */,
+				FE9A6CAF2B3571100042E476 /* Assets.xcassets */,
+				FE9A6CB12B3571100042E476 /* Preview Content */,
+				FE9A6CD52B357A7D0042E476 /* LocationViewModel.swift */,
+				FE9A6CD82B3587630042E476 /* RequestLocationView.swift */,
+				FE9A6CDA2B3589010042E476 /* TrackingView.swift */,
+				FE9A6CDC2B358A0E0042E476 /* PairView.swift */,
+			);
+			path = gpsmapdemo23f;
+			sourceTree = "<group>";
+		};
+		FE9A6CB12B3571100042E476 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				FE9A6CB22B3571100042E476 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FE9A6CBB2B3571100042E476 /* gpsmapdemo23fTests */ = {
+			isa = PBXGroup;
+			children = (
+				FE9A6CBC2B3571100042E476 /* gpsmapdemo23fTests.swift */,
+			);
+			path = gpsmapdemo23fTests;
+			sourceTree = "<group>";
+		};
+		FE9A6CC52B3571100042E476 /* gpsmapdemo23fUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FE9A6CC62B3571100042E476 /* gpsmapdemo23fUITests.swift */,
+				FE9A6CC82B3571100042E476 /* gpsmapdemo23fUITestsLaunchTests.swift */,
+			);
+			path = gpsmapdemo23fUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FE9A6CA72B35710E0042E476 /* gpsmapdemo23f */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE9A6CCC2B3571100042E476 /* Build configuration list for PBXNativeTarget "gpsmapdemo23f" */;
+			buildPhases = (
+				FE9A6CA42B35710E0042E476 /* Sources */,
+				FE9A6CA52B35710E0042E476 /* Frameworks */,
+				FE9A6CA62B35710E0042E476 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = gpsmapdemo23f;
+			productName = gpsmapdemo23f;
+			productReference = FE9A6CA82B35710E0042E476 /* gpsmapdemo23f.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FE9A6CB72B3571100042E476 /* gpsmapdemo23fTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE9A6CCF2B3571100042E476 /* Build configuration list for PBXNativeTarget "gpsmapdemo23fTests" */;
+			buildPhases = (
+				FE9A6CB42B3571100042E476 /* Sources */,
+				FE9A6CB52B3571100042E476 /* Frameworks */,
+				FE9A6CB62B3571100042E476 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE9A6CBA2B3571100042E476 /* PBXTargetDependency */,
+			);
+			name = gpsmapdemo23fTests;
+			productName = gpsmapdemo23fTests;
+			productReference = FE9A6CB82B3571100042E476 /* gpsmapdemo23fTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FE9A6CC12B3571100042E476 /* gpsmapdemo23fUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE9A6CD22B3571100042E476 /* Build configuration list for PBXNativeTarget "gpsmapdemo23fUITests" */;
+			buildPhases = (
+				FE9A6CBE2B3571100042E476 /* Sources */,
+				FE9A6CBF2B3571100042E476 /* Frameworks */,
+				FE9A6CC02B3571100042E476 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FE9A6CC42B3571100042E476 /* PBXTargetDependency */,
+			);
+			name = gpsmapdemo23fUITests;
+			productName = gpsmapdemo23fUITests;
+			productReference = FE9A6CC22B3571100042E476 /* gpsmapdemo23fUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE9A6CA02B35710E0042E476 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1510;
+				LastUpgradeCheck = 1510;
+				TargetAttributes = {
+					FE9A6CA72B35710E0042E476 = {
+						CreatedOnToolsVersion = 15.1;
+					};
+					FE9A6CB72B3571100042E476 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = FE9A6CA72B35710E0042E476;
+					};
+					FE9A6CC12B3571100042E476 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = FE9A6CA72B35710E0042E476;
+					};
+				};
+			};
+			buildConfigurationList = FE9A6CA32B35710E0042E476 /* Build configuration list for PBXProject "gpsmapdemo23f" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FE9A6C9F2B35710E0042E476;
+			productRefGroup = FE9A6CA92B35710E0042E476 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FE9A6CA72B35710E0042E476 /* gpsmapdemo23f */,
+				FE9A6CB72B3571100042E476 /* gpsmapdemo23fTests */,
+				FE9A6CC12B3571100042E476 /* gpsmapdemo23fUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FE9A6CA62B35710E0042E476 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE9A6CB32B3571100042E476 /* Preview Assets.xcassets in Resources */,
+				FE9A6CB02B3571100042E476 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE9A6CB62B3571100042E476 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE9A6CC02B3571100042E476 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE9A6CA42B35710E0042E476 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE9A6CDD2B358A0E0042E476 /* PairView.swift in Sources */,
+				FE9A6CAE2B35710E0042E476 /* ContentView.swift in Sources */,
+				FE9A6CD92B3587630042E476 /* RequestLocationView.swift in Sources */,
+				FE9A6CDB2B3589010042E476 /* TrackingView.swift in Sources */,
+				FE9A6CD62B357A7D0042E476 /* LocationViewModel.swift in Sources */,
+				FE9A6CAC2B35710E0042E476 /* gpsmapdemo23fApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE9A6CB42B3571100042E476 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE9A6CBD2B3571100042E476 /* gpsmapdemo23fTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FE9A6CBE2B3571100042E476 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE9A6CC72B3571100042E476 /* gpsmapdemo23fUITests.swift in Sources */,
+				FE9A6CC92B3571100042E476 /* gpsmapdemo23fUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FE9A6CBA2B3571100042E476 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE9A6CA72B35710E0042E476 /* gpsmapdemo23f */;
+			targetProxy = FE9A6CB92B3571100042E476 /* PBXContainerItemProxy */;
+		};
+		FE9A6CC42B3571100042E476 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE9A6CA72B35710E0042E476 /* gpsmapdemo23f */;
+			targetProxy = FE9A6CC32B3571100042E476 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		FE9A6CCA2B3571100042E476 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FE9A6CCB2B3571100042E476 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FE9A6CCD2B3571100042E476 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"gpsmapdemo23f/Preview Content\"";
+				DEVELOPMENT_TEAM = 2US4L4HG86;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = gpsmapdemo23f/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Always and when in usage";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Always usage";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "When in usage";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.taltech.josill.gpsmapdemo23f;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FE9A6CCE2B3571100042E476 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"gpsmapdemo23f/Preview Content\"";
+				DEVELOPMENT_TEAM = 2US4L4HG86;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = gpsmapdemo23f/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Always and when in usage";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Always usage";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "When in usage";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.taltech.josill.gpsmapdemo23f;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		FE9A6CD02B3571100042E476 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2US4L4HG86;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.taltech.josill.gpsmapdemo23fTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gpsmapdemo23f.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/gpsmapdemo23f";
+			};
+			name = Debug;
+		};
+		FE9A6CD12B3571100042E476 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2US4L4HG86;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.taltech.josill.gpsmapdemo23fTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/gpsmapdemo23f.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/gpsmapdemo23f";
+			};
+			name = Release;
+		};
+		FE9A6CD32B3571100042E476 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2US4L4HG86;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.taltech.josill.gpsmapdemo23fUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = gpsmapdemo23f;
+			};
+			name = Debug;
+		};
+		FE9A6CD42B3571100042E476 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2US4L4HG86;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.taltech.josill.gpsmapdemo23fUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = gpsmapdemo23f;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FE9A6CA32B35710E0042E476 /* Build configuration list for PBXProject "gpsmapdemo23f" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE9A6CCA2B3571100042E476 /* Debug */,
+				FE9A6CCB2B3571100042E476 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE9A6CCC2B3571100042E476 /* Build configuration list for PBXNativeTarget "gpsmapdemo23f" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE9A6CCD2B3571100042E476 /* Debug */,
+				FE9A6CCE2B3571100042E476 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE9A6CCF2B3571100042E476 /* Build configuration list for PBXNativeTarget "gpsmapdemo23fTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE9A6CD02B3571100042E476 /* Debug */,
+				FE9A6CD12B3571100042E476 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE9A6CD22B3571100042E476 /* Build configuration list for PBXNativeTarget "gpsmapdemo23fUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE9A6CD32B3571100042E476 /* Debug */,
+				FE9A6CD42B3571100042E476 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FE9A6CA02B35710E0042E476 /* Project object */;
+}

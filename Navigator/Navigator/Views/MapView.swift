@@ -65,7 +65,7 @@ struct MapView: View {
                     MapUserLocationButton()
                     MapScaleView()
                 }
-                .mapStyle(.standard(elevation: .realistic))
+                .mapStyle(.hybrid(elevation: .realistic))
                 .navigationBarBackButtonHidden(true)
                 .padding(.top, verticalSizeClass != .compact ? 40 : 10)
 
