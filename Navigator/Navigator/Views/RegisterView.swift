@@ -15,9 +15,7 @@ struct RegisterView: View {
     @State private var email = ""
     @State private var password1 = ""
     @State private var password2 = ""
-    
-    @State private var registerSuccessful = false
-    
+        
     var body: some View {
         NavigationStack {
             ZStack {
@@ -96,13 +94,13 @@ struct RegisterView: View {
                     
                     Button(action: {
                         Task {
-                            registerSuccessful = await authHelper.register(
+                            await authHelper.register(
                                 firstName: firstName,
                                 lastName: lastName,
                                 email: email,
                                 password1: password1,
                                 password2: password2
-                            ) != nil ? true : false
+                            )
                         }
                     }, label: {
                         if authHelper.isLoading {
@@ -145,7 +143,7 @@ struct RegisterView: View {
                     }
                     .hidden()
                     .navigationDestination(
-                        isPresented: $registerSuccessful) {
+                        isPresented: $authHelper.registerSuccess) {
                             LoginView()
                         }
                 }

@@ -15,9 +15,7 @@ struct CreateSessionView: View {
     
     @State private var selectedValue = 0
     let values = ["figure.walk", "figure.run"]
-    
-    @State private var createSessionSuccessful = false
-    
+        
     var body: some View {
         NavigationStack {
             ZStack {
@@ -75,11 +73,11 @@ struct CreateSessionView: View {
                     
                     Button(action: {
                         Task {
-                            createSessionSuccessful = await authHelper.createSession(
+                            await authHelper.createSession(
                                 name: sessionName,
                                 description: sessionDescription,
                                 mode: selectedValue == 0 ? .walking : .running
-                            ) != nil ? true : false
+                            )
                         }
                     }, label: {
                         if authHelper.isLoading {
@@ -104,7 +102,7 @@ struct CreateSessionView: View {
                     }
                     .hidden()
                     .navigationDestination(
-                        isPresented: $createSessionSuccessful) {
+                        isPresented: $authHelper.createSessionSuccess) {
                             MapView()
                         }
                 }

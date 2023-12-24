@@ -11,6 +11,7 @@ struct SlideUpCard: View {
     @Environment(\.colorScheme) var colorScheme
     @GestureState private var dragState = DragState.inactive
     @State var position = CardPosition.bottom
+    @Binding var quitSessionPresented: Bool
     
     var body: some View {
         let drag = DragGesture()
@@ -30,7 +31,7 @@ struct SlideUpCard: View {
                     .foregroundColor(.gray)
                     .padding(.top, 10)
                 
-                SessionControls()
+                SessionControls(quitSessionPresented: $quitSessionPresented)
                 
                 SessionStats()
                 
@@ -101,5 +102,5 @@ struct SlideUpCard: View {
 }
 
 #Preview {
-    SlideUpCard()
+    SlideUpCard(quitSessionPresented: .constant(false))
 }

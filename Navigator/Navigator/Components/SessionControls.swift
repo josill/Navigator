@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct SessionControls: View {
+    @ObservedObject var authHelper = AuthenticationHelper()
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var notificationManager: NotificationManager
+    
+    @Binding var quitSessionPresented: Bool
 
     var body: some View {
         HStack {
@@ -72,13 +75,14 @@ struct SessionControls: View {
             Spacer()
             
             Button {
-                locationManager.reset()
+                quitSessionPresented.toggle()
+                    print(quitSessionPresented)
             } label: {
-                Image(systemName: "gobackward")
+                Image(systemName: "power")
             }
             .padding()
             .cornerRadius(12.0)
-            .background(.orange)
+            .background(.red)
             .foregroundColor(.white)
             .clipShape(Circle())
             .font(.system(size: 24))
@@ -89,5 +93,5 @@ struct SessionControls: View {
 }
 
 #Preview {
-    SessionControls()
+    SessionControls(quitSessionPresented: .constant(false))
 }

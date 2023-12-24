@@ -10,7 +10,6 @@ import SwiftUI
 struct MenuView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var authHelper = AuthenticationHelper()
-    @State private var firstName: String = DatabaseService.shared.currentUserStored?.firstName ?? "User"
     @State private var isLogoutAlertPresented = false
     @State private var logoutSuccessful = false
     
@@ -32,7 +31,7 @@ struct MenuView: View {
                             Image(systemName: "person")
                                 .foregroundColor(.white)
                             
-                            Text(firstName)
+                            Text("User!")
                         }
                     }
                     .font(.largeTitle)
@@ -84,16 +83,7 @@ struct MenuView: View {
                 }
             }
         }
-        .alert(isPresented: $isLogoutAlertPresented) {
-            Alert(
-                title: Text("Logout"),
-                message: Text("Are you sure you want to log out?"),
-                primaryButton: .default(Text("Cancel")),
-                secondaryButton: .destructive(Text("Log Out")) {
-                    logoutSuccessful = authHelper.logOut() != nil
-                }
-            )
-        }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

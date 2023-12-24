@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    var currentUser = DatabaseService.shared.currentUserStored
+    @ObservedObject private var authHelper = AuthenticationHelper()
     
     var body: some View {
-        if currentUser == nil {
+        if authHelper.savedUser == nil {
 //            MapView()
              LoginOrRegisterView()
         } else {

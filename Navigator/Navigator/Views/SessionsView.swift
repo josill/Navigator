@@ -11,8 +11,6 @@ import SwiftData
 struct SessionsView: View {
     
     @ObservedObject var authHelper = AuthenticationHelper()
-    private var context = DatabaseService.shared.context
-    private var currentUser = DatabaseService.shared.currentUser
     
     @Query(
 //        filter: #Predicate {
@@ -46,8 +44,6 @@ struct SessionsView: View {
                 VStack {
                     VStack {
                             Text("Your sessions")
-                                                        
-                            Text("\(currentUser?.firstName ?? "no current user")")
                         }
                         .font(.largeTitle)
                         .foregroundColor(.white)
@@ -99,23 +95,10 @@ struct SessionsView: View {
     }
     
     func deleteSession(_ indexSet: IndexSet) {
-        for i in indexSet {
-            let session = sessions[i]
-            context!.delete(session)
-        }
+        // TODO
     }
 }
 
 #Preview {
-    
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: Session.self, configurations: config)
-        let context = ModelContext(container)
-        
-        return SessionsView()
-            .modelContainer(container)
-    } catch {
-        fatalError("Failed to create model container.")
-    }
+    return SessionsView()
 }
