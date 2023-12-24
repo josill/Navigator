@@ -387,8 +387,6 @@ class AuthenticationHelper: ObservableObject {
     func quitSavedSession() {
         savedSessionId = nil
         UserDefaults.standard.removeObject(forKey: "savedSessionId")
-        print("here in quitSavedSession")
-        print(savedSessionId)
     }
     
     func updateLocation(

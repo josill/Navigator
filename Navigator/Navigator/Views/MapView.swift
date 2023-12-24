@@ -72,19 +72,6 @@ struct MapView: View {
                 }
                 .mapStyle(.hybrid(elevation: .realistic))
                 
-//                Button(action: {
-//                    trigger.toggle()
-//                    quitSessionPresented.toggle()
-//                    print(trigger)
-//                    print(quitSessionPresented)
-////                    authHelper.quitSavedSession()
-////                    locationManager.reset()
-//                }) {
-//                    Text("QUIT")
-//                        .font(.title)
-//                        .foregroundColor(.red)
-//                }
-                
                 if verticalSizeClass == .compact {
                     SlideUpCardCompact(quitSessionPresented: $quitSessionPresented)
                 } else {

@@ -84,6 +84,17 @@ struct MenuView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $isLogoutAlertPresented) {
+                    Alert(
+                        title: Text("Logout"),
+                        message: Text("Are you sure you want to log out?"),
+                        primaryButton: .default(Text("Cancel")),
+                        secondaryButton: .destructive(Text("Log Out")) {
+                            authHelper.logOut()
+                        }
+                    )
+                }
+
     }
 }
 
