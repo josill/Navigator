@@ -55,18 +55,22 @@ struct LoginView: View {
                         .border(.red, width: CGFloat(authHelper.passwordError != "" ? 3 : 0))
                     }
                     
-                    Button(action: {
+                    Button {
                         Task {
                             await authHelper.login(email: email, password: password)
+                            
+                            if authHelper.loginSuccess {
+                                Router.shared.changeRoute(RoutePath(.login))
+                            }
                         }
-                    }, label: {
+                    } label: {
                         if authHelper.isLoading {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         } else {
                             Text("Login")
                         }
-                    })
+                    }
                     .disabled(authHelper.isLoading)
                     .frame(maxWidth: 265)
                     .padding()
@@ -86,18 +90,6 @@ struct LoginView: View {
                     }
                     .foregroundColor(.red)
                     .padding(.top, 40)
-                    
-                    NavigationLink() {
-                        ContentView()
-                    } label: {
-                        EmptyView()
-                    }
-                    .hidden()
-                    .navigationDestination(
-                        isPresented: $authHelper.loginSuccess) {
-                            MenuView()
-                        }
-                
             }
         }
     }

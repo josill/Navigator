@@ -91,7 +91,7 @@ struct RegisterView: View {
                             .border(.red, width: CGFloat(authHelper.passwordsError != "" ? 3 : 0))
                     }
                     
-                    Button(action: {
+                    Button {
                         Task {
                             await authHelper.register(
                                 firstName: firstName,
@@ -100,15 +100,19 @@ struct RegisterView: View {
                                 password1: password1,
                                 password2: password2
                             )
+                            
+                            if authHelper.registerSuccess {
+                                Router.shared.changeRoute(RoutePath(.login))
+                            }
                         }
-                    }, label: {
+                    } label: {
                         if authHelper.isLoading {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         } else {
                             Text("Create")
                         }
-                    })
+                    }
                     .disabled(authHelper.isLoading)
                     .frame(maxWidth: 265)
                     .padding()
@@ -134,17 +138,6 @@ struct RegisterView: View {
                     }
                     .foregroundColor(.red)
                     .padding(.top, 40)
-                    
-                    NavigationLink {
-                        ContentView()
-                    } label: {
-                        EmptyView()
-                    }
-                    .hidden()
-                    .navigationDestination(
-                        isPresented: $authHelper.registerSuccess) {
-                            LoginView()
-                        }
                 }
             }
     }

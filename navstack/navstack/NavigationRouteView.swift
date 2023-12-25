@@ -1,32 +1,33 @@
 //
-//  ContentView.swift
-//  Navigator
+//  NavigationRouteView.swift
+//  navstack
 //
-//  Created by Jonathan Sillak on 03.11.2023.
+//  Created by Jonathan Sillak on 25.12.2023.
 //
 
 import SwiftUI
 
-struct ContentView: View {    
-    @EnvironmentObject private var router: Router
+struct NavigationRouteView: View {
+    @State private var path = NavigationPath()
     
     var body: some View {
-        NavigationStack(path: $router.path) {
+        NavigationStack(path: $path) {
             VStack(spacing: 10) {
                 Text("Root view")
                 Button {
-                    router.changeRoute(RoutePath(.menu))
+                    Router.shared.changeRoute(RoutePath(.menu))
                 } label: {
                     Text("Go to user create")
                 }
                 Button {
-                    router.changeRoute(RoutePath(.map))
+                    let user = User("George")
+                    Router.shared.changeRoute(RoutePath(.map))
                 } label: {
                     Text("Go to user edit")
                 }
                 
                 Button {
-                    router.changeRoute(RoutePath(.login))
+                    Router.shared.changeRoute(RoutePath(.login))
                 } label: {
                     Text("go to main screen")
                 }
@@ -55,8 +56,20 @@ struct ContentView: View {
             }
         }
     }
+
+    // MARK: Route
+    func changeRoute(_ route: RoutePath) {
+        print("route is: \(route.route)")
+        path.append(route)
+        print("path is: \(path)")
+    }
+    
+
+    func backRoute() {
+        path.removeLast()
+    }
 }
 
 #Preview {
-    LoginOrRegisterView()
+    NavigationRouteView()
 }

@@ -1,8 +1,8 @@
 //
 //  LoginOrRegisterView.swift
-//  Navigator
+//  navstack
 //
-//  Created by Jonathan Sillak on 13.11.2023.
+//  Created by Jonathan Sillak on 26.12.2023.
 //
 
 import SwiftUI
@@ -53,6 +53,10 @@ struct LoginOrRegisterView: View {
                 }
             }
     }
+}
+
+#Preview {
+    LoginOrRegisterView()
 }
 
 #Preview {

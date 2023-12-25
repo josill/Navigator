@@ -83,7 +83,6 @@ struct MenuView: View {
                 primaryButton: .default(Text("Cancel")),
                 secondaryButton: .destructive(Text("Log Out")) {
                     authHelper.logOut()
-                    router.returnToRoot()
                 }
             )
         }

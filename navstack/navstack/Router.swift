@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 public struct RoutePath: Hashable {
     public var route: Routes = .none
@@ -25,20 +24,9 @@ public struct RoutePath: Hashable {
 }
 
 class Router: ObservableObject {
-    @Published var path = NavigationPath()
     static let shared: Router = Router()
     
-    func reset() {
-        self.path = NavigationPath()
-    }
-    
-    func changeRoute(_ route: RoutePath) {
-        path.append(route)
-    }
-    
-
-    func backRoute() {
-        path.removeLast()
-    }
+    public var changeRoute: ((RoutePath) -> Void)!
+    public var backRoute: (() -> Void)!
+    public var backtoRootRoute: (() -> Void)!
 }
-

@@ -12,12 +12,14 @@ import SwiftData
 struct NavigatorApp: App {
     @StateObject var locationManager = LocationManager()
     @StateObject var notificationManager = NotificationManager()
+    @StateObject var router = Router()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(locationManager)
                 .environmentObject(notificationManager)
+                .environmentObject(router)
         }
     }
 }
