@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE46B0C92B39DE5500DA0DB2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE46B0C82B39DE5500DA0DB2 /* Router.swift */; };
+		FE46B0CB2B39E1E600DA0DB2 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE46B0CA2B39E1E600DA0DB2 /* Routes.swift */; };
 		FE6ED2F52B265A5C00E4A39C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */; };
 		FE72502F2B064F4000068114 /* SessionControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72502E2B064F4000068114 /* SessionControls.swift */; };
 		FE7250312B0652FC00068114 /* SessionStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7250302B0652FC00068114 /* SessionStats.swift */; };
@@ -63,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FE46B0C82B39DE5500DA0DB2 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		FE46B0CA2B39E1E600DA0DB2 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		FE72502E2B064F4000068114 /* SessionControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionControls.swift; sourceTree = "<group>"; };
 		FE7250302B0652FC00068114 /* SessionStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStats.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 				FEEA24902B160220001D1981 /* AuthenticationHelper.swift */,
 				FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */,
 				FE958BB42B272C36008F24C2 /* UserState.swift */,
+				FE46B0C82B39DE5500DA0DB2 /* Router.swift */,
+				FE46B0CA2B39E1E600DA0DB2 /* Routes.swift */,
 			);
 			path = BusinessLogic;
 			sourceTree = "<group>";
@@ -388,6 +394,7 @@
 				FEB3DAC82B1BA0E900262CB7 /* SessionsView.swift in Sources */,
 				FEE26AC52B1353B200FEEDBD /* NotificationManager.swift in Sources */,
 				FEEA24912B160220001D1981 /* AuthenticationHelper.swift in Sources */,
+				FE46B0C92B39DE5500DA0DB2 /* Router.swift in Sources */,
 				FE7E551C2B057F3B00521F39 /* CompassMarker.swift in Sources */,
 				FEA559A52B02D92C00D0E3D8 /* LocationRequestView.swift in Sources */,
 				FE7E55162B057C6200521F39 /* Compass.swift in Sources */,
@@ -398,6 +405,7 @@
 				FEC07DC52B1272A1004976D7 /* Session.swift in Sources */,
 				FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */,
 				FE72502F2B064F4000068114 /* SessionControls.swift in Sources */,
+				FE46B0CB2B39E1E600DA0DB2 /* Routes.swift in Sources */,
 				FEE3023B2B27DE4B00BF48CB /* CreateSessionView.swift in Sources */,
 				FEA5599B2B0284E500D0E3D8 /* LoginOrRegisterView.swift in Sources */,
 				FE75A3912B07C2D100FE3757 /* Slider.swift in Sources */,

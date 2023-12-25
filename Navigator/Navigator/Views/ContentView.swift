@@ -9,13 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject private var authHelper = AuthenticationHelper()
+    @StateObject var router = Router.shared
     
     var body: some View {
-        if authHelper.savedUser == nil {
-//            MapView()
-             LoginOrRegisterView()
-        } else {
-            MenuView()
+        NavigationStack(path: $router.path) {
+            LoginOrRegisterView()
         }
     }
 }

@@ -111,10 +111,8 @@ extension LocationManager: CLLocationManagerDelegate {
                 let distance = location.distance(from: CLLocation(latitude: previousLocation.latitude, longitude: previousLocation.longitude))
                 
                 if distance > 1 && distance <= 5.0 {
-                    print("added loc")
-                    
                     Task {
-                        let loc = await authHelper.updateLocation(
+                        await authHelper.updateLocation(
                             latitude: location.coordinate.latitude,
                             longitude: location.coordinate.longitude,
                             locationType: .location)
@@ -134,9 +132,17 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func addCheckpoint(coordinate: CLLocationCoordinate2D) {
         if trackingEnabled {
+            print("addCheckpoint")
+            
             let checkpointName = "Checkpoint \(checkpoints.count + 1)"
             checkpoints[checkpointName] = coordinate
-            print(checkpoints)
+            
+            Task {
+                await authHelper.updateLocation(
+                    latitude: coordinate.latitude,
+                    longitude: coordinate.longitude,
+                    locationType: .checkPoint)
+            }
             
             distanceFromCp = 0.0
             directLineFromCp = 0.0
@@ -146,7 +152,16 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func addWaypoint(coordinate: CLLocationCoordinate2D) {
         if trackingEnabled {
+            print("addWaypoint")
+
             waypoint = coordinate
+            
+            Task {
+                await authHelper.updateLocation(
+                    latitude: coordinate.latitude,
+                    longitude: coordinate.longitude,
+                    locationType: .checkPoint)
+            }
             
             distanceFromWp = 0.0
             directLineFromWp = 0.0

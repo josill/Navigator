@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LoginOrRegisterView: View {    
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color
                     .black
@@ -51,8 +50,6 @@ struct LoginOrRegisterView: View {
                     }
                 }
             }
-        }
-        
     }
 }
 

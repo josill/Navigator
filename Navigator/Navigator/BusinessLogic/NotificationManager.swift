@@ -35,18 +35,12 @@ class NotificationManager: NSObject, ObservableObject {
             
             self.changeAuthorizationStatus()
             self.changeNotificationsEnabled()
-        }}
+        }
+    }
     
     func changeAuthorizationStatus() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
-            print("settings: \(settings)")
-            DispatchQueue.main.async {
-                print("status: \(settings.authorizationStatus)")
-                
-                self.notificationsAllowed = settings.authorizationStatus.rawValue == 2 ? true : false
-                
-                print("notifications allowed: \(self.notificationsAllowed)")
-            }
+            self.notificationsAllowed = settings.authorizationStatus.rawValue == 2 ? true : false
         }
     }
     

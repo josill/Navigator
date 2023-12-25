@@ -17,7 +17,6 @@ struct RegisterView: View {
     @State private var password2 = ""
         
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color
                     .black
@@ -148,7 +147,6 @@ struct RegisterView: View {
                         }
                 }
             }
-        }
     }
 }
 

@@ -12,11 +12,8 @@ struct LoginView: View {
     
     @State private var email = ""
     @State private var password = ""
-    
-    @State private var loginSuccessful = false
-
+        
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color
                     .black
@@ -39,31 +36,28 @@ struct LoginView: View {
                             text: $email,
                             prompt: Text("Email")
                                 .foregroundColor(.black.opacity(0.6)))
-                            .padding()
-                            .frame(width: 300, height: 50)
-                            .background(.white)
-                            .foregroundColor(.black)
-                            .cornerRadius(10)
-                            .border(.red, width: CGFloat(authHelper.emailError != "" ? 3 : 0))
+                        .padding()
+                        .frame(width: 300, height: 50)
+                        .background(.white)
+                        .foregroundColor(.black)
+                        .cornerRadius(10)
+                        .border(.red, width: CGFloat(authHelper.emailError != "" ? 3 : 0))
                         
                         SecureField(
                             "Password",
                             text: $password,
                             prompt: Text("Password").foregroundColor(.black.opacity(0.6)))
-                            .padding()
-                            .frame(width: 300, height: 50)
-                            .background(.white)
-                            .foregroundColor(.black)
-                            .cornerRadius(10)
-                            .border(.red, width: CGFloat(authHelper.passwordError != "" ? 3 : 0))
+                        .padding()
+                        .frame(width: 300, height: 50)
+                        .background(.white)
+                        .foregroundColor(.black)
+                        .cornerRadius(10)
+                        .border(.red, width: CGFloat(authHelper.passwordError != "" ? 3 : 0))
                     }
                     
                     Button(action: {
                         Task {
-                            loginSuccessful = await authHelper.login(
-                                email: email,
-                                password: password
-                            ) != nil ? true : false
+                            await authHelper.login(email: email, password: password)
                         }
                     }, label: {
                         if authHelper.isLoading {
@@ -100,10 +94,10 @@ struct LoginView: View {
                     }
                     .hidden()
                     .navigationDestination(
-                        isPresented: $loginSuccessful) {
+                        isPresented: $authHelper.loginSuccess) {
                             MenuView()
                         }
-                }
+                
             }
         }
     }

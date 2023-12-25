@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 import CryptoKit
 
-class User: Codable {
+public class User: Codable, Equatable {
 //    var userId: UUID
 //    var firstName: String?
 //    var lastName: String?
@@ -64,7 +64,7 @@ class User: Codable {
         return hashed.compactMap { String(format: "%02hhx", $0) }.joined()
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 //        userId = try container.decode(UUID.self, forKey: .userId)
 //        firstName = try container.decode(String.self, forKey: .firstName)
@@ -75,7 +75,7 @@ class User: Codable {
         jwtToken = try container.decode(String?.self, forKey: .jwtToken)
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 //        try container.encode(userId, forKey: .userId)
 //        try container.encode(firstName, forKey: .firstName)
@@ -85,4 +85,12 @@ class User: Codable {
         try container.encode(passwordHash, forKey: .passwordHash)
         try container.encode(jwtToken, forKey: .jwtToken)
     }
+    
+    public static func == (lhs: User, rhs: User) -> Bool {
+            // Compare the properties that define equality for User instances
+            return lhs.email == rhs.email &&
+                lhs.salt == rhs.salt &&
+                lhs.passwordHash == rhs.passwordHash &&
+                lhs.jwtToken == rhs.jwtToken
+        }
 }

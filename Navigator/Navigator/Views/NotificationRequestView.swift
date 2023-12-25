@@ -39,7 +39,9 @@ struct NotificationRequestView: View {
                     
                     VStack {
                         Button {
-                            notificationManager.requestNotificationsPermission()
+                            Task {
+                                notificationManager.requestNotificationsPermission()
+                            }
                         } label: {
                             Text("Allow Notifications")
                                 .padding()

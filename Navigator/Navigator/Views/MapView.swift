@@ -18,16 +18,15 @@ struct MapView: View {
     
     @State private var userInitialLocation: MapCameraPosition = .userLocation(fallback: .automatic)
     @State var quitSessionPresented = false
-    @State var trigger = false
     
     var body: some View {
         ZStack {
             if locationManager.userLocation == nil {
                 LocationRequestView()
             }
-            //            else if !notificationManager.notificationsAllowed {
-            //                NotificationRequestView()
-            //            }
+            else if !notificationManager.notificationsAllowed {
+                NotificationRequestView()
+            }
             else if authHelper.savedSessionId != nil {
                 Map(position: $userInitialLocation) {
                     UserAnnotation()

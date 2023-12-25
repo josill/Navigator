@@ -92,6 +92,13 @@ struct SessionsView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
+        .onAppear() {
+            Task {
+                var sessions = await authHelper.getSessions()
+                
+                print("Sessions: \(sessions)")
+            }
+        }
     }
     
     func deleteSession(_ indexSet: IndexSet) {

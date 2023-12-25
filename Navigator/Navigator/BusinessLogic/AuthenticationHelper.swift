@@ -28,6 +28,7 @@ class AuthenticationHelper: ObservableObject {
     @Published var registerError = ""
     
     @Published var loginSuccess = false
+    @Published var logoutSuccess = false
     @Published var registerSuccess = false
     @Published var createSessionSuccess = false
     @Published var quitSessionPresented = false
@@ -238,12 +239,8 @@ class AuthenticationHelper: ObservableObject {
             
             if res.statusCode == 200 {
                 if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                    print("json data from login: \(json)")
-                    
                     let token = json["token"] as! String
-                    
-                    print("Token: \(token)")
-                    
+                                        
                     savedUser = User(
                         email: email,
                         password: password,
@@ -253,7 +250,10 @@ class AuthenticationHelper: ObservableObject {
                         UserDefaults.standard.set(encodedUser, forKey: "savedUser")
                     }
                     
+                    print(res.statusCode)
+                    print(loginSuccess)
                     isLoading = false
+                    loginSuccess = true
                     return savedUser
                 }
             } else {
@@ -281,16 +281,18 @@ class AuthenticationHelper: ObservableObject {
     func logOut() {
         savedUser = nil
         UserDefaults.standard.removeObject(forKey: "savedUser")
+        logoutSuccess = true
+        print("logging out and savedUser: \(savedUser)")
     }
     
     func createSession(name: String, description: String, mode: GpsSessionType) async {
         isLoading = true
         
         if name == "" {
-            sessionNameError = true
-            isLoading = false
-            return
-        } else if description == "" {
+                   sessionNameError = true
+                   isLoading = false
+                   return
+               } else if description == "" {
             sessionDescriptionError = true
             isLoading = false
             return
@@ -378,6 +380,78 @@ class AuthenticationHelper: ObservableObject {
         }
         
         isLoading = false
+    }
+    
+    func getSessions() async -> Session? {
+        let urlString = "\(config.baseUrl)/api/v1.0/GpsSessions"
+        guard let url = URL(string: urlString) else {
+            print("unable to make string: \(urlString) to URL object")
+            return nil
+        }
+        
+        guard let token = savedUser?.jwtToken else {
+            print("Failed to receive token: \(savedUser)")
+            return nil
+        }
+        
+        var req = URLRequest(url: url)
+        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        req.httpMethod = "POST"
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: req)
+
+            guard let res = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return nil
+            }
+            
+            if res.statusCode == 201 {
+                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                    
+                    print("sessions get successfully")
+                    print("json: \(json)")
+                }
+//                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+//                    guard let userId = json["appUserId"] as? String,
+//                          let sessionId = json["id"] as? String else {
+//                        print("Error getting data from json: \(json)")
+//                        isLoading = false
+//                        return
+//                    }
+//                    
+//                    UserDefaults.standard.set(sessionId, forKey: "savedSessionId")
+//                    savedSessionId = sessionId
+//                    
+//                    if savedSessionId != nil {
+//                        isLoading = false
+//                        createSessionSuccess = true
+//                    }
+//                } else {
+//                    print("Error inserting session to db")
+//                    isLoading = false
+//                    return
+//                }
+            } else {
+                print("HTTP Status Code: \(res.statusCode)")
+                
+                if let responseString = String(data: data, encoding: .utf8) {
+                    print("Response Data: \(responseString)")
+                    // Handle the error using the responseString
+                } else {
+                    print("Failed to convert response data to string.")
+                    // Handle the error appropriately
+                }
+                // Handle the error appropriately
+            }
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        isLoading = false
+        
+        return nil
     }
     
     func presentQuitSessionAlert() {
