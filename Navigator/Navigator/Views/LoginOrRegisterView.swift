@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LoginOrRegisterView: View {
+    @EnvironmentObject private var router: Router
+
     var body: some View {
             ZStack {
                 Color
@@ -28,7 +30,7 @@ struct LoginOrRegisterView: View {
                         .foregroundColor(.white.opacity(0.8))
                     
                     Button {
-                        Router.shared.changeRoute(RoutePath(.login))
+                        router.changeRoute(RoutePath(.login))
                     } label: {
                         Text("Sign in")
                             .frame(maxWidth: 300)
@@ -40,7 +42,7 @@ struct LoginOrRegisterView: View {
                     }
                     
                     Button {
-                        Router.shared.changeRoute(RoutePath(.register))
+                        router.changeRoute(RoutePath(.register))
                     } label: {
                         Text("Create account")
                             .frame(maxWidth: 300)

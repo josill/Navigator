@@ -12,31 +12,11 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $router.path) {
-            VStack(spacing: 10) {
-                Text("Root view")
-                Button {
-                    router.changeRoute(RoutePath(.menu))
-                } label: {
-                    Text("Go to user create")
-                }
-                Button {
-                    router.changeRoute(RoutePath(.map))
-                } label: {
-                    Text("Go to user edit")
-                }
-                
-                Button {
-                    router.changeRoute(RoutePath(.login))
-                } label: {
-                    Text("go to main screen")
-                }
-            }
+            LoginOrRegisterView()
             .navigationDestination(for: RoutePath.self) { route in
                 switch route.route {
-                case .login:
-                    LoginOrRegisterView()
-                case .register:
-                    Text("User create view comes here")
+                case .login: LoginView()
+                case .register: RegisterView()
                 case .menu:
                     Text("User create view comes here")
                 case .createSession:
