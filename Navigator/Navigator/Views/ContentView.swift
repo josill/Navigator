@@ -7,32 +7,35 @@
 
 import SwiftUI
 
-struct ContentView: View {    
+struct ContentView: View {
+    @EnvironmentObject private var authHelper: AuthenticationHelper
     @EnvironmentObject private var router: Router
     
     var body: some View {
         NavigationStack(path: $router.path) {
             LoginOrRegisterView()
-            .navigationDestination(for: RoutePath.self) { route in
-                switch route.route {
-                case .login: LoginView()
-                case .register: RegisterView()
-                case .menu:
-                    Text("User create view comes here")
-                case .createSession:
-                    Text("User create view comes here")
-                case .viewSessions:
-                    Text("User create view comes here")
-                case .locationAllowed:
-                    Text("User create view comes here")
-                case .notificationsAllowed:
-                    Text("User create view comes here")
-                case .map:
-                    Text("User create view comes here")
-                case .none:
-                    Text("User create view comes here")
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        print("main view: \(authHelper.savedUser)")
+
+                        if authHelper.savedUser != nil {
+                            router.changeRoute(.init(.menu))
+                        }
+                    }
                 }
-            }
+                .navigationDestination(for: RoutePath.self) { route in
+                    switch route.route {
+                    case .login: LoginView()
+                    case .register: RegisterView()
+                    case .menu: MenuView()
+                    case .createSession: CreateSessionView()
+                    case .viewSessions: SessionsView()
+                    case .locationAllowed: LocationRequestView()
+                    case .notificationsAllowed: NotificationRequestView()
+                    case .map: MapView()
+                    case .none: LoginOrRegisterView()
+                    }
+                }
         }
     }
 }

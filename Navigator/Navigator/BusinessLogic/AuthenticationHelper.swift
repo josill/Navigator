@@ -27,9 +27,6 @@ class AuthenticationHelper: ObservableObject {
     @Published var loginError = ""
     @Published var registerError = ""
     
-    @Published var loginSuccess = false
-    @Published var logoutSuccess = false
-    @Published var registerSuccess = false
     @Published var createSessionSuccess = false
     @Published var quitSessionPresented = false
     
@@ -109,12 +106,12 @@ class AuthenticationHelper: ObservableObject {
         return passwordsCorrect
     }
     
-    func register(firstName: String, lastName: String, email: String, password1: String, password2: String) async {
+    func register(firstName: String, lastName: String, email: String, password1: String, password2: String) async -> Bool {
         isLoading = true
         
-        if !validateNames(firstName, lastName) { isLoading = false; return }
-        if !validateEmail(email) { isLoading = false; return }
-        if !validatePasswords(password1, password2) { isLoading = false; return }
+        if !validateNames(firstName, lastName) { isLoading = false; return false }
+        if !validateEmail(email) { isLoading = false; return false }
+        if !validatePasswords(password1, password2) { isLoading = false; return false }
         
         let urlString = "\(config.baseUrl)/api/v1.0/account/register"
         let data = [
@@ -128,13 +125,13 @@ class AuthenticationHelper: ObservableObject {
             registerError = "Something went wrong!"
             print("unable to make string: \(urlString) to URL object")
             isLoading = false
-            return
+            return false
         }
         guard let encoded = try? JSONEncoder().encode(data) else {
             registerError = "Something went wrong!"
             print("Failed to encode data: \(data)")
             isLoading = false
-            return
+            return false
         }
         
         var req = URLRequest(url: url)
@@ -148,61 +145,53 @@ class AuthenticationHelper: ObservableObject {
                 registerError = "Something went wrong!"
                 print("Invalid response")
                 isLoading = false
-                return
+                return false
             }
             
             if res.statusCode == 200 {
                 // Process the successful response
                 if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                    print("json as data from register: \(json)")
-                    
                     guard let token = json["token"] else {
                         isLoading = false
                         registerError = "Something went wrong!"
-                        return
+                        return false
                     }
-                    print("Token: \(token)")
                     
+                    print("register success")
                     isLoading = false
                     registerError = ""
-                    registerSuccess.toggle()
+                    return true
+                    
                 }
             } else if res.statusCode == 404 {
                 registerError = "User with this email already exists!"
+                isLoading = false
             } else {
                 registerError = "Something went wrong!"
-                
                 print("HTTP Status Code: \(res.statusCode)")
                 
                 if let responseString = String(data: data, encoding: .utf8) {
                     print("Response Data: \(responseString)")
-                    // Handle the error using the responseString
                 } else {
                     print("Failed to convert response data to string.")
-                    // Handle the error appropriately
                 }
-                // Handle the error appropriately
             }
         } catch {
             registerError = "Something went wrong!"
             print("Error: \(error)")
+            return false
         }
         
-        isLoading = false
+        isLoading = false        
+        return false
     }
     
-    func login(email: String, password: String) async -> User? {
+    func login(email: String, password: String) async -> Bool {
         isLoading = true
         
-        if !validateEmail(email) {
-            isLoading = false
-            return nil
-        }
-        
-        if !validatePassword(password) {
-            isLoading = false
-            return nil
-        }
+        if !validateEmail(email) { isLoading = false; return false }
+
+        if !validatePassword(password) { isLoading = false; return false }
         
         let urlString = "\(config.baseUrl)/api/v1.0/account/login"
         let data = [
@@ -214,13 +203,13 @@ class AuthenticationHelper: ObservableObject {
             loginError = "Something went wrong!"
             print("unable to make string: \(urlString) to URL object")
             isLoading = false
-            return nil
+            return false
         }
         guard let encoded = try? JSONEncoder().encode(data) else {
             loginError = "Something went wrong!"
             print("Failed to encode data: \(data)")
             isLoading = false
-            return nil
+            return false
         }
         
         var req = URLRequest(url: url)
@@ -234,27 +223,26 @@ class AuthenticationHelper: ObservableObject {
                 loginError = "Something went wrong!"
                 print("Invalid response")
                 isLoading = false
-                return nil
+                return false
             }
             
             if res.statusCode == 200 {
                 if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
                     let token = json["token"] as! String
-                                        
-                    savedUser = User(
-                        email: email,
-                        password: password,
-                        jwtToken: token
-                    )
-                    if let encodedUser = try? JSONEncoder().encode(savedUser) {
-                        UserDefaults.standard.set(encodedUser, forKey: "savedUser")
+                    
+                    Task { @MainActor in
+                        savedUser = User(
+                            email: email,
+                            password: password,
+                            jwtToken: token
+                        )
+                        if let encodedUser = try? JSONEncoder().encode(savedUser) {
+                            UserDefaults.standard.set(encodedUser, forKey: "savedUser")
+                        }
                     }
                     
-                    print(res.statusCode)
-                    print(loginSuccess)
                     isLoading = false
-                    loginSuccess = true
-                    return savedUser
+                    return true
                 }
             } else {
                 loginError = "Wrong email or password!"
@@ -275,24 +263,24 @@ class AuthenticationHelper: ObservableObject {
         }
         
         isLoading = false
-        return nil
+        return false
     }
     
-    func logOut() {
-        savedUser = nil
-        UserDefaults.standard.removeObject(forKey: "savedUser")
-        logoutSuccess = true
-        print("logging out and savedUser: \(savedUser)")
+    func logOut(completion: @escaping () -> Void) {
+            savedUser = nil
+            UserDefaults.standard.removeObject(forKey: "savedUser")
+            print("logout: \(savedUser)")
+            completion()
     }
     
     func createSession(name: String, description: String, mode: GpsSessionType) async {
         isLoading = true
         
         if name == "" {
-                   sessionNameError = true
-                   isLoading = false
-                   return
-               } else if description == "" {
+            sessionNameError = true
+            isLoading = false
+            return
+        } else if description == "" {
             sessionDescriptionError = true
             isLoading = false
             return
@@ -401,7 +389,7 @@ class AuthenticationHelper: ObservableObject {
         
         do {
             let (data, response) = try await URLSession.shared.data(for: req)
-
+            
             guard let res = response as? HTTPURLResponse else {
                 print("Invalid response")
                 return nil
@@ -413,26 +401,26 @@ class AuthenticationHelper: ObservableObject {
                     print("sessions get successfully")
                     print("json: \(json)")
                 }
-//                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-//                    guard let userId = json["appUserId"] as? String,
-//                          let sessionId = json["id"] as? String else {
-//                        print("Error getting data from json: \(json)")
-//                        isLoading = false
-//                        return
-//                    }
-//                    
-//                    UserDefaults.standard.set(sessionId, forKey: "savedSessionId")
-//                    savedSessionId = sessionId
-//                    
-//                    if savedSessionId != nil {
-//                        isLoading = false
-//                        createSessionSuccess = true
-//                    }
-//                } else {
-//                    print("Error inserting session to db")
-//                    isLoading = false
-//                    return
-//                }
+                //                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                //                    guard let userId = json["appUserId"] as? String,
+                //                          let sessionId = json["id"] as? String else {
+                //                        print("Error getting data from json: \(json)")
+                //                        isLoading = false
+                //                        return
+                //                    }
+                //
+                //                    UserDefaults.standard.set(sessionId, forKey: "savedSessionId")
+                //                    savedSessionId = sessionId
+                //
+                //                    if savedSessionId != nil {
+                //                        isLoading = false
+                //                        createSessionSuccess = true
+                //                    }
+                //                } else {
+                //                    print("Error inserting session to db")
+                //                    isLoading = false
+                //                    return
+                //                }
             } else {
                 print("HTTP Status Code: \(res.statusCode)")
                 

@@ -29,10 +29,11 @@ class Router: ObservableObject {
     static let shared: Router = Router()
     
     func reset() {
-        self.path = NavigationPath()
+        path = NavigationPath()
     }
     
     func changeRoute(_ route: RoutePath) {
+        print("changing route: \(route)")
         path.append(route)
     }
     

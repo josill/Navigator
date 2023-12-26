@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
-    @ObservedObject var authHelper = AuthenticationHelper()
-    
+    @EnvironmentObject private var authHelper: AuthenticationHelper
+    @EnvironmentObject private var router: Router
+
     @State private var email = ""
     @State private var password = ""
         
@@ -57,10 +58,10 @@ struct LoginView: View {
                     
                     Button {
                         Task {
-                            await authHelper.login(email: email, password: password)
+                            let loginSuccess = await authHelper.login(email: email, password: password)
                             
-                            if authHelper.loginSuccess {
-                                Router.shared.changeRoute(RoutePath(.login))
+                            if loginSuccess {
+                                router.changeRoute(.init(.menu))
                             }
                         }
                     } label: {

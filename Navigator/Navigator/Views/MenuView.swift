@@ -9,9 +9,10 @@ import SwiftUI
 
 struct MenuView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var authHelper = AuthenticationHelper()
+    @EnvironmentObject private var authHelper: AuthenticationHelper 
+    @EnvironmentObject private var router: Router
+    
     @State private var isLogoutAlertPresented = false
-    @StateObject private var router = Router.shared
     
     var body: some View {
         ZStack {
@@ -40,7 +41,9 @@ struct MenuView: View {
                 Spacer()
                 
                 VStack(spacing: 20) {
-                    NavigationLink(destination: SessionsView()) {
+                    Button {
+                        router.changeRoute(.init(.viewSessions))
+                    } label: {
                         Text("Your sessions")
                     }
                     .frame(maxWidth: 265)
@@ -50,7 +53,9 @@ struct MenuView: View {
                     .font(.headline)
                     .cornerRadius(12.0)
                     
-                    NavigationLink(destination: CreateSessionView()) {
+                    Button {
+                        router.changeRoute(.init(.createSession))
+                    } label: {
                         Text("Create session")
                     }
                     .frame(maxWidth: 265)
@@ -82,7 +87,9 @@ struct MenuView: View {
                 message: Text("Are you sure you want to log out?"),
                 primaryButton: .default(Text("Cancel")),
                 secondaryButton: .destructive(Text("Log Out")) {
-                    authHelper.logOut()
+                    authHelper.logOut {
+                        router.reset()
+                    }
                 }
             )
         }
