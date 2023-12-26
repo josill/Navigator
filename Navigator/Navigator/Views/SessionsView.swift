@@ -13,91 +13,75 @@ struct SessionsView: View {
     @EnvironmentObject private var router: Router
     
     @State private var sessions: [Session] = []
-
-//    @Query(
-//        filter: #Predicate {
-//                guard let user = $0.user else {
-//                    return false
-//                }
-//
-//                return DatabaseService.shared.currentUser?.email == user.email
-//            },
-//            sort: [SortDescriptor(\Session.createdAt)]
-//        ) var sessions: [Session]
-
-//    init() {
-//        _sessions = Query(
-//            filter: #Predicate {
-//                if let user = $0.user {
-//                    if user.email == currentUser!.email { return true }
-//                    else { return false }
-//                }
-//                else { return false }
-//            },
-//            sort: [SortDescriptor(\Session.createdAt)]
-//        )
-//    }
+    @State private var isLoading: Bool = true
     
     var body: some View {
-            ZStack {
-                Color.black.edgesIgnoringSafeArea(.all)
-                
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            
+            VStack {
                 VStack {
-                    VStack {
-                            Text("Your sessions")
-                        }
+                    Text("Your sessions")
                         .font(.largeTitle)
                         .foregroundColor(.white)
                         .padding(.top, 20)
-                    
-                    if sessions.isEmpty {
-                        Spacer()
-                        
-                        HStack {
-                            Image(systemName: "exclamationmark.triangle")
-                                .font(.title2)
-                                .foregroundColor(.red)
-                                .padding(.top, 10)
-                            
-                            Text("No sessions available.")
-                                .font(.title2)
-                                .foregroundColor(.red)
-                                .padding(.top, 10)
-                        }
-                        .padding(.bottom, 30)
-                        
-                        Button {
-                            router.changeRoute(.init(.createSession))
-                        } label: {
-                            Text("Create session")
-                        }
-                        .frame(maxWidth: 265)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(Color.white.opacity(0.9))
-                        .font(.headline)
-                        .cornerRadius(12.0)
-                        
-                        Spacer()
-                    } else {
-                        
-                        List{
-                            ForEach(sessions) { session in
-                                SessionLink(session: session)
-                            }
-                            .onDelete(perform: deleteSession)
-                        }
-                        .background(.black)
-                        .scrollContentBackground(.hidden)
-                    }
                 }
-                .background(.black)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                Spacer()
+                
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .onAppear {
+                            Task {
+                                sessions = await authHelper.getSessions() ?? []
+                                isLoading = false
+                            }
+                        }
+                    
+                    Spacer()
+                } else if sessions.isEmpty {
+                    Spacer()
+
+                    HStack {
+                        Image(systemName: "exclamationmark.triangle")
+                            .font(.title2)
+                            .foregroundColor(.red)
+                            .padding(.top, 10)
+                        
+                        Text("No sessions available.")
+                            .font(.title2)
+                            .foregroundColor(.red)
+                            .padding(.top, 10)
+                    }
+                    .padding(.bottom, 30)
+                    
+                    Button {
+                        router.changeRoute(.init(.createSession))
+                    } label: {
+                        Text("Create session")
+                    }
+                    .frame(maxWidth: 265)
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(Color.white.opacity(0.9))
+                    .font(.headline)
+                    .cornerRadius(12.0)
+                    
+                    Spacer()
+                } else {
+                    List {
+                        ForEach(sessions) { session in
+                            SessionLink(session: session)
+                        }
+                        .onDelete(perform: deleteSession)
+                    }
+                    .background(.black)
+                    .scrollContentBackground(.hidden)
+                }
             }
-        .onAppear() {
-            Task {
-                sessions = await authHelper.getSessions() ?? []
-            }
+            .background(.black)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
     
@@ -106,6 +90,6 @@ struct SessionsView: View {
     }
 }
 
-#Preview {
-    return SessionsView()
-}
+//#Preview {
+//    SessionsView()
+//}
