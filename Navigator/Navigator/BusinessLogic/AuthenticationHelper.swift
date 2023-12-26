@@ -190,7 +190,7 @@ class AuthenticationHelper: ObservableObject {
         isLoading = true
         
         if !validateEmail(email) { isLoading = false; return false }
-
+        
         if !validatePassword(password) { isLoading = false; return false }
         
         let urlString = "\(config.baseUrl)/api/v1.0/account/login"
@@ -267,10 +267,10 @@ class AuthenticationHelper: ObservableObject {
     }
     
     func logOut(completion: @escaping () -> Void) {
-            savedUser = nil
-            UserDefaults.standard.removeObject(forKey: "savedUser")
-            print("logout: \(savedUser)")
-            completion()
+        savedUser = nil
+        UserDefaults.standard.removeObject(forKey: "savedUser")
+        print("logout: \(savedUser)")
+        completion()
     }
     
     func createSession(name: String, description: String, mode: GpsSessionType) async {
@@ -370,22 +370,23 @@ class AuthenticationHelper: ObservableObject {
         isLoading = false
     }
     
-    func getSessions() async -> Session? {
+    func getSessions() async -> [Session]? {
         let urlString = "\(config.baseUrl)/api/v1.0/GpsSessions"
+        
         guard let url = URL(string: urlString) else {
             print("unable to make string: \(urlString) to URL object")
             return nil
         }
         
-        guard let token = savedUser?.jwtToken else {
-            print("Failed to receive token: \(savedUser)")
-            return nil
-        }
+        //        guard let token = savedUser?.jwtToken else {
+        //            print("Failed to receive token: \(savedUser)")
+        //            return nil
+        //        }
         
         var req = URLRequest(url: url)
-        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        req.httpMethod = "POST"
+        //        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        //        req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        req.httpMethod = "GET"
         
         do {
             let (data, response) = try await URLSession.shared.data(for: req)
@@ -395,32 +396,17 @@ class AuthenticationHelper: ObservableObject {
                 return nil
             }
             
-            if res.statusCode == 201 {
-                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+            if res.statusCode == 200 {
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                
+                do {
+                    let sessions = try decoder.decode([Session].self, from: data)
                     
-                    print("sessions get successfully")
-                    print("json: \(json)")
+                    return sessions
+                } catch {
+                    print("Error decoding JSON: \(error)")
                 }
-                //                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                //                    guard let userId = json["appUserId"] as? String,
-                //                          let sessionId = json["id"] as? String else {
-                //                        print("Error getting data from json: \(json)")
-                //                        isLoading = false
-                //                        return
-                //                    }
-                //
-                //                    UserDefaults.standard.set(sessionId, forKey: "savedSessionId")
-                //                    savedSessionId = sessionId
-                //
-                //                    if savedSessionId != nil {
-                //                        isLoading = false
-                //                        createSessionSuccess = true
-                //                    }
-                //                } else {
-                //                    print("Error inserting session to db")
-                //                    isLoading = false
-                //                    return
-                //                }
             } else {
                 print("HTTP Status Code: \(res.statusCode)")
                 

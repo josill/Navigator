@@ -16,8 +16,6 @@ struct ContentView: View {
             LoginOrRegisterView()
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        print("main view: \(authHelper.savedUser)")
-
                         if authHelper.savedUser != nil {
                             router.changeRoute(.init(.menu))
                         }
@@ -27,7 +25,7 @@ struct ContentView: View {
                     switch route.route {
                     case .login: LoginView()
                     case .register: RegisterView()
-                    case .menu: MenuView()
+                    case .menu: MenuView().navigationBarBackButtonHidden()
                     case .createSession: CreateSessionView()
                     case .viewSessions: SessionsView()
                     case .locationAllowed: LocationRequestView()

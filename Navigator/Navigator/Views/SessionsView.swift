@@ -9,10 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct SessionsView: View {
+    @EnvironmentObject private var authHelper: AuthenticationHelper
+    @EnvironmentObject private var router: Router
     
-    @ObservedObject var authHelper = AuthenticationHelper()
-    
-    @Query(
+    @State private var sessions: [Session] = []
+
+//    @Query(
 //        filter: #Predicate {
 //                guard let user = $0.user else {
 //                    return false
@@ -20,8 +22,8 @@ struct SessionsView: View {
 //
 //                return DatabaseService.shared.currentUser?.email == user.email
 //            },
-            sort: [SortDescriptor(\Session.createdAt)]
-        ) var sessions: [Session]
+//            sort: [SortDescriptor(\Session.createdAt)]
+//        ) var sessions: [Session]
 
 //    init() {
 //        _sessions = Query(
@@ -37,7 +39,6 @@ struct SessionsView: View {
 //    }
     
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color.black.edgesIgnoringSafeArea(.all)
                 
@@ -65,7 +66,9 @@ struct SessionsView: View {
                         }
                         .padding(.bottom, 30)
                         
-                    NavigationLink(destination: CreateSessionView()) {
+                        Button {
+                            router.changeRoute(.init(.createSession))
+                        } label: {
                             Text("Create session")
                         }
                         .frame(maxWidth: 265)
@@ -91,12 +94,9 @@ struct SessionsView: View {
                 .background(.black)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-        }
         .onAppear() {
             Task {
-                var sessions = await authHelper.getSessions()
-                
-                print("Sessions: \(sessions)")
+                sessions = await authHelper.getSessions() ?? []
             }
         }
     }

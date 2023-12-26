@@ -93,7 +93,6 @@ struct MenuView: View {
                 }
             )
         }
-        .navigationBarBackButtonHidden()
     }
 }
 

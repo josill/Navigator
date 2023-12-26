@@ -1,104 +1,106 @@
+// Session.swift
+// Navigator
 //
-//  Session.swift
-//  Navigator
-//
-//  Created by Jonathan Sillak on 25.11.2023.
-//
+// Created by Jonathan Sillak on 25.11.2023.
 
 import Foundation
-import SwiftData
 
-@Model
-class Session: Codable {
-    var sessionId : UUID
-    var sessionName: String
-    var sessionDescription: String
-    var createdAt: Date
-    var minSpeed: Double
-    var maxSpeed: Double
-    var distanceCovered: Double
-    var timeElapsed: Double
-    var averageSpeed: Double
-    @Relationship(deleteRule: .cascade, inverse: \UserLocation.session)
-    var checkPoints = [UserLocation]()
-    @Relationship(deleteRule: .cascade, inverse: \UserLocation.session)
-    var wayPoints = [UserLocation]()
-    @Relationship(deleteRule: .cascade, inverse: \UserLocation.session)
-    var locations = [UserLocation]()
-    var user: User?
+struct Session: Codable, Identifiable {
+    var id: UUID
+    var name: String
+    var description: String
+    var recordedAt: Date
+    var duration: Double
+    var speed: Double
+    var distance: Double
+    var climb: Double
+    var descent: Double
+    var paceMin: Double
+    var paceMax: Double
+    var gpsSessionType: String
+    var gpsLocationsCount: Double
+    var userFirstLastName: String
+    var userId: UUID
     
     enum CodingKeys: String, CodingKey {
-        case sessionId
-        case sessionName
-        case sessionDescription
-        case createdAt
-        case minSpeed
-        case maxSpeed
-        case distanceCovered
-        case timeElapsed
-        case averageSpeed
-        case checkPoints
-        case wayPoints
-        case locations
-        case user
+        case id
+        case name
+        case description
+        case recordedAt
+        case duration
+        case speed
+        case distance
+        case climb
+        case descent
+        case paceMin
+        case paceMax
+        case gpsSessionType
+        case gpsLocationsCount
+        case userFirstLastName
+        case userId
     }
     
     init(
-        sessionId: UUID = UUID(), 
-        sessionName: String,
-        sessionDescription: String,
-        createdAt: Date = Date(),
-        minSpeed: Double = 60,
-        maxSpeed: Double = 600,
-        distanceCovered: Double = 0,
-        timeElapsed: Double = 0,
-        averageSpeed: Double = 0,
-        checkPoints: [UserLocation] = [],
-        wayPoints: [UserLocation] = [],
-        locations: [UserLocation] = []
+        id: UUID,
+        name: String,
+        description: String,
+        recordedAt: Date = Date(),
+        duration: Double = 0,
+        speed: Double = 0,
+        distance: Double = 0,
+        climb: Double = 0,
+        descent: Double = 0,
+        paceMin: Double = 0,
+        paceMax: Double = 0,
+        gpsSessionType: String = "",
+        gpsLocationsCount: Double = 0,
+        userFirstLastName: String = "",
+        userId: UUID
     ) {
-        self.sessionId = sessionId
-        self.sessionName = sessionName
-        self.sessionDescription = sessionDescription
-        self.createdAt = createdAt
-        self.minSpeed = minSpeed
-        self.maxSpeed = maxSpeed
-        self.distanceCovered = distanceCovered
-        self.timeElapsed = timeElapsed
-        self.averageSpeed = averageSpeed
-        self.checkPoints = checkPoints
-        self.wayPoints = wayPoints
-        self.locations = locations
+        self.id = id
+        self.name = name
+        self.description = description
+        self.recordedAt = recordedAt
+        self.duration = duration
+        self.speed = speed
+        self.distance = distance
+        self.climb = climb
+        self.descent = descent
+        self.paceMin = paceMin
+        self.paceMax = paceMax
+        self.gpsSessionType = gpsSessionType
+        self.gpsLocationsCount = gpsLocationsCount
+        self.userFirstLastName = userFirstLastName
+        self.userId = userId
     }
     
-    required init(from decoder: Decoder) throws {
+    init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        sessionId = try container.decode(UUID.self, forKey: .sessionId)
-        sessionName = try container.decode(String.self, forKey: .sessionName)
-        sessionDescription = try container.decode(String.self, forKey: .sessionDescription)
-        createdAt = try container.decode(Date.self, forKey: .createdAt)
-        minSpeed = try container.decode(Double.self, forKey: .minSpeed)
-        maxSpeed = try container.decode(Double.self, forKey: .maxSpeed)
-        distanceCovered = try container.decode(Double.self, forKey: .distanceCovered)
-        timeElapsed = try container.decode(Double.self, forKey: .timeElapsed)
-        averageSpeed = try container.decode(Double.self, forKey: .averageSpeed)
-        checkPoints = try container.decode([UserLocation].self, forKey: .checkPoints)
-        wayPoints = try container.decode([UserLocation].self, forKey: .wayPoints)
-        locations = try container.decode([UserLocation].self, forKey: .locations)
+
+        id = try container.decode(UUID.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        description = try container.decode(String.self, forKey: .description)
+        duration = try container.decode(Double.self, forKey: .duration)
+        speed = try container.decode(Double.self, forKey: .speed)
+        distance = try container.decode(Double.self, forKey: .distance)
+        climb = try container.decode(Double.self, forKey: .climb)
+        descent = try container.decode(Double.self, forKey: .descent)
+        paceMin = try container.decode(Double.self, forKey: .paceMin)
+        paceMax = try container.decode(Double.self, forKey: .paceMax)
+        gpsSessionType = try container.decode(String.self, forKey: .gpsSessionType)
+        gpsLocationsCount = try container.decode(Double.self, forKey: .gpsLocationsCount)
+        userFirstLastName = try container.decode(String.self, forKey: .userFirstLastName)
+        userId = try container.decode(UUID.self, forKey: .userId)
+
+        let iso8601Decoder = ISO8601DateFormatter()
+        iso8601Decoder.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+        if let recordedAtString = try? container.decode(String.self, forKey: .recordedAt),
+           let date = iso8601Decoder.date(from: recordedAtString) {
+            recordedAt = date
+        } else {
+            recordedAt = Date()
+        }
     }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(sessionId, forKey: .sessionId)
-        try container.encode(sessionName, forKey: .sessionName)
-        try container.encode(sessionDescription, forKey: .sessionDescription)
-        try container.encode(createdAt, forKey: .createdAt)
-        try container.encode(minSpeed, forKey: .minSpeed)
-        try container.encode(maxSpeed, forKey: .maxSpeed)
-        try container.encode(distanceCovered, forKey: .distanceCovered)
-        try container.encode(averageSpeed, forKey: .averageSpeed)
-        try container.encode(checkPoints, forKey: .checkPoints)
-        try container.encode(wayPoints, forKey: .wayPoints)
-        try container.encode(locations, forKey: .locations)
-    }
+
 }

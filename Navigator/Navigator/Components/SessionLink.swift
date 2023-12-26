@@ -13,16 +13,16 @@ struct SessionLink: View {
     var body: some View {
         NavigationLink(destination: MapView()) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("\(session.sessionName)")
+                    Text("\(session.name)")
                         .font(.headline)
                         .foregroundColor(.blue)
-                    Text("Created at: \(formatDateString(session.createdAt))")
+                    Text("Created at: \(formatDateString(session.recordedAt))")
                         .foregroundColor(.white)
-                    Text("Distance covered: \(String(format: "%.2f", session.distanceCovered))")
+                    Text("Distance covered: \(String(format: "%.2f", session.distance))")
                         .foregroundColor(.white)
-                    Text("Time elapsed: \(session.timeElapsed)")
+                    Text("Time elapsed: \(session.duration)")
                         .foregroundColor(.white)
-                    Text("Average speed: \(String(format: "%.2f", session.averageSpeed))")
+                    Text("Average speed: \(String(format: "%.2f", session.speed))")
                         .foregroundColor(.white)
                 }
                 .padding(10)
@@ -39,6 +39,6 @@ struct SessionLink: View {
     }
 }
 
-#Preview {
-    SessionLink(session: Session(sessionId: UUID(), sessionName: "Sample Session", sessionDescription: "bla bla", createdAt: Date(), distanceCovered: 10.5, timeElapsed: 3600, averageSpeed: 5.0, checkPoints: [], wayPoints: [], locations: []))
-}
+//#Preview {
+//    SessionLink(session: Session(id: UUID(), sessionName: "Sample Session", sessionDescription: "bla bla", createdAt: Date(), distanceCovered: 10.5, timeElapsed: 3600, averageSpeed: 5.0, checkPoints: [], wayPoints: [], locations: []))
+//}
