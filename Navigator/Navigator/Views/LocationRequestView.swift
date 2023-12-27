@@ -11,9 +11,8 @@ import CoreLocation
 struct LocationRequestView: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject var locationManager: LocationManager
-    
-    @State private var redirectToMenu = false
-    
+    @EnvironmentObject var notificationManager: NotificationManager
+        
     var body: some View {
         ZStack {
             Color
@@ -58,7 +57,11 @@ struct LocationRequestView: View {
         }
         .onReceive(locationManager.$authorizationStatus) { newAuthorizationStatus in
             if newAuthorizationStatus == .authorizedWhenInUse || newAuthorizationStatus == .authorizedAlways {
-                router.changeRoute(.init(.notificationsAllowed))
+                if notificationManager.authorizationStatus == .authorized {
+                    router.changeRoute(.init(.map))
+                } else {
+                    router.changeRoute(.init(.notificationsAllowed))
+                }
             }
         }
     }

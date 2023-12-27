@@ -41,6 +41,13 @@ class Router: ObservableObject {
         path.removeLast()
     }
     
+    func backToMenuRoute() {
+        if let mapRoutePathIndex = path.firstIndex(where: { $0.route == .menu }) {
+            let elementsToRemove = path.count - (mapRoutePathIndex + 1)
+            path.removeLast(elementsToRemove)
+        }
+    }
+    
     func lastRoute() -> RoutePath? {
         return path.last
     }

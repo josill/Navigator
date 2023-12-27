@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SessionControls: View {
     @StateObject private var authHelper = AuthenticationHelper.shared
+    @EnvironmentObject private var router: Router
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var notificationManager: NotificationManager
     
@@ -76,7 +77,6 @@ struct SessionControls: View {
             
             Button {
                 quitSessionPresented.toggle()
-                    print(quitSessionPresented)
             } label: {
                 Image(systemName: "power")
             }
@@ -89,7 +89,22 @@ struct SessionControls: View {
             
             Spacer()
         }
+        .alert(isPresented: $quitSessionPresented) {
+            Alert(
+                title: Text("Quit session"),
+                message: Text("Are you sure you want to end the session?"),
+                primaryButton: .default(Text("Cancel")),
+                secondaryButton: .destructive(Text("Quit")) {
+                    Task {
+                        router.backToMenuRoute()
+//                        authHelper.quitSavedSession()
+//                        locationManager.reset()
+                    }
+                }
+            )
+        }
     }
+    
 }
 
 #Preview {

@@ -70,19 +70,6 @@ struct MapView: View {
                 SlideUpCard(quitSessionPresented: $quitSessionPresented)
             }
         }
-        .alert(isPresented: $quitSessionPresented) {
-            Alert(
-                title: Text("Quit session"),
-                message: Text("Are you sure you want to end the session?"),
-                primaryButton: .default(Text("Cancel")),
-                secondaryButton: .destructive(Text("Quit")) {
-                    Task {
-                        authHelper.quitSavedSession()
-                        locationManager.reset()
-                    }
-                }
-            )
-        }
     }
 }
 

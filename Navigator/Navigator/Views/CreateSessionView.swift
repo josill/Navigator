@@ -10,9 +10,8 @@ import SwiftUI
 struct CreateSessionView: View {
     @StateObject private var authHelper = AuthenticationHelper.shared
     @EnvironmentObject private var router: Router
-    
-        @EnvironmentObject var locationManager: LocationManager
-        @EnvironmentObject var notificationManager: NotificationManager
+    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var notificationManager: NotificationManager
     
     @State private var sessionName = ""
     @State private var sessionDescription = ""

@@ -11,9 +11,6 @@ struct NotificationRequestView: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject private var notificationManager: NotificationManager
     
-    @State private var redirectToMenu = false
-    @State private var routeChanged = false
-    
     var body: some View {
         ZStack {
             Color
@@ -56,7 +53,7 @@ struct NotificationRequestView: View {
                     .clipShape(Capsule())
                     
                     Button {
-                        redirectToMenu = true
+                        router.backToMenuRoute()
                     } label: {
                         Text("Maybe later")
                             .padding()
@@ -73,11 +70,8 @@ struct NotificationRequestView: View {
             }
         }
         .onReceive(notificationManager.$authorizationStatus) { newAuthorizationStatus in
-            print("onReceive notification")
-            print(router.lastRoute()!.route)
-            if !routeChanged && newAuthorizationStatus == .authorized {
+            if newAuthorizationStatus == .authorized {
                 router.changeRoute(.init(.map))
-                routeChanged = true
             }
         }
     }
