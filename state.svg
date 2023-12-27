@@ -1,0 +1,456 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 
+3233.652343749999 1312.0996093749993" width="6467.304687499998" 
+height="2624.1992187499986">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style class="style-fonts">
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+      @font-face {
+        font-family: "Assistant";
+        src: url("https://excalidraw.com/Assistant-Regular.woff2");
+      }
+    </style>
+    
+  </defs>
+  <rect x="0" y="0" width="3233.652343749999" height="1312.0996093749993" 
+fill="#ffffff"></rect><g stroke-linecap="round" 
+transform="translate(302.31309204796935 416.6820118313851) rotate(0 
+95.703125 132.564453125)"><path d="M32 0 C68.29 -0.39, 107.43 1.3, 159.41 
+0 M32 0 C72.54 -0.57, 113.75 0.33, 159.41 0 M159.41 0 C182.61 -1.76, 
+192.74 9.27, 191.41 32 M159.41 0 C182.39 -0.11, 192.99 11.25, 191.41 32 
+M191.41 32 C193.19 88.01, 193.99 142.12, 191.41 233.13 M191.41 32 C190.38 
+88.85, 189.96 147.76, 191.41 233.13 M191.41 233.13 C192.71 252.98, 181.33 
+264.12, 159.41 265.13 M191.41 233.13 C191.77 254.52, 182.48 265.43, 159.41 
+265.13 M159.41 265.13 C114.82 263.48, 69.74 262.92, 32 265.13 M159.41 
+265.13 C119.86 263.13, 81.1 264.07, 32 265.13 M32 265.13 C11.74 264.16, 
+-0.08 255.57, 0 233.13 M32 265.13 C10.01 264.74, 0.16 256.57, 0 233.13 M0 
+233.13 C-0.16 177.67, -1.27 125.47, 0 32 M0 233.13 C2.01 158.29, 0.79 
+82.45, 0 32 M0 32 C-0.98 9.91, 10.12 -0.32, 32 0 M0 32 C-1 11.63, 10.29 
+-1.36, 32 0" stroke="#1e1e1e" stroke-width="1" fill="none"></path></g><g 
+transform="translate(360.1962631295123 511.7464649563851) rotate(0 
+37.81995391845703 37.5)"><text x="37.81995391845703" y="0" 
+font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" 
+text-anchor="middle" style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">login</text><text 
+x="37.81995391845703" y="25" font-family="Virgil, Segoe UI Emoji" 
+font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: 
+pre;" direction="ltr" dominant-baseline="text-before-edge">or</text><text 
+x="37.81995391845703" y="50" font-family="Virgil, Segoe UI Emoji" 
+font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: 
+pre;" direction="ltr" 
+dominant-baseline="text-before-edge">register</text></g><g 
+stroke-linecap="round" transform="translate(665.4615295479693 
+622.5003712063851) rotate(0 95.703125 132.564453125)"><path d="M32 0 
+C81.63 -1.54, 132.52 -1.86, 159.41 0 M32 0 C81.48 0.27, 131.44 -0.98, 
+159.41 0 M159.41 0 C180.61 0.8, 189.82 11.9, 191.41 32 M159.41 0 C178.44 
+0.63, 189.56 9.76, 191.41 32 M191.41 32 C193.41 103.78, 191.42 178.3, 
+191.41 233.13 M191.41 32 C193.07 111.51, 192.96 189.74, 191.41 233.13 
+M191.41 233.13 C189.74 254.69, 182.32 266.7, 159.41 265.13 M191.41 233.13 
+C191.76 255.05, 181.61 267.4, 159.41 265.13 M159.41 265.13 C121.92 264.19, 
+80.33 264.78, 32 265.13 M159.41 265.13 C123.71 265.98, 85.91 265.35, 32 
+265.13 M32 265.13 C11.63 266.7, 1.01 254.49, 0 233.13 M32 265.13 C10.64 
+265.26, -1.23 255.46, 0 233.13 M0 233.13 C-3.17 182.7, -2.5 130.71, 0 32 
+M0 233.13 C1.64 155.9, 2.59 79.16, 0 32 M0 32 C1.11 10.67, 12.21 -0.29, 32 
+0 M0 32 C1.68 11, 11.96 0.56, 32 0" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(723.3447006295123 
+742.5648243313851) rotate(0 37.81995391845703 12.5)"><text 
+x="37.81995391845703" y="0" font-family="Virgil, Segoe UI Emoji" 
+font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: 
+pre;" direction="ltr" 
+dominant-baseline="text-before-edge">register</text></g><g 
+stroke-linecap="round" transform="translate(990.414971814233 
+269.2803243302136) rotate(0 95.703125 132.564453125)"><path d="M32 0 
+C81.53 1.06, 132 -1.43, 159.41 0 M32 0 C69.99 0.01, 107.01 0.21, 159.41 0 
+M159.41 0 C179.95 1.25, 192 12.16, 191.41 32 M159.41 0 C182.62 -1.5, 
+190.73 11.17, 191.41 32 M191.41 32 C193.19 112.32, 192.96 190.06, 191.41 
+233.13 M191.41 32 C192.32 75.75, 191.84 119.56, 191.41 233.13 M191.41 
+233.13 C193.38 254.63, 179.44 263.32, 159.41 265.13 M191.41 233.13 C193.52 
+254.71, 180.24 266.05, 159.41 265.13 M159.41 265.13 C124.64 266.48, 85.69 
+265.23, 32 265.13 M159.41 265.13 C115.04 265.76, 70.7 265.24, 32 265.13 
+M32 265.13 C11.53 264.22, 1.98 255.64, 0 233.13 M32 265.13 C8.89 266.08, 
+-0.91 254.37, 0 233.13 M0 233.13 C1.47 155.95, 3.39 79.76, 0 32 M0 233.13 
+C-0.13 162.28, 0.13 90.62, 0 32 M0 32 C0.49 8.76, 11.27 -1.44, 32 0 M0 32 
+C1.28 11.51, 12.13 -2.03, 32 0" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(1066.0781187868893 
+389.3447774552136) rotate(0 20.03997802734375 12.5)"><text 
+x="20.03997802734375" y="0" font-family="Virgil, Segoe UI Emoji" 
+font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: 
+pre;" direction="ltr" 
+dominant-baseline="text-before-edge">login</text></g><g 
+stroke-linecap="round"><g transform="translate(501.75179908309553 
+533.6775238176363) rotate(0 242.5186131216247 -72.85864162395876)"><path 
+d="M0 0.43 C80.65 -24.02, 403.04 -121.38, 484.04 -145.58 M-1.46 -0.39 
+C79.54 -24.11, 405.03 -119.6, 486.23 -143.97" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g><g 
+transform="translate(501.75179908309553 533.6775238176363) rotate(0 
+242.5186131216247 -72.85864162395876)"><path d="M466.13 -129.1 C473.01 
+-135.42, 478.82 -136.84, 486.23 -143.97 M466.13 -129.1 C474.1 -133.79, 
+481.41 -141.06, 486.23 -143.97" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(501.75179908309553 
+533.6775238176363) rotate(0 242.5186131216247 -72.85864162395876)"><path 
+d="M461.27 -145.5 C469.82 -146.68, 477.16 -142.96, 486.23 -143.97 M461.27 
+-145.5 C471.1 -143.99, 480.26 -145.05, 486.23 -143.97" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g></g><mask></mask><g 
+stroke-linecap="round"><g transform="translate(500.9474887143067 
+567.4152049438619) rotate(0 80.16689945007522 92.0054914167149)"><path 
+d="M0.74 0.38 C27.3 31.43, 133.3 154.42, 159.93 185.2 M-0.33 -0.46 C25.99 
+30.38, 132.07 153.08, 158.77 183.71" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(500.9474887143067 
+567.4152049438619) rotate(0 80.16689945007522 92.0054914167149)"><path 
+d="M136.92 171.56 C145.03 174.97, 153.97 180.2, 158.77 183.71 M136.92 
+171.56 C145.27 176.78, 154.16 181.33, 158.77 183.71" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g><g 
+transform="translate(500.9474887143067 567.4152049438619) rotate(0 
+80.16689945007522 92.0054914167149)"><path d="M149.83 160.36 C153.37 
+167.74, 157.82 176.85, 158.77 183.71 M149.83 160.36 C153.13 170.04, 157 
+178.95, 158.77 183.71" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g 
+transform="translate(861.0691276818208 771.2721891846836) rotate(0 
+93.21909581932522 -113.79563948475902)"><path d="M-0.56 -0.56 C30.31 
+-38.56, 155.04 -190.47, 186.15 -228.18 M1.35 1.77 C31.95 -36.07, 154.42 
+-188.53, 185.05 -226.96" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(861.0691276818208 
+771.2721891846836) rotate(0 93.21909581932522 -113.79563948475902)"><path 
+d="M177.04 -203.27 C179.2 -212.74, 182.19 -221.9, 185.05 -226.96 M177.04 
+-203.27 C180.43 -212.42, 183.24 -220.78, 185.05 -226.96" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g><g 
+transform="translate(861.0691276818208 771.2721891846836) rotate(0 
+93.21909581932522 -113.79563948475902)"><path d="M163.69 -213.96 C170.92 
+-219.3, 178.99 -224.39, 185.05 -226.96 M163.69 -213.96 C171.88 -219.36, 
+179.54 -223.82, 185.05 -226.96" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g></g><mask></mask><g stroke-linecap="round" 
+transform="translate(1423.743791384896 485.5894576974948) rotate(0 
+95.703125 132.56445312500006)"><path d="M32 0 C82.54 -1.3, 128.7 0.04, 
+159.41 0 M32 0 C79.05 -1.03, 128.05 -1.51, 159.41 0 M159.41 0 C180.12 
+-1.6, 191.29 11.17, 191.41 32 M159.41 0 C182.68 -1.41, 192.92 9.73, 191.41 
+32 M191.41 32 C192.27 100.84, 190.27 167.07, 191.41 233.13 M191.41 32 
+C191.35 90.61, 192.05 148.72, 191.41 233.13 M191.41 233.13 C190.25 255.91, 
+179.23 263.99, 159.41 265.13 M191.41 233.13 C190.02 253.32, 182.19 267.19, 
+159.41 265.13 M159.41 265.13 C108.1 262.85, 60.03 265.9, 32 265.13 M159.41 
+265.13 C126.72 265.71, 94.31 264.91, 32 265.13 M32 265.13 C11.18 264.11, 
+-0.97 255, 0 233.13 M32 265.13 C8.45 266.48, 0.55 254.94, 0 233.13 M0 
+233.13 C2.07 164.79, -0.66 96.99, 0 32 M0 233.13 C1.93 155.61, 2.19 76.02, 
+0 32 M0 32 C-1.71 11.05, 12.09 0.32, 32 0 M0 32 C1.78 9.99, 9.77 -1.85, 32 
+0" stroke="#1e1e1e" stroke-width="1" fill="none"></path></g><g 
+transform="translate(1497.2969377472007 605.6539108224948) rotate(0 
+22.149978637695312 12.5)"><text x="22.149978637695312" y="0" 
+font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" 
+text-anchor="middle" style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">menu</text></g><g 
+stroke-linecap="round"><g transform="translate(1190.8231242852128 
+373.4936226740481) rotate(0 114.50137219566602 112.51514517284454)"><path 
+d="M-0.69 -0.01 C37.62 37.37, 191.97 186.53, 230.07 223.85 M1.15 -1.07 
+C39.38 36.46, 191.5 187.15, 229.69 224.77" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g><g 
+transform="translate(1190.8231242852128 373.4936226740481) rotate(0 
+114.50137219566602 112.51514517284454)"><path d="M206.97 214.34 C214.1 
+219.56, 219.36 219.29, 229.69 224.77 M206.97 214.34 C210.77 217.09, 216.46 
+218.28, 229.69 224.77" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(1190.8231242852128 
+373.4936226740481) rotate(0 114.50137219566602 112.51514517284454)"><path 
+d="M218.99 202.18 C222.27 211.18, 223.72 214.76, 229.69 224.77 M218.99 
+202.18 C220.36 207.45, 223.55 211.16, 229.69 224.77" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g></g><mask></mask><g 
+stroke-linecap="round" transform="translate(1860.1862839310959 
+144.9010758363711) rotate(0 95.70312499999989 132.564453125)"><path d="M32 
+0 C68.04 2.1, 102.44 0.74, 159.41 0 M32 0 C77.94 -0.41, 121.24 0.6, 159.41 
+0 M159.41 0 C178.81 -1.52, 193.06 11.49, 191.41 32 M159.41 0 C181.04 0.65, 
+189.22 10.94, 191.41 32 M191.41 32 C190.07 82.06, 190.87 133.7, 191.41 
+233.13 M191.41 32 C189.75 76.46, 190 121.33, 191.41 233.13 M191.41 233.13 
+C190.15 255.14, 182.33 263.35, 159.41 265.13 M191.41 233.13 C191.89 
+252.97, 180.91 265.13, 159.41 265.13 M159.41 265.13 C132.7 266.43, 106.2 
+265.11, 32 265.13 M159.41 265.13 C122.47 265.78, 85.67 265.53, 32 265.13 
+M32 265.13 C10.44 266.46, 0.5 254.84, 0 233.13 M32 265.13 C8.64 263.42, 
+0.29 256.01, 0 233.13 M0 233.13 C-0.45 182.08, -1.21 129.14, 0 32 M0 
+233.13 C0.22 177.01, 0.71 119.7, 0 32 M0 32 C-1.86 10.02, 12.21 -0.42, 32 
+0 M0 32 C1.09 12.72, 10.18 -0.37, 32 0" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(1916.2994583695724 
+252.4655289613711) rotate(0 39.58995056152344 25)"><text 
+x="39.58995056152344" y="0" font-family="Virgil, Segoe UI Emoji" 
+font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: 
+pre;" direction="ltr" 
+dominant-baseline="text-before-edge">view</text><text 
+x="39.58995056152344" y="25" font-family="Virgil, Segoe UI Emoji" 
+font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: 
+pre;" direction="ltr" 
+dominant-baseline="text-before-edge">sessions</text></g><g 
+stroke-linecap="round" transform="translate(1853.870324902302 
+486.7060381088992) rotate(0 95.703125 132.56445312500006)"><path d="M32 0 
+C71.05 3.01, 114.27 0.07, 159.41 0 M32 0 C77.52 -0.81, 121.2 0.28, 159.41 
+0 M159.41 0 C178.84 -1.69, 191.19 11.81, 191.41 32 M159.41 0 C179.68 
+-1.14, 193.67 11.41, 191.41 32 M191.41 32 C188.29 105.93, 188.3 178.65, 
+191.41 233.13 M191.41 32 C192.74 99.03, 192.95 167.86, 191.41 233.13 
+M191.41 233.13 C192.34 252.67, 180.51 264.8, 159.41 265.13 M191.41 233.13 
+C192.12 254.01, 181.35 267.09, 159.41 265.13 M159.41 265.13 C120.65 
+264.47, 81.55 264.04, 32 265.13 M159.41 265.13 C132.73 264.39, 104.57 
+264.94, 32 265.13 M32 265.13 C11.99 265.36, 0.25 253.22, 0 233.13 M32 
+265.13 C10.39 267.06, 1.89 254.47, 0 233.13 M0 233.13 C0.16 169.84, 0.18 
+106.73, 0 32 M0 233.13 C0.73 169.37, 1.13 106.91, 0 32 M0 32 C0.51 12.5, 
+10.69 -0.16, 32 0 M0 32 C-1.42 9.27, 11.68 1.6, 32 0" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g><g 
+transform="translate(1915.4134920165598 594.2704912338992) rotate(0 
+34.15995788574219 25)"><text x="34.15995788574219" y="0" 
+font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" 
+text-anchor="middle" style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">create</text><text 
+x="34.15995788574219" y="25" font-family="Virgil, Segoe UI Emoji" 
+font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: 
+pre;" direction="ltr" 
+dominant-baseline="text-before-edge">session</text></g><g 
+stroke-linecap="round"><g transform="translate(1629.6037173698305 
+587.8280963519196) rotate(0 110.57771533410073 -144.86981587245305)"><path 
+d="M0.88 -1.07 C37.88 -49.15, 185.3 -241.06, 222.08 -289.32 M-0.12 0.98 
+C36.8 -47.39, 184.77 -242.76, 221.61 -291.23" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g><g 
+transform="translate(1629.6037173698305 587.8280963519196) rotate(0 
+110.57771533410073 -144.86981587245305)"><path d="M214.23 -267.35 C214.86 
+-273.15, 219.6 -281.36, 221.61 -291.23 M214.23 -267.35 C216.28 -272.82, 
+217.76 -276.91, 221.61 -291.23" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(1629.6037173698305 
+587.8280963519196) rotate(0 110.57771533410073 -144.86981587245305)"><path 
+d="M200.6 -277.68 C205.32 -280.43, 214.21 -285.49, 221.61 -291.23 M200.6 
+-277.68 C205.67 -280.86, 210.16 -282.66, 221.61 -291.23" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g></g><mask></mask><g 
+stroke-linecap="round"><g transform="translate(1629.5874301929946 
+638.725523964552) rotate(0 108.4074490206981 -0.35017430197490285)"><path 
+d="M-0.01 -1.2 C36.08 -1.35, 180.8 0.29, 216.97 0.23 M-1.47 0.79 C34.43 
+0.83, 179.8 -1.15, 216.11 -1.4" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(1629.5874301929946 
+638.725523964552) rotate(0 108.4074490206981 -0.35017430197490285)"><path 
+d="M192.71 7.39 C198.54 4.69, 209.99 1.83, 216.11 -1.4 M192.71 7.39 
+C198.35 5.59, 203.12 2.97, 216.11 -1.4" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(1629.5874301929946 
+638.725523964552) rotate(0 108.4074490206981 -0.35017430197490285)"><path 
+d="M192.53 -9.71 C198.58 -6.63, 210.1 -3.71, 216.11 -1.4 M192.53 -9.71 
+C198.18 -7.63, 203 -6.36, 216.11 -1.4" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g 
+transform="translate(1516.6116267547097 767.8176875670242) rotate(0 
+-548.519640826697 169.89968516517604)"><path d="M0.73 0.4 C-96.88 69.22, 
+-403.21 424.86, -586.1 412.7 C-769 400.54, -1011.28 8.56, -1096.63 -72.57 
+M-0.35 -0.44 C-97.55 68.6, -401.11 426.55, -583.91 414.18 C-766.72 401.8, 
+-1011.4 6.6, -1097.18 -74.67" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(1516.6116267547097 
+767.8176875670242) rotate(0 -548.519640826697 169.89968516517604)"><path 
+d="M-1075.66 -61.94 C-1080.59 -66.79, -1087.07 -67.76, -1097.18 -74.67 
+M-1075.66 -61.94 C-1083.03 -66.01, -1089.79 -70.19, -1097.18 -74.67" 
+stroke="#1e1e1e" stroke-width="1" fill="none"></path></g><g 
+transform="translate(1516.6116267547097 767.8176875670242) rotate(0 
+-548.519640826697 169.89968516517604)"><path d="M-1088.88 -51.09 C-1090.34 
+-58.85, -1093.37 -62.66, -1097.18 -74.67 M-1088.88 -51.09 C-1091.68 
+-58.71, -1093.98 -66.56, -1097.18 -74.67" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g></g><mask></mask><g 
+stroke-linecap="round" transform="translate(2241.0246618834476 
+486.58388428262936) rotate(0 95.703125 132.56445312500006)"><path d="M32 0 
+C75.85 1.07, 116.56 1.51, 159.41 0 M32 0 C82.65 -0.71, 132.73 -0.34, 
+159.41 0 M159.41 0 C179.44 0.79, 193.37 11.24, 191.41 32 M159.41 0 C178.73 
+0.54, 190.17 11.38, 191.41 32 M191.41 32 C190.38 108.69, 189.27 183.06, 
+191.41 233.13 M191.41 32 C191.6 92.65, 192.68 150.86, 191.41 233.13 
+M191.41 233.13 C193.33 254.9, 182.08 264.9, 159.41 265.13 M191.41 233.13 
+C190.41 255.18, 179.46 263.94, 159.41 265.13 M159.41 265.13 C125.33 
+264.49, 91.11 264.14, 32 265.13 M159.41 265.13 C123.89 266.1, 87.79 
+266.81, 32 265.13 M32 265.13 C9 266.27, 1.32 254.74, 0 233.13 M32 265.13 
+C9.06 263.34, -0.46 254.29, 0 233.13 M0 233.13 C0.77 157.54, 0.56 80.3, 0 
+32 M0 233.13 C0.33 155.92, -0.11 76.67, 0 32 M0 32 C-0.85 12.46, 9.48 
+-1.14, 32 0 M0 32 C1.3 11.49, 9.54 0.17, 32 0" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g><g 
+transform="translate(2298.817821368311 594.1483374076294) rotate(0 
+37.90996551513672 25)"><text x="37.90996551513672" y="0" 
+font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" 
+text-anchor="middle" style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">allow</text><text 
+x="37.90996551513672" y="25" font-family="Virgil, Segoe UI Emoji" 
+font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: 
+pre;" direction="ltr" 
+dominant-baseline="text-before-edge">location</text></g><g 
+stroke-linecap="round" transform="translate(2603.2759054822845 
+488.54648909137256) rotate(0 95.703125 132.56445312499994)"><path d="M32 0 
+C75.41 0.36, 116.65 -1, 159.41 0 M32 0 C67.38 -1.04, 104.22 0.71, 159.41 0 
+M159.41 0 C181.11 -0.89, 189.92 11.54, 191.41 32 M159.41 0 C179.62 -0.69, 
+190.66 9.27, 191.41 32 M191.41 32 C192.81 106.05, 193.82 176.59, 191.41 
+233.13 M191.41 32 C192.16 83.86, 191.77 133.3, 191.41 233.13 M191.41 
+233.13 C191.22 255.28, 182.07 263.43, 159.41 265.13 M191.41 233.13 C192.23 
+252.9, 180.76 263.14, 159.41 265.13 M159.41 265.13 C130.73 264.44, 100.63 
+266.15, 32 265.13 M159.41 265.13 C111.68 264.98, 62.69 265.54, 32 265.13 
+M32 265.13 C12.38 265.68, -0.77 254.71, 0 233.13 M32 265.13 C8.93 266.1, 
+-1.74 255.32, 0 233.13 M0 233.13 C1.43 164.4, 1.8 98.38, 0 32 M0 233.13 
+C0.43 180.67, -0.54 126.99, 0 32 M0 32 C-1.22 9.75, 12.2 0.3, 32 0 M0 32 
+C-1.86 8.69, 12.59 -1.11, 32 0" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(2638.7090948743744 
+596.1109422163726) rotate(0 60.269935607910156 25)"><text 
+x="60.269935607910156" y="0" font-family="Virgil, Segoe UI Emoji" 
+font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: 
+pre;" direction="ltr" 
+dominant-baseline="text-before-edge">allow</text><text 
+x="60.269935607910156" y="25" font-family="Virgil, Segoe UI Emoji" 
+font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: 
+pre;" direction="ltr" 
+dominant-baseline="text-before-edge">notifications</text></g><g 
+stroke-linecap="round" transform="translate(2958.442227157442 
+491.7876372817449) rotate(0 95.703125 132.56445312499994)"><path d="M32 0 
+C66.8 -2.1, 103.05 -1.66, 159.41 0 M32 0 C71.68 0.24, 110.81 0.1, 159.41 0 
+M159.41 0 C178.94 0, 189.85 12.22, 191.41 32 M159.41 0 C179.34 2.23, 
+189.53 11.04, 191.41 32 M191.41 32 C190.47 109.89, 192.95 190.77, 191.41 
+233.13 M191.41 32 C192.82 81.22, 192.04 130.3, 191.41 233.13 M191.41 
+233.13 C192.59 254.98, 180.38 265.05, 159.41 265.13 M191.41 233.13 C189.83 
+256.07, 179.17 266.1, 159.41 265.13 M159.41 265.13 C131.79 265.64, 102.01 
+262.25, 32 265.13 M159.41 265.13 C114.36 266.01, 71.37 266.03, 32 265.13 
+M32 265.13 C10.16 266.45, -0.57 253.73, 0 233.13 M32 265.13 C9.85 265.45, 
+-1.7 256.01, 0 233.13 M0 233.13 C2.75 174.18, -0.03 115.56, 0 32 M0 233.13 
+C0.23 154.79, -0.28 74.5, 0 32 M0 32 C-0.53 10.29, 12.65 0.56, 32 0 M0 32 
+C0.72 10.01, 10.03 -1.55, 32 0" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(3036.2153671110555 
+611.8520904067449) rotate(0 17.92998504638672 12.5)"><text 
+x="17.92998504638672" y="0" font-family="Virgil, Segoe UI Emoji" 
+font-size="20px" fill="#1e1e1e" text-anchor="middle" style="white-space: 
+pre;" direction="ltr" 
+dominant-baseline="text-before-edge">map</text></g><g 
+stroke-linecap="round"><g transform="translate(2329.496280368246 
+757.2880277425229) rotate(0 -385.11029628822234 191.02008172731416)"><path 
+d="M0.65 0.36 C-56.03 63.82, -210.93 379.41, -339.3 381.52 C-467.67 
+383.64, -697.6 74.41, -769.57 13.05 M-0.46 -0.49 C-57.39 63.05, -212.12 
+380.88, -340.37 382.79 C-468.63 384.71, -698.17 72.92, -769.99 11" 
+stroke="#1e1e1e" stroke-width="1" fill="none"></path></g><g 
+transform="translate(2329.496280368246 757.2880277425229) rotate(0 
+-385.11029628822234 191.02008172731416)"><path d="M-747.74 22.4 C-755.34 
+17.94, -764.94 15.27, -769.99 11 M-747.74 22.4 C-755.26 18.11, -762.95 
+13.83, -769.99 11" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(2329.496280368246 
+757.2880277425229) rotate(0 -385.11029628822234 191.02008172731416)"><path 
+d="M-760.28 34.03 C-763.38 25.25, -768.39 18.33, -769.99 11 M-760.28 34.03 
+C-763.38 25.63, -766.73 17.33, -769.99 11" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g></g><mask></mask><g 
+stroke-linecap="round"><g transform="translate(2052.117515262026 
+618.4154144500073) rotate(0 88.69182146066896 2.4797226732874833)"><path 
+d="M0.16 0.76 C29.63 1.75, 147.97 5.12, 177.64 5.7 M-1.22 0.11 C28.04 
+0.78, 146.99 3.13, 176.82 3.97" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(2052.117515262026 
+618.4154144500073) rotate(0 88.69182146066896 2.4797226732874833)"><path 
+d="M153.14 11.97 C163.13 9.42, 171.82 7.35, 176.82 3.97 M153.14 11.97 
+C158.06 10.05, 164.07 7.41, 176.82 3.97" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(2052.117515262026 
+618.4154144500073) rotate(0 88.69182146066896 2.4797226732874833)"><path 
+d="M153.54 -5.13 C163.35 -1.39, 171.89 2.83, 176.82 3.97 M153.54 -5.13 
+C158.22 -2.98, 164.14 -1.54, 176.82 3.97" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g></g><mask></mask><g 
+stroke-linecap="round"><g transform="translate(2441.454333939201 
+624.2869416994008) rotate(0 78.64263335283067 1.535066416797008)"><path 
+d="M-0.23 0.31 C25.66 1, 129.77 3.47, 156.12 3.81 M-1.82 -0.57 C24.37 
+-0.19, 131.68 1.43, 158.22 2.08" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(2441.454333939201 
+624.2869416994008) rotate(0 78.64263335283067 1.535066416797008)"><path 
+d="M134.57 10.18 C143.63 5.37, 152.88 5.35, 158.22 2.08 M134.57 10.18 
+C140.46 8.4, 146.12 5.88, 158.22 2.08" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(2441.454333939201 
+624.2869416994008) rotate(0 78.64263335283067 1.535066416797008)"><path 
+d="M134.9 -6.92 C143.8 -5.57, 152.92 0.58, 158.22 2.08 M134.9 -6.92 
+C140.84 -4.51, 146.42 -2.85, 158.22 2.08" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g></g><mask></mask><g 
+stroke-linecap="round"><g transform="translate(2807.0525923778446 
+627.9189821338382) rotate(0 74.11479819241094 -0.7451383402489)"><path 
+d="M-0.74 0.21 C23.9 -0.2, 123.76 -1.18, 148.6 -1.55 M1.07 -0.73 C25.52 
+-1.01, 123.44 -0.01, 147.84 -0.04" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(2807.0525923778446 
+627.9189821338382) rotate(0 74.11479819241094 -0.7451383402489)"><path 
+d="M124.31 8.39 C133.14 6.09, 141.24 2.47, 147.84 -0.04 M124.31 8.39 
+C131.32 6.11, 137.54 3.13, 147.84 -0.04" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(2807.0525923778446 
+627.9189821338382) rotate(0 74.11479819241094 -0.7451383402489)"><path 
+d="M124.39 -8.71 C133.32 -4.8, 141.39 -2.22, 147.84 -0.04 M124.39 -8.71 
+C131.47 -6.53, 137.67 -5.05, 147.84 -0.04" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g></g><mask></mask><g 
+stroke-linecap="round"><g transform="translate(2048.2167364097936 
+486.2856923676136) rotate(0 504.7355383547447 -131.83655289934512)"><path 
+d="M0.4 1.13 C85.59 -43.07, 344.24 -263.78, 512.31 -264.29 C680.38 
+-264.81, 925.9 -45.89, 1008.81 -1.95 M-0.85 0.68 C84.09 -43.46, 343.26 
+-262.78, 511.35 -263.08 C679.44 -263.38, 924.56 -45.09, 1007.69 -1.14" 
+stroke="#1e1e1e" stroke-width="1" fill="none"></path></g><g 
+transform="translate(2048.2167364097936 486.2856923676136) rotate(0 
+504.7355383547447 -131.83655289934512)"><path d="M983.45 -7.24 C994.92 
+-4.94, 1001.55 -3.63, 1007.69 -1.14 M983.45 -7.24 C988.43 -6.32, 994.36 
+-4.43, 1007.69 -1.14" stroke="#1e1e1e" stroke-width="1" 
+fill="none"></path></g><g transform="translate(2048.2167364097936 
+486.2856923676136) rotate(0 504.7355383547447 -131.83655289934512)"><path 
+d="M993.05 -21.4 C1000.86 -13.49, 1003.7 -6.61, 1007.69 -1.14 M993.05 
+-21.4 C995.95 -17.33, 999.77 -12.32, 1007.69 -1.14" stroke="#1e1e1e" 
+stroke-width="1" fill="none"></path></g></g><mask></mask><g 
+transform="translate(690.7375522445866 662.9445559197472) rotate(0 
+6.049995422363281 12.5)"><text x="0" y="0" font-family="Virgil, Segoe UI 
+Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" 
+style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">&lt;</text></g><g 
+transform="translate(1017.1984155184466 297.63987488581506) rotate(0 
+6.049995422363281 12.5)"><text x="0" y="0" font-family="Virgil, Segoe UI 
+Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" 
+style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">&lt;</text></g><g 
+transform="translate(1886.5427663190455 168.38483951498256) rotate(0 
+6.049995422363281 12.5)"><text x="0" y="0" font-family="Virgil, Segoe UI 
+Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" 
+style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">&lt;</text></g><g 
+transform="translate(1880.2884904140053 510.2852556571843) rotate(0 
+6.049995422363281 12.5)"><text x="0" y="0" font-family="Virgil, Segoe UI 
+Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" 
+style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">&lt;</text></g><g 
+transform="translate(309.27679443359295 357.0800781249998) rotate(0 
+98.35992431640625 12.5)"><text x="0" y="0" font-family="Virgil, Segoe UI 
+Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" 
+style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">flow can start here</text></g><g 
+transform="translate(1420.0936181394009 405.851469562818) rotate(0 
+98.35992431640625 12.5)"><text x="0" y="0" font-family="Virgil, Segoe UI 
+Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" 
+style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">flow can start here</text></g><g 
+transform="translate(2254.0377900868616 447.0173090159151) rotate(0 
+99.73990631103516 12.5)"><text x="0" y="0" font-family="Virgil, Segoe UI 
+Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" 
+style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">location is requiredt</text></g><g 
+transform="translate(2138.6594293803378 850.5321151288654) 
+rotate(306.8828980414681 61.18994903564453 12.5)"><text x="0" y="0" 
+font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" 
+text-anchor="start" style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">else go back</text></g><g 
+transform="translate(2620.311966364201 419.06851356526636) rotate(0 
+81.70992279052734 25)"><text x="0" y="0" font-family="Virgil, Segoe UI 
+Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" 
+style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">notifications are</text><text x="0" 
+y="25" font-family="Virgil, Segoe UI Emoji" font-size="20px" 
+fill="#1e1e1e" text-anchor="start" style="white-space: pre;" 
+direction="ltr" dominant-baseline="text-before-edge">not 
+required</text></g><g transform="translate(1854.8227986586269 
+791.3770888603594) rotate(0 93.57990264892567 12.5)"><text x="0" y="0" 
+font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" 
+text-anchor="start" style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">ask for permissions</text></g><g 
+transform="translate(2120.181627259847 277.17462896966515) 
+rotate(328.19848359562945 162.49984741210938 12.5)"><text x="0" y="0" 
+font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" 
+text-anchor="start" style="white-space: pre;" direction="ltr" 
+dominant-baseline="text-before-edge">go to map if we have 
+permissions</text></g><g stroke-linecap="round" transform="translate(10 
+9.999999999999943) rotate(0 1606.8261718749995 646.0498046874997)"><path 
+d="M32 0 C1077.53 -6.48, 2122 -5.37, 3181.65 0 M32 0 C1130.7 7.23, 2229.17 
+7.25, 3181.65 0 M3181.65 0 C3204.97 1.17, 3212.99 11.57, 3213.65 32 
+M3181.65 0 C3201.57 -1.55, 3211.51 10.14, 3213.65 32 M3213.65 32 C3211.85 
+277.55, 3212.03 524.11, 3213.65 1260.1 M3213.65 32 C3214.89 378.13, 
+3215.42 724.59, 3213.65 1260.1 M3213.65 1260.1 C3215.3 1281.09, 3203.14 
+1290.33, 3181.65 1292.1 M3213.65 1260.1 C3211.74 1282.72, 3201.19 1292.24, 
+3181.65 1292.1 M3181.65 1292.1 C2182.96 1280.5, 1185 1280.44, 32 1292.1 
+M3181.65 1292.1 C2115.57 1294.13, 1050.17 1294.01, 32 1292.1 M32 1292.1 
+C12.49 1293.62, -0.11 1283.32, 0 1260.1 M32 1292.1 C12.81 1294.35, -2.28 
+1279.73, 0 1260.1 M0 1260.1 C-2.15 945.44, -1.84 629.7, 0 32 M0 1260.1 
+C-0.92 935.75, -1.18 611.34, 0 32 M0 32 C0.15 11.8, 11.24 0.46, 32 0 M0 32 
+C-0.43 8.41, 9.83 -2.25, 32 0" stroke="#1e1e1e" stroke-width="2" 
+fill="none"></path></g></svg>
