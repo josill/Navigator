@@ -56,20 +56,11 @@ struct LocationRequestView: View {
                 .padding(32)
             }
         }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                if locationManager.authorizationStatus == .authorizedWhenInUse ||
-                    locationManager.authorizationStatus == .authorizedAlways {
-                    router.changeRoute(.init(.notificationsAllowed))
-                }
-            }
-        }
         .onReceive(locationManager.$authorizationStatus) { newAuthorizationStatus in
             if newAuthorizationStatus == .authorizedWhenInUse || newAuthorizationStatus == .authorizedAlways {
                 router.changeRoute(.init(.notificationsAllowed))
             }
         }
-        
     }
 }
 

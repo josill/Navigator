@@ -11,6 +11,9 @@ struct CreateSessionView: View {
     @StateObject private var authHelper = AuthenticationHelper.shared
     @EnvironmentObject private var router: Router
     
+        @EnvironmentObject var locationManager: LocationManager
+        @EnvironmentObject var notificationManager: NotificationManager
+    
     @State private var sessionName = ""
     @State private var sessionDescription = ""
     
@@ -80,7 +83,16 @@ struct CreateSessionView: View {
                         )
                         
                         if authHelper.createSessionSuccess {
-                            router.changeRoute(.init(.locationAllowed))
+                            let locAllowed = locationManager.authorizationStatus == .authorizedAlways || locationManager.authorizationStatus == .authorizedWhenInUse
+                            let notifAllowed = notificationManager.authorizationStatus == .authorized
+                            
+                            if locAllowed && notifAllowed {
+                                router.changeRoute(.init(.map))
+                            } else if locAllowed {
+                                router.changeRoute(.init(.notificationsAllowed))
+                            } else {
+                                router.changeRoute(.init(.locationAllowed))
+                            }
                         }
                     }
                 }, label: {

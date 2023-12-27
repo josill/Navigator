@@ -25,21 +25,24 @@ public struct RoutePath: Hashable {
 }
 
 class Router: ObservableObject {
-    @Published var path = NavigationPath()
+    @Published var path: [RoutePath] = []
     static let shared: Router = Router()
     
     func reset() {
-        path = NavigationPath()
+        path = []
     }
     
     func changeRoute(_ route: RoutePath) {
         print("changing route: \(route)")
         path.append(route)
     }
-    
 
     func backRoute() {
         path.removeLast()
+    }
+    
+    func lastRoute() -> RoutePath? {
+        return path.last
     }
 }
 

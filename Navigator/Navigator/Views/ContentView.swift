@@ -15,7 +15,7 @@ struct ContentView: View {
         NavigationStack(path: $router.path) {
             LoginOrRegisterView()
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    Task {
                         if authHelper.savedUser != nil {
                             router.changeRoute(.init(.menu))
                         }

@@ -340,12 +340,14 @@ class AuthenticationHelper: ObservableObject {
                         return
                     }
                     
-                    UserDefaults.standard.set(sessionId, forKey: "savedSessionId")
-                    savedSessionId = sessionId
-                    
-                    if savedSessionId != nil {
-                        isLoading = false
-                        createSessionSuccess = true
+                    Task { @MainActor in
+                        UserDefaults.standard.set(sessionId, forKey: "savedSessionId")
+                        savedSessionId = sessionId
+                        
+                        if savedSessionId != nil {
+                            isLoading = false
+                            createSessionSuccess = true
+                        }
                     }
                 } else {
                     print("Error inserting session to db")
