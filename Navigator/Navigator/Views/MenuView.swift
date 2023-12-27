@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MenuView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject private var authHelper: AuthenticationHelper 
+    @StateObject private var authHelper = AuthenticationHelper.shared
     @EnvironmentObject private var router: Router
     
     @State private var isLogoutAlertPresented = false

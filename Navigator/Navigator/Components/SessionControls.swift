@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SessionControls: View {
-    @ObservedObject var authHelper = AuthenticationHelper()
+    @StateObject private var authHelper = AuthenticationHelper.shared
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var notificationManager: NotificationManager
     

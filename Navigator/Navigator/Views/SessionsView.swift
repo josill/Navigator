@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SessionsView: View {
-    @EnvironmentObject private var authHelper: AuthenticationHelper
+    @StateObject private var authHelper = AuthenticationHelper.shared
     @EnvironmentObject private var router: Router
     
     @State private var sessions: [Session] = []

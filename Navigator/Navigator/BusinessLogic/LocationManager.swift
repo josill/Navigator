@@ -10,9 +10,11 @@ import MapKit
 
 class LocationManager: NSObject, ObservableObject {
     private let manager = CLLocationManager()
+    @Published var authorizationStatus: CLAuthorizationStatus? = nil
+    
     let mapView =  MKMapView()
     @Published var mapHelper: MapHelper?
-    @Published var authHelper = AuthenticationHelper()
+    private var authHelper = AuthenticationHelper.shared
     private var timer: Timer?
     
     @Published var userLocation: CLLocation?
@@ -34,7 +36,7 @@ class LocationManager: NSObject, ObservableObject {
     @Published var averageSpeed = 0.0
     @Published var averageSpeedFromCp = 0.0
     @Published var averageSpeedFromWp = 0.0
-        
+    
     override init() {
         super.init()
         
@@ -42,7 +44,6 @@ class LocationManager: NSObject, ObservableObject {
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         // manager.distanceFilter = 10.0
-        manager.startUpdatingLocation()
         self.setup()
     }
     
@@ -59,27 +60,17 @@ class LocationManager: NSObject, ObservableObject {
 }
 
 extension LocationManager: CLLocationManagerDelegate {
-//    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        switch status {
-//        case .notDetermined:
-//            print("DEBUG: Not Determined")
-//        case .restricted:
-//            print("DEBUG: Restricted")
-//        case .denied:
-//            print("DEBUG: Not Determined")
-//        case .authorizedAlways:
-//            print("DEBUG: Not Determined")
-//        case .authorizedWhenInUse:
-//            print("DEBUG: Not Determined")
-//        @unknown default:
-//            break
-//        }
-//    }
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        self.authorizationStatus = manager.authorizationStatus
+        
+        if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {
+            manager.startUpdatingLocation()
+        }
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         
-
         addUserLocation(location: location)
         calculateSpeeds()
     }
@@ -90,7 +81,7 @@ extension LocationManager: CLLocationManagerDelegate {
     
     func startSession() {
         trackingEnabled = !trackingEnabled
-
+        
         if trackingEnabled {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
                 self?.updateElapsedTime()
@@ -153,7 +144,7 @@ extension LocationManager: CLLocationManagerDelegate {
     func addWaypoint(coordinate: CLLocationCoordinate2D) {
         if trackingEnabled {
             print("addWaypoint")
-
+            
             waypoint = coordinate
             
             Task {
@@ -188,10 +179,10 @@ extension LocationManager: CLLocationManagerDelegate {
         directLineFromWp = 0.0
     }
     
-//    private func updateStatistics() {
-//        calculateDistances()
-//        calculateSpeeds()
-//    }
+    //    private func updateStatistics() {
+    //        calculateDistances()
+    //        calculateSpeeds()
+    //    }
     
     private func calculateDistances() {
         guard let locations = userLocations, locations.count >= 2 else { return }
@@ -208,17 +199,17 @@ extension LocationManager: CLLocationManagerDelegate {
     private func calculateDistanceCovered(secondToLastLocation: CLLocation, lastLocation: CLLocation) {
         distanceCovered += lastLocation.distance(from: secondToLastLocation)
     }
-
+    
     private func calculateDistanceFromCp(secondToLastLocation: CLLocation, lastLocation: CLLocation) {
         guard let lastCheckpointKey = checkpoints.keys.sorted().last, let lastCheckpoint = checkpoints[lastCheckpointKey] else { return }
-
+        
         let lastCheckpointLocation = CLLocation(latitude: lastCheckpoint.latitude, longitude: lastCheckpoint.longitude)
-
+        
         distanceFromCp += lastLocation.distance(from: secondToLastLocation)
-
+        
         directLineFromCp = lastLocation.distance(from: lastCheckpointLocation)
     }
-
+    
     private func calculateDistanceFromWp(secondToLastLocation: CLLocation, lastLocation: CLLocation) {
         guard waypoint != nil else { return }
         
@@ -245,11 +236,11 @@ extension LocationManager: CLLocationManagerDelegate {
     
     private func updateElapsedTime() {
         sessionDurationSec += 1.0
-
+        
         let hours = Int(sessionDurationSec) / 3600
         let minutes = (Int(sessionDurationSec) % 3600) / 60
         let seconds = Int(sessionDurationSec) % 60
-
+        
         sessionDuration = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject private var authHelper: AuthenticationHelper
+    @StateObject private var authHelper = AuthenticationHelper.shared
     @EnvironmentObject private var router: Router
 
     @State private var email = ""

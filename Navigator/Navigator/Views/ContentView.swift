@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject private var authHelper: AuthenticationHelper
+    @StateObject private var authHelper = AuthenticationHelper.shared
     @EnvironmentObject private var router: Router
     
     var body: some View {
         NavigationStack(path: $router.path) {
             LoginOrRegisterView()
                 .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    DispatchQueue.main.asyncAfter(deadline: .now()) {
                         if authHelper.savedUser != nil {
                             router.changeRoute(.init(.menu))
                         }
@@ -29,8 +29,8 @@ struct ContentView: View {
                     case .createSession: CreateSessionView()
                     case .viewSessions: SessionsView()
                     case .locationAllowed: LocationRequestView()
-                    case .notificationsAllowed: NotificationRequestView()
-                    case .map: MapView()
+                    case .notificationsAllowed: NotificationRequestView().navigationBarBackButtonHidden()
+                    case .map: MapView().navigationBarBackButtonHidden()
                     case .none: LoginOrRegisterView()
                     }
                 }

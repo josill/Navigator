@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct NotificationRequestView: View {
-    @State private var selectedDate = Date()
+    @EnvironmentObject private var router: Router
+    @EnvironmentObject private var notificationManager: NotificationManager
+
     @State private var redirectToMenu = false
-    let notificationManager = NotificationManager()
     
     var body: some View {
-        NavigationStack {
             ZStack {
                 Color
                     .black
@@ -67,17 +67,23 @@ struct NotificationRequestView: View {
                         .padding(.horizontal, -32)
                         .background(.white)
                         .clipShape(Capsule())
-                        
-                        NavigationLink(destination: LoginOrRegisterView().navigationBarBackButtonHidden(), isActive: $redirectToMenu) {
-                            EmptyView()
-                        }
-                        .hidden()
                     }
                     .padding(32)
                 }
             }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    if notificationManager.authorizationStatus == .authorized {
+                        router.changeRoute(.init(.menu))
+                    }
+                }
+            }
+            .onReceive(notificationManager.$authorizationStatus) { newAuthorizationStatus in
+                if newAuthorizationStatus == .authorized {
+                    router.changeRoute(.init(.menu))
+                }
+            }
         }
-    }
 }
 
 #Preview {

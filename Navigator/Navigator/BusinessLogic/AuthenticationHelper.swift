@@ -11,6 +11,7 @@ import MapKit
 import SwiftData
 
 class AuthenticationHelper: ObservableObject {
+    static let shared = AuthenticationHelper()
     let config = Configuration()
     
     @Published var savedUser: User? = nil

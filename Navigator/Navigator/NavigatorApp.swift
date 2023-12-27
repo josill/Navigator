@@ -13,7 +13,6 @@ struct NavigatorApp: App {
     @StateObject var locationManager = LocationManager()
     @StateObject var notificationManager = NotificationManager()
     @StateObject var router = Router()
-    @StateObject var authHelper = AuthenticationHelper()
     
     var body: some Scene {
         WindowGroup {
@@ -21,7 +20,6 @@ struct NavigatorApp: App {
                 .environmentObject(locationManager)
                 .environmentObject(notificationManager)
                 .environmentObject(router)
-                .environmentObject(authHelper)
         }
     }
 }

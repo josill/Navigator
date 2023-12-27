@@ -54,8 +54,6 @@ struct SessionLink: View {
         formatter.dateFormat = "HH:mm:ss dd.MM.yyyy"
         return formatter.string(from: date)
     }
-
-    
 }
 
 //#Preview {

@@ -11,7 +11,7 @@ import UserNotifications
 import UIKit
 
 class NotificationManager: NSObject, ObservableObject {
-    @Published var notificationsAllowed = false // allowed by system
+    @Published var authorizationStatus: UNAuthorizationStatus? = nil
     @Published var notificationsEnabled = true // user wants to get updates
     
     private var timer: Timer?
@@ -40,7 +40,9 @@ class NotificationManager: NSObject, ObservableObject {
     
     func changeAuthorizationStatus() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
-            self.notificationsAllowed = settings.authorizationStatus.rawValue == 2 ? true : false
+            DispatchQueue.main.async {
+                self.authorizationStatus = settings.authorizationStatus
+            }
         }
     }
     
