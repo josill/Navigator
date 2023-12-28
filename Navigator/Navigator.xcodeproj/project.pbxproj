@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		FE46B0C92B39DE5500DA0DB2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE46B0C82B39DE5500DA0DB2 /* Router.swift */; };
 		FE46B0CB2B39E1E600DA0DB2 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE46B0CA2B39E1E600DA0DB2 /* Routes.swift */; };
+		FE5475142B3E325C002F936E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE5475132B3E325C002F936E /* WidgetKit.framework */; };
+		FE5475162B3E325C002F936E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE5475152B3E325C002F936E /* SwiftUI.framework */; };
+		FE5475192B3E325C002F936E /* SessionWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475182B3E325C002F936E /* SessionWidgetBundle.swift */; };
+		FE54751B2B3E325C002F936E /* SessionWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE54751A2B3E325C002F936E /* SessionWidgetLiveActivity.swift */; };
+		FE54751D2B3E325C002F936E /* SessionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE54751C2B3E325C002F936E /* SessionWidget.swift */; };
+		FE54751F2B3E325E002F936E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE54751E2B3E325E002F936E /* Assets.xcassets */; };
+		FE5475232B3E325E002F936E /* SessionWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FE5475112B3E325C002F936E /* SessionWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FE6ED2F52B265A5C00E4A39C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */; };
 		FE72502F2B064F4000068114 /* SessionControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72502E2B064F4000068114 /* SessionControls.swift */; };
 		FE7250312B0652FC00068114 /* SessionStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7250302B0652FC00068114 /* SessionStats.swift */; };
@@ -48,6 +55,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		FE5475212B3E325E002F936E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FEBE74472AF4E317005A98C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE5475102B3E325C002F936E;
+			remoteInfo = SessionWidgetExtension;
+		};
 		FEBE74612AF4E31A005A98C0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FEBE74472AF4E317005A98C0 /* Project object */;
@@ -64,9 +78,31 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FE5475242B3E325E002F936E /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FE5475232B3E325E002F936E /* SessionWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		FE46B0C82B39DE5500DA0DB2 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FE46B0CA2B39E1E600DA0DB2 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
+		FE5475112B3E325C002F936E /* SessionWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SessionWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE5475132B3E325C002F936E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		FE5475152B3E325C002F936E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		FE5475182B3E325C002F936E /* SessionWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionWidgetBundle.swift; sourceTree = "<group>"; };
+		FE54751A2B3E325C002F936E /* SessionWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		FE54751C2B3E325C002F936E /* SessionWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionWidget.swift; sourceTree = "<group>"; };
+		FE54751E2B3E325E002F936E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE5475202B3E325E002F936E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		FE72502E2B064F4000068114 /* SessionControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionControls.swift; sourceTree = "<group>"; };
 		FE7250302B0652FC00068114 /* SessionStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStats.swift; sourceTree = "<group>"; };
@@ -111,6 +147,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FE54750E2B3E325C002F936E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE5475162B3E325C002F936E /* SwiftUI.framework in Frameworks */,
+				FE5475142B3E325C002F936E /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FEBE744C2AF4E317005A98C0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,12 +229,35 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		FE5475122B3E325C002F936E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE5475132B3E325C002F936E /* WidgetKit.framework */,
+				FE5475152B3E325C002F936E /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FE5475172B3E325C002F936E /* SessionWidget */ = {
+			isa = PBXGroup;
+			children = (
+				FE5475182B3E325C002F936E /* SessionWidgetBundle.swift */,
+				FE54751A2B3E325C002F936E /* SessionWidgetLiveActivity.swift */,
+				FE54751C2B3E325C002F936E /* SessionWidget.swift */,
+				FE54751E2B3E325E002F936E /* Assets.xcassets */,
+				FE5475202B3E325E002F936E /* Info.plist */,
+			);
+			path = SessionWidget;
+			sourceTree = "<group>";
+		};
 		FEBE74462AF4E317005A98C0 = {
 			isa = PBXGroup;
 			children = (
 				FEBE74512AF4E317005A98C0 /* Navigator */,
 				FEBE74632AF4E31A005A98C0 /* NavigatorTests */,
 				FEBE746D2AF4E31A005A98C0 /* NavigatorUITests */,
+				FE5475172B3E325C002F936E /* SessionWidget */,
+				FE5475122B3E325C002F936E /* Frameworks */,
 				FEBE74502AF4E317005A98C0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -200,6 +268,7 @@
 				FEBE744F2AF4E317005A98C0 /* Navigator.app */,
 				FEBE74602AF4E31A005A98C0 /* NavigatorTests.xctest */,
 				FEBE746A2AF4E31A005A98C0 /* NavigatorUITests.xctest */,
+				FE5475112B3E325C002F936E /* SessionWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -259,6 +328,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FE5475102B3E325C002F936E /* SessionWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE5475272B3E325E002F936E /* Build configuration list for PBXNativeTarget "SessionWidgetExtension" */;
+			buildPhases = (
+				FE54750D2B3E325C002F936E /* Sources */,
+				FE54750E2B3E325C002F936E /* Frameworks */,
+				FE54750F2B3E325C002F936E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SessionWidgetExtension;
+			productName = SessionWidgetExtension;
+			productReference = FE5475112B3E325C002F936E /* SessionWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		FEBE744E2AF4E317005A98C0 /* Navigator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FEBE74742AF4E31A005A98C0 /* Build configuration list for PBXNativeTarget "Navigator" */;
@@ -266,10 +352,12 @@
 				FEBE744B2AF4E317005A98C0 /* Sources */,
 				FEBE744C2AF4E317005A98C0 /* Frameworks */,
 				FEBE744D2AF4E317005A98C0 /* Resources */,
+				FE5475242B3E325E002F936E /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				FE5475222B3E325E002F936E /* PBXTargetDependency */,
 			);
 			name = Navigator;
 			productName = Navigator;
@@ -319,9 +407,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					FE5475102B3E325C002F936E = {
+						CreatedOnToolsVersion = 15.1;
+					};
 					FEBE744E2AF4E317005A98C0 = {
 						CreatedOnToolsVersion = 15.0.1;
 					};
@@ -351,11 +442,20 @@
 				FEBE744E2AF4E317005A98C0 /* Navigator */,
 				FEBE745F2AF4E31A005A98C0 /* NavigatorTests */,
 				FEBE74692AF4E31A005A98C0 /* NavigatorUITests */,
+				FE5475102B3E325C002F936E /* SessionWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		FE54750F2B3E325C002F936E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE54751F2B3E325E002F936E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FEBE744D2AF4E317005A98C0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -382,6 +482,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FE54750D2B3E325C002F936E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE5475192B3E325C002F936E /* SessionWidgetBundle.swift in Sources */,
+				FE54751B2B3E325C002F936E /* SessionWidgetLiveActivity.swift in Sources */,
+				FE54751D2B3E325C002F936E /* SessionWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FEBE744B2AF4E317005A98C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -442,6 +552,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		FE5475222B3E325E002F936E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE5475102B3E325C002F936E /* SessionWidgetExtension */;
+			targetProxy = FE5475212B3E325E002F936E /* PBXContainerItemProxy */;
+		};
 		FEBE74622AF4E31A005A98C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FEBE744E2AF4E317005A98C0 /* Navigator */;
@@ -455,6 +570,65 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		FE5475252B3E325E002F936E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2US4L4HG86;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SessionWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SessionWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.taltech.josill.Navigate.SessionWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FE5475262B3E325E002F936E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2US4L4HG86;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SessionWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SessionWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ee.taltech.josill.Navigate.SessionWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		FEBE74722AF4E31A005A98C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -572,6 +746,7 @@
 		FEBE74752AF4E31A005A98C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Navigator/Navigator.entitlements;
@@ -614,6 +789,7 @@
 		FEBE74762AF4E31A005A98C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Navigator/Navigator.entitlements;
@@ -746,6 +922,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FE5475272B3E325E002F936E /* Build configuration list for PBXNativeTarget "SessionWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE5475252B3E325E002F936E /* Debug */,
+				FE5475262B3E325E002F936E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FEBE744A2AF4E317005A98C0 /* Build configuration list for PBXProject "Navigator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
