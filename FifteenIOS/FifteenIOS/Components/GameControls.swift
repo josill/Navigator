@@ -33,13 +33,19 @@ struct GameControls: View {
                 
                 HStack {
                     Spacer()
-                    Text("Time:")
-                        .foregroundColor(.text)
-                        .font(.title2)
+                    VStack {
+                        Text("Time:")
+                            .foregroundColor(.text)
+                            .font(.title2)
+                        Text(gameBrain.elapsedTimeString)
+                    }
                     Spacer()
-                    Text("Moves:")
-                        .foregroundColor(.text)
-                        .font(.title2)
+                    VStack {
+                        Text("Moves:")
+                            .foregroundColor(.text)
+                            .font(.title2)
+                        Text("\(gameBrain.movesMade)")
+                    }
                     Spacer()
                 }
                 
@@ -82,6 +88,6 @@ struct GameControls: View {
     }
 }
 
-//#Preview {
-//    GameControls()
-//}
+#Preview {
+    GameControls(gameBrain: GameBrain())
+}

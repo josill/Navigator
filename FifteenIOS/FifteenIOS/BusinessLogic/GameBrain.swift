@@ -11,8 +11,14 @@ class GameBrain: ObservableObject {
     @Published var tiles: [[Int]]
     @Published var undoDisabled = true
     
-    private var gameActive = true
+    private var gameActive = false
     private var stack = [(Int, Int)]()
+    
+    private var timer = Timer()
+    private var elapsedTime = 0
+    
+    @Published var elapsedTimeString = "00:00:00"
+    @Published var movesMade = 0
     
     enum Position {
         case top, left, right, bottom
@@ -27,36 +33,49 @@ class GameBrain: ObservableObject {
             }
         }
         self.tiles = shuffledMatrix
-        print(self.tiles)
     }
     
     private static func createShuffledMatrix() -> [[Int]] {
         var array: [Int] = Array(0..<16)
         array.shuffle()
-
+        
         var matrix: [[Int]] = []
         for row in 0..<4 {
             let startIndex = row * 4
             let endIndex = startIndex + 4
             matrix.append(Array(array[startIndex..<endIndex]))
         }
-
+        
         return matrix
     }
     
     private static func isSolveable(_ matrix: [[Int]]) -> Bool {
         let arr = Array(matrix.joined())
         var invCount = 0
+        var zeroRow: Int? = nil
         
         for i in 0..<arr.count {
-                for j in i+1..<arr.count {
-                    if arr[i] != 0 && arr[j] != 0 && arr[i] > arr[j] {
-                        invCount += 1
-                    }
+            if arr[i] == 0 {
+                zeroRow = {
+                    (0...3).contains(i) ? 1
+                    : (4...7).contains(i) ? 2
+                    : (8...11).contains(i) ? 3
+                    : 4
+                }()
+                continue
+            }
+            
+            for j in i+1..<arr.count {
+                if arr[i] != 0 && arr[j] != 0 && arr[i] > arr[j] {
+                    invCount += 1
                 }
             }
+        }
         
-        print("inv \(invCount)")
+        if let zeroRow = zeroRow {
+            invCount += zeroRow
+        }
+        
         return invCount % 2 == 0
     }
     
@@ -76,6 +95,9 @@ class GameBrain: ObservableObject {
         if countUndo {
             stack.append(zeroPos)
             undoDisabled = false
+            movesMade += 1
+        } else {
+            movesMade -= 1
         }
         
         swapTiles(row, col, zeroPos)
@@ -89,7 +111,7 @@ class GameBrain: ObservableObject {
             Position.bottom: row < tiles.count - 1 && tiles[row + 1][col] == 0
         ]
         
-        var positions = locateValidPositions(row, col)
+        let positions = locateValidPositions(row, col)
         
         for p in positions {
             if positionChecks[p]! {
@@ -100,7 +122,7 @@ class GameBrain: ObservableObject {
         return false
     }
     
-
+    
     func locateValidPositions(_ row: Int, _ col: Int) -> [Position] {
         switch (row, col) {
         case (0, 0):
@@ -148,21 +170,39 @@ class GameBrain: ObservableObject {
             }
         }
         self.tiles = shuffledMatrix
-
+        
         stack = []
+        resetTimer()
+        movesMade = 0
     }
     
     func undo() {
-        print("undo")
-        
         if !undoDisabled {
             if let (row, col) = stack.popLast() {
                 handleTap(row, col, countUndo: false)
-                
-                print(tiles)
             }
         }
         
         undoDisabled = stack.isEmpty
+    }
+
+    func resetTimer() {
+        timer.invalidate()
+        elapsedTime = 0
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
+            self?.updateElapsedTime()
+        }
+    }
+    
+    func updateElapsedTime() {
+        elapsedTime += 1
+        
+        let hours = Int(elapsedTime) / 3600
+        let minutes = (Int(elapsedTime) % 3600) / 60
+        let seconds = Int(elapsedTime) % 60
+        
+        elapsedTimeString = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        
     }
 }
