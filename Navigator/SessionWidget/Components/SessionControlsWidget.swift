@@ -50,8 +50,6 @@ struct SessionControlsWidget: View {
             
             Button(intent: QuitSessionIntent()) {
                 Image(systemName: "power")
-                    .foregroundColor(.clear)
-                    .background(.clear)
             }
             .padding()
             .background(.blue)
