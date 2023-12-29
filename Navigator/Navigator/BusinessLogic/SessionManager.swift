@@ -46,6 +46,7 @@ class SessionManager: ObservableObject {
     }
     
     func toggleActiveState() {
+        locationManager.startOrStopSession()
         print("Hello from toggleSessionState()")
     }
     

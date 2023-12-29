@@ -22,7 +22,8 @@ struct SessionWidgetLiveActivity: Widget {
             }
             .padding(.top, 10)
             .padding(.bottom, 10)
-            .activityBackgroundTint(.white)
+//            .activityBackgroundTint(Color(UIColor(ciColor: UIColor.systemBackground.ciColor)))
+            .activityBackgroundTint(.clear)
             .activitySystemActionForegroundColor(.black)
 
         } dynamicIsland: { context in

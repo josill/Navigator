@@ -24,7 +24,7 @@ struct SessionControls: View {
             Spacer()
             
             Button {
-                locationManager.startSession()
+                locationManager.startOrStopSession()
                 
                 if locationManager.trackingEnabled {
                     sessionManager.startActivity()

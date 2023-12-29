@@ -13,47 +13,51 @@ struct SessionControlsWidget: View {
         HStack {
             Spacer()
             
-            Button(intent: ToggleActiveIntent()) {
+            Button(intent: StartOrStopIntent()) {
                 Image(systemName: "play")
             }
+            .padding()
             .cornerRadius(12.0)
-//            .background(locationManager.trackingEnabled ? .green : .red)
             .background(.blue)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 18))
+            .font(.system(size: 24))
             
             Spacer()
             
             Button(intent: AddCheckpointIntent()) {
                 Image(systemName: "mappin.and.ellipse")
             }
+            .padding()
+            .cornerRadius(12.0)
             .background(.red)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 18))
+            .font(.system(size: 24))
             
             Spacer()
             
             Button(intent: AddWaypointIntent()) {
                 Image(systemName: "pin")
             }
+            .padding()
             .cornerRadius(12.0)
             .background(.blue)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 18))
+            .font(.system(size: 24))
             
             Spacer()
             
             Button(intent: QuitSessionIntent()) {
                 Image(systemName: "power")
             }
+            .padding()
             .cornerRadius(12.0)
             .background(.red)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 18))
+            .font(.system(size: 24))
             
             Spacer()
         }

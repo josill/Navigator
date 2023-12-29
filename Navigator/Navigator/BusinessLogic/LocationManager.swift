@@ -81,7 +81,7 @@ extension LocationManager: CLLocationManagerDelegate {
         CompassManager.shared.degrees = -1 * newHeading.magneticHeading
     }
     
-    func startSession() {
+    func startOrStopSession() {
         trackingEnabled = !trackingEnabled
         
         if trackingEnabled {
@@ -140,9 +140,6 @@ extension LocationManager: CLLocationManagerDelegate {
                 directLineFromCp = 0.0
                 sessionDurationBeforeCp = sessionDurationSec
             }
-            
-            print("addCheckpoint:")
-            print(checkpoints)
         }
     }
     
@@ -165,8 +162,6 @@ extension LocationManager: CLLocationManagerDelegate {
                 sessionDurationBeforeWp = sessionDurationSec
             }
         }
-        print("addWaypoint:")
-        print(waypoint)
     }
     
     func reset() {
