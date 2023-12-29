@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ActivityKit
 
 struct SessionControls: View {
     @StateObject private var authHelper = AuthenticationHelper.shared
@@ -14,6 +15,7 @@ struct SessionControls: View {
     @EnvironmentObject var notificationManager: NotificationManager
     
     @Binding var quitSessionPresented: Bool
+    @State var  activities = Activity<SessionAttributes>.activities
 
     var body: some View {
         HStack {
@@ -21,6 +23,8 @@ struct SessionControls: View {
             
             Button {
                 locationManager.startSession()
+                requestActivity()
+                listAllActivities()
             } label: {
                 Image(systemName: "play")
             }
@@ -86,9 +90,21 @@ struct SessionControls: View {
             .foregroundColor(.white)
             .clipShape(Circle())
             .font(.system(size: 24))
-            
+    
             Spacer()
         }
+        
+        ScrollView {
+            ForEach(activities, id: \.id) { activity in
+                let courierName = activity.content.state.sessionDuration
+                let deliveryTime = activity.content.state.sessionSpeed
+                HStack(alignment: .center) {
+                    Text(courierName)
+                    Text("\(deliveryTime)")
+                }
+            }
+        }
+        
         .alert(isPresented: $quitSessionPresented) {
             Alert(
                 title: Text("Quit session"),
@@ -105,6 +121,27 @@ struct SessionControls: View {
         }
     }
     
+    func requestActivity() {
+            let session = SessionAttributes()
+            let initialState = SessionAttributes.ContentState(
+                sessionDistance: 0.0,
+                sessionDuration: "00:00:00",
+                sessionSpeed: 0.0
+            )
+            let content = ActivityContent(state: initialState, staleDate: nil)
+            
+            let _ = try? Activity.request(
+                attributes: session,
+                content: content,
+                pushType: nil
+            )
+        }
+        
+        func listAllActivities() {
+            var activities = Activity<SessionAttributes>.activities
+            activities.sort { $0.id > $1.id }
+            self.activities = activities
+        }
 }
 
 #Preview {

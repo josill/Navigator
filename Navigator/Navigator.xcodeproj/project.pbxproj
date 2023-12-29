@@ -16,6 +16,8 @@
 		FE54751D2B3E325C002F936E /* SessionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE54751C2B3E325C002F936E /* SessionWidget.swift */; };
 		FE54751F2B3E325E002F936E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE54751E2B3E325E002F936E /* Assets.xcassets */; };
 		FE5475232B3E325E002F936E /* SessionWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = FE5475112B3E325C002F936E /* SessionWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FE5475342B3ED364002F936E /* SessionAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475332B3ED364002F936E /* SessionAttributes.swift */; };
+		FE5475352B3ED364002F936E /* SessionAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475332B3ED364002F936E /* SessionAttributes.swift */; };
 		FE6ED2F52B265A5C00E4A39C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */; };
 		FE72502F2B064F4000068114 /* SessionControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72502E2B064F4000068114 /* SessionControls.swift */; };
 		FE7250312B0652FC00068114 /* SessionStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7250302B0652FC00068114 /* SessionStats.swift */; };
@@ -103,6 +105,7 @@
 		FE54751C2B3E325C002F936E /* SessionWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionWidget.swift; sourceTree = "<group>"; };
 		FE54751E2B3E325E002F936E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE5475202B3E325E002F936E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE5475332B3ED364002F936E /* SessionAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionAttributes.swift; sourceTree = "<group>"; };
 		FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		FE72502E2B064F4000068114 /* SessionControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionControls.swift; sourceTree = "<group>"; };
 		FE7250302B0652FC00068114 /* SessionStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStats.swift; sourceTree = "<group>"; };
@@ -286,6 +289,7 @@
 				FEBE74582AF4E31A005A98C0 /* Navigator.entitlements */,
 				FEBE74592AF4E31A005A98C0 /* Preview Content */,
 				FEEA24922B16067F001D1981 /* Configuration.swift */,
+				FE5475332B3ED364002F936E /* SessionAttributes.swift */,
 			);
 			path = Navigator;
 			sourceTree = "<group>";
@@ -487,6 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE5475192B3E325C002F936E /* SessionWidgetBundle.swift in Sources */,
+				FE5475352B3ED364002F936E /* SessionAttributes.swift in Sources */,
 				FE54751B2B3E325C002F936E /* SessionWidgetLiveActivity.swift in Sources */,
 				FE54751D2B3E325C002F936E /* SessionWidget.swift in Sources */,
 			);
@@ -519,6 +524,7 @@
 				FEE3023B2B27DE4B00BF48CB /* CreateSessionView.swift in Sources */,
 				FEA5599B2B0284E500D0E3D8 /* LoginOrRegisterView.swift in Sources */,
 				FE75A3912B07C2D100FE3757 /* Slider.swift in Sources */,
+				FE5475342B3ED364002F936E /* SessionAttributes.swift in Sources */,
 				FEBE74532AF4E317005A98C0 /* NavigatorApp.swift in Sources */,
 				FEC07DC72B1273D2004976D7 /* UserLocation.swift in Sources */,
 				FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */,
@@ -760,6 +766,7 @@
 				INFOPLIST_FILE = Navigator/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please share your location with us";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -803,6 +810,7 @@
 				INFOPLIST_FILE = Navigator/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please share your location with us";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

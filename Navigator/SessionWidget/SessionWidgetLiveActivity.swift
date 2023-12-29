@@ -9,25 +9,6 @@ import ActivityKit
 import WidgetKit
 import SwiftUI
 
-public struct SessionAttributes: ActivityAttributes {
-    public struct ContentState: Codable & Hashable {
-        let sessionDistance: Double
-        let sessionDuration: String
-        let sessionSpeed: Double
-    }
-}
-
-import ActivityKit
-import WidgetKit
-import SwiftUI
-//public struct SessionAttributes: ActivityAttributes {
-//    public struct ContentState: Codable & Hashable {
-//        let sessionDistance: Double
-//        let sessionDuration: String
-//        let sessionSpeed: Double
-//    }
-//}
-
 struct SessionWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: SessionAttributes.self) { context in
