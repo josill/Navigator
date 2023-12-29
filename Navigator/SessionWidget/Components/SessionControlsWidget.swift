@@ -9,82 +9,51 @@ import SwiftUI
 import ActivityKit
 
 struct SessionControlsWidget: View {
-    var locationManager = LocationManager()
-    var notificationManager = NotificationManager()
-    
     var body: some View {
         HStack {
             Spacer()
             
-            Button {
-                locationManager.startSession()
-                startActivity()
-//                listAllActivities()
-            } label: {
+            Button(intent: ToggleActiveIntent()) {
                 Image(systemName: "play")
             }
-            .padding()
             .cornerRadius(12.0)
-            .background(locationManager.trackingEnabled ? .green : .red)
+//            .background(locationManager.trackingEnabled ? .green : .red)
+            .background(.blue)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 24))
+            .font(.system(size: 18))
             
             Spacer()
             
-            Button {
-                notificationManager.changeNotificationsEnabled()
-            } label: {
-                Image(systemName: "bell.circle")
-            }
-            .padding()
-            .cornerRadius(12.0)
-            .background(notificationManager.notificationsEnabled ? .green : .red)
-            .foregroundColor(.white)
-            .clipShape(Circle())
-            .font(.system(size: 24))
-            
-            Spacer()
-            
-            Button {
-                locationManager.addCheckpoint(coordinate: locationManager.userLocation!.coordinate)
-            } label: {
+            Button(intent: AddCheckpointIntent()) {
                 Image(systemName: "mappin.and.ellipse")
             }
-            .padding()
-            .cornerRadius(12.0)
             .background(.red)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 24))
+            .font(.system(size: 18))
             
             Spacer()
             
-            Button {
-                locationManager.addWaypoint(coordinate: locationManager.userLocation!.coordinate)
-            } label: {
+            Button(intent: AddWaypointIntent()) {
                 Image(systemName: "pin")
             }
-            .padding()
             .cornerRadius(12.0)
             .background(.blue)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 24))
+            .font(.system(size: 18))
             
             Spacer()
             
-            Button {
-                //                        quitSessionPresented.toggle()
-            } label: {
+            Button(intent: QuitSessionIntent()) {
                 Image(systemName: "power")
             }
-            .padding()
             .cornerRadius(12.0)
             .background(.red)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 24))
+            .font(.system(size: 18))
             
             Spacer()
         }

@@ -34,6 +34,12 @@
 		FE5475492B3EE803002F936E /* SessionStatsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475472B3EE803002F936E /* SessionStatsWidget.swift */; };
 		FE54754C2B3EF528002F936E /* AddCheckpointIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE54754B2B3EF528002F936E /* AddCheckpointIntent.swift */; };
 		FE54754D2B3EF528002F936E /* AddCheckpointIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE54754B2B3EF528002F936E /* AddCheckpointIntent.swift */; };
+		FE5475502B3F0440002F936E /* AddWaypointIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE54754F2B3F0440002F936E /* AddWaypointIntent.swift */; };
+		FE5475512B3F0440002F936E /* AddWaypointIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE54754F2B3F0440002F936E /* AddWaypointIntent.swift */; };
+		FE5475562B3F09A9002F936E /* ToggleActiveIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475552B3F09A8002F936E /* ToggleActiveIntent.swift */; };
+		FE5475572B3F09A9002F936E /* ToggleActiveIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475552B3F09A8002F936E /* ToggleActiveIntent.swift */; };
+		FE5475592B3F0A0B002F936E /* QuitSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475582B3F0A0B002F936E /* QuitSessionIntent.swift */; };
+		FE54755A2B3F0A0B002F936E /* QuitSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475582B3F0A0B002F936E /* QuitSessionIntent.swift */; };
 		FE6ED2F52B265A5C00E4A39C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */; };
 		FE72502F2B064F4000068114 /* SessionControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72502E2B064F4000068114 /* SessionControls.swift */; };
 		FE7250312B0652FC00068114 /* SessionStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7250302B0652FC00068114 /* SessionStats.swift */; };
@@ -126,6 +132,9 @@
 		FE5475442B3EE69E002F936E /* SessionControlsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionControlsWidget.swift; sourceTree = "<group>"; };
 		FE5475472B3EE803002F936E /* SessionStatsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStatsWidget.swift; sourceTree = "<group>"; };
 		FE54754B2B3EF528002F936E /* AddCheckpointIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCheckpointIntent.swift; sourceTree = "<group>"; };
+		FE54754F2B3F0440002F936E /* AddWaypointIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWaypointIntent.swift; sourceTree = "<group>"; };
+		FE5475552B3F09A8002F936E /* ToggleActiveIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleActiveIntent.swift; sourceTree = "<group>"; };
+		FE5475582B3F0A0B002F936E /* QuitSessionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitSessionIntent.swift; sourceTree = "<group>"; };
 		FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		FE72502E2B064F4000068114 /* SessionControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionControls.swift; sourceTree = "<group>"; };
 		FE7250302B0652FC00068114 /* SessionStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStats.swift; sourceTree = "<group>"; };
@@ -265,13 +274,13 @@
 		FE5475172B3E325C002F936E /* SessionWidget */ = {
 			isa = PBXGroup;
 			children = (
+				FE54754E2B3F0425002F936E /* Intents */,
 				FE5475432B3EE683002F936E /* Components */,
 				FE5475182B3E325C002F936E /* SessionWidgetBundle.swift */,
 				FE54751A2B3E325C002F936E /* SessionWidgetLiveActivity.swift */,
 				FE54751C2B3E325C002F936E /* SessionWidget.swift */,
 				FE54751E2B3E325E002F936E /* Assets.xcassets */,
 				FE5475202B3E325E002F936E /* Info.plist */,
-				FE54754B2B3EF528002F936E /* AddCheckpointIntent.swift */,
 			);
 			path = SessionWidget;
 			sourceTree = "<group>";
@@ -283,6 +292,17 @@
 				FE5475472B3EE803002F936E /* SessionStatsWidget.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		FE54754E2B3F0425002F936E /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				FE54754B2B3EF528002F936E /* AddCheckpointIntent.swift */,
+				FE54754F2B3F0440002F936E /* AddWaypointIntent.swift */,
+				FE5475552B3F09A8002F936E /* ToggleActiveIntent.swift */,
+				FE5475582B3F0A0B002F936E /* QuitSessionIntent.swift */,
+			);
+			path = Intents;
 			sourceTree = "<group>";
 		};
 		FEBE74462AF4E317005A98C0 = {
@@ -533,11 +553,14 @@
 				FE5475462B3EE69E002F936E /* SessionControlsWidget.swift in Sources */,
 				FE54751B2B3E325C002F936E /* SessionWidgetLiveActivity.swift in Sources */,
 				FE5475422B3EE56F002F936E /* Session.swift in Sources */,
+				FE5475572B3F09A9002F936E /* ToggleActiveIntent.swift in Sources */,
 				FE54753E2B3EE550002F936E /* CompassManager.swift in Sources */,
 				FE5475412B3EE569002F936E /* User.swift in Sources */,
 				FE5475382B3EE35C002F936E /* SessionManager.swift in Sources */,
+				FE5475512B3F0440002F936E /* AddWaypointIntent.swift in Sources */,
 				FE54751D2B3E325C002F936E /* SessionWidget.swift in Sources */,
 				FE5475402B3EE565002F936E /* Configuration.swift in Sources */,
+				FE54755A2B3F0A0B002F936E /* QuitSessionIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +574,7 @@
 				FEBE74552AF4E317005A98C0 /* ContentView.swift in Sources */,
 				FEE26AC72B13562600FEEDBD /* NotificationRequestView.swift in Sources */,
 				FEB3DAC82B1BA0E900262CB7 /* SessionsView.swift in Sources */,
+				FE5475502B3F0440002F936E /* AddWaypointIntent.swift in Sources */,
 				FEE26AC52B1353B200FEEDBD /* NotificationManager.swift in Sources */,
 				FEEA24912B160220001D1981 /* AuthenticationHelper.swift in Sources */,
 				FE46B0C92B39DE5500DA0DB2 /* Router.swift in Sources */,
@@ -571,9 +595,11 @@
 				FE75A3912B07C2D100FE3757 /* Slider.swift in Sources */,
 				FE5475342B3ED364002F936E /* SessionAttributes.swift in Sources */,
 				FEBE74532AF4E317005A98C0 /* NavigatorApp.swift in Sources */,
+				FE5475562B3F09A9002F936E /* ToggleActiveIntent.swift in Sources */,
 				FEC07DC72B1273D2004976D7 /* UserLocation.swift in Sources */,
 				FE5475482B3EE803002F936E /* SessionStatsWidget.swift in Sources */,
 				FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */,
+				FE5475592B3F0A0B002F936E /* QuitSessionIntent.swift in Sources */,
 				FE54754C2B3EF528002F936E /* AddCheckpointIntent.swift in Sources */,
 				FE6ED2F52B265A5C00E4A39C /* DatabaseService.swift in Sources */,
 				FE958BB52B272C36008F24C2 /* UserState.swift in Sources */,

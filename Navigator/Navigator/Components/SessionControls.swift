@@ -10,6 +10,7 @@ import ActivityKit
 
 struct SessionControls: View {
     @StateObject private var authHelper = AuthenticationHelper.shared
+    @StateObject private var sessionManager = SessionManager.shared
     @EnvironmentObject private var router: Router
     @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var notificationManager: NotificationManager
@@ -23,7 +24,7 @@ struct SessionControls: View {
             
             Button {
                 locationManager.startSession()
-                requestActivity()
+                sessionManager.startActivity() 
                 listAllActivities()
             } label: {
                 Image(systemName: "play")

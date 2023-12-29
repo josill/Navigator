@@ -29,7 +29,6 @@ struct SessionStatsWidget: View {
 //                .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
         }
-        .padding()
 //        .background(colorScheme == .dark ? Color.black : Color.white)
     }
 }

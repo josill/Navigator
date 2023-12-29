@@ -10,7 +10,6 @@ import WidgetKit
 import SwiftUI
 
 struct SessionWidgetLiveActivity: Widget {
-//    private var sessionManager = SessionManager()
 //    private var locationManager = LocationManager.shared
     
     var body: some WidgetConfiguration {
@@ -19,16 +18,14 @@ struct SessionWidgetLiveActivity: Widget {
             VStack {
                 SessionStatsWidget(context: context)
                 
-                Button(intent: AddCheckpointIntent()) {
-                        Text("Click me")
-                        .foregroundStyle(.red)
-                }
-                
-//                SessionControlsWidget()
+                SessionControlsWidget()
+                    .padding(.top, 10)
 //                Text("Hello \(context.state.sessionDuration)")
             }
-            .activityBackgroundTint(Color.red)
-            .activitySystemActionForegroundColor(Color.black)
+            .padding(.top, 10)
+            .padding(.bottom, 10)
+            .activityBackgroundTint(.white)
+            .activitySystemActionForegroundColor(.black)
 
         } dynamicIsland: { context in
             DynamicIsland {
