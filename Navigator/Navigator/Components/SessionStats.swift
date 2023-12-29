@@ -9,10 +9,10 @@ import SwiftUI
 
 struct SessionStats: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
-
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var locationManager: LocationManager
-
+    
+    @StateObject private var locationManager = LocationManager.shared
+    
     enum Mode {
         case main
         case checkPoint

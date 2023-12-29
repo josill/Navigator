@@ -17,7 +17,6 @@ struct NavigatorApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(locationManager)
                 .environmentObject(notificationManager)
                 .environmentObject(router)
         }

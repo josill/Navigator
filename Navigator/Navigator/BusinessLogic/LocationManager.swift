@@ -23,7 +23,7 @@ class LocationManager: NSObject, ObservableObject {
     @Published var userLocations: [CLLocationCoordinate2D]?
     @Published var trackingEnabled = false
     @Published var checkpoints: [String: CLLocationCoordinate2D] = [:]
-    @Published var waypoint: CLLocationCoordinate2D?
+    @Published var waypoint: CLLocationCoordinate2D? = nil
     
     @Published var distanceCovered = 0.0
     @Published var distanceFromCp = 0.0
@@ -123,43 +123,50 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     
-    func addCheckpoint(coordinate: CLLocationCoordinate2D) {
+    func addCheckpoint() {
         if trackingEnabled {
-            print("addCheckpoint")
-            
             let checkpointName = "Checkpoint \(checkpoints.count + 1)"
-            checkpoints[checkpointName] = coordinate
+            checkpoints[checkpointName] = userLocation!.coordinate
             
             Task {
                 await authHelper.updateLocation(
-                    latitude: coordinate.latitude,
-                    longitude: coordinate.longitude,
+                    latitude: userLocation!.coordinate.latitude,
+                    longitude: userLocation!.coordinate.longitude,
                     locationType: .checkPoint)
             }
+        
+            Task { @MainActor in
+                distanceFromCp = 0.0
+                directLineFromCp = 0.0
+                sessionDurationBeforeCp = sessionDurationSec
+            }
             
-            distanceFromCp = 0.0
-            directLineFromCp = 0.0
-            sessionDurationBeforeCp = sessionDurationSec
+            print("addCheckpoint:")
+            print(checkpoints)
         }
     }
     
-    func addWaypoint(coordinate: CLLocationCoordinate2D) {
-        if trackingEnabled {
-            print("addWaypoint")
-            
-            waypoint = coordinate
+    func addWaypoint() {
+        if trackingEnabled {   
+            Task { @MainActor in
+                waypoint = userLocation!.coordinate
+            }
             
             Task {
                 await authHelper.updateLocation(
-                    latitude: coordinate.latitude,
-                    longitude: coordinate.longitude,
+                    latitude: userLocation!.coordinate.latitude,
+                    longitude: userLocation!.coordinate.longitude,
                     locationType: .checkPoint)
             }
             
-            distanceFromWp = 0.0
-            directLineFromWp = 0.0
-            sessionDurationBeforeWp = sessionDurationSec
+            Task { @MainActor in
+                distanceFromWp = 0.0
+                directLineFromWp = 0.0
+                sessionDurationBeforeWp = sessionDurationSec
+            }
         }
+        print("addWaypoint:")
+        print(waypoint)
     }
     
     func reset() {

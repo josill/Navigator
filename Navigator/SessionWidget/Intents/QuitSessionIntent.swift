@@ -14,7 +14,6 @@ struct QuitSessionIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Live Activity"
     
     func perform() async throws -> some IntentResult {
-        print("perform in AddCheckpointIntent")
         SessionManager().quitSession()
         
         return .result()

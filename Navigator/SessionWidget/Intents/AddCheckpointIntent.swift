@@ -15,7 +15,6 @@ struct AddCheckpointIntent: LiveActivityIntent {
 //    private var sessionManager = SessionManager.shared
     
     func perform() async throws -> some IntentResult {
-        print("perform in AddCheckpointIntent")
 //        sessionManager.helloWorld()
         SessionManager().addCheckpoint()
         

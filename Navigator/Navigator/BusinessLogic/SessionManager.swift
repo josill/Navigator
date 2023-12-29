@@ -36,10 +36,12 @@ class SessionManager: ObservableObject {
     }
     
     func addCheckpoint() {
+        locationManager.addCheckpoint()
         print("Hello from addCheckpoint()")
     }
     
     func addWaypoint() {
+        locationManager.addWaypoint()
         print("Hello from addWaypoint()")
     }
     

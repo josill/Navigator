@@ -9,8 +9,9 @@ import SwiftUI
 import CoreLocation
 
 struct LocationRequestView: View {
+    @StateObject private var locationManager = LocationManager.shared
+    
     @EnvironmentObject private var router: Router
-    @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var notificationManager: NotificationManager
         
     var body: some View {

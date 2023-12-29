@@ -11,8 +11,9 @@ import ActivityKit
 struct SessionControls: View {
     @StateObject private var authHelper = AuthenticationHelper.shared
     @StateObject private var sessionManager = SessionManager.shared
+    @StateObject private var locationManager = LocationManager.shared
+    
     @EnvironmentObject private var router: Router
-    @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var notificationManager: NotificationManager
     
     @Binding var quitSessionPresented: Bool
@@ -24,8 +25,11 @@ struct SessionControls: View {
             
             Button {
                 locationManager.startSession()
-                sessionManager.startActivity() 
-                listAllActivities()
+                
+                if locationManager.trackingEnabled {
+                    sessionManager.startActivity()
+                    listAllActivities()
+                }
             } label: {
                 Image(systemName: "play")
             }
@@ -53,7 +57,7 @@ struct SessionControls: View {
             Spacer()
             
             Button {
-                locationManager.addCheckpoint(coordinate: locationManager.userLocation!.coordinate)
+                locationManager.addCheckpoint()
             } label: {
                 Image(systemName: "mappin.and.ellipse")
             }
@@ -67,7 +71,7 @@ struct SessionControls: View {
             Spacer()
             
             Button {
-                locationManager.addWaypoint(coordinate: locationManager.userLocation!.coordinate)
+                locationManager.addWaypoint()
             } label: {
                 Image(systemName: "pin")
             }
@@ -121,23 +125,6 @@ struct SessionControls: View {
             )
         }
     }
-    
-    func requestActivity() {
-            let session = SessionAttributes()
-            let initialState = SessionAttributes.ContentState(
-                sessionDistance: 0.0,
-                sessionDuration: "00:00:00",
-                sessionSpeed: 0.0
-            )
-            let content = ActivityContent(state: initialState, staleDate: nil)
-            
-            let _ = try? Activity.request(
-                attributes: session,
-                content: content,
-                pushType: nil
-            )
-        }
-        
         func listAllActivities() {
             var activities = Activity<SessionAttributes>.activities
             activities.sort { $0.id > $1.id }

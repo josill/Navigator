@@ -10,11 +10,10 @@ import MapKit
 
 struct MapView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    
-    @StateObject private var authHelper = AuthenticationHelper.shared
-    
-    @EnvironmentObject var locationManager: LocationManager
     @EnvironmentObject var notificationManager: NotificationManager
+
+    @StateObject private var authHelper = AuthenticationHelper.shared
+    @StateObject private var locationManager = LocationManager.shared
     
     @State private var userInitialLocation: MapCameraPosition = .userLocation(fallback: .automatic)
     @State var quitSessionPresented = false
@@ -70,6 +69,9 @@ struct MapView: View {
                 SlideUpCard(quitSessionPresented: $quitSessionPresented)
             }
         }
+//        .onChange(of: locationManager.waypoint) { waypoint in
+//                
+//        }
     }
 }
 

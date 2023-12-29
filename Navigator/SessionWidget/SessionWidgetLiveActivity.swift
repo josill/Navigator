@@ -14,13 +14,11 @@ struct SessionWidgetLiveActivity: Widget {
     
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: SessionAttributes.self) { context in
-            // Lock screen/banner UI goes here
             VStack {
                 SessionStatsWidget(context: context)
                 
                 SessionControlsWidget()
                     .padding(.top, 10)
-//                Text("Hello \(context.state.sessionDuration)")
             }
             .padding(.top, 10)
             .padding(.bottom, 10)

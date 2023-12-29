@@ -492,7 +492,7 @@ class AuthenticationHelper: ObservableObject {
                 print("location updated successfully")
                 
                 if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                    print("json from location: \(json)")
+//                    print("json from location: \(json)")
                     
                     return
                 } else {
