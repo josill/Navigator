@@ -9,6 +9,8 @@ import CoreLocation
 import MapKit
 
 class LocationManager: NSObject, ObservableObject {
+    static let shared = LocationManager()
+    
     private let manager = CLLocationManager()
     @Published var authorizationStatus: CLAuthorizationStatus? = nil
     

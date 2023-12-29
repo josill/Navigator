@@ -10,13 +10,24 @@ import WidgetKit
 import SwiftUI
 
 struct SessionWidgetLiveActivity: Widget {
+//    private var sessionManager = SessionManager()
+//    private var locationManager = LocationManager.shared
+    
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: SessionAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
-                Text("Hello \(context.state.sessionDuration)")
+                SessionStatsWidget(context: context)
+                
+                Button(intent: AddCheckpointIntent()) {
+                        Text("Click me")
+                        .foregroundStyle(.red)
+                }
+                
+//                SessionControlsWidget()
+//                Text("Hello \(context.state.sessionDuration)")
             }
-            .activityBackgroundTint(Color.cyan)
+            .activityBackgroundTint(Color.red)
             .activitySystemActionForegroundColor(Color.black)
 
         } dynamicIsland: { context in
@@ -43,23 +54,6 @@ struct SessionWidgetLiveActivity: Widget {
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
         }
-    }
-    
-    func requestActivity() {
-        let session = SessionAttributes()
-        let initialState = SessionAttributes.ContentState(
-            sessionDistance: 0.0,
-            sessionDuration: "00:00:00",
-            sessionSpeed: 0.0
-        )
-        
-        let content = ActivityContent(state: initialState, staleDate: nil)
-        
-        let _ = try? Activity.request(
-            attributes: session,
-            content: content,
-            pushType: nil
-        )
     }
     
     func updateActivity(

@@ -17,7 +17,7 @@ struct ContentView: View {
                 .onAppear {
                     Task {
                         if authHelper.savedUser != nil {
-                            router.changeRoute(.init(.menu))
+                            router.changeRoute(.init(.map))
                         }
                     }
                 }
