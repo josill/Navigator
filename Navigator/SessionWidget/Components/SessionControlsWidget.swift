@@ -21,7 +21,7 @@ struct SessionControlsWidget: View {
             .background(.blue)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 24))
+            .font(.system(size: 18))
             
             Spacer()
             
@@ -30,10 +30,10 @@ struct SessionControlsWidget: View {
             }
             .padding()
             .cornerRadius(12.0)
-            .background(.red)
+            .background(.blue)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 24))
+            .font(.system(size: 18))
             
             Spacer()
             
@@ -41,23 +41,23 @@ struct SessionControlsWidget: View {
                 Image(systemName: "pin")
             }
             .padding()
-            .cornerRadius(12.0)
             .background(.blue)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 24))
+            .font(.system(size: 18))
             
             Spacer()
             
             Button(intent: QuitSessionIntent()) {
                 Image(systemName: "power")
+                    .foregroundColor(.clear)
+                    .background(.clear)
             }
             .padding()
-            .cornerRadius(12.0)
-            .background(.red)
+            .background(.blue)
             .foregroundColor(.white)
             .clipShape(Circle())
-            .font(.system(size: 24))
+            .font(.system(size: 18))
             
             Spacer()
         }
