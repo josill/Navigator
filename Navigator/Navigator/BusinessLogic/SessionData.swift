@@ -12,6 +12,7 @@ class SessionData: ObservableObject {
     private var sessionManager = SessionManager.shared
     
     @Published var sessionActive = false
+    @Published var sessionQuitAlertPresented = false
     
     @Published var distanceCovered = 0.0
     @Published var distanceFromCp = 0.0

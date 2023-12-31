@@ -86,7 +86,7 @@ struct SessionControls: View {
             Spacer()
             
             Button {
-                quitSessionPresented.toggle()
+                sessionData.sessionQuitAlertPresented.toggle()
             } label: {
                 Image(systemName: "power")
             }
@@ -100,7 +100,7 @@ struct SessionControls: View {
             Spacer()
         }
         
-        .alert(isPresented: $quitSessionPresented) {
+        .alert(isPresented: $sessionData.sessionQuitAlertPresented) {
             Alert(
                 title: Text("Quit session"),
                 message: Text("Are you sure you want to end the session?"),

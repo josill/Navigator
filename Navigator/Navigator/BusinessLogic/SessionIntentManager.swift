@@ -9,7 +9,7 @@ import Foundation
 
 class SessionIntentManager: ObservableObject {
     private var locationManager = LocationManager.shared
-    
+    private var sessionData = SessionData.shared
     
     func addCheckpoint() {
         locationManager.addCheckpoint()
@@ -27,6 +27,9 @@ class SessionIntentManager: ObservableObject {
     }
 
     func quitSession() {
+        print(sessionData.sessionQuitAlertPresented)
+        sessionData.sessionQuitAlertPresented.toggle()
+        print(sessionData.sessionQuitAlertPresented)
         print("Hello from endSession()")
     }
 }

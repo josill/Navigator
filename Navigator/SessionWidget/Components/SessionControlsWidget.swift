@@ -48,9 +48,14 @@ struct SessionControlsWidget: View {
             
             Spacer()
             
-            Button(intent: QuitSessionIntent()) {
+            Button() {
+//                let appURL = URL(string: "navigatorapp://quitsession")!
+//                UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
+                SessionIntentManager().quitSession()
+            } label: {
                 Image(systemName: "power")
             }
+            .widgetURL(URL(string: "navigatorapp://quitsession"))
             .padding()
             .background(.blue)
             .foregroundColor(.white)

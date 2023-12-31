@@ -13,7 +13,7 @@ struct QuitSessionIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Live Activity"
     
     func perform() async throws -> some IntentResult {
-        SessionIntentManager().quitSession()
+//        SessionIntentManager().quitSession()
         
         return .result()
     }
