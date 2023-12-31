@@ -13,8 +13,14 @@ class SessionManager: ObservableObject {
     
     private var locationManager = LocationManager.shared
     
+    private var activity: Activity<SessionAttributes>? // We only allow one activity at a time because we can only create one session at a time
+    
     func startActivity(state contentState: SessionAttributes.ContentState? = nil) {
         do {
+            guard activity == nil else {
+                return
+            }
+            
             let session = SessionAttributes()
             let initialState = SessionAttributes.ContentState(
                 sessionDistance: contentState?.sessionDistance ?? 0.0,
@@ -24,7 +30,7 @@ class SessionManager: ObservableObject {
             
             let content = ActivityContent(state: initialState, staleDate: nil)
             
-            let _ = try Activity.request(
+            activity = try Activity.request(
                 attributes: session,
                 content: content,
                 pushType: nil
@@ -32,6 +38,45 @@ class SessionManager: ObservableObject {
         } catch (let e) {
             print("SessionManager startActivity() failed! Error:")
             print(e.localizedDescription)
+        }
+    }
+    
+    func getActivity() -> Activity<SessionAttributes>? {
+        if let activity = activity {
+            return activity
+        }
+        
+        return nil
+    }
+    
+    func updateActivity(
+        distance: Double,
+        duration: String,
+        speed: Double
+    ) {
+        if let activity = activity {
+            let contentState = SessionAttributes.ContentState(
+                sessionDistance: distance,
+                sessionDuration: duration,
+                sessionSpeed: speed
+            )
+            
+            Task {
+                await activity.update(
+                    ActivityContent<SessionAttributes.ContentState>(
+                        state: contentState,
+                        staleDate: nil
+                    )
+                )
+            }
+        }
+    }
+
+    func stopActivity() {
+        if let activity = activity {
+            Task {
+                await activity.end(nil, dismissalPolicy: .default)
+            }
         }
     }
     

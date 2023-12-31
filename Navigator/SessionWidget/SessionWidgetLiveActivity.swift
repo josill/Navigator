@@ -78,24 +78,6 @@ struct SessionWidgetLiveActivity: Widget {
             alertConfiguration: alertConfig
         )
     }
-    
-    func endActivity(
-        activity: Activity<SessionAttributes>,
-        distance: Double,
-        duration: String,
-        speed: Double
-    ) async {
-        let finalContent = SessionAttributes.ContentState(
-            sessionDistance: distance,
-            sessionDuration: duration,
-            sessionSpeed: speed
-        )
-        
-        await activity.end(
-            ActivityContent(state: finalContent, staleDate: nil),
-            dismissalPolicy: .default
-        )
-    }
 }
 
 extension SessionAttributes {

@@ -17,6 +17,7 @@ class LocationManager: NSObject, ObservableObject {
     let mapView =  MKMapView()
     @Published var mapHelper: MapHelper?
     private var authHelper = AuthenticationHelper.shared
+    private var sessionManager = SessionManager.shared
     private var timer: Timer?
     
     @Published var userLocation: CLLocation?
@@ -88,9 +89,15 @@ extension LocationManager: CLLocationManagerDelegate {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
                 self?.updateElapsedTime()
             }
+            
+            sessionManager.startActivity()
         } else {
             timer?.invalidate()
             timer = nil
+            
+            Task {
+                await sessionManager.stopActivity()
+            }
         }
         
         if let userLocation {
@@ -183,11 +190,6 @@ extension LocationManager: CLLocationManagerDelegate {
         directLineFromWp = 0.0
     }
     
-    //    private func updateStatistics() {
-    //        calculateDistances()
-    //        calculateSpeeds()
-    //    }
-    
     private func calculateDistances() {
         guard let locations = userLocations, locations.count >= 2 else { return }
         
@@ -195,7 +197,6 @@ extension LocationManager: CLLocationManagerDelegate {
         let secondToLastLocation = CLLocation(latitude: userLocations![userLocations!.count - 2].latitude, longitude: userLocations![userLocations!.count - 2].longitude)
         
         calculateDistanceCovered(secondToLastLocation: secondToLastLocation, lastLocation: lastLocation)
-        // TODO: disatance covered, from checkpoint and waypoint increases too rapidly
         calculateDistanceFromCp(secondToLastLocation: secondToLastLocation, lastLocation: lastLocation)
         calculateDistanceFromWp(secondToLastLocation: secondToLastLocation, lastLocation: lastLocation)
     }

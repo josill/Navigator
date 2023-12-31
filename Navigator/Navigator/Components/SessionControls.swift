@@ -17,7 +17,6 @@ struct SessionControls: View {
     @EnvironmentObject var notificationManager: NotificationManager
     
     @Binding var quitSessionPresented: Bool
-    @State var  activities = Activity<SessionAttributes>.activities
 
     var body: some View {
         HStack {
@@ -27,8 +26,6 @@ struct SessionControls: View {
                 locationManager.startOrStopSession()
                 
                 if locationManager.trackingEnabled {
-                    sessionManager.startActivity()
-                    listAllActivities()
                 }
             } label: {
                 Image(systemName: "play")
@@ -99,17 +96,6 @@ struct SessionControls: View {
             Spacer()
         }
         
-        ScrollView {
-            ForEach(activities, id: \.id) { activity in
-                let courierName = activity.content.state.sessionDuration
-                let deliveryTime = activity.content.state.sessionSpeed
-                HStack(alignment: .center) {
-                    Text(courierName)
-                    Text("\(deliveryTime)")
-                }
-            }
-        }
-        
         .alert(isPresented: $quitSessionPresented) {
             Alert(
                 title: Text("Quit session"),
@@ -125,11 +111,6 @@ struct SessionControls: View {
             )
         }
     }
-        func listAllActivities() {
-            var activities = Activity<SessionAttributes>.activities
-            activities.sort { $0.id > $1.id }
-            self.activities = activities
-        }
 }
 
 #Preview {
