@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		FE27650F2B417D230081A460 /* SessionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE27650E2B417D230081A460 /* SessionData.swift */; };
 		FE2765102B4184360081A460 /* SessionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE27650E2B417D230081A460 /* SessionData.swift */; };
+		FE2765122B419BB50081A460 /* SessionIntentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2765112B419BB50081A460 /* SessionIntentManager.swift */; };
+		FE2765132B419BB50081A460 /* SessionIntentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2765112B419BB50081A460 /* SessionIntentManager.swift */; };
 		FE46B0C92B39DE5500DA0DB2 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE46B0C82B39DE5500DA0DB2 /* Router.swift */; };
 		FE46B0CB2B39E1E600DA0DB2 /* Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE46B0CA2B39E1E600DA0DB2 /* Routes.swift */; };
 		FE5475142B3E325C002F936E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE5475132B3E325C002F936E /* WidgetKit.framework */; };
@@ -120,6 +122,7 @@
 
 /* Begin PBXFileReference section */
 		FE27650E2B417D230081A460 /* SessionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionData.swift; sourceTree = "<group>"; };
+		FE2765112B419BB50081A460 /* SessionIntentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionIntentManager.swift; sourceTree = "<group>"; };
 		FE46B0C82B39DE5500DA0DB2 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FE46B0CA2B39E1E600DA0DB2 /* Routes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routes.swift; sourceTree = "<group>"; };
 		FE5475112B3E325C002F936E /* SessionWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SessionWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +233,7 @@
 				FE46B0CA2B39E1E600DA0DB2 /* Routes.swift */,
 				FE5475362B3EE35C002F936E /* SessionManager.swift */,
 				FE27650E2B417D230081A460 /* SessionData.swift */,
+				FE2765112B419BB50081A460 /* SessionIntentManager.swift */,
 			);
 			path = BusinessLogic;
 			sourceTree = "<group>";
@@ -548,6 +552,7 @@
 			files = (
 				FE5475492B3EE803002F936E /* SessionStatsWidget.swift in Sources */,
 				FE54753D2B3EE54E002F936E /* MapHelper.swift in Sources */,
+				FE2765132B419BB50081A460 /* SessionIntentManager.swift in Sources */,
 				FE54753F2B3EE554002F936E /* AuthenticationHelper.swift in Sources */,
 				FE54753B2B3EE549002F936E /* NotificationManager.swift in Sources */,
 				FE5475192B3E325C002F936E /* SessionWidgetBundle.swift in Sources */,
@@ -587,6 +592,7 @@
 				FEA559A52B02D92C00D0E3D8 /* LocationRequestView.swift in Sources */,
 				FE7E55162B057C6200521F39 /* Compass.swift in Sources */,
 				FE7E55182B057E3900521F39 /* Marker.swift in Sources */,
+				FE2765122B419BB50081A460 /* SessionIntentManager.swift in Sources */,
 				FE27650F2B417D230081A460 /* SessionData.swift in Sources */,
 				FE5475372B3EE35C002F936E /* SessionManager.swift in Sources */,
 				FEB3DAC62B1B965D00262CB7 /* SlideUpCardCompact.swift in Sources */,

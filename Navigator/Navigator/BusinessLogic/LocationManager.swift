@@ -8,7 +8,7 @@
 import CoreLocation
 import MapKit
 
-class LocationManager: NSObject, ObservableObject {
+class LocationManager: NSObject, ObservableObject, @unchecked Sendable {
     static let shared = LocationManager()
     
     private let manager = CLLocationManager()
@@ -123,6 +123,8 @@ extension LocationManager: CLLocationManagerDelegate {
                 sessionData.updateDirectLineDistance(for: .checkpoint, distance: 0.0)
                 sessionData.updateSessionDuration(time: sessionData.sessionDurationSec)
             }
+        } else {
+            print("no user location")
         }
     }
     
