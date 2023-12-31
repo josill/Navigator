@@ -275,7 +275,9 @@ class AuthenticationHelper: ObservableObject {
     }
     
     func createSession(name: String, description: String, mode: GpsSessionType) async {
-        isLoading = true
+        Task { @MainActor in
+            isLoading = true
+        }
         
         if name == "" {
             sessionNameError = true
@@ -370,7 +372,9 @@ class AuthenticationHelper: ObservableObject {
             print("Error: \(error)")
         }
         
-        isLoading = false
+        Task { @MainActor in
+            isLoading = false
+        }
     }
     
     func getSessions() async -> [Session]? {
@@ -438,6 +442,7 @@ class AuthenticationHelper: ObservableObject {
     func quitSavedSession() {
         savedSessionId = nil
         UserDefaults.standard.removeObject(forKey: "savedSessionId")
+        print("Saved session is \(savedSessionId)")
     }
     
     func updateLocation(

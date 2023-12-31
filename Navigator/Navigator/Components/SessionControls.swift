@@ -24,8 +24,6 @@ struct SessionControls: View {
             Spacer()
             
             Button {
-                print("Activities: \(sessionManager.getActivity())")
-                
                 if sessionData.sessionActive {
                     sessionManager.stopActivity()
                 } else {
@@ -33,9 +31,6 @@ struct SessionControls: View {
                 }
                                 
                 locationManager.startOrStopSession()
-                
-                if sessionData.sessionActive {
-                }
             } label: {
                 Image(systemName: "play")
             }
@@ -112,9 +107,9 @@ struct SessionControls: View {
                 primaryButton: .default(Text("Cancel")),
                 secondaryButton: .destructive(Text("Quit")) {
                     Task {
+                        authHelper.quitSavedSession()
+                        locationManager.reset()
                         router.backToMenuRoute()
-//                        authHelper.quitSavedSession()
-//                        locationManager.reset()
                     }
                 }
             )
