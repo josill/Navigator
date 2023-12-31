@@ -180,7 +180,7 @@ extension LocationManager: CLLocationManagerDelegate {
         let lastCheckpointLocation = CLLocation(latitude: lastCheckpoint.latitude, longitude: lastCheckpoint.longitude)
         
         sessionData.updateDistance(for: .checkpoint, distance: lastLocation.distance(from: secondToLastLocation))
-        sessionData.updateDirectLineDistance(for: .waypoint, distance: lastLocation.distance(from: lastCheckpointLocation))
+        sessionData.updateDirectLineDistance(for: .checkpoint, distance: lastLocation.distance(from: lastCheckpointLocation))
     }
     
     private func calculateDistanceFromWp(secondToLastLocation: CLLocation, lastLocation: CLLocation) {
