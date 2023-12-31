@@ -12,6 +12,7 @@ struct SessionStats: View {
     @Environment(\.colorScheme) var colorScheme
     
     @StateObject private var locationManager = LocationManager.shared
+    @StateObject private var sessionData = SessionData.shared
     
     enum Mode {
         case main
@@ -32,15 +33,15 @@ struct SessionStats: View {
                            .padding(.bottom, 8)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
                        
-                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceCovered)) m")
+                       Text("Distance covered: \(String(format: "%.2f", sessionData.distanceCovered)) m")
                            .font(.subheadline)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
-                       Text("Session duration: \(locationManager.sessionDuration)")
+                       Text("Session duration: \(sessionData.sessionDuration)")
                            .font(.subheadline)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
-                       Text("Average speed: \(String(format: "%.2f", locationManager.averageSpeed)) km/h")
+                       Text("Average speed: \(String(format: "%.2f", sessionData.averageSpeed)) km/h")
                            .font(.subheadline)
                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
 
@@ -61,13 +62,13 @@ struct SessionStats: View {
                            .fontWeight(.bold)
                            .padding(.bottom, 8)
                        
-                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceFromCp )) m")
+                       Text("Distance covered: \(String(format: "%.2f", sessionData.distanceFromCp )) m")
                            .font(.subheadline)
 
-                       Text("Direct line distance: \(String(format: "%.2f", locationManager.directLineFromCp )) m")
+                       Text("Direct line distance: \(String(format: "%.2f", sessionData.directLineFromCp )) m")
                            .font(.subheadline)
 
-                       Text("Average speed: \(String(format: "%.2f", locationManager.averageSpeedFromCp)) km/h")
+                       Text("Average speed: \(String(format: "%.2f", sessionData.averageSpeedFromCp)) km/h")
                            .font(.subheadline)
                    }
                }
@@ -83,13 +84,13 @@ struct SessionStats: View {
                            .fontWeight(.bold)
                            .padding(.bottom, 8)
                        
-                       Text("Distance covered: \(String(format: "%.2f", locationManager.distanceFromWp ))")
+                       Text("Distance covered: \(String(format: "%.2f", sessionData.distanceFromWp ))")
                            .font(.subheadline)
 
-                       Text("Direct line distance: \(String(format: "%.2f", locationManager.directLineFromWp ))")
+                       Text("Direct line distance: \(String(format: "%.2f", sessionData.directLineFromWp ))")
                            .font(.subheadline)
 
-                       Text("Average speed: \(String(format: "%.2f", locationManager.averageSpeedFromWp)) km/h")
+                       Text("Average speed: \(String(format: "%.2f", sessionData.averageSpeedFromWp)) km/h")
                            .font(.subheadline)
                    }
                }

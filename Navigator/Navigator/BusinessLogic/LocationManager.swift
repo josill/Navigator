@@ -18,27 +18,13 @@ class LocationManager: NSObject, ObservableObject {
     @Published var mapHelper: MapHelper?
     private var authHelper = AuthenticationHelper.shared
     private var sessionManager = SessionManager.shared
-    private var timer: Timer?
+    private var sessionData = SessionData.shared
     
     @Published var userLocation: CLLocation?
     @Published var userLocations: [CLLocationCoordinate2D]?
     @Published var trackingEnabled = false
     @Published var checkpoints: [String: CLLocationCoordinate2D] = [:]
     @Published var waypoint: CLLocationCoordinate2D? = nil
-    
-    @Published var distanceCovered = 0.0
-    @Published var distanceFromCp = 0.0
-    @Published var distanceFromWp = 0.0
-    @Published var directLineFromCp = 0.0
-    @Published var directLineFromWp = 0.0
-    
-    @Published var sessionDurationSec = 0.0
-    @Published var sessionDuration = "00:00:00"
-    @Published var sessionDurationBeforeCp = 0.0
-    @Published var sessionDurationBeforeWp = 0.0
-    @Published var averageSpeed = 0.0
-    @Published var averageSpeedFromCp = 0.0
-    @Published var averageSpeedFromWp = 0.0
     
     override init() {
         super.init()
@@ -86,18 +72,11 @@ extension LocationManager: CLLocationManagerDelegate {
         trackingEnabled = !trackingEnabled
         
         if trackingEnabled {
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
-                self?.updateElapsedTime()
-            }
-            
+            sessionData.startTimer()
             sessionManager.startActivity()
         } else {
-            timer?.invalidate()
-            timer = nil
-            
-            Task {
-                await sessionManager.stopActivity()
-            }
+            sessionData.stopTimer()
+            sessionManager.stopActivity()
         }
         
         if let userLocation {
@@ -141,17 +120,17 @@ extension LocationManager: CLLocationManagerDelegate {
                     longitude: userLocation!.coordinate.longitude,
                     locationType: .checkPoint)
             }
-        
+            
             Task { @MainActor in
-                distanceFromCp = 0.0
-                directLineFromCp = 0.0
-                sessionDurationBeforeCp = sessionDurationSec
+                sessionData.updateDistance(for: .checkpoint, distance: 0.0)
+                sessionData.updateDirectLineDistance(for: .checkpoint, distance: 0.0)
+                sessionData.updateSessionDuration(time: sessionData.sessionDurationSec)
             }
         }
     }
     
     func addWaypoint() {
-        if trackingEnabled {   
+        if trackingEnabled {
             Task { @MainActor in
                 waypoint = userLocation!.coordinate
             }
@@ -164,30 +143,20 @@ extension LocationManager: CLLocationManagerDelegate {
             }
             
             Task { @MainActor in
-                distanceFromWp = 0.0
-                directLineFromWp = 0.0
-                sessionDurationBeforeWp = sessionDurationSec
+                sessionData.updateDistance(for: .waypoint, distance: 0.0)
+                sessionData.updateDirectLineDistance(for: .waypoint, distance: 0.0)
+                sessionData.updateSessionDuration(time: sessionData.sessionDurationSec)
             }
         }
     }
     
     func reset() {
         trackingEnabled = false
-        
-        timer?.invalidate()
-        timer = nil
-        
         userLocations = nil
         checkpoints = [:]
         waypoint = nil
         
-        distanceCovered = 0.0
-        sessionDuration = "00:00:00"
-        sessionDurationSec = 0.0
-        distanceFromCp = 0.0
-        directLineFromCp = 0.0
-        distanceFromWp = 0.0
-        directLineFromWp = 0.0
+        sessionData.reset()
     }
     
     private func calculateDistances() {
@@ -202,7 +171,8 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     private func calculateDistanceCovered(secondToLastLocation: CLLocation, lastLocation: CLLocation) {
-        distanceCovered += lastLocation.distance(from: secondToLastLocation)
+        //        distanceCovered += lastLocation.distance(from: secondToLastLocation)
+        sessionData.updateDistance(for: .none, distance: lastLocation.distance(from: secondToLastLocation))
     }
     
     private func calculateDistanceFromCp(secondToLastLocation: CLLocation, lastLocation: CLLocation) {
@@ -210,9 +180,8 @@ extension LocationManager: CLLocationManagerDelegate {
         
         let lastCheckpointLocation = CLLocation(latitude: lastCheckpoint.latitude, longitude: lastCheckpoint.longitude)
         
-        distanceFromCp += lastLocation.distance(from: secondToLastLocation)
-        
-        directLineFromCp = lastLocation.distance(from: lastCheckpointLocation)
+        sessionData.updateDistance(for: .checkpoint, distance: lastLocation.distance(from: secondToLastLocation))
+        sessionData.updateDirectLineDistance(for: .waypoint, distance: lastLocation.distance(from: lastCheckpointLocation))
     }
     
     private func calculateDistanceFromWp(secondToLastLocation: CLLocation, lastLocation: CLLocation) {
@@ -220,32 +189,24 @@ extension LocationManager: CLLocationManagerDelegate {
         
         let waypointLocation = CLLocation(latitude: waypoint!.latitude, longitude: waypoint!.longitude)
         
-        distanceFromWp += lastLocation.distance(from: secondToLastLocation)
-        
-        directLineFromWp = lastLocation.distance(from: waypointLocation)
+        sessionData.updateDistance(for: .waypoint, distance: lastLocation.distance(from: secondToLastLocation))
+        sessionData.updateDirectLineDistance(for: .waypoint, distance: lastLocation.distance(from: waypointLocation))
     }
     
     private func calculateSpeeds() {
-        if timer != nil {
-            averageSpeed = (distanceCovered / sessionDurationSec) * 3.6
+        if sessionData.timer != nil {
+            let speed = (sessionData.distanceCovered / sessionData.sessionDurationSec) * 3.6
+            sessionData.updateSpeed(for: .none,speed: speed)
         }
         
         if checkpoints.count > 0 {
-            averageSpeedFromCp = (distanceFromCp / (sessionDurationSec - sessionDurationBeforeCp)) * 3.6
+            let speed = (sessionData.distanceFromCp / (sessionData.sessionDurationSec - sessionData.sessionDurationBeforeCp)) * 3.6
+            sessionData.updateSpeed(for: .checkpoint, speed: speed)
         }
         
         if waypoint != nil {
-            averageSpeedFromWp = (distanceFromWp / (sessionDurationSec - sessionDurationBeforeWp)) * 3.6
+            let speed = (sessionData.distanceFromWp / (sessionData.sessionDurationSec - sessionData.sessionDurationBeforeWp)) * 3.6
+            sessionData.updateSpeed(for: .waypoint, speed: speed)
         }
-    }
-    
-    private func updateElapsedTime() {
-        sessionDurationSec += 1.0
-        
-        let hours = Int(sessionDurationSec) / 3600
-        let minutes = (Int(sessionDurationSec) % 3600) / 60
-        let seconds = Int(sessionDurationSec) % 60
-        
-        sessionDuration = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }

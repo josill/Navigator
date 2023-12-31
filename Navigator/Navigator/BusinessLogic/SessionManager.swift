@@ -9,7 +9,7 @@ import Foundation
 import ActivityKit
 
 class SessionManager: ObservableObject {
-    static var shared = SessionManager()
+    static let shared = SessionManager()
     
     private var locationManager = LocationManager.shared
     
@@ -99,6 +99,3 @@ class SessionManager: ObservableObject {
         print("Hello from endSession()")
     }
 }
-
-//@available(iOS 17.0, *)
-//extension SessionManager: @unchecked Sendable {}
