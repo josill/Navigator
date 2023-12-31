@@ -10,9 +10,7 @@ import ActivityKit
 
 class SessionManager: ObservableObject {
     static let shared = SessionManager()
-    
-    private var locationManager = LocationManager.shared
-    
+        
     private var activity: Activity<SessionAttributes>? // We only allow one activity at a time because we can only create one session at a time
     
     func startActivity(state contentState: SessionAttributes.ContentState? = nil) {
@@ -80,22 +78,22 @@ class SessionManager: ObservableObject {
         }
     }
     
-    func addCheckpoint() {
-        locationManager.addCheckpoint()
-        print("Hello from addCheckpoint()")
-    }
-    
-    func addWaypoint() {
-        locationManager.addWaypoint()
-        print("Hello from addWaypoint()")
-    }
-    
-    func toggleActiveState() {
-        locationManager.startOrStopSession()
-        print("Hello from toggleSessionState()")
-    }
-    
-    func quitSession() {
-        print("Hello from endSession()")
-    }
+//    func addCheckpoint() {
+//        locationManager.addCheckpoint()
+//        print("Hello from addCheckpoint()")
+//    }
+//    
+//    func addWaypoint() {
+//        locationManager.addWaypoint()
+//        print("Hello from addWaypoint()")
+//    }
+//    
+//    func toggleActiveState() {
+//        locationManager.startOrStopSession()
+//        print("Hello from toggleSessionState()")
+//    }
+//    
+//    func quitSession() {
+//        print("Hello from endSession()")
+//    }
 }

@@ -12,6 +12,7 @@ struct SessionControls: View {
     @StateObject private var authHelper = AuthenticationHelper.shared
     @StateObject private var sessionManager = SessionManager.shared
     @StateObject private var locationManager = LocationManager.shared
+    @StateObject private var sessionData = SessionData.shared
     
     @EnvironmentObject private var router: Router
     @EnvironmentObject var notificationManager: NotificationManager
@@ -25,14 +26,14 @@ struct SessionControls: View {
             Button {
                 locationManager.startOrStopSession()
                 
-                if locationManager.trackingEnabled {
+                if sessionData.sessionActive {
                 }
             } label: {
                 Image(systemName: "play")
             }
             .padding()
             .cornerRadius(12.0)
-            .background(locationManager.trackingEnabled ? .green : .red)
+            .background(sessionData.sessionActive ? .green : .red)
             .foregroundColor(.white)
             .clipShape(Circle())
             .font(.system(size: 24))

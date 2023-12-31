@@ -12,9 +12,10 @@ import AppIntents
 @available(iOS 17.0, *)
 struct QuitSessionIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Live Activity"
+    private var locationManager = LocationManager.shared
     
     func perform() async throws -> some IntentResult {
-        SessionManager().quitSession()
+        locationManager.reset()
         
         return .result()
     }

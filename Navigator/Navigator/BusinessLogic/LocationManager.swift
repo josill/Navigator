@@ -17,12 +17,10 @@ class LocationManager: NSObject, ObservableObject {
     let mapView =  MKMapView()
     @Published var mapHelper: MapHelper?
     private var authHelper = AuthenticationHelper.shared
-    private var sessionManager = SessionManager.shared
     private var sessionData = SessionData.shared
     
     @Published var userLocation: CLLocation?
     @Published var userLocations: [CLLocationCoordinate2D]?
-    @Published var trackingEnabled = false
     @Published var checkpoints: [String: CLLocationCoordinate2D] = [:]
     @Published var waypoint: CLLocationCoordinate2D? = nil
     
@@ -69,14 +67,12 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func startOrStopSession() {
-        trackingEnabled = !trackingEnabled
+        sessionData.setSessionActive()
         
-        if trackingEnabled {
+        if sessionData.sessionActive {
             sessionData.startTimer()
-            sessionManager.startActivity()
         } else {
             sessionData.stopTimer()
-            sessionManager.stopActivity()
         }
         
         if let userLocation {
@@ -85,7 +81,7 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func addUserLocation(location: CLLocation) {
-        if trackingEnabled {
+        if sessionData.sessionActive {
             if let previousLocation = userLocations?.last {
                 let distance = location.distance(from: CLLocation(latitude: previousLocation.latitude, longitude: previousLocation.longitude))
                 
@@ -110,7 +106,7 @@ extension LocationManager: CLLocationManagerDelegate {
     
     
     func addCheckpoint() {
-        if trackingEnabled {
+        if sessionData.sessionActive {
             let checkpointName = "Checkpoint \(checkpoints.count + 1)"
             checkpoints[checkpointName] = userLocation!.coordinate
             
@@ -130,7 +126,7 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func addWaypoint() {
-        if trackingEnabled {
+        if sessionData.sessionActive {
             Task { @MainActor in
                 waypoint = userLocation!.coordinate
             }
@@ -151,7 +147,7 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func reset() {
-        trackingEnabled = false
+        sessionData.sessionActive = false
         userLocations = nil
         checkpoints = [:]
         waypoint = nil

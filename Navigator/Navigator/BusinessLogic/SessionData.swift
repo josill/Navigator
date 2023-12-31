@@ -9,6 +9,9 @@ import Foundation
 
 class SessionData: ObservableObject {
     static let shared = SessionData()
+    private var sessionManager = SessionManager.shared
+    
+    @Published var sessionActive = false
     
     @Published var distanceCovered = 0.0
     @Published var distanceFromCp = 0.0
@@ -28,6 +31,16 @@ class SessionData: ObservableObject {
     
     enum updateType {
         case none, checkpoint, waypoint
+    }
+    
+    func setSessionActive() {
+        sessionActive.toggle()
+        
+        if sessionActive {
+            sessionManager.startActivity()
+        } else {
+            sessionManager.stopActivity()
+        }
     }
     
     func startTimer() {
