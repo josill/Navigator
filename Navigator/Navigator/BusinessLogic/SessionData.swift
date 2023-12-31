@@ -75,8 +75,8 @@ class SessionData: ObservableObject {
     
     func updateDirectLineDistance(for type: updateType, distance: Double) {
         if type == .none { return }
-        else if type == .checkpoint { directLineFromWp = distance }
-        else { distanceFromWp = distance }
+        else if type == .checkpoint { directLineFromCp = distance }
+        else { directLineFromWp = distance }
     }
     
     func updateSpeed(for type: updateType, speed: Double) {

@@ -13,11 +13,18 @@ class SessionManager: ObservableObject {
         
     private var activity: Activity<SessionAttributes>? // We only allow one activity at a time because we can only create one session at a time
     
+    init(activity: Activity<SessionAttributes>? = nil) {
+        self.activity = activity
+        print("init sesManager")
+    }
+    
     func startActivity(state contentState: SessionAttributes.ContentState? = nil) {
+        print("startActivity start")
         do {
             guard activity == nil else {
                 return
             }
+            print("startActivity nil")
             
             let session = SessionAttributes()
             let initialState = SessionAttributes.ContentState(
@@ -25,14 +32,15 @@ class SessionManager: ObservableObject {
                 sessionDuration: contentState?.sessionDuration ?? "00:00:00",
                 sessionSpeed: contentState?.sessionSpeed ?? 0.0
             )
-            
+            print("startActivity session and intiialState")
             let content = ActivityContent(state: initialState, staleDate: nil)
-            
+            print("startActivity start contnet")
             activity = try Activity.request(
                 attributes: session,
                 content: content,
                 pushType: nil
             )
+            print("startActivity: \(activity)")
         } catch (let e) {
             print("SessionManager startActivity() failed! Error:")
             print(e.localizedDescription)

@@ -32,6 +32,7 @@ class LocationManager: NSObject, ObservableObject {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         // manager.distanceFilter = 10.0
         self.setup()
+        print("init loc")
     }
     
     func requestLocation() {

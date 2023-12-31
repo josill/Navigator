@@ -12,10 +12,10 @@ import AppIntents
 @available(iOS 17.0, *)
 struct AddCheckpointIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Live Activity"
-    private var locationManager = LocationManager.shared
+//    private var locationManager = LocationManager.shared
 
     func perform() async throws -> some IntentResult {
-        locationManager.addCheckpoint()
+        LocationManager().addCheckpoint()
         
         return .result()
     }

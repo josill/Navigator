@@ -24,6 +24,14 @@ struct SessionControls: View {
             Spacer()
             
             Button {
+                print("Activities: \(sessionManager.getActivity())")
+                
+                if sessionData.sessionActive {
+                    sessionManager.stopActivity()
+                } else {
+                    sessionManager.startActivity()
+                }
+                                
                 locationManager.startOrStopSession()
                 
                 if sessionData.sessionActive {
