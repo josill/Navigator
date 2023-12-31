@@ -448,13 +448,17 @@ class AuthenticationHelper: ObservableObject {
         if savedSessionId == nil { return }
         
         let urlString = "\(config.baseUrl)/api/v1.0/gpsLocations"
-        let locTypeId = locationType == .location ? "00000000-0000-0000-0000-000000000001" : locationType == .checkPoint ? "00000000-0000-0000-0000-000000000002" : "00000000-0000-0000-0000-000000000003"
+        let locTypeId = locationType == .location ? "00000000-0000-0000-0000-000000000001" : locationType == .wayPoint ? "00000000-0000-0000-0000-000000000002" : "00000000-0000-0000-0000-000000000003"
         let data = [
             "gpsSessionId": savedSessionId!,
             "gpsLocationTypeId": locTypeId,
             "latitude": latitude,
             "longitude": longitude,
         ] as [String: Any]
+        
+        if locationType != .location {
+            print("data: \(data)")
+        }
         
         guard let url = URL(string: urlString) else {
             print("unable to make string: \(urlString) to URL object")
@@ -490,6 +494,10 @@ class AuthenticationHelper: ObservableObject {
             
             if res.statusCode == 201 {
                 print("location updated successfully")
+                
+                if locationType != .location {
+                    print("respone: \(data)")
+                }
                 
                 if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
 //                    print("json from location: \(json)")

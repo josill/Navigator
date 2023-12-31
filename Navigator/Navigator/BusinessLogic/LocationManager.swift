@@ -153,7 +153,7 @@ extension LocationManager: CLLocationManagerDelegate {
                 await authHelper.updateLocation(
                     latitude: userLocation!.coordinate.latitude,
                     longitude: userLocation!.coordinate.longitude,
-                    locationType: .checkPoint)
+                    locationType: .wayPoint)
             }
             
             Task { @MainActor in

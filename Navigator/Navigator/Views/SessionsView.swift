@@ -20,12 +20,10 @@ struct SessionsView: View {
             Color.black.edgesIgnoringSafeArea(.all)
             
             VStack {
-                VStack {
-                    Text("Your sessions")
-                        .font(.largeTitle)
-                        .foregroundColor(.white)
-                        .padding(.top, 20)
-                }
+                Text("Your sessions")
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                    .padding(.top, 20)
                 
                 Spacer()
                 
@@ -90,6 +88,6 @@ struct SessionsView: View {
     }
 }
 
-//#Preview {
-//    SessionsView()
-//}
+#Preview {
+    SessionsView()
+}
