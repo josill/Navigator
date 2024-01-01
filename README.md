@@ -13,4 +13,4 @@ NavigationStack
 using a router](https://medium.com/@fmmobilelive/navigating-with-navigationpath-in-swiftui-a-structured-approach-91d31e8939b)
 
 - [Live 
-actions](https://betterprogramming.pub/create-live-activities-with-activitykit-on-ios-16-beta-4766a347035b)
+Activities](https://betterprogramming.pub/create-live-activities-with-activitykit-on-ios-16-beta-4766a347035b)
