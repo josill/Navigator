@@ -31,7 +31,7 @@ struct SessionLink: View {
                     .foregroundColor(.white)
                 Text("Distance covered: \(formatDistance(session.distance)) meters")
                     .foregroundColor(.white)
-                Text("Time elapsed: \(formatTime(session.duration))")
+                Text("Time elapsed: \(session.duration)")
                     .foregroundColor(.white)
                 Text("Average speed: \(String(format: "%.2f", session.speed))")
                     .foregroundColor(.white)
@@ -39,7 +39,6 @@ struct SessionLink: View {
             .padding(.trailing, 20)
             
             Button {
-                print("implement gpx download")
                 showMailAlert.toggle()
             } label: {
                 Image(systemName: "arrow.down.circle")
@@ -62,10 +61,8 @@ struct SessionLink: View {
                     ) { res in
                         switch res {
                         case .success:
-                            print("success")
                             mailResult = true
                         case .failure:
-                            print("failure")
                             mailResult = false
                         }
                         showMailResult = true
@@ -85,13 +82,13 @@ struct SessionLink: View {
         return "\(formattedDistance)"
     }
     
-    func formatTime(_ duration: Double) -> String {
-        let hours = Int(duration / 3600)
-        let minutes = Int((duration.truncatingRemainder(dividingBy: 3600)) / 60)
-        let seconds = Int(duration.truncatingRemainder(dividingBy: 60))
-        
-        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-    }
+//    func formatTime(_ duration: Double) -> String {
+//        let hours = Int(duration / 3600)
+//        let minutes = Int((duration.truncatingRemainder(dividingBy: 3600)) / 60)
+//        let seconds = Int(duration.truncatingRemainder(dividingBy: 60))
+//        
+//        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+//    }
     
     func formatDateString(_ date: Date) -> String {
         let formatter = DateFormatter()

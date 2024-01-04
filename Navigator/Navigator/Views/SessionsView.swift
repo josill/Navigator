@@ -11,8 +11,9 @@ import SwiftData
 struct SessionsView: View {
     @StateObject private var authHelper = AuthenticationHelper.shared
     @EnvironmentObject private var router: Router
+    @Environment(\.modelContext) var context
     
-    @State private var sessions: [Session] = []
+    @Query(sort: \Session.recordedAt) var sessions: [Session]
     @State private var isLoading: Bool = true
     
     @State var mailResult: Bool? = nil
@@ -27,38 +28,8 @@ struct SessionsView: View {
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .padding(.top, 20)
-                
-                
-//                if let mailResult = mailResult {
-//                    switch mailResult {
-//                    case .success:
-//                        Text("Mail sent successfully!")
-//                            .font(.title2)
-//                            .foregroundColor(.green)
-//                            .padding(.top, 20)
-//                    case .failure(let error):
-//                        Text("Failed to send mail!")
-//                            .font(.title2)
-//                            .foregroundColor(.red)
-//                            .padding(.top, 20)
-//                    }
-//                    
-//                }
-                
-                Spacer()
-                
-                if isLoading {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                        .onAppear {
-                            Task {
-                                sessions = await authHelper.getSessions() ?? []
-                                isLoading = false
-                            }
-                        }
-                    
-                    Spacer()
-                } else if sessions.isEmpty {
+                                
+                if sessions.isEmpty {
                     Spacer()
                     
                     HStack {
@@ -96,8 +67,11 @@ struct SessionsView: View {
                                 showMailResult: $showMailResult
                             )
                         }
-                        .onDelete(perform: deleteSession)
-                    }
+                        .onDelete{ indexSet in
+                            for i in indexSet {
+                                context.delete(sessions[i])
+                            }
+                        }                    }
                     .background(.black)
                     .scrollContentBackground(.hidden)
                 }

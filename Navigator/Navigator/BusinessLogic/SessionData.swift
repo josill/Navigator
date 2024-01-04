@@ -10,6 +10,7 @@ import Foundation
 class SessionData: ObservableObject {
     static let shared = SessionData()
     private var sessionManager = SessionManager.shared
+    private var authHelper = AuthenticationHelper.shared
     
     @Published var sessionActive = false
     @Published var sessionQuitAlertPresented = false
@@ -69,7 +70,10 @@ class SessionData: ObservableObject {
     }
     
     func updateDistance(for type: updateType, distance: Double) {
-        if type == .none { distanceCovered += distance }
+        if type == .none {
+            distanceCovered += distance
+            authHelper.savedSession?.distance = distanceCovered
+        }
         else if type == .checkpoint { distanceFromCp += distance }
         else { distanceFromWp += distance }
     }
@@ -81,7 +85,10 @@ class SessionData: ObservableObject {
     }
     
     func updateSpeed(for type: updateType, speed: Double) {
-        if type == .none { averageSpeed = speed }
+        if type == .none {
+            averageSpeed = speed
+            authHelper.savedSession?.speed = averageSpeed
+        }
         else if type == .checkpoint { averageSpeedFromCp = speed }
         else { averageSpeedFromWp = speed }
     }
@@ -98,5 +105,6 @@ class SessionData: ObservableObject {
         let seconds = Int(sessionDurationSec) % 60
         
         sessionDuration = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        authHelper.savedSession?.duration = sessionDuration
     }
 }

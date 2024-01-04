@@ -10,45 +10,28 @@ import SwiftData
 import CryptoKit
 
 public struct User: Codable, Equatable {
-//    var userId: UUID
-//    var firstName: String?
-//    var lastName: String?
-//    @Attribute(.unique) var email: String
     var email: String
     var salt: String
     var passwordHash: String
     var jwtToken: String?
-//    @Relationship(deleteRule: .cascade, inverse: \Session.user)
-//    var sessions = [Session]()
     
     enum CodingKeys: String, CodingKey {
-//        case userId
-//        case firstName
-//        case lastName
         case email
         case salt
         case passwordHash
         case jwtToken
-//        case sessions
     }
     
     init(
-//            userId: UUID = UUID(),
-//            firstName: String? = nil,
-//            lastName: String? = nil,
             email: String,
             password: String,
             jwtToken: String
         ) {
-//            self.userId = userId
-//            self.firstName = firstName
-//            self.lastName = lastName
             self.email = email
             
             let salt = User.generateSalt()
             self.salt = salt
             self.passwordHash = User.hashPassword(password: password, salt: salt)
-//            self.sessions = []
             self.jwtToken = jwtToken
         }
     

@@ -16,6 +16,7 @@ class AuthenticationHelper: ObservableObject {
     
     @Published var savedUser: User? = nil
     @Published var savedSessionId: String? = nil
+    @Published var savedSession: Session? = nil
     
     @Published var isLoading = false
     
@@ -52,7 +53,6 @@ class AuthenticationHelper: ObservableObject {
         }
         
         baseUrl = url
-        print(url)
     }
     
     func validateNames(_ firstName: String, _ lastName: String) -> Bool {
@@ -382,64 +382,6 @@ class AuthenticationHelper: ObservableObject {
         Task { @MainActor in
             isLoading = false
         }
-    }
-    
-    func getSessions() async -> [Session]? {
-        let urlString = "\(baseUrl)/api/v1.0/GpsSessions"
-        
-        guard let url = URL(string: urlString) else {
-            print("unable to make string: \(urlString) to URL object")
-            return nil
-        }
-        
-        //        guard let token = savedUser?.jwtToken else {
-        //            print("Failed to receive token: \(savedUser)")
-        //            return nil
-        //        }
-        
-        var req = URLRequest(url: url)
-        //        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        //        req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        req.httpMethod = "GET"
-        
-        do {
-            let (data, response) = try await URLSession.shared.data(for: req)
-            
-            guard let res = response as? HTTPURLResponse else {
-                print("Invalid response")
-                return nil
-            }
-            
-            if res.statusCode == 200 {
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .iso8601
-                
-                do {
-                    let sessions = try decoder.decode([Session].self, from: data)
-                    
-                    return sessions
-                } catch {
-                    print("Error decoding JSON: \(error)")
-                }
-            } else {
-                print("HTTP Status Code: \(res.statusCode)")
-                
-                if let responseString = String(data: data, encoding: .utf8) {
-                    print("Response Data: \(responseString)")
-                    // Handle the error using the responseString
-                } else {
-                    print("Failed to convert response data to string.")
-                    // Handle the error appropriately
-                }
-                // Handle the error appropriately
-            }
-        } catch {
-            print("Error: \(error)")
-        }
-        
-        isLoading = false
-        
-        return nil
     }
     
     func presentQuitSessionAlert() {

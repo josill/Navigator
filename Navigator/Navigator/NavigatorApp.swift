@@ -20,5 +20,6 @@ struct NavigatorApp: App {
                 .environmentObject(notificationManager)
                 .environmentObject(router)
         }
+        .modelContainer(for: [Location.self, Session.self])
     }
 }

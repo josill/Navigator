@@ -30,7 +30,6 @@
 		FE54753E2B3EE550002F936E /* CompassManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E551D2B05851D00521F39 /* CompassManager.swift */; };
 		FE54753F2B3EE554002F936E /* AuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEA24902B160220001D1981 /* AuthenticationHelper.swift */; };
 		FE5475412B3EE569002F936E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DC82B12750D004976D7 /* User.swift */; };
-		FE5475422B3EE56F002F936E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DC42B1272A1004976D7 /* Session.swift */; };
 		FE5475452B3EE69E002F936E /* SessionControlsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475442B3EE69E002F936E /* SessionControlsWidget.swift */; };
 		FE5475462B3EE69E002F936E /* SessionControlsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475442B3EE69E002F936E /* SessionControlsWidget.swift */; };
 		FE5475482B3EE803002F936E /* SessionStatsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475472B3EE803002F936E /* SessionStatsWidget.swift */; };
@@ -43,7 +42,6 @@
 		FE54755A2B3F0A0B002F936E /* QuitSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5475582B3F0A0B002F936E /* QuitSessionIntent.swift */; };
 		FE54755C2B3F19B0002F936E /* StartOrStopIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE54755B2B3F19B0002F936E /* StartOrStopIntent.swift */; };
 		FE54755D2B3F19B0002F936E /* StartOrStopIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE54755B2B3F19B0002F936E /* StartOrStopIntent.swift */; };
-		FE6ED2F52B265A5C00E4A39C /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */; };
 		FE72502F2B064F4000068114 /* SessionControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE72502E2B064F4000068114 /* SessionControls.swift */; };
 		FE7250312B0652FC00068114 /* SessionStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7250302B0652FC00068114 /* SessionStats.swift */; };
 		FE75A38F2B07BDF600FE3757 /* SlideUpCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE75A38E2B07BDF600FE3757 /* SlideUpCard.swift */; };
@@ -70,13 +68,15 @@
 		FEBE74652AF4E31A005A98C0 /* NavigatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE74642AF4E31A005A98C0 /* NavigatorTests.swift */; };
 		FEBE746F2AF4E31A005A98C0 /* NavigatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE746E2AF4E31A005A98C0 /* NavigatorUITests.swift */; };
 		FEBE74712AF4E31A005A98C0 /* NavigatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE74702AF4E31A005A98C0 /* NavigatorUITestsLaunchTests.swift */; };
-		FEC07DC52B1272A1004976D7 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DC42B1272A1004976D7 /* Session.swift */; };
-		FEC07DC72B1273D2004976D7 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DC62B1273D2004976D7 /* UserLocation.swift */; };
 		FEC07DC92B12750D004976D7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC07DC82B12750D004976D7 /* User.swift */; };
 		FED3B9712B46C578008D1E02 /* SwiftSMTP in Frameworks */ = {isa = PBXBuildFile; productRef = FED3B9702B46C578008D1E02 /* SwiftSMTP */; };
 		FED3B9732B46C5CB008D1E02 /* MailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED3B9722B46C5CB008D1E02 /* MailSender.swift */; };
 		FED3B9742B46C5CB008D1E02 /* MailSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED3B9722B46C5CB008D1E02 /* MailSender.swift */; };
 		FED3B9762B46C91E008D1E02 /* SwiftSMTP in Frameworks */ = {isa = PBXBuildFile; productRef = FED3B9752B46C91E008D1E02 /* SwiftSMTP */; };
+		FED3B9B22B470FD8008D1E02 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED3B9B12B470FD8008D1E02 /* Session.swift */; };
+		FED3B9B42B470FEA008D1E02 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED3B9B32B470FEA008D1E02 /* Location.swift */; };
+		FED3B9B52B4718D4008D1E02 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED3B9B12B470FD8008D1E02 /* Session.swift */; };
+		FED3B9B62B4718D7008D1E02 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED3B9B32B470FEA008D1E02 /* Location.swift */; };
 		FEE26AC52B1353B200FEEDBD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE26AC42B1353B200FEEDBD /* NotificationManager.swift */; };
 		FEE26AC72B13562600FEEDBD /* NotificationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE26AC62B13562600FEEDBD /* NotificationRequestView.swift */; };
 		FEE3023B2B27DE4B00BF48CB /* CreateSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE3023A2B27DE4A00BF48CB /* CreateSessionView.swift */; };
@@ -143,7 +143,6 @@
 		FE54754F2B3F0440002F936E /* AddWaypointIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWaypointIntent.swift; sourceTree = "<group>"; };
 		FE5475582B3F0A0B002F936E /* QuitSessionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitSessionIntent.swift; sourceTree = "<group>"; };
 		FE54755B2B3F19B0002F936E /* StartOrStopIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartOrStopIntent.swift; sourceTree = "<group>"; };
-		FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		FE72502E2B064F4000068114 /* SessionControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionControls.swift; sourceTree = "<group>"; };
 		FE7250302B0652FC00068114 /* SessionStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStats.swift; sourceTree = "<group>"; };
 		FE75A38E2B07BDF600FE3757 /* SlideUpCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideUpCard.swift; sourceTree = "<group>"; };
@@ -174,10 +173,10 @@
 		FEBE746A2AF4E31A005A98C0 /* NavigatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEBE746E2AF4E31A005A98C0 /* NavigatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorUITests.swift; sourceTree = "<group>"; };
 		FEBE74702AF4E31A005A98C0 /* NavigatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		FEC07DC42B1272A1004976D7 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
-		FEC07DC62B1273D2004976D7 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		FEC07DC82B12750D004976D7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FED3B9722B46C5CB008D1E02 /* MailSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailSender.swift; sourceTree = "<group>"; };
+		FED3B9B12B470FD8008D1E02 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		FED3B9B32B470FEA008D1E02 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		FEE26AC42B1353B200FEEDBD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		FEE26AC62B13562600FEEDBD /* NotificationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestView.swift; sourceTree = "<group>"; };
 		FEE26AC82B135F1500FEEDBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -231,7 +230,6 @@
 				FE7E551D2B05851D00521F39 /* CompassManager.swift */,
 				FEBD5CB12B0D3C75002E9936 /* MapHelper.swift */,
 				FEEA24902B160220001D1981 /* AuthenticationHelper.swift */,
-				FE6ED2F42B265A5C00E4A39C /* DatabaseService.swift */,
 				FE958BB42B272C36008F24C2 /* UserState.swift */,
 				FE46B0C82B39DE5500DA0DB2 /* Router.swift */,
 				FE46B0CA2B39E1E600DA0DB2 /* Routes.swift */,
@@ -386,9 +384,9 @@
 		FEC07DC32B126FA9004976D7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FEC07DC42B1272A1004976D7 /* Session.swift */,
-				FEC07DC62B1273D2004976D7 /* UserLocation.swift */,
 				FEC07DC82B12750D004976D7 /* User.swift */,
+				FED3B9B12B470FD8008D1E02 /* Session.swift */,
+				FED3B9B32B470FEA008D1E02 /* Location.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -575,9 +573,10 @@
 				FED3B9742B46C5CB008D1E02 /* MailSender.swift in Sources */,
 				FE54754D2B3EF528002F936E /* AddCheckpointIntent.swift in Sources */,
 				FE54755D2B3F19B0002F936E /* StartOrStopIntent.swift in Sources */,
+				FED3B9B62B4718D7008D1E02 /* Location.swift in Sources */,
 				FE5475462B3EE69E002F936E /* SessionControlsWidget.swift in Sources */,
 				FE54751B2B3E325C002F936E /* SessionWidgetLiveActivity.swift in Sources */,
-				FE5475422B3EE56F002F936E /* Session.swift in Sources */,
+				FED3B9B52B4718D4008D1E02 /* Session.swift in Sources */,
 				FE54753E2B3EE550002F936E /* CompassManager.swift in Sources */,
 				FE5475412B3EE569002F936E /* User.swift in Sources */,
 				FE5475382B3EE35C002F936E /* SessionManager.swift in Sources */,
@@ -605,12 +604,13 @@
 				FEA559A52B02D92C00D0E3D8 /* LocationRequestView.swift in Sources */,
 				FE7E55162B057C6200521F39 /* Compass.swift in Sources */,
 				FE7E55182B057E3900521F39 /* Marker.swift in Sources */,
+				FED3B9B22B470FD8008D1E02 /* Session.swift in Sources */,
 				FE2765122B419BB50081A460 /* SessionIntentManager.swift in Sources */,
 				FE27650F2B417D230081A460 /* SessionData.swift in Sources */,
 				FE5475372B3EE35C002F936E /* SessionManager.swift in Sources */,
 				FEB3DAC62B1B965D00262CB7 /* SlideUpCardCompact.swift in Sources */,
+				FED3B9B42B470FEA008D1E02 /* Location.swift in Sources */,
 				FEC07DC92B12750D004976D7 /* User.swift in Sources */,
-				FEC07DC52B1272A1004976D7 /* Session.swift in Sources */,
 				FEA559992B0284BC00D0E3D8 /* RegisterView.swift in Sources */,
 				FE72502F2B064F4000068114 /* SessionControls.swift in Sources */,
 				FE46B0CB2B39E1E600DA0DB2 /* Routes.swift in Sources */,
@@ -619,13 +619,11 @@
 				FE75A3912B07C2D100FE3757 /* Slider.swift in Sources */,
 				FE5475342B3ED364002F936E /* SessionAttributes.swift in Sources */,
 				FEBE74532AF4E317005A98C0 /* NavigatorApp.swift in Sources */,
-				FEC07DC72B1273D2004976D7 /* UserLocation.swift in Sources */,
 				FE5475482B3EE803002F936E /* SessionStatsWidget.swift in Sources */,
 				FED3B9732B46C5CB008D1E02 /* MailSender.swift in Sources */,
 				FEA559972B027C4500D0E3D8 /* LoginView.swift in Sources */,
 				FE5475592B3F0A0B002F936E /* QuitSessionIntent.swift in Sources */,
 				FE54754C2B3EF528002F936E /* AddCheckpointIntent.swift in Sources */,
-				FE6ED2F52B265A5C00E4A39C /* DatabaseService.swift in Sources */,
 				FE54755C2B3F19B0002F936E /* StartOrStopIntent.swift in Sources */,
 				FE958BB52B272C36008F24C2 /* UserState.swift in Sources */,
 				FE5475452B3EE69E002F936E /* SessionControlsWidget.swift in Sources */,

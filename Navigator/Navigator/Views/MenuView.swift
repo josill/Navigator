@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MenuView: View {
+    @Environment(\.modelContext) var context
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var authHelper = AuthenticationHelper.shared
     @EnvironmentObject private var router: Router
     
+    @Query(sort: \Session.recordedAt) var sessions: [Session]
+
+    @State private var isLogoutWarningPresented = false
     @State private var isLogoutAlertPresented = false
     
     var body: some View {
@@ -84,18 +89,18 @@ struct MenuView: View {
         .alert(isPresented: $isLogoutAlertPresented) {
             Alert(
                 title: Text("Logout"),
-                message: Text("Are you sure you want to log out?"),
+                message: Text("Are you sure you want to log out? All your saved session will be DELETED!"),
                 primaryButton: .default(Text("Cancel")),
                 secondaryButton: .destructive(Text("Log Out")) {
                     authHelper.logOut {
+                        sessions.forEach { session in
+                             context.delete(session)
+                         }
+                        
                         router.reset()
                     }
                 }
             )
         }
     }
-}
-
-#Preview {
-    MenuView()
 }

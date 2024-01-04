@@ -13,6 +13,7 @@ struct CreateSessionView: View {
 
     @EnvironmentObject private var router: Router
     @EnvironmentObject var notificationManager: NotificationManager
+    @Environment(\.modelContext) var context
     
     @State private var sessionName = ""
     @State private var sessionDescription = ""
@@ -82,7 +83,18 @@ struct CreateSessionView: View {
                             mode: selectedValue == 0 ? .walking : .running
                         )
                         
-                        if authHelper.createSessionSuccess {
+                        if authHelper.createSessionSuccess, let sessionId = authHelper.savedSessionId {
+                            let session = Session(
+                                id: sessionId,
+                                name: sessionName,
+                                description: sessionDescription,
+                                duration: "00:00:00",
+                                speed: 0.0,
+                                distance: 0.0
+                            )
+                            context.insert(session)
+                            authHelper.savedSession = session
+                            
                             let locAllowed = locationManager.authorizationStatus == .authorizedAlways || locationManager.authorizationStatus == .authorizedWhenInUse
                             let notifAllowed = notificationManager.authorizationStatus == .authorized
                             

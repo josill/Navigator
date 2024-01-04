@@ -7,6 +7,7 @@
 
 import CoreLocation
 import MapKit
+import SwiftData
 
 class LocationManager: NSObject, ObservableObject, @unchecked Sendable {
     static let shared = LocationManager()
@@ -32,7 +33,6 @@ class LocationManager: NSObject, ObservableObject, @unchecked Sendable {
         manager.desiredAccuracy = kCLLocationAccuracyBest
         // manager.distanceFilter = 10.0
         self.setup()
-        print("init loc")
     }
     
     func requestLocation() {
@@ -94,7 +94,9 @@ extension LocationManager: CLLocationManagerDelegate {
                             locationType: .location)
                     }
                     
+                    addLoc(location: location)
                     userLocations!.append(location.coordinate)
+                    
                     calculateDistances()
                 }
             } else {
@@ -123,6 +125,8 @@ extension LocationManager: CLLocationManagerDelegate {
                 sessionData.updateDirectLineDistance(for: .checkpoint, distance: 0.0)
                 sessionData.updateSessionDuration(time: sessionData.sessionDurationSec)
             }
+            
+            addLoc(location: userLocation!, type: .checkPoint)
         } else {
             print("no user location")
         }
@@ -146,6 +150,8 @@ extension LocationManager: CLLocationManagerDelegate {
                 sessionData.updateDirectLineDistance(for: .waypoint, distance: 0.0)
                 sessionData.updateSessionDuration(time: sessionData.sessionDurationSec)
             }
+            
+            addLoc(location: userLocation!, type: .wayPoint)
         }
     }
     
@@ -207,5 +213,15 @@ extension LocationManager: CLLocationManagerDelegate {
             let speed = (sessionData.distanceFromWp / (sessionData.sessionDurationSec - sessionData.sessionDurationBeforeWp)) * 3.6
             sessionData.updateSpeed(for: .waypoint, speed: speed)
         }
+    }
+    
+    private func addLoc(location: CLLocation, type: Location.LocationType = .location) {
+        let loc = Location(
+            locationType: type,
+            latitude: location.coordinate.latitude,
+            longitude: location.coordinate.longitude,
+            session: authHelper.savedSession!
+        )
+        authHelper.savedSession?.locations.append(loc)
     }
 }

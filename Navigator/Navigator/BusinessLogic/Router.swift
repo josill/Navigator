@@ -33,7 +33,6 @@ class Router: ObservableObject {
     }
     
     func changeRoute(_ route: RoutePath) {
-        print("changing route: \(route)")
         path.append(route)
     }
 
