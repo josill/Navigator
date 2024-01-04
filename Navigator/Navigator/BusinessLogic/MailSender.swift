@@ -40,7 +40,7 @@ struct MailSender {
             text: body
         )
         
-        Task {
+        Task { @MainActor in
             smtp.send(mail) { error in
                 if let error = error {
                     completion(.failure(error))
