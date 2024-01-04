@@ -49,6 +49,28 @@
             ReferencedContainer = "container:Navigator.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "SMTP_HOSTNAME"
+            value = "smtp.gmail.com"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "SMTP_EMAIL"
+            value = "jonathan.sillak2@gmail.com"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "SMTP_PASSWORD"
+            value = "mjlb zxea txbl buxf"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "BACKEND_URL"
+            value = "https://sportmap.akaver.com"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

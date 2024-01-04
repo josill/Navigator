@@ -9,5 +9,7 @@ import Foundation
 import SwiftData
 
 struct Configuration {
+    static let shared = Configuration()
+    
     let baseUrl = "https://sportmap.akaver.com"
 }

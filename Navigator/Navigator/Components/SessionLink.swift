@@ -6,15 +6,23 @@
 //
 
 import SwiftUI
+import UIKit
+import MessageUI
+import SwiftSMTP
 
 struct SessionLink: View {
     @EnvironmentObject private var router: Router
+    private let mail = MailSender.shared
+    
     @State var session: Session
+    @State private var email = ""
+    @State private var showMailAlert = false
+    
+    @Binding var mailResult: Bool?
+    @Binding var showMailResult: Bool
     
     var body: some View {
-        Button {
-            router.changeRoute(.init(.map))
-        } label: {
+        HStack {
             VStack(alignment: .leading, spacing: 10) {
                 Text("\(session.name)")
                     .font(.headline)
@@ -28,12 +36,48 @@ struct SessionLink: View {
                 Text("Average speed: \(String(format: "%.2f", session.speed))")
                     .foregroundColor(.white)
             }
-            .padding(10)
+            .padding(.trailing, 20)
             
+            Button {
+                print("implement gpx download")
+                showMailAlert.toggle()
+            } label: {
+                Image(systemName: "arrow.down.circle")
+                    .font(.title)
+            }
         }
+        .padding(10)
         .background(.black)
         .listRowBackground(Color.black)
         .listRowSeparatorTint(.blue)
+        .alert("Enter your email", isPresented: $showMailAlert) {
+            TextField("your email here", text: $email)
+            
+            HStack {
+                Button("OK") {
+                    mail.sendMail(
+                        toEmail: email,
+                        subject: "Your session - \(session.name) gpx data",
+                        body: "TODO"
+                    ) { res in
+                        switch res {
+                        case .success:
+                            print("success")
+                            mailResult = true
+                        case .failure:
+                            print("failure")
+                            mailResult = false
+                        }
+                        showMailResult = true
+                    }
+                }
+                Button("Cancel") {
+                    showMailAlert.toggle()
+                }
+            }
+        } message: {
+            Text("We will email you the GPX file of the track!")
+        }
     }
     
     func formatDistance(_ distance: Double) -> String {
@@ -55,7 +99,3 @@ struct SessionLink: View {
         return formatter.string(from: date)
     }
 }
-
-//#Preview {
-//    SessionLink(router: .shared, session: [])
-//}

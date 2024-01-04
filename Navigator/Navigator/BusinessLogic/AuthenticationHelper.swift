@@ -12,7 +12,7 @@ import SwiftData
 
 class AuthenticationHelper: ObservableObject {
     static let shared = AuthenticationHelper()
-    let config = Configuration()
+    private let baseUrl: String
     
     @Published var savedUser: User? = nil
     @Published var savedSessionId: String? = nil
@@ -46,6 +46,13 @@ class AuthenticationHelper: ObservableObject {
         if let sessionId = UserDefaults.standard.string(forKey: "savedSessionId") {
             self.savedSessionId = sessionId
         }
+        
+        guard let url = ProcessInfo.processInfo.environment["BACKEND_URL"] else {
+           fatalError("AuthenticationHelper configuration missing in environment variables.")
+        }
+        
+        baseUrl = url
+        print(url)
     }
     
     func validateNames(_ firstName: String, _ lastName: String) -> Bool {
@@ -114,7 +121,7 @@ class AuthenticationHelper: ObservableObject {
         if !validateEmail(email) { isLoading = false; return false }
         if !validatePasswords(password1, password2) { isLoading = false; return false }
         
-        let urlString = "\(config.baseUrl)/api/v1.0/account/register"
+        let urlString = "\(baseUrl)/api/v1.0/account/register"
         let data = [
             "firstName": firstName,
             "lastName": lastName,
@@ -194,7 +201,7 @@ class AuthenticationHelper: ObservableObject {
         
         if !validatePassword(password) { isLoading = false; return false }
         
-        let urlString = "\(config.baseUrl)/api/v1.0/account/login"
+        let urlString = "\(baseUrl)/api/v1.0/account/login"
         let data = [
             "email": email,
             "password": password
@@ -289,7 +296,7 @@ class AuthenticationHelper: ObservableObject {
             return
         }
         
-        let urlString = "\(config.baseUrl)/api/v1.0/GpsSessions"
+        let urlString = "\(baseUrl)/api/v1.0/GpsSessions"
         let minSpeed = mode == .walking ? 360.0 : 360.0
         let maxSpeed = mode == .walking ? 720.0 : 600.0
         let data = [
@@ -378,7 +385,7 @@ class AuthenticationHelper: ObservableObject {
     }
     
     func getSessions() async -> [Session]? {
-        let urlString = "\(config.baseUrl)/api/v1.0/GpsSessions"
+        let urlString = "\(baseUrl)/api/v1.0/GpsSessions"
         
         guard let url = URL(string: urlString) else {
             print("unable to make string: \(urlString) to URL object")
@@ -452,7 +459,7 @@ class AuthenticationHelper: ObservableObject {
     ) async {
         if savedSessionId == nil { return }
         
-        let urlString = "\(config.baseUrl)/api/v1.0/gpsLocations"
+        let urlString = "\(baseUrl)/api/v1.0/gpsLocations"
         let locTypeId = locationType == .location ? "00000000-0000-0000-0000-000000000001" : locationType == .wayPoint ? "00000000-0000-0000-0000-000000000002" : "00000000-0000-0000-0000-000000000003"
         let data = [
             "gpsSessionId": savedSessionId!,

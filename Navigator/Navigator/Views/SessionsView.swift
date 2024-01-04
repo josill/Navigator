@@ -15,6 +15,9 @@ struct SessionsView: View {
     @State private var sessions: [Session] = []
     @State private var isLoading: Bool = true
     
+    @State var mailResult: Bool? = nil
+    @State var showMailResult = false
+    
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
@@ -24,6 +27,23 @@ struct SessionsView: View {
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .padding(.top, 20)
+                
+                
+//                if let mailResult = mailResult {
+//                    switch mailResult {
+//                    case .success:
+//                        Text("Mail sent successfully!")
+//                            .font(.title2)
+//                            .foregroundColor(.green)
+//                            .padding(.top, 20)
+//                    case .failure(let error):
+//                        Text("Failed to send mail!")
+//                            .font(.title2)
+//                            .foregroundColor(.red)
+//                            .padding(.top, 20)
+//                    }
+//                    
+//                }
                 
                 Spacer()
                 
@@ -40,7 +60,7 @@ struct SessionsView: View {
                     Spacer()
                 } else if sessions.isEmpty {
                     Spacer()
-
+                    
                     HStack {
                         Image(systemName: "exclamationmark.triangle")
                             .font(.title2)
@@ -70,7 +90,11 @@ struct SessionsView: View {
                 } else {
                     List {
                         ForEach(sessions) { session in
-                            SessionLink(session: session)
+                            SessionLink(
+                                session: session,
+                                mailResult: $mailResult,
+                                showMailResult: $showMailResult
+                            )
                         }
                         .onDelete(perform: deleteSession)
                     }
@@ -80,6 +104,14 @@ struct SessionsView: View {
             }
             .background(.black)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .alert(isPresented: $showMailResult) {
+                Alert(
+                    title: Text(mailResult! ? "Email sent!" : "Failed to send email, try again!"),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
+
+
         }
     }
     
