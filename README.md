@@ -25,3 +25,5 @@ using a router](https://medium.com/@fmmobilelive/navigating-with-navigationpath-
 
 - [Live 
 Activities](https://betterprogramming.pub/create-live-activities-with-activitykit-on-ios-16-beta-4766a347035b)
+
+- [SwiftSMTP](https://swiftpackageindex.com/Kitura/Swift-SMTP)
