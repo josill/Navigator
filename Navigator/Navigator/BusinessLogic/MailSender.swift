@@ -10,24 +10,19 @@ import SwiftSMTP
 
 struct MailSender {
     static let shared = MailSender()
+    private let config = Config.shared
         
     private let smtp: SMTP
     private let fromEmail: Mail.User
     
     init() {
-        guard let hostname = ProcessInfo.processInfo.environment["SMTP_HOSTNAME"],
-              let email = ProcessInfo.processInfo.environment["SMTP_EMAIL"],
-              let password = ProcessInfo.processInfo.environment["SMTP_PASSWORD"] else {
-            fatalError("SMTP configuration missing in environment variables.")
-        }
-        
         self.smtp = SMTP(
-            hostname: hostname,
-            email: email,
-            password: password
+            hostname: config.smtpHostname,
+            email: config.smtpEmail,
+            password: config.smtpPassword
         )
         
-        fromEmail = Mail.User(email: email)
+        fromEmail = Mail.User(email: config.smtpEmail)
     }
     
     func sendMail(

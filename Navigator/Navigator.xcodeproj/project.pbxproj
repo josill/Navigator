@@ -82,6 +82,8 @@
 		FEE3023B2B27DE4B00BF48CB /* CreateSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE3023A2B27DE4A00BF48CB /* CreateSessionView.swift */; };
 		FEE335EE2B28979C0004B0B0 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE335ED2B28979C0004B0B0 /* MenuView.swift */; };
 		FEEA24912B160220001D1981 /* AuthenticationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEA24902B160220001D1981 /* AuthenticationHelper.swift */; };
+		FEEE21152B4F417C00E5427C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEE21142B4F417C00E5427C /* Config.swift */; };
+		FEEE21162B4F417C00E5427C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEE21142B4F417C00E5427C /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +185,7 @@
 		FEE3023A2B27DE4A00BF48CB /* CreateSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionView.swift; sourceTree = "<group>"; };
 		FEE335ED2B28979C0004B0B0 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		FEEA24902B160220001D1981 /* AuthenticationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationHelper.swift; sourceTree = "<group>"; };
+		FEEE21142B4F417C00E5427C /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,6 +355,7 @@
 				FEBE74582AF4E31A005A98C0 /* Navigator.entitlements */,
 				FEBE74592AF4E31A005A98C0 /* Preview Content */,
 				FE5475332B3ED364002F936E /* SessionAttributes.swift */,
+				FEEE21142B4F417C00E5427C /* Config.swift */,
 			);
 			path = Navigator;
 			sourceTree = "<group>";
@@ -579,6 +583,7 @@
 				FED3B9B52B4718D4008D1E02 /* Session.swift in Sources */,
 				FE54753E2B3EE550002F936E /* CompassManager.swift in Sources */,
 				FE5475412B3EE569002F936E /* User.swift in Sources */,
+				FEEE21162B4F417C00E5427C /* Config.swift in Sources */,
 				FE5475382B3EE35C002F936E /* SessionManager.swift in Sources */,
 				FE5475512B3F0440002F936E /* AddWaypointIntent.swift in Sources */,
 				FE54751D2B3E325C002F936E /* SessionWidget.swift in Sources */,
@@ -601,6 +606,7 @@
 				FEEA24912B160220001D1981 /* AuthenticationHelper.swift in Sources */,
 				FE46B0C92B39DE5500DA0DB2 /* Router.swift in Sources */,
 				FE7E551C2B057F3B00521F39 /* CompassMarker.swift in Sources */,
+				FEEE21152B4F417C00E5427C /* Config.swift in Sources */,
 				FEA559A52B02D92C00D0E3D8 /* LocationRequestView.swift in Sources */,
 				FE7E55162B057C6200521F39 /* Compass.swift in Sources */,
 				FE7E55182B057E3900521F39 /* Marker.swift in Sources */,

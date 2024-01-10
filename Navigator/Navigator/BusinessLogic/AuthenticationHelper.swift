@@ -12,6 +12,7 @@ import SwiftData
 
 class AuthenticationHelper: ObservableObject {
     static let shared = AuthenticationHelper()
+    private let config = Config.shared
     private let baseUrl: String
     
     @Published var savedUser: User? = nil
@@ -48,11 +49,7 @@ class AuthenticationHelper: ObservableObject {
             self.savedSessionId = sessionId
         }
         
-//        guard let url = ProcessInfo.processInfo.environment["BACKEND_URL"] else {
-//           fatalError("AuthenticationHelper configuration missing in environment variables.")
-//        }
-        
-        baseUrl = "https://sportmap.akaver.com"
+        baseUrl = config.backendUrl
     }
     
     func validateNames(_ firstName: String, _ lastName: String) -> Bool {
