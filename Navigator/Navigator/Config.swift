@@ -14,4 +14,6 @@ struct Config {
     let smtpHostname = "the host where your email is located on, f.e smtp.gmail.com"
     let smtpEmail = "email where we send the gpx data from"
     let smtpPassword = "for your email"
+    
+    print("Test .gitignore")
 }
