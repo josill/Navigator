@@ -66,8 +66,8 @@ struct CreateSessionView: View {
                     .border(.red, width: CGFloat(authHelper.sessionDescriptionError ? 3 : 0))
                     
                     Picker("Select an option", selection: $selectedValue) {
-                        ForEach(0 ..< values.count) {
-                            Image(systemName: self.values[$0])
+                        ForEach(values.indices, id: \.self) { index in
+                            Image(systemName: self.values[index])
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())

@@ -52,6 +52,7 @@ class AuthenticationHelper: ObservableObject {
         baseUrl = config.backendUrl
     }
     
+    @MainActor
     func validateNames(_ firstName: String, _ lastName: String) -> Bool {
         let firstNameCorrect = firstName.count > 3
         let lastNameCorrect = lastName.count > 3
@@ -65,6 +66,7 @@ class AuthenticationHelper: ObservableObject {
         return firstNameCorrect && lastNameCorrect
     }
     
+    @MainActor
     func validateEmail(_ email: String) -> Bool {
         let emailRegex = #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"#
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
@@ -77,6 +79,7 @@ class AuthenticationHelper: ObservableObject {
         return emailCorrect
     }
     
+    @MainActor
     func passwordMeetsRequirements(_ password: String) -> Bool {
         let passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{4,}$"
         
@@ -85,6 +88,7 @@ class AuthenticationHelper: ObservableObject {
         return passwordPredicate.evaluate(with: password)
     }
     
+    @MainActor
     func validatePassword(_ password: String) -> Bool {
         let passwordCorrect = passwordMeetsRequirements(password)
         
@@ -100,17 +104,22 @@ class AuthenticationHelper: ObservableObject {
         return passwordCorrect
     }
     
+    @MainActor
     func validatePasswords(_ password1: String, _ password2: String) -> Bool {
-        let passwordsCorrect =
+        var passwordsCorrect =
         password1 == password2 &&
         validatePassword(password1)
         
         if passwordsCorrect { passwordsError = "" }
-        else if password1 != password2 { passwordsError = "Passwords don't match!" }
+        else if password1 != password2 {
+            passwordsError = "Passwords don't match!"
+            passwordsCorrect = false
+        }
         
         return passwordsCorrect
     }
     
+    @MainActor
     func register(firstName: String, lastName: String, email: String, password1: String, password2: String) async -> Bool {
         isLoading = true
         
@@ -156,7 +165,7 @@ class AuthenticationHelper: ObservableObject {
             if res.statusCode == 200 {
                 // Process the successful response
                 if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                    guard let token = json["token"] else {
+                    guard json["token"] != nil else {
                         isLoading = false
                         registerError = "Something went wrong!"
                         return false
@@ -187,15 +196,15 @@ class AuthenticationHelper: ObservableObject {
             return false
         }
         
-        isLoading = false        
+        isLoading = false
         return false
     }
     
+    @MainActor
     func login(email: String, password: String) async -> Bool {
         isLoading = true
         
         if !validateEmail(email) { isLoading = false; return false }
-        
         if !validatePassword(password) { isLoading = false; return false }
         
         let urlString = "\(baseUrl)/api/v1.0/account/login"
@@ -235,18 +244,17 @@ class AuthenticationHelper: ObservableObject {
                 if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
                     let token = json["token"] as! String
                     
-                    Task { @MainActor in
-                        savedUser = User(
-                            email: email,
-                            password: password,
-                            jwtToken: token
-                        )
-                        if let encodedUser = try? JSONEncoder().encode(savedUser) {
-                            UserDefaults.standard.set(encodedUser, forKey: "savedUser")
-                        }
+                    savedUser = User(
+                        email: email,
+                        password: password,
+                        jwtToken: token
+                    )
+                    if let encodedUser = try? JSONEncoder().encode(savedUser) {
+                        UserDefaults.standard.set(encodedUser, forKey: "savedUser")
                     }
                     
                     isLoading = false
+                    
                     return true
                 }
             } else {
@@ -271,17 +279,18 @@ class AuthenticationHelper: ObservableObject {
         return false
     }
     
+    @MainActor
     func logOut(completion: @escaping () -> Void) {
         savedUser = nil
         UserDefaults.standard.removeObject(forKey: "savedUser")
-        print("logout: \(savedUser)")
+        print("logout: \(String(describing: savedUser))")
         completion()
     }
     
+    @MainActor
     func createSession(name: String, description: String, mode: GpsSessionType) async {
-        Task { @MainActor in
-            isLoading = true
-        }
+        isLoading = true
+        
         
         if name == "" {
             sessionNameError = true
@@ -317,7 +326,7 @@ class AuthenticationHelper: ObservableObject {
         }
         
         guard let token = savedUser?.jwtToken else {
-            print("Failed to receive token: \(savedUser)")
+            print("Failed to receive token: \(String(describing: savedUser))")
             isLoading = false
             return
         }
@@ -346,14 +355,13 @@ class AuthenticationHelper: ObservableObject {
                         return
                     }
                     
-                    Task { @MainActor in
-                        UserDefaults.standard.set(sessionId, forKey: "savedSessionId")
-                        savedSessionId = sessionId
+                    UserDefaults.standard.set(sessionId, forKey: "savedSessionId")
+                    savedSessionId = sessionId
+                    
+                    if savedSessionId != nil {
+                        isLoading = false
+                        createSessionSuccess = true
                         
-                        if savedSessionId != nil {
-                            isLoading = false
-                            createSessionSuccess = true
-                        }
                     }
                 } else {
                     print("Error inserting session to db")
@@ -376,21 +384,24 @@ class AuthenticationHelper: ObservableObject {
             print("Error: \(error)")
         }
         
-        Task { @MainActor in
-            isLoading = false
-        }
+        
+        isLoading = false
+        
     }
     
+    @MainActor
     func presentQuitSessionAlert() {
         quitSessionPresented.toggle()
     }
     
+    @MainActor
     func quitSavedSession() {
         savedSessionId = nil
         UserDefaults.standard.removeObject(forKey: "savedSessionId")
-        print("Saved session is \(savedSessionId)")
+        print("Saved session is \(String(describing: savedSessionId))")
     }
     
+    @MainActor
     func updateLocation(
         latitude: CLLocationDegrees,
         longitude: CLLocationDegrees,
@@ -424,7 +435,7 @@ class AuthenticationHelper: ObservableObject {
         }
         
         guard let token = savedUser?.jwtToken else {
-            print("Failed to receive token: \(savedUser)")
+            print("Failed to receive token: \(String(describing: savedUser))")
             isLoading = false
             return
         }
@@ -450,9 +461,7 @@ class AuthenticationHelper: ObservableObject {
                     print("respone: \(data)")
                 }
                 
-                if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-//                    print("json from location: \(json)")
-                    
+                if (try? JSONSerialization.jsonObject(with: data) as? [String: Any]) != nil {                    
                     return
                 } else {
                     print("Error inserting session to db")
