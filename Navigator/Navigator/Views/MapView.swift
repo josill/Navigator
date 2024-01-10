@@ -61,6 +61,7 @@ struct MapView: View {
                 MapUserLocationButton()
                 MapScaleView()
             }
+            .padding(.top, 40)
             .mapStyle(.hybrid(elevation: .realistic))
             
             if verticalSizeClass == .compact {
