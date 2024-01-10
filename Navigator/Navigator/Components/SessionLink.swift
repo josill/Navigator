@@ -54,18 +54,21 @@ struct SessionLink: View {
             
             HStack {
                 Button("OK") {
-                    mail.sendMail(
-                        toEmail: email,
-                        subject: "Your session - \(session.name) gpx data",
-                        body: "TODO"
-                    ) { res in
-                        switch res {
-                        case .success:
-                            mailResult = true
-                        case .failure:
-                            mailResult = false
+                    Task { @MainActor in
+                        mail.sendMail(
+                            toEmail: email,
+                            subject: "Your session - \(session.name) gpx data",
+                            body: "TODO",
+                            session: session
+                        ) { res in
+                            switch res {
+                            case .success:
+                                mailResult = true
+                            case .failure:
+                                mailResult = false
+                            }
+                            showMailResult = true
                         }
-                        showMailResult = true
                     }
                 }
                 Button("Cancel") {
@@ -81,14 +84,6 @@ struct SessionLink: View {
         let formattedDistance = String(format: "%.0f", distance)
         return "\(formattedDistance)"
     }
-    
-//    func formatTime(_ duration: Double) -> String {
-//        let hours = Int(duration / 3600)
-//        let minutes = Int((duration.truncatingRemainder(dividingBy: 3600)) / 60)
-//        let seconds = Int(duration.truncatingRemainder(dividingBy: 60))
-//        
-//        return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
-//    }
     
     func formatDateString(_ date: Date) -> String {
         let formatter = DateFormatter()

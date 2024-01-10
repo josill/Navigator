@@ -220,6 +220,7 @@ extension LocationManager: CLLocationManagerDelegate {
             locationType: type,
             latitude: location.coordinate.latitude,
             longitude: location.coordinate.longitude,
+            altitude: location.altitude,
             session: authHelper.savedSession!
         )
         authHelper.savedSession?.locations.append(loc)
