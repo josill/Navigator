@@ -58,7 +58,14 @@ struct SessionLink: View {
                         mail.sendMail(
                             toEmail: email,
                             subject: "Your session - \(session.name) gpx data",
-                            body: "TODO",
+                            body: """
+                            Hello from Navigator!
+                            
+                            We have attached your GPX file as an attachment to the end of this letter.
+                            
+                            Until the next journey,
+                            Navigator team
+                            """,
                             session: session
                         ) { res in
                             switch res {

@@ -42,7 +42,7 @@ struct MailSender {
         let gpxAttachment = Attachment(
             data: data,
             mime: "application/gpx+xml",
-            name: "track-\(Date()).gpx",
+            name: "track-\(self.formatDate(Date())).gpx",
             inline: false
         )
         
@@ -71,34 +71,40 @@ struct MailSender {
         var gpxContent = """
         <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
         <gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.0" creator="Navigator">
-            <trk>
-                <trkseg>
+        """
+        
+        for location in session.locations.sorted(by: { $0.createdAt < $1.createdAt }) {
+            if location.locationType != .location {
+                gpxContent += """
+                \n  <wpt lat="\(location.latitude)" lon="\(location.longitude)">
+                    <name>\(location.locationType == .checkPoint ? "Checkpoint \(checkpointNr)" : "Waypoint \(wayPointNr)")</name>
+                  </wpt>
+                """
+                
+                if (location.locationType == .checkPoint) { checkpointNr += 1 }
+                else { wayPointNr += 1 }
+            }
+        }
+    
+        gpxContent += """
+        \n  <trk>
+            <name>\(session.name)</name>
+            <trkseg>
         """
                 
-        for location in session.locations {
-//            gpxContent += "\n           <trkpt lat=\(location.latitude) lon=\(location.longitude) />"
+        for (i, location) in session.locations.sorted(by: { $0.createdAt < $1.createdAt }).enumerated() {
             gpxContent += """
-            \n            <trkpt lat="\(location.latitude)" lon="\(location.longitude)">
-                            <ele>\(location.altitude!)</ele>
-                            <time>\(formatDate(location.createdAt))</time>
-                        </trkpt>
+            \n    <trkpt lat="\(location.latitude)" lon="\(location.longitude)">
+                  <name>TP\(i+1)</name>
+                  <time>\(formatDate(location.createdAt))</time>
+                </trkpt>
             """
         }
         
         gpxContent += """
-        \n      </trkseg>
-            </trk>
+        \n    </trkseg>
+          </trk>
         """
-        
-        for location in session.locations {
-            if location.locationType != .location {
-                gpxContent += """
-                <wpt lat="\(location.latitude)" lon="\(location.longitude)">
-                    <name>\(location.locationType == .checkPoint ? "Checkpoint \(checkpointNr)" : "Waypoint \(wayPointNr)")</name>
-                </wpt>
-                """
-            }
-        }
         
         gpxContent += """
         \n</gpx>

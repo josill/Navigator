@@ -48,11 +48,11 @@ class AuthenticationHelper: ObservableObject {
             self.savedSessionId = sessionId
         }
         
-        guard let url = ProcessInfo.processInfo.environment["BACKEND_URL"] else {
-           fatalError("AuthenticationHelper configuration missing in environment variables.")
-        }
+//        guard let url = ProcessInfo.processInfo.environment["BACKEND_URL"] else {
+//           fatalError("AuthenticationHelper configuration missing in environment variables.")
+//        }
         
-        baseUrl = url
+        baseUrl = "https://sportmap.akaver.com"
     }
     
     func validateNames(_ firstName: String, _ lastName: String) -> Bool {
