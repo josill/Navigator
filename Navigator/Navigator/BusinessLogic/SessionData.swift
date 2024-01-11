@@ -73,6 +73,7 @@ class SessionData: ObservableObject {
         if type == .none {
             distanceCovered += distance
             authHelper.savedSession?.distance = distanceCovered
+            sessionManager.updateDistance(distance: distanceCovered)
         }
         else if type == .checkpoint { distanceFromCp += distance }
         else { distanceFromWp += distance }
@@ -88,6 +89,7 @@ class SessionData: ObservableObject {
         if type == .none {
             averageSpeed = speed
             authHelper.savedSession?.speed = averageSpeed
+            sessionManager.updateSpeed(speed: averageSpeed)
         }
         else if type == .checkpoint { averageSpeedFromCp = speed }
         else { averageSpeedFromWp = speed }
@@ -106,5 +108,6 @@ class SessionData: ObservableObject {
         
         sessionDuration = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
         authHelper.savedSession?.duration = sessionDuration
+        sessionManager.updateDuration(duration: sessionDuration)
     }
 }

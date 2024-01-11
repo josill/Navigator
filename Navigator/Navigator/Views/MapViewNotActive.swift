@@ -57,16 +57,7 @@ struct MapViewNotActive: View {
                 MapScaleView()
             }
             .mapStyle(.hybrid(elevation: .realistic))
-            
-//            if verticalSizeClass == .compact {
-//                SlideUpCardCompact(quitSessionPresented: $quitSessionPresented)
-//            } else {
-//                SlideUpCard(quitSessionPresented: $quitSessionPresented)
-//            }
         }
-//        .onChange(of: locationManager.waypoint) { waypoint in
-//
-//        }
     }
 }
 

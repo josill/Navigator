@@ -50,28 +50,53 @@ class SessionManager: ObservableObject {
         return nil
     }
     
-    func updateActivity(
-        distance: Double,
-        duration: String,
-        speed: Double
-    ) {
+    func updateDistance(distance: Double) {
         if let activity = activity {
             let contentState = SessionAttributes.ContentState(
                 sessionDistance: distance,
+                sessionDuration: activity.content.state.sessionDuration,
+                sessionSpeed: activity.content.state.sessionSpeed
+            )
+            
+            updateActivity(contentState)
+        }
+    }
+
+    func updateDuration(duration: String) {
+        if let activity = activity {
+            let contentState = SessionAttributes.ContentState(
+                sessionDistance: activity.content.state.sessionDistance,
                 sessionDuration: duration,
+                sessionSpeed: activity.content.state.sessionSpeed
+            )
+            
+            updateActivity(contentState)
+        }
+    }
+
+    func updateSpeed(speed: Double) {
+        if let activity = activity {
+            let contentState = SessionAttributes.ContentState(
+                sessionDistance: activity.content.state.sessionDistance,
+                sessionDuration: activity.content.state.sessionDuration,
                 sessionSpeed: speed
             )
             
-            Task {
-                await activity.update(
-                    ActivityContent<SessionAttributes.ContentState>(
-                        state: contentState,
-                        staleDate: nil
-                    )
-                )
-            }
+            updateActivity(contentState)
         }
     }
+    
+    private func updateActivity(_ contentState: SessionAttributes.ContentState) {
+        Task {
+            await activity!.update(
+                ActivityContent<SessionAttributes.ContentState>(
+                    state: contentState,
+                    staleDate: nil
+                )
+            )
+        }
+    }
+
 
     func stopActivity() {
         if let activity = activity {

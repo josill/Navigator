@@ -454,9 +454,7 @@ class AuthenticationHelper: ObservableObject {
                 return
             }
             
-            if res.statusCode == 201 {
-                print("location updated successfully")
-                
+            if res.statusCode == 201 {                
                 if locationType != .location {
                     print("respone: \(data)")
                 }

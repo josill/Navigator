@@ -17,14 +17,18 @@ struct SessionLink: View {
     @State var session: Session
     @State private var email = ""
     @State private var showMailAlert = false
+    @State private var showSessionOpeningAlert = false
     
     @Binding var mailResult: Bool?
     @Binding var showMailResult: Bool
 
     var body: some View {
         Button {
-            print("Session id is \(session.id)")
-            router.changeRoute(.init(.mapNonActive(session)))
+            if (session.locations.count > 2) {
+                router.changeRoute(.init(.mapNonActive(session)))
+            } else {
+                showSessionOpeningAlert.toggle()
+            }
         } label: {
             HStack {
                 VStack(alignment: .leading, spacing: 10) {
@@ -89,6 +93,12 @@ struct SessionLink: View {
             }
         } message: {
             Text("We will email you the GPX file of the track!")
+        }
+        .alert(isPresented: $showSessionOpeningAlert) {
+            Alert(
+                title: Text("There are too few locations in this track to display it").foregroundStyle(.red)
+                    
+            )
         }
     }
     

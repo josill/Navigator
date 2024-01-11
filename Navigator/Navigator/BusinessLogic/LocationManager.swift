@@ -19,6 +19,7 @@ class LocationManager: NSObject, ObservableObject, @unchecked Sendable {
     @Published var mapHelper: MapHelper?
     private var authHelper = AuthenticationHelper.shared
     private var sessionData = SessionData.shared
+    private var sessionManager = SessionManager.shared
     
     @Published var userLocation: CLLocation?
     @Published var userLocations: [CLLocationCoordinate2D]?

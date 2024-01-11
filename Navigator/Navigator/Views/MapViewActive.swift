@@ -70,9 +70,6 @@ struct MapViewActive: View {
                 SlideUpCard(quitSessionPresented: $quitSessionPresented)
             }
         }
-//        .onChange(of: locationManager.waypoint) { waypoint in
-//
-//        }
     }
 }
 
