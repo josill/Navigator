@@ -94,12 +94,11 @@ struct SessionLink: View {
         } message: {
             Text("We will email you the GPX file of the track!")
         }
-        .alert(isPresented: $showSessionOpeningAlert) {
-            Alert(
-                title: Text("There are too few locations in this track to display it").foregroundStyle(.red)
-                    
-            )
-        }
+        .alert("Can't open this session!", isPresented: $showSessionOpeningAlert, actions: {
+            
+        }, message: {
+            Text("There are too few locations in this track to display it (there needs to be atleast 3 recorded locations)")
+        })
     }
     
     func formatDistance(_ distance: Double) -> String {
