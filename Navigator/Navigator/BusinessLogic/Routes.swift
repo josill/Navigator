@@ -7,11 +7,11 @@
 
 import Foundation
 
-public enum Routes: Equatable {
+enum Routes: Equatable {
     case login, register
     case menu, viewSessions, createSession
     case notificationsAllowed, locationAllowed
-    case map
+    case mapActive, mapNonActive(Session)
     case none
     
     public static func == (lhs: Routes, rhs: Routes) -> Bool {
@@ -23,7 +23,8 @@ public enum Routes: Equatable {
                  (.createSession, .createSession),
                  (.notificationsAllowed, .notificationsAllowed),
                  (.locationAllowed, .locationAllowed),
-                 (.map, .map),
+                 (.mapActive, .mapActive),
+                 (.mapNonActive, .mapNonActive),
                  (.none, .none):
                 return true
                 

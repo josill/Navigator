@@ -20,29 +20,34 @@ struct SessionLink: View {
     
     @Binding var mailResult: Bool?
     @Binding var showMailResult: Bool
-    
+
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("\(session.name)")
-                    .font(.headline)
-                    .foregroundColor(.blue)
-                Text("Created at: \(formatDateString(session.recordedAt))")
-                    .foregroundColor(.white)
-                Text("Distance covered: \(formatDistance(session.distance)) meters")
-                    .foregroundColor(.white)
-                Text("Time elapsed: \(session.duration)")
-                    .foregroundColor(.white)
-                Text("Average speed: \(String(format: "%.2f", session.speed))")
-                    .foregroundColor(.white)
-            }
-            .padding(.trailing, 20)
-            
-            Button {
-                showMailAlert.toggle()
-            } label: {
-                Image(systemName: "arrow.down.circle")
-                    .font(.title)
+        Button {
+            print("Session id is \(session.id)")
+            router.changeRoute(.init(.mapNonActive(session)))
+        } label: {
+            HStack {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("\(session.name)")
+                        .font(.headline)
+                        .foregroundColor(.blue)
+                    Text("Created at: \(formatDateString(session.recordedAt))")
+                        .foregroundColor(.white)
+                    Text("Distance covered: \(formatDistance(session.distance)) meters")
+                        .foregroundColor(.white)
+                    Text("Time elapsed: \(session.duration)")
+                        .foregroundColor(.white)
+                    Text("Average speed: \(String(format: "%.2f", session.speed))")
+                        .foregroundColor(.white)
+                }
+                .padding(.trailing, 20)
+                
+                Button {
+                    showMailAlert.toggle()
+                } label: {
+                    Image(systemName: "arrow.down.circle")
+                        .font(.title)
+                }
             }
         }
         .padding(10)

@@ -30,7 +30,8 @@ struct ContentView: View {
                     case .viewSessions: SessionsView()
                     case .locationAllowed: LocationRequestView()
                     case .notificationsAllowed: NotificationRequestView().navigationBarBackButtonHidden()
-                    case .map: MapView().navigationBarBackButtonHidden()
+                    case .mapActive: MapViewActive().navigationBarBackButtonHidden()
+                    case .mapNonActive(let session): MapViewNotActive(session: session)
                     case .none: LoginOrRegisterView()
                     }
                 }

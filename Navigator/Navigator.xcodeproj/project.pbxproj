@@ -77,6 +77,8 @@
 		FED3B9B42B470FEA008D1E02 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED3B9B32B470FEA008D1E02 /* Location.swift */; };
 		FED3B9B52B4718D4008D1E02 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED3B9B12B470FD8008D1E02 /* Session.swift */; };
 		FED3B9B62B4718D7008D1E02 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED3B9B32B470FEA008D1E02 /* Location.swift */; };
+		FED5DFB92B4FF4C6002FFF53 /* MapViewActive.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED5DFB82B4FF4C6002FFF53 /* MapViewActive.swift */; };
+		FED5DFBC2B4FF50A002FFF53 /* MapViewNotActive.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED5DFBB2B4FF50A002FFF53 /* MapViewNotActive.swift */; };
 		FEE26AC52B1353B200FEEDBD /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE26AC42B1353B200FEEDBD /* NotificationManager.swift */; };
 		FEE26AC72B13562600FEEDBD /* NotificationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE26AC62B13562600FEEDBD /* NotificationRequestView.swift */; };
 		FEE3023B2B27DE4B00BF48CB /* CreateSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE3023A2B27DE4A00BF48CB /* CreateSessionView.swift */; };
@@ -179,6 +181,8 @@
 		FED3B9722B46C5CB008D1E02 /* MailSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailSender.swift; sourceTree = "<group>"; };
 		FED3B9B12B470FD8008D1E02 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		FED3B9B32B470FEA008D1E02 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		FED5DFB82B4FF4C6002FFF53 /* MapViewActive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewActive.swift; sourceTree = "<group>"; };
+		FED5DFBB2B4FF50A002FFF53 /* MapViewNotActive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewNotActive.swift; sourceTree = "<group>"; };
 		FEE26AC42B1353B200FEEDBD /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		FEE26AC62B13562600FEEDBD /* NotificationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestView.swift; sourceTree = "<group>"; };
 		FEE26AC82B135F1500FEEDBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -257,6 +261,8 @@
 				FEB3DAC72B1BA0E900262CB7 /* SessionsView.swift */,
 				FEE3023A2B27DE4A00BF48CB /* CreateSessionView.swift */,
 				FEE335ED2B28979C0004B0B0 /* MenuView.swift */,
+				FED5DFB82B4FF4C6002FFF53 /* MapViewActive.swift */,
+				FED5DFBB2B4FF50A002FFF53 /* MapViewNotActive.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -598,6 +604,7 @@
 				FEA5599D2B02C35200D0E3D8 /* MapView.swift in Sources */,
 				FE7250312B0652FC00068114 /* SessionStats.swift in Sources */,
 				FEE335EE2B28979C0004B0B0 /* MenuView.swift in Sources */,
+				FED5DFB92B4FF4C6002FFF53 /* MapViewActive.swift in Sources */,
 				FEBE74552AF4E317005A98C0 /* ContentView.swift in Sources */,
 				FEE26AC72B13562600FEEDBD /* NotificationRequestView.swift in Sources */,
 				FEB3DAC82B1BA0E900262CB7 /* SessionsView.swift in Sources */,
@@ -612,6 +619,7 @@
 				FE7E55182B057E3900521F39 /* Marker.swift in Sources */,
 				FED3B9B22B470FD8008D1E02 /* Session.swift in Sources */,
 				FE2765122B419BB50081A460 /* SessionIntentManager.swift in Sources */,
+				FED5DFBC2B4FF50A002FFF53 /* MapViewNotActive.swift in Sources */,
 				FE27650F2B417D230081A460 /* SessionData.swift in Sources */,
 				FE5475372B3EE35C002F936E /* SessionManager.swift in Sources */,
 				FEB3DAC62B1B965D00262CB7 /* SlideUpCardCompact.swift in Sources */,

@@ -59,7 +59,7 @@ struct LocationRequestView: View {
         .onReceive(locationManager.$authorizationStatus) { newAuthorizationStatus in
             if newAuthorizationStatus == .authorizedWhenInUse || newAuthorizationStatus == .authorizedAlways {
                 if notificationManager.authorizationStatus == .authorized {
-                    router.changeRoute(.init(.map))
+                    router.changeRoute(.init(.mapActive))
                 } else {
                     router.changeRoute(.init(.notificationsAllowed))
                 }

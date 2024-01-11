@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct MapView: View {
+struct MapViewActive: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @EnvironmentObject var notificationManager: NotificationManager
 
@@ -18,42 +18,20 @@ struct MapView: View {
     @State private var userInitialLocation: MapCameraPosition = .userLocation(fallback: .automatic)
     @State var quitSessionPresented = false
     
-    var session: Session?
-    
     var body: some View {
         ZStack {
             Map(position: $userInitialLocation) {
                 UserAnnotation()
                 
-                if let locations = session?.locations {
-                    let sortedLocations = locations.sorted { $0.createdAt < $1.createdAt }
-                    let coordinates = sortedLocations.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }
-                    MapPolyline(coordinates: coordinates)
-                        .stroke(Color.blue, lineWidth: 12)
-                }
-
                 if let locations = locationManager.userLocations {
                     MapPolyline(coordinates: locations)
                         .stroke(Color.blue, lineWidth: 12)
                 }
-
-                if let waypointFromLocationManager = locationManager.waypoint {
-                    Annotation(
-                        "Waypoint",
-                        coordinate: waypointFromLocationManager,
-                        anchor: .bottom) {
-                            Image(systemName: "pin")
-                                .padding(4)
-                                .foregroundStyle(.white)
-                                .background(.blue)
-                                .cornerRadius(4)
-                        }
-                }
                 
-                if let waypointFromSession = session?.locations.last(where: { $0.locationType == .wayPoint }) {
+                if let waypoint = locationManager.waypoint {
                     Annotation(
                         "Waypoint",
-                        coordinate: CLLocationCoordinate2D(latitude: waypointFromSession.latitude, longitude: waypointFromSession.longitude),
+                        coordinate: waypoint,
                         anchor: .bottom) {
                             Image(systemName: "pin")
                                 .padding(4)
@@ -93,12 +71,12 @@ struct MapView: View {
             }
         }
 //        .onChange(of: locationManager.waypoint) { waypoint in
-//                
+//
 //        }
     }
 }
 
 
 #Preview {
-    MapView()
+    MapViewActive()
 }

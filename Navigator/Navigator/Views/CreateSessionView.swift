@@ -99,7 +99,7 @@ struct CreateSessionView: View {
                             let notifAllowed = notificationManager.authorizationStatus == .authorized
                             
                             if locAllowed && notifAllowed {
-                                router.changeRoute(.init(.map))
+                                router.changeRoute(.init(.mapActive))
                             } else if locAllowed {
                                 router.changeRoute(.init(.notificationsAllowed))
                             } else {

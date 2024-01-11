@@ -71,7 +71,7 @@ struct NotificationRequestView: View {
         }
         .onReceive(notificationManager.$authorizationStatus) { newAuthorizationStatus in
             if newAuthorizationStatus == .authorized {
-                router.changeRoute(.init(.map))
+                router.changeRoute(.init(.mapActive))
             }
         }
     }
