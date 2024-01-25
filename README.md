@@ -1,8 +1,8 @@
 # Navigator: 
 
 ## Setup:
-Mandatory config class variables:
-- smtpHostname (there host where your email is located on, f.e smtp.gmail.com)
+Mandatory config class variables (./Navigator/Config.swift):
+- smtpHostname (the host where your email is located on, f.e smtp.gmail.com)
 - smtpEmail (email where we send the gpx data from)
 - smtpPassword (for your email)
 - backendUrl (for my case it is https://sportmap.akaver.ee)
