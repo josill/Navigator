@@ -7,8 +7,6 @@ Mandatory config class variables (./Navigator/Config.swift):
 - smtpPassword (for your email)
 - backendUrl (for my case it is https://sportmap.akaver.ee)
 
-The class is located in ./Navigator/Navigator/Config.swift
-
 ### Navigator user flow:
 ![Alt text](./state.svg)
 
