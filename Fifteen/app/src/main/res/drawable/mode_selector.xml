@@ -1,4 +1,0 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true" android:drawable="@drawable/baseline_nights_stay_24" />
-    <item android:drawable="@drawable/baseline_light_mode_24" />
-</selector>
