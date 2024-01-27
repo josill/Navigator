@@ -1,5 +1,13 @@
 # Navigator: 
 
+## Demo
+Full demo of the app, a few comments:
+- Apple screen recording automatically hides the password entering and location approving
+- One point my location teleports, which demonstrates that you can't cheat. When you move too fast the track is broken off
+- The download button, where I enter my email is for downloading your session as GPX format, which is emailed to you
+
+https://github.com/josill/Navigator/assets/113284402/747f224c-13d2-4410-bdc8-64564d3de25f
+
 ## Setup:
 Mandatory config class variables (./Navigator/Config.swift):
 - smtpHostname (the host where your email is located on, f.e smtp.gmail.com)
