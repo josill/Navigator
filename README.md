@@ -6,7 +6,7 @@ Full demo of the app, a few comments:
 - One point my location teleports, which demonstrates that you can't cheat. When you move too fast the track is broken off
 - The download button, where I enter my email is for downloading your session as GPX format, which is emailed to you
 
-https://github.com/josill/Navigator/assets/113284402/747f224c-13d2-4410-bdc8-64564d3de25f
+https://github.com/josill/Navigator/assets/113284402/f01cecf9-ed71-4130-b0b2-e1a955823b59
 
 ## Setup:
 Mandatory config class variables (./Navigator/Config.swift):
